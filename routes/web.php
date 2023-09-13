@@ -18,7 +18,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/redirects',[HomeController::class,"index"]);
+Route::get('/homepage', function () {
+    return view('homepage/homepage');
+});
+
+Route::get('/redirects', [HomeController::class, "index"]);
 
 Route::middleware([
     'auth:sanctum',
