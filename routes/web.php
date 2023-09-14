@@ -22,6 +22,10 @@ Route::get('/homepage', function () {
     return view('homepage');
 });
 
+Route::get('/presensi', function () {
+    return view('presensi.create');
+});
+
 Route::get('/redirects', [HomeController::class, "index"]);
 
 Route::middleware([
