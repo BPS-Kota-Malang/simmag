@@ -19,7 +19,7 @@ Route::get('/', function () {
 });
 
 Route::get('/homepage', function () {
-    return view('homepage/homepage');
+    return view('main');
 });
 
 Route::get('/redirects', [HomeController::class, "index"]);
