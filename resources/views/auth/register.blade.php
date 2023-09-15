@@ -66,7 +66,7 @@
 
                                     <div class="text-center">
                                         <x-jet-button
-                                            class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0 pt-3 pb-3">
+                                            class="btn btn-lg bg-gradient-info btn-lg w-100 mt-4 mb-0 pt-3 pb-3">
                                             <span style="font-size: 16px">
                                                 {{ __('Register') }}
                                             </span>
@@ -78,7 +78,7 @@
                                 <p class="mb-4 mx-auto">
                                     {{ __('Already registered?') }}
                                     <a href="{{ route('login') }}"
-                                        class="text-primary text-gradient font-weight-bold">Log in</a>
+                                        class="text-info text-gradient font-weight-bold">Log in</a>
                                 </p>
                             </div>
                         </div>
@@ -86,7 +86,7 @@
                     <div
                         class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
                         <div
-                            class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center">
+                            class="position-relative bg-gradient-info h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center">
                             <img src="../../assets/img/shapes/pattern-lines.svg" alt="pattern-lines"
                                 class="position-absolute opacity-4 start-0">
                             <div class="position-relative">

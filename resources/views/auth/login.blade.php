@@ -25,7 +25,6 @@
 </head>
 
 <body class="sign-in-illustration">
-    <!-- Navbar -->
     <section>
         <div class="page-header min-vh-100">
             <div class="container">
@@ -34,7 +33,7 @@
                         <div class="card card-plain">
                             <div class="card-header pb-0 text-left">
                                 <h4 class="font-weight-bolder">Log In</h4>
-                                <p class="mb-0">Enter your email and password to log in</p>
+                                <x-jet-validation-errors class="mb-0" />
                             </div>
                             <div class="card-body">
                                 @if (session('status'))
@@ -62,7 +61,7 @@
                                     </div>
                                     <div class="text-center">
                                         <x-jet-button
-                                            class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0 pt-3 pb-3">
+                                            class="btn btn-lg bg-gradient-info btn-lg w-100 mt-4 mb-0 pt-3 pb-3">
                                             <span style="font-size: 16px">
                                                 {{ __('Log in') }}
                                             </span>
@@ -73,7 +72,7 @@
                             <div class="card-footer text-center pt-0 px-lg-2 px-1">
                                 <p class="mb-4 text-sm mx-auto">
                                     @if (Route::has('password.request'))
-                                        <a class="text-primary text-gradient font-weight-bold"
+                                        <a class="text-info text-gradient font-weight-bold"
                                             href="{{ route('password.request') }}">{{ __('Forgot your password?') }}</a>
                                     @endif
                                 </p>
@@ -83,7 +82,7 @@
                     <div
                         class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
                         <div
-                            class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center">
+                            class="position-relative bg-gradient-info h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center">
                             <img src="../assets/img/shapes/pattern-lines.svg" alt="pattern-lines"
                                 class="position-absolute opacity-4 start-0">
                             <div class="position-relative">
