@@ -16,22 +16,18 @@
                         </span>
                     </button>
                     <div class="collapse navbar-collapse pt-3 pb-2 py-lg-0 w-100" id="navigation">
-                        <ul class="navbar-nav navbar-nav-hover ms-lg-9 ps-lg-12 w-100">
+                        <ul class="navbar-nav navbar-nav-hover ms-lg-10 ps-lg-12 w-100">
                             <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center" href="{{ url('/') }}" aria-expanded="false">
                                 Logbook
-                                <!-- <img src="./assets/img/down-arrow-dark.svg" alt="down-arrow" class="arrow ms-1"> -->
                             </a>
                             <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center" href="{{ url('/presensi') }}" aria-expanded="false">
                                 Presensi
-                                <!-- <img src="./assets/img/down-arrow-dark.svg" alt="down-arrow" class="arrow ms-1" /> -->
                             </a>
-                            <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center" href="{{ url('/') }}" aria-expanded="false">
+                            <!-- <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center" href="{{ url('/') }}" aria-expanded="false">
                                 Profil
-                                <!-- <img src="./assets/img/down-arrow-dark.svg" alt="down-arrow" class="arrow ms-1"> -->
-                            </a>
-                            <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center" href="{{ url('/') }}" aria-expanded="false">
+                            </a> -->
+                            <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center" href="{{ url('/register') }}" aria-expanded="false">
                                 Login/Register
-                                <!-- <img src="./assets/img/down-arrow-dark.svg" alt="down-arrow" class="arrow ms-1"> -->
                             </a>
                         </ul>
                     </div>

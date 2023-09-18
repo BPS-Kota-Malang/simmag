@@ -1,5 +1,6 @@
-<link rel="apple-touch-icon" sizes="76x76" href="./assets/img/apple-icon.png">
-<link rel="icon" type="image/png" href="{{url('/assets/img/favicon.png')}}">
+<link rel="apple-touch-icon" sizes="76x76" href="{{url('/assets/img/logo-icon.png')}}">
+<link rel="icon" type="image/png" href="{{url('/assets/img/logo-bps.png')}}">
+
 <!--     Fonts and icons     -->
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
 
@@ -33,8 +34,10 @@
 
 <!--  Plugin for Parallax, full documentation here: https://github.com/dixonandmoe/rellax -->
 <script src="{{url('/assets/js/plugins/rellax.min.js')}}"></script>
+
 <!--  Plugin for TiltJS, full documentation here: https://gijsroge.github.io/tilt.js/ -->
 <script src="{{url('/assets/js/plugins/tilt.min.js')}}"></script>
+
 <!--  Plugin for Selectpicker - ChoicesJS, full documentation here: https://github.com/jshjohnson/Choices -->
 <script src="{{url('/assets/js/plugins/choices.min.js')}}"></script>
 

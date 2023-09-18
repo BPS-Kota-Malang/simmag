@@ -17,6 +17,8 @@
 <body class="index-page">
     @include('components.navbar')
 
+    @include('components.header')
+
     @yield('container')
 
     @include('components.footer')

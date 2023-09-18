@@ -18,6 +18,10 @@ Route::get('/', function () {
     return view('homepage');
 });
 
+Route::get('/daftarmagang', function () {
+    return view('magang');
+});
+
 // Route::get('/homepage', function () {
 //     return view('homepage');
 // });

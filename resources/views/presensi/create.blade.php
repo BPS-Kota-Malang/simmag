@@ -3,7 +3,7 @@
 @section('container')
 
 <section class="pt-3 pb-4" id="count-stats">
-    <div class="container" style="margin-top: 300px;">
+    <div class="container">
         <div class="row">
             <div class="col-lg-9 z-index-2 border-radius-xl mt-n10 mx-auto py-3 blur shadow-blur">
                 <div class="row">
