@@ -8,7 +8,7 @@
     @include('components.core')
 
     <title>
-        Soft UI Design System by Creative Tim
+        SIMMAG - Sistem Informasi Magang
     </title>
 
 
