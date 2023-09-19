@@ -19,7 +19,7 @@ Route::get('/', function () {
 });
 
 Route::get('/daftarmagang', function () {
-    return view('magang');
+    return view('pendaftaran.pendaftaran-magang');
 });
 
 // Route::get('/homepage', function () {
