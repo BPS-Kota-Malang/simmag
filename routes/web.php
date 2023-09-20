@@ -15,12 +15,20 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/homepage', function () {
     return view('homepage');
 });
+
+Route::get('/daftarmagang', function () {
+    return view('pendaftaran.pendaftaran-magang');
+});
+
+// Route::get('/homepage', function () {
+//     return view('homepage');
+// });
+
+// Route::get('/homepage', function () {
+//     return view('homepage');
+// })->middleware('checkRole:2');
 
 Route::get('/presensi', function () {
     return view('presensi.create');
