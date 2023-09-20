@@ -24,6 +24,11 @@ Route::get('/homepage', function () {
 
 Route::get('/presensi', function () {
     return view('presensi.create');
+
+});
+
+Route::get('/logbook', function () {
+        return view('logbook.create');
 });
 
 Route::get('/redirects', [HomeController::class, "index"]);
