@@ -26699,6 +26699,12 @@ pre[class*="language-"] {
   }
 }
 
+<<<<<<< HEAD
+.jam {
+  display: block;
+}
+/*# sourceMappingURL=kit-free.css.map */
+=======
 /*# sourceMappingURL=kit-free.css.map */
 
 
@@ -26708,3 +26714,4 @@ pre[class*="language-"] {
   align-items: center;
   text-align: center;
 }
+>>>>>>> a8565e37d5202fb01b1be198e87de3bfca5b10aa
