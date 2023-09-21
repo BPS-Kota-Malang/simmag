@@ -45,8 +45,8 @@
                                         </a>
                                     </div>
 
+                                    <!-- Dropdown Resposive -->
                                     <div class="d-lg-none">
-
                                         <a href="{{route ('presensi-masuk')}}" class="dropdown-item border-radius-md">
                                             <span class="ps-3">Presensi Masuk</span>
                                         </a>
@@ -84,7 +84,7 @@
                                         <form method="POST" action="{{ route('logout') }}" x-data>
                                             @csrf
                                             <a href="{{ route('logout') }}" @click.prevent="$root.submit();" class="dropdown-item border-radius-md">
-                                                <span class="ps-3">Presensi Masuk</span>
+                                                <span class="ps-3">Logout</span>
                                             </a>
                                         </form>
 
@@ -111,6 +111,7 @@
                                         </a> -->
                                     </div>
 
+                                    <!-- Dropdown Resposive -->
                                     <div class="d-lg-none">
                                         <a href="{{route ('profile.show')}}" class="dropdown-item border-radius-md">
                                             <span class="ps-3">Profil</span>
@@ -119,7 +120,7 @@
                                         <form method="POST" action="{{ route('logout') }}" x-data>
                                             @csrf
                                             <a href="{{ route('logout') }}" @click.prevent="$root.submit();" class="dropdown-item border-radius-md">
-                                                <span class="ps-3">Presensi Masuk</span>
+                                                <span class="ps-3">Logout</span>
                                             </a>
                                         </form>
                                     </div>
