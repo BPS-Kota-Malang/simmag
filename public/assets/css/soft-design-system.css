@@ -26700,3 +26700,11 @@ pre[class*="language-"] {
 }
 
 /*# sourceMappingURL=kit-free.css.map */
+
+
+.tombol-tengah{
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  text-align: center;
+}

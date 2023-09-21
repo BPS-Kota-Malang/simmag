@@ -19,7 +19,12 @@ class HomeController extends Controller
             return view('admin');
         }
         else {
-            return view('dashboard');
+            return view('homepage');
         }
+    }
+
+    public function logout(){
+        Auth::logout();
+        return redirect()->route('login');
     }
 }

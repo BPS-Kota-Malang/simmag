@@ -15,12 +15,20 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', function () {
-    return view('homepage');
+    return view('login');
 });
 
-Route::get('/daftarmagang', function () {
-    return view('pendaftaran.pendaftaran-magang');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/', function () {
+        return redirect('/redirects');
+    });
 });
+
+Route::get('/logout', [HomeController::class, 'logout'])->name('logout');
+
+Route::get('/daftarmagang', function () {
+    return view('pendaftaran.pendaftaran-magang');})->middleware('checkRole:0');
+// });
 
 // Route::get('/homepage', function () {
 //     return view('homepage');
