@@ -45,7 +45,9 @@ Route::get('/daftarmagang', function () {
 // });
 
 Route::post('/simpan-masuk', [PresensiController::class, 'store'])->name('simpan-masuk');
-Route::get('/presensi', [PresensiController::class, 'index'])->name('presensi');
+Route::get('/presensi-masuk',[PresensiController::class,'index'])->name('presensi-masuk');    
+Route::get('/presensi-keluar',[PresensiController::class,'keluar'])->name('presensi-keluar'); 
+Route::post('/ubah-presensi', [PresensiController::class, 'presensipulang'])->name('ubah-presensi');
 
 Route::get('/redirects', [HomeController::class, "index"]);
 

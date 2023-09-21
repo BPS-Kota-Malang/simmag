@@ -14,7 +14,7 @@
                         </div>
                         <div class="content">
                             <div class="row justify-content-center">
-                                <form action="{{ route('simpan-masuk') }}" method="post">
+                                <form action="{{ route('ubah-presensi') }}" method="post">
                                     {{ csrf_field() }}
                                     <div class="form-group">
                                         <center>
@@ -25,17 +25,9 @@
                                             <div class="row px-3">
                                                 <div class="col text-center py-3">
                                                     <div class="col-6 mx-auto">
-                                                        <div class="col" style="font-size: 18px;">Jam Masuk</div>
-                                                        <div class="jam" style="font-size: 36px; font-weight: bold;">07.30</div>
-                                                        <button type="submit" class="btn bg-gradient-dark w-auto me-1 mb-0">Absen Masuk</button>
-                                                        <!-- <hr class="vertical dark"> -->
-                                                    </div>
-                                                </div>
-                                                <div class="col text-center py-3">
-                                                    <div class="col-6 mx-auto ">
-                                                        <div class="col" style="font-size: 18px;">Jam Pulang</div>
-                                                        <div class="jam" style="font-size: 36px; font-weight: bold;">15.00</div>
-                                                        <button type="button" class="btn bg-gradient-dark w-auto me-1 mb-0">Absen Pulang</button>
+                                                        <!-- <div class="col" style="font-size: 18px;">Jam Masuk</div>
+                                                        <div class="jam" style="font-size: 36px; font-weight: bold;">07.30</div> -->
+                                                        <button type="submit" class="btn bg-gradient-dark w-auto me-1 mb-0">Absen Pulang</button>
                                                         <!-- <hr class="vertical dark"> -->
                                                     </div>
                                                 </div>
@@ -65,9 +57,9 @@
                             <div class="jam" style="font-size: 36px; font-weight: bold;">07.30</div>
                             <button type="submit" class="btn bg-gradient-dark w-auto me-1 mb-0">Absen Masuk</button> -->
 
-                            <!-- <hr class="vertical dark"> -->
-                            
-                        <!-- </div>
+                <!-- <hr class="vertical dark"> -->
+
+                <!-- </div>
                     </div>
                     <div class="col text-center py-3">
                         <div class="col-6 mx-auto ">
@@ -75,14 +67,14 @@
                             <div class="jam" style="font-size: 36px; font-weight: bold;">15.00</div>
                             <button type="button" class="btn bg-gradient-dark w-auto me-1 mb-0">Absen Pulang</button> -->
 
-                            <!-- <hr class="vertical dark"> -->
+                <!-- <hr class="vertical dark"> -->
 
-                        <!-- </div>
+                <!-- </div>
                     </div>
                 </div>
             </div> -->
 
-            <!-- <div class="col-md-4 position-relative">
+                <!-- <div class="col-md-4 position-relative">
                             <div class="p-3 text-center">
                                 <h1 class="text-gradient text-primary"> <span id="state2" countTo="15">0</span>+</h1>
                                 <h5 class="mt-3">Design Blocks</h5>
@@ -97,8 +89,8 @@
                                 <p class="text-sm">Save 3-4 weeks of work when you use our pre-made pages for your website</p>
                             </div>
                         </div> -->
+            </div>
         </div>
-    </div>
     </div>
     </div>
 </section>
