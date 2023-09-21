@@ -1,5 +1,5 @@
 <header class="header-2">
-    <div class="page-header min-vh-75 relative" style="background-image: url('./assets/img/curved-images/bps.jpg')">
+    <div class="page-header min-vh-75 relative" style="background-image: {{ asset('assets/img/curved-images/bps.jpg') }}">
         <span class="mask bg-gradient-info opacity-5"></span>
         <div class="container">
             <div class="row">
