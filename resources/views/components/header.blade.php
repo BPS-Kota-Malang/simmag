@@ -26,5 +26,4 @@
                 </g>
             </svg>
         </div>
-
 </header>
