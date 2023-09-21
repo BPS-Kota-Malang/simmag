@@ -87,7 +87,7 @@ class PresensiController extends Controller
     }
 
     public function presensipulang(){
-        $timezone = 'Asia/Makassar'; 
+        $timezone = 'Asia/Jakarta'; 
         $date = new DateTime('now', new DateTimeZone($timezone)); 
         $tanggal = $date->format('Y-m-d');
         $localtime = $date->format('H:i:s');
