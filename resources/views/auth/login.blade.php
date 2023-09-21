@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="../assets/img/favicon.png">
-    
+
     @include('components.core')
-    
+
     <title>
         Login Simmag
     </title>
@@ -69,6 +69,13 @@
                                         <a class="text-info text-gradient font-weight-bold"
                                             href="{{ route('password.request') }}">{{ __('Forgot your password?') }}</a>
                                     @endif
+                                </p>
+                            </div>
+
+                            <div class="card-footer text-center pt-0 px-sm-4 px-1">
+                                <p class="mb-4 mx-auto">
+                                    Don't have Account?
+                                    <a href="{{ route('register') }}" class="text-info text-gradient font-weight-bold">Register</a>
                                 </p>
                             </div>
                         </div>

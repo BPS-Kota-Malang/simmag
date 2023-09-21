@@ -4,6 +4,9 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    @livewireStyles
 
     @include('components.core')
 
@@ -15,6 +18,8 @@
 </head>
 
 <body class="index-page">
+    <x-jet-banner />
+
     @include('components.navbar')
 
     @include('components.header')
@@ -22,6 +27,8 @@
     @yield('container')
 
     @include('components.footer')
+    @livewireScripts
+
 </body>
 
 </html>

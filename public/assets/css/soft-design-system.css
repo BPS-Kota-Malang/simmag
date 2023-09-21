@@ -26699,7 +26699,19 @@ pre[class*="language-"] {
   }
 }
 
+<<<<<<< HEAD
 .jam {
   display: block;
 }
 /*# sourceMappingURL=kit-free.css.map */
+=======
+/*# sourceMappingURL=kit-free.css.map */
+
+
+.tombol-tengah{
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  text-align: center;
+}
+>>>>>>> a8565e37d5202fb01b1be198e87de3bfca5b10aa
