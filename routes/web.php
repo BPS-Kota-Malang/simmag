@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PresensiController;
+use Faker\Guesser\Name;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,12 +17,20 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', function () {
-    return view('homepage');
+    return view('login');
 });
 
-Route::get('/daftarmagang', function () {
-    return view('pendaftaran.pendaftaran-magang');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/', function () {
+        return redirect('/redirects');
+    });
 });
+
+Route::get('/logout', [HomeController::class, 'logout'])->name('logout');
+
+Route::get('/daftarmagang', function () {
+    return view('pendaftaran.pendaftaran-magang');})->middleware('checkRole:0');
+// });
 
 // Route::get('/homepage', function () {
 //     return view('homepage');
@@ -30,6 +40,7 @@ Route::get('/daftarmagang', function () {
 //     return view('homepage');
 // })->middleware('checkRole:2');
 
+<<<<<<< HEAD
 Route::get('/presensi', function () {
     return view('presensi.create');
 
@@ -38,6 +49,16 @@ Route::get('/presensi', function () {
 Route::get('/logbook', function () {
         return view('logbook.create');
 });
+=======
+// Route::get('/presensi', function () {
+//     return view('presensi.create');
+// });
+
+Route::post('/simpan-masuk', [PresensiController::class, 'store'])->name('simpan-masuk');
+Route::get('/presensi-masuk',[PresensiController::class,'index'])->name('presensi-masuk');    
+Route::get('/presensi-keluar',[PresensiController::class,'keluar'])->name('presensi-keluar'); 
+Route::post('/ubah-presensi', [PresensiController::class, 'presensipulang'])->name('ubah-presensi');
+>>>>>>> d39dd7a0b8954e4c20d9d3e40a677b78ff4094d2
 
 Route::get('/redirects', [HomeController::class, "index"]);
 
