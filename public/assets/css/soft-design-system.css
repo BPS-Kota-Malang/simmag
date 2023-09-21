@@ -4392,7 +4392,7 @@ fieldset:disabled .btn {
   padding: var(--bs-dropdown-item-padding-y) var(--bs-dropdown-item-padding-x);
   clear: both;
   font-weight: 400;
-  color: var(--bs-dropdown-link-color);
+  /* color: var(--bs-dropdown-link-color); */
   text-align: inherit;
   white-space: nowrap;
   background-color: transparent;
@@ -21322,7 +21322,7 @@ fieldset:disabled .btn {
   }
 
   .dropdown.nav-item .dropdown-menu-animation.show {
-    height: 250px;
+    height: 50%;
     opacity: 1;
   }
 
@@ -26699,19 +26699,24 @@ pre[class*="language-"] {
   }
 }
 
-<<<<<<< HEAD
-.jam {
+.background-container {
+  background-image: url('/assets/img/curved-images/bps.jpg')
+}
+
+<<<<<<< HEAD .jam {
   display: block;
 }
+
 /*# sourceMappingURL=kit-free.css.map */
 =======
 /*# sourceMappingURL=kit-free.css.map */
 
 
-.tombol-tengah{
+.tombol-tengah {
   justify-content: center;
   justify-items: center;
   align-items: center;
   text-align: center;
 }
->>>>>>> a8565e37d5202fb01b1be198e87de3bfca5b10aa
+
+>>>>>>>a8565e37d5202fb01b1be198e87de3bfca5b10aa

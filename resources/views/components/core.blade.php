@@ -1,4 +1,4 @@
-<link rel="apple-touch-icon" sizes="76x76" href="{{url('/assets/img/logo-icon.png')}}">
+<link rel="apple-touch-icon" sizes="76x76" href="{{asset('/assets/img/logo-icon.png')}}">
 <link rel="icon" type="image/png" href="{{url('/assets/img/logo-bps.png')}}">
 
 <!--     Fonts and icons     -->
