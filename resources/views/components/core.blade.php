@@ -1,5 +1,11 @@
-<link rel="apple-touch-icon" sizes="76x76" href="{{url('/assets/img/logo-icon.png')}}">
+<link rel="apple-touch-icon" sizes="76x76" href="{{asset('/assets/img/logo-icon.png')}}">
 <link rel="icon" type="image/png" href="{{url('/assets/img/logo-bps.png')}}">
+
+<!-- Flatpickr Stylesheet -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+<!-- Flatpickr JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 <!--     Fonts and icons     -->
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />

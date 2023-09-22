@@ -4,7 +4,7 @@
         <div class=" row">
             <div class="col-lg-12 text-center mx-auto">
                 <div class="avatar avatar-xl rounded-circle">>
-                    <img alt="Image placeholder" src="./assets/img/logo-bps.png">
+                    <img alt="Image placeholder" src="{{ asset('assets/img/logo-bps.png') }}">
                 </div>
                 <h6 class="font-weight-bolder">BPS Kota Malang</h6>
                 <p class="text-sm">Jl. Janti Bar. No.47, Bandungrejosari, Kec. Sukun, Kota Malang, Jawa Timur</p>
