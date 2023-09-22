@@ -40,10 +40,10 @@ Route::get('/daftarmagang', function () {
 //     return view('homepage');
 // })->middleware('checkRole:2');
 
-Route::get('/presensi', function () {
-    return view('presensi.create');
+// Route::get('/presensi', function () {
+//     return view('presensi.create');
 
-});
+// });
 
 Route::get('/logbook', function () {
         return view('logbook.create');
