@@ -20,7 +20,7 @@
                         <ul class="navbar-nav navbar-nav-hover ms-lg-10 ps-lg-12 w-100">
                             <li class="nav-item">
 
-                                <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center" href="{{ url('/') }}" aria-expanded="false">
+                                <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center" href="{{route ('logbook.appointments')}}" aria-expanded="false">
                                     Logbook
                             </li>
                             </a>

@@ -40,14 +40,15 @@ Route::get('/daftarmagang', function () {
 //     return view('homepage');
 // })->middleware('checkRole:2');
 
-Route::get('/presensi', function () {
-    return view('presensi.create');
+// Route::get('/presensi', function () {
+//     return view('presensi.create');
 
-});
+// });
 
-Route::get('/logbook', function () {
-        return view('logbook.create');
-});
+// Route::get('/logbook', function () {
+//         return view('logbook.appointments');
+// });
+Route::get('/logbook', [LogbookController::class,'index'])->name('logbook.appointments');
 
 Route::post('/simpan-masuk', [PresensiController::class, 'store'])->name('simpan-masuk');
 Route::get('/presensi-masuk',[PresensiController::class,'index'])->name('presensi-masuk');    
