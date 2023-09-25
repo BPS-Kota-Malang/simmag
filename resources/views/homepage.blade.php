@@ -17,7 +17,7 @@
                         </div>
                         <div class="row text-center py-3">
                             <div class="col-12 mx-auto">
-                                <button type="button" class="btn bg-gradient-dark w-auto me-1 mb-0">Daftar Magang</button>
+                                <a class="btn bg-gradient-dark w-auto me-1 mb-0" href="{{ url('/daftarmagang') }}">Daftar Magang</a>
                                 <!-- <hr class="vertical dark"> -->
                             </div>
                         </div>

@@ -10,7 +10,7 @@
                     <div class="col position-relative">
                         <div class="p-3 text-center">
                             <!-- <h1 class="text-gradient text-primary"><span id="state1" countTo="70">0</span>+</h1> -->
-                            <h4 class="mt-3">Jangan Lupa Absen Hari Ini!!!</h4>
+                            <h4 class="mt-3">Silahkan Absen Pulang Disini!!!</h4>
                         </div>
                         <div class="content">
                             <div class="row justify-content-center">

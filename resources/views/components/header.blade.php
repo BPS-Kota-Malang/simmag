@@ -1,5 +1,5 @@
 <header class="header-2">
-    <div class="page-header min-vh-75 relative" style="background-image: url('./assets/img/curved-images/bps.jpg')">
+    <div class="page-header min-vh-75 relative background-container">
         <span class="mask bg-gradient-info opacity-5"></span>
         <div class="container">
             <div class="row">
@@ -12,11 +12,9 @@
         </div>
 
         <div class="position-absolute w-100 z-index-1 bottom-0">
-            <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                viewBox="0 24 150 40" preserveAspectRatio="none" shape-rendering="auto">
+            <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 40" preserveAspectRatio="none" shape-rendering="auto">
                 <defs>
-                    <path id="gentle-wave"
-                        d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+                    <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
                 </defs>
                 <g class="moving-waves">
                     <use xlink:href="#gentle-wave" x="48" y="-1" fill="rgba(255,255,255,0.40" />
@@ -29,4 +27,4 @@
             </svg>
         </div>
 
-       </header>
+</header>

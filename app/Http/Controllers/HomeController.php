@@ -16,7 +16,7 @@ class HomeController extends Controller
             return view('super-admin');
         }
         if ($role=='2') {
-            return view('admin');
+            return view('admin.admin-dashboard');
         }
         else {
             return view('homepage');
