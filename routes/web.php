@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\PresensiController;
+use App\Http\Controllers\LogbookController;
 use Faker\Guesser\Name;
 
 /*
@@ -43,9 +44,15 @@ Route::post('/daftarmagang/store', [MahasiswaController::class, 'store'])->name(
 //     return view('homepage');
 // })->middleware('checkRole:2');
 
-Route::get('/logbook', function () {
-    return view('logbook.create');
-});
+// Route::get('/presensi', function () {
+//     return view('presensi.create');
+
+// });
+
+// Route::get('/logbook', function () {
+//         return view('logbook.appointments');
+// });
+Route::get('/logbook', [LogbookController::class,'index'])->name('logbook');
 
 Route::post('/simpan-masuk', [PresensiController::class, 'store'])->name('simpan-masuk');
 Route::get('/presensi-masuk', [PresensiController::class, 'index'])->name('presensi-masuk');
