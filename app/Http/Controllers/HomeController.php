@@ -13,10 +13,12 @@ class HomeController extends Controller
         $role=Auth::user()->role;
 
         if ($role=='1') {
-            return view('super-admin');
+            
+            return view('super-admin', ['menu' => 'Dashboard']);
         }
         if ($role=='2') {
-            return view('admin.admin-dashboard');
+           
+            return view('admin.admin-dashboard',  ['menu' => 'Dashboard']);
         }
         else {
             return view('homepage');

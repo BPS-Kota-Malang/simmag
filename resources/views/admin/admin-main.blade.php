@@ -28,17 +28,17 @@
     @endguest
 
     @auth
-        @if (in_array(request()->route()->getName(), ['redirects', 'profile-admin']))
+        {{-- @if (in_array(request()->route()->getName(), ['', '']))
             @yield('content')
         @else
-            @if (!in_array(request()->route()->getName(), ['redirects', 'profile-admin']))
+            @if (!in_array(request()->route()->getName(), ['', ''])) --}}
                 <div class="min-height-300 bg-primary position-absolute w-100"></div>
-           @endif
+           {{-- @endif --}}
             @include('components.sidebar')
                 <main class="main-content border-radius-lg">
                     @yield('content')
-                </main>
-        @endif
+                {{-- </main>
+        @endif --}}
     @endauth
 
     <!--   Core JS Files   -->
