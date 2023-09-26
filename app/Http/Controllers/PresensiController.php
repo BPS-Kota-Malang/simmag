@@ -70,21 +70,18 @@ class PresensiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function halamanrekap()
     {
-        //
+        return view('presensi.halaman-rekap-absen');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+
+    public function tampildatakeseluruhan($tglawal, $tglakhir)
     {
-        //
+        $presensi = Presensi::with('user')->whereBetween('tgl',[$tglawal, $tglakhir])->orderBy('tgl','asc')->get();
+        return view('presensi.rekap-absen',compact('presensi'));
     }
+
 
     public function presensipulang(){
         $timezone = 'Asia/Jakarta'; 
