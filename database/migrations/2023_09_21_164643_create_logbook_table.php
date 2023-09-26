@@ -19,7 +19,7 @@ class CreateLogbookTable extends Migration
             $table->date('tgl');
             $table->time('waktumulai')->nullable();
             $table->time('waktuselesai')->nullable();
-            $table->array('keterangan')->nullable();
+            // $table->array('keterangan')->nullable();
             $table->timestamps();
         });
     }
