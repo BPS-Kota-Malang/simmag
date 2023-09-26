@@ -22,21 +22,20 @@ Route::get('/', function () {
     return view('login');
 });
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/', function () {
-        return redirect('/redirects');
-    });
-});
+// Route::middleware(['auth'])->group(function () {
+//     Route::get('/', function () {
+//         return redirect('/redirects');
+//     });
+// });
 
-Route::get('/logout', [HomeController::class, 'logout'])->name('logout');
+// Route::get('/logout', [HomeController::class, 'logout'])->name('logout');
 
 Route::get('/daftarmagang', function () {
     return view('pendaftaran.pendaftaran-magang');
-})->middleware('checkRole:0');
+})->middleware('checkRole:0')->name('daftarmagang');
 // });
 
-Route::get('/daftarmagang/create', [MahasiswaController::class, 'create'])->name('daftarmagang.create');
-Route::post('/daftarmagang/store', [MahasiswaController::class, 'store'])->name('daftarmagang.store');
+Route::post('/daftarcok', [MahasiswaController::class, 'store'])->name('daftarcok');
 // Route::post('/daftarmagang/create', [MahasiswaController::class, 'create'])->name('create');
 // Route::get('/homepage', function () {
 //     return view('homepage');
@@ -54,23 +53,21 @@ Route::post('/daftarmagang/store', [MahasiswaController::class, 'store'])->name(
 // Route::get('/logbook', function () {
 //         return view('logbook.appointments');
 // });
-Route::get('/logbook', [LogbookController::class,'index'])->name('logbook');
+Route::get('/logbook', [LogbookController::class, 'index'])->name('logbook');
 
 Route::post('/simpan-masuk', [PresensiController::class, 'store'])->name('simpan-masuk');
 Route::get('/presensi-masuk', [PresensiController::class, 'index'])->name('presensi-masuk');
 Route::get('/presensi-keluar', [PresensiController::class, 'keluar'])->name('presensi-keluar');
 Route::post('/ubah-presensi', [PresensiController::class, 'presensipulang'])->name('ubah-presensi');
 
-
-
 Route::get('/redirects', [HomeController::class, "index"]);
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-});
+// Route::middleware([
+//     'auth:sanctum',
+//     config('jetstream.auth_session'),
+//     'verified'
+// ])->group(function () {
+//     Route::get('/dashboard', function () {
+//         return view('dashboard');
+//     })->name('dashboard');
+// });

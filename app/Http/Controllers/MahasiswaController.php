@@ -25,24 +25,7 @@ class MahasiswaController extends Controller
      */
     public function create()
     {
-        return view('mahasiswa.create');
-
-        // $request->validate([
-        //     'nim' => 'required',
-        //     'nama' => 'required',
-        //     'universitas' => 'required',
-        //     'fakultas' => 'required',
-        //     'program_studi' => 'required',
-        //     'telepon' => 'required',
-        //     'jumlah_anggota' => 'required',
-        //     'file_proposal' => 'required|mimes:pdf',
-        //     'file_suratpengantar' => 'required|mimes:pdf',
-        //     'tanggal_mulai' => 'required',
-        //     'tanggal_selesai' => 'required',
-        // ]);
-        // Mahasiswa::create($request->all());
-
-        // return redirect()->route('create')->with('success', 'berhasil');
+        //
     }
 
     /**
@@ -53,24 +36,24 @@ class MahasiswaController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nim' => 'required',
-            'nama' => 'required',
-            'universitas' => 'required',
-            'fakultas' => 'required',
-            'program_studi' => 'required',
-            'telepon' => 'required',
-            'jumlah_anggota' => 'required',
-            'file_proposal' => 'required|mimes:pdf', // Sesuaikan dengan format yang diperlukan
-            'file_suratpengantar' => 'required|mimes:pdf', // Sesuaikan dengan format yang diperlukan
-            'tanggal_mulai' => 'required|date',
-            'tanggal_selesai' => 'required|date|after_or_equal:tanggal_mulai',
-        ]);
+        // $request->validate([
+        //     'nim' => 'required',
+        //     'nama' => 'required',
+        //     'universitas' => 'required',
+        //     'fakultas' => 'required',
+        //     'program_studi' => 'required',
+        //     'telepon' => 'required',
+        //     'jumlah_anggota' => 'required',
+        //     'file_proposal' => 'required|mimes:pdf', // Sesuaikan dengan format yang diperlukan
+        //     'file_suratpengantar' => 'required|mimes:pdf', // Sesuaikan dengan format yang diperlukan
+        //     'tanggal_mulai' => 'required|date',
+        //     'tanggal_selesai' => 'required|date|after_or_equal:tanggal_mulai',
+        // ]);
 
         // Simpan data ke dalam tabel "mahasiswa"
         Mahasiswa::create($request->all());
 
-        return redirect()->route('daftarmagang.create')->with('success', 'Data mahasiswa berhasil disimpan');
+        return redirect()->route('daftarmagang')->with('success', 'Data mahasiswa berhasil disimpan');
     }
 
     /**
