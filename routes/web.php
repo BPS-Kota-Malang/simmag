@@ -20,7 +20,7 @@ use Faker\Guesser\Name;
 
 Route::get('/', function () {
     return view('login');
-});
+})->middleware('guest')->name('redirects');
 
 // Route::middleware(['auth'])->group(function () {
 //     Route::get('/', function () {
