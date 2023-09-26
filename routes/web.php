@@ -23,7 +23,7 @@ Route::get('/', function () {
 })->middleware('guest')->name('redirects');
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('/redirects', [HomeController::Class, 'index'])->name('redirects');
+    Route::get('/redirects', [HomeController::class, 'index'])->name('redirects');
 });
 
 Route::get('/logout', [HomeController::class, 'logout'])->name('logout');
