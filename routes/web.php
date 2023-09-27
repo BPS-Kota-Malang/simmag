@@ -20,7 +20,8 @@ use Faker\Guesser\Name;
 
 Route::get('/', function () {
     return view('login');
-})->middleware('guest')->name('redirects');
+});
+// ->middleware('guest')->name('redirects');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/redirects', [HomeController::Class, 'index'])->name('redirects');
@@ -62,7 +63,7 @@ Route::get('rekap-absen',[PresensiController::class,'halamanrekap'])->name('reka
 Route::get('rekap-absen/{tglawal}/{tglakhir}',[PresensiController::class,'tampildatakeseluruhan'])->name('rekap-absen-keseluruhan');
 
 
-Route::get('/redirects', [HomeController::class, "index"]);
+// Route::get('/redirects', [HomeController::class, "index"]);
 
 Route::middleware([
     'auth:sanctum',
