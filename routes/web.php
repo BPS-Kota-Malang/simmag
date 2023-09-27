@@ -20,19 +20,19 @@ use Faker\Guesser\Name;
 
 Route::get('/', function () {
     return view('login');
-});
-// ->middleware('guest')->name('redirects');
+})->middleware('guest')->name('redirects');
 
-// Route::middleware(['auth'])->group(function () {
-//     Route::get('/', function () {
-//         return redirect('/redirects');
-//     });
-// });
 Route::middleware(['auth'])->group(function () {
+    Route::get('/', function () {
+        return redirect('/redirects');
+    });
     Route::get('/redirects', [HomeController::class, 'index'])->name('redirects');
 });
+// Route::middleware(['auth'])->group(function () {
+//     Route::get('/redirects', [HomeController::class, 'index'])->name('redirects');
+// });
 
-// Route::get('/logout', [HomeController::class, 'logout'])->name('logout');
+Route::get('/logout', [HomeController::class, 'logout'])->name('logout');
 
 Route::get('/daftarmagang', function () {
     return view('pendaftaran.pendaftaran-magang');

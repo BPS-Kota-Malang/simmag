@@ -1,4 +1,4 @@
-@extends('admin.admin-dashboard')
+@extends('admin.admin-main')
 
 @section('content')
 @include('components.topnav', ['title' => 'Rekap Presensi'])

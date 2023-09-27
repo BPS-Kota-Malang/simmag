@@ -72,14 +72,15 @@ class PresensiController extends Controller
      */
     public function halamanrekap()
     {
-        return view('presensi.halaman-rekap-absen');
+        return view('presensi.halaman-rekap-absen', ['menu' => 'Rekap Absen']);
     }
 
 
     public function tampildatakeseluruhan($tglawal, $tglakhir)
     {
+
         $presensi = Presensi::with('user')->whereBetween('tgl',[$tglawal, $tglakhir])->orderBy('tgl','asc')->get();
-        return view('presensi.rekap-absen',compact('presensi'));
+        return view('presensi.rekap-absen',compact('presensi'),['menu' => 'Rekap Absen Done']);
     }
 
 
