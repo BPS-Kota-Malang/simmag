@@ -23,19 +23,23 @@ Route::get('/', function () {
 });
 // ->middleware('guest')->name('redirects');
 
+// Route::middleware(['auth'])->group(function () {
+//     Route::get('/', function () {
+//         return redirect('/redirects');
+//     });
+// });
 Route::middleware(['auth'])->group(function () {
-    Route::get('/redirects', [HomeController::Class, 'index'])->name('redirects');
+    Route::get('/redirects', [HomeController::class, 'index'])->name('redirects');
 });
 
-Route::get('/logout', [HomeController::class, 'logout'])->name('logout');
+// Route::get('/logout', [HomeController::class, 'logout'])->name('logout');
 
 Route::get('/daftarmagang', function () {
     return view('pendaftaran.pendaftaran-magang');
-})->middleware('checkRole:0');
+})->middleware('checkRole:0')->name('daftarmagang');
 // });
 
-Route::get('/daftarmagang/create', [MahasiswaController::class, 'create'])->name('daftarmagang.create');
-Route::post('/daftarmagang/store', [MahasiswaController::class, 'store'])->name('daftarmagang.store');
+Route::post('/daftarcok', [MahasiswaController::class, 'store'])->name('daftarcok');
 // Route::post('/daftarmagang/create', [MahasiswaController::class, 'create'])->name('create');
 // Route::get('/homepage', function () {
 //     return view('homepage');
@@ -53,7 +57,7 @@ Route::post('/daftarmagang/store', [MahasiswaController::class, 'store'])->name(
 // Route::get('/logbook', function () {
 //         return view('logbook.appointments');
 // });
-Route::get('/logbook', [LogbookController::class,'index'])->name('logbook');
+Route::get('/logbook', [LogbookController::class, 'index'])->name('logbook');
 
 Route::post('/simpan-masuk', [PresensiController::class, 'store'])->name('simpan-masuk');
 Route::get('/presensi-masuk', [PresensiController::class, 'index'])->name('presensi-masuk');
@@ -62,15 +66,14 @@ Route::post('/ubah-presensi', [PresensiController::class, 'presensipulang'])->na
 Route::get('rekap-absen',[PresensiController::class,'halamanrekap'])->name('rekap-absen'); 
 Route::get('rekap-absen/{tglawal}/{tglakhir}',[PresensiController::class,'tampildatakeseluruhan'])->name('rekap-absen-keseluruhan');
 
-
 // Route::get('/redirects', [HomeController::class, "index"]);
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-});
+// Route::middleware([
+//     'auth:sanctum',
+//     config('jetstream.auth_session'),
+//     'verified'
+// ])->group(function () {
+//     Route::get('/dashboard', function () {
+//         return view('dashboard');
+//     })->name('dashboard');
+// });
