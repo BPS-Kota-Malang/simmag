@@ -1,6 +1,6 @@
 @extends('admin.admin-main')
 
-@section('content')
+@section('container')
 @include('components.topnav', ['title' => 'Rekap Presensi'])
 
 <div class="container-fluid py-4">

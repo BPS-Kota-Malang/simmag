@@ -1,6 +1,7 @@
-@extends('main')
+@extends('admin.admin-main')
 
 @section('container')
+@include('components.topnav', ['title' => 'Presensi Masuk'])
 
 <section class="pt-3 pb-4" id="count-stats">
     <div class="container">

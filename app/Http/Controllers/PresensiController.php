@@ -16,12 +16,12 @@ class PresensiController extends Controller
      */
     public function index()
     {
-        return view('presensi.masuk');
+        return view('presensi.masuk', ['menu' => 'Presensi Masuk']);
     }
 
     public function keluar()
     {
-        return view('presensi.Keluar');
+        return view('presensi.Keluar', ['menu' => 'Presensi Keluar']);
     }
 
     /**
