@@ -23,12 +23,12 @@ Route::get('/', function () {
     return view('login');
 })->middleware('guest')->name('redirects');
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/', function () {
-        return redirect('/redirects');
-    });
-    Route::get('/redirects', [HomeController::class, 'index'])->name('redirects');
+// Route::middleware(['auth'])->group(function () {
+// });
+Route::get('/', function () {
+    return redirect('/redirects');
 });
+Route::get('/redirects', [HomeController::class, 'index'])->name('redirects');
 // Route::middleware(['auth'])->group(function () {
 //     Route::get('/redirects', [HomeController::class, 'index'])->name('redirects');
 // });
