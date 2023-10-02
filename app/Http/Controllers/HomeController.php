@@ -10,15 +10,11 @@ use Illuminate\Support\Facades\Auth;
 class HomeController extends Controller
 {
     public function index(){
-        $role=Auth::user()->role;
+        $status=Auth::user()->status;
 
-        if ($role=='1') {
+        if ($status =='1') {
             
-            return view('super-admin', ['menu' => 'Dashboard']);
-        }
-        if ($role=='2') {
-           
-            return view('admin.admin-dashboard',  ['menu' => 'Dashboard']);
+            return view('admin.admin-dashboard', ['menu' => 'Dashboard']);
         }
         else {
             return view('homepage');

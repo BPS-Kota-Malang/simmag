@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\PresensiController;
 use App\Http\Controllers\LogbookController;
+use App\Http\Controllers\UserProfileController;
 use Faker\Guesser\Name;
 
 /*
@@ -36,7 +37,7 @@ Route::get('/logout', [HomeController::class, 'logout'])->name('logout');
 
 Route::get('/daftarmagang', function () {
     return view('pendaftaran.pendaftaran-magang');
-})->middleware('checkRole:0')->name('daftarmagang');
+})->middleware('checkStatus:0')->name('daftarmagang');
 // });
 
 Route::post('/daftarcok', [MahasiswaController::class, 'store'])->name('daftarcok');
@@ -77,3 +78,6 @@ Route::get('rekap-absen/{tglawal}/{tglakhir}',[PresensiController::class,'tampil
 //         return view('dashboard');
 //     })->name('dashboard');
 // });
+
+Route::get('/user/profile-admin', [UserProfileController::class, 'showAdmin'])->name('profile.show-admin');
+

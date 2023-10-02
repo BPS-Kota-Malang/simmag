@@ -63,4 +63,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Presensi::class);
     }
+
+    public function isSuperAdmin()
+    {
+        return $this->roles_id === '1'; // Ubah ini sesuai dengan logika peran Anda
+    }
 }

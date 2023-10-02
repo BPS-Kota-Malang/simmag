@@ -20,36 +20,36 @@ class AdminSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'Admin Produksi',
             'email' => 'Admin@gmail.com',
-            'role'  => 2,
-            'keterangan'  => 'Pembina Produksi',
+            'roles_id'  => 2,
+            'divisions_id' => 0,
             'password' => Hash::make('password'),
         ]);
         DB::table('users')->insert([
             'name' => 'Admin Sosial',
             'email' => 'Admin2@gmail.com',
-            'role'  => 2,
-            'keterangan'  => 'Pembina Sosial',
+            'roles_id'  => 2,
+            'divisions_id' => 1,
             'password' => Hash::make('password'),
         ]);
         DB::table('users')->insert([
             'name' => 'Admin Neraca',
             'email' => 'Admin3@gmail.com',
-            'role'  => 2,
-            'keterangan'  => 'Pembina Neraca',
+            'roles_id'  => 2,
+            'divisions_id' => 2,
             'password' => Hash::make('password'),
         ]);
         DB::table('users')->insert([
             'name' => 'Admin IPDS',
             'email' => 'Admin4@gmail.com',
-            'role'  => 2,
-            'keterangan'  => 'Pembina IPDS',
+            'roles_id'  => 2,
+            'divisions_id' => 3,
             'password' => Hash::make('password'),
         ]);
         DB::table('users')->insert([
             'name' => 'Admin Distribusi',
             'email' => 'Admin5@gmail.com',
-            'role'  => 2,
-            'keterangan'  => 'Pembina Distribusi',
+            'roles_id'  => 2,
+            'divisions_id' => 4,
             'password' => Hash::make('password'),
         ]);
     }

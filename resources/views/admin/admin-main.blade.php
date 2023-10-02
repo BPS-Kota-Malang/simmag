@@ -24,7 +24,7 @@
 <body class="{{ $class ?? '' }}">
 
     @guest
-        @yield('content')
+        @yield('container')
     @endguest
 
     @auth
@@ -36,7 +36,7 @@
            {{-- @endif --}}
             @include('components.sidebar')
                 <main class="main-content border-radius-lg">
-                    @yield('content')
+                    @yield('container')
                 {{-- </main>
         @endif --}}
     @endauth
