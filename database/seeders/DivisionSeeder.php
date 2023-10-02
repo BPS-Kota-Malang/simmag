@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
 
 class DivisionSeeder extends Seeder
 {
@@ -13,6 +15,21 @@ class DivisionSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('divisions')->insert([
+            'nama_divisi' => 'Produksi',
+        ]);
+        DB::table('divisions')->insert([
+            'nama_divisi' => 'Sosial',
+        ]);
+        DB::table('divisions')->insert([
+            'nama_divisi' => 'Neraca',
+        ]);
+        DB::table('divisions')->insert([
+            'nama_divisi' => 'IPDS',
+        ]);
+        DB::table('divisions')->insert([
+            'nama_divisi' => 'Distribusi',
+        ]);
+        
     }
 }
