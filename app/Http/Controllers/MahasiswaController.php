@@ -53,7 +53,8 @@ class MahasiswaController extends Controller
         // Simpan data ke dalam tabel "mahasiswa"
         Mahasiswa::create($request->all());
 
-        return redirect()->route('daftarmagang')->with('success', 'Data mahasiswa berhasil disimpan');
+        session()->put('pendaftaran_magang_berhasil', true);
+        return redirect()->route('redirects');
     }
 
     /**

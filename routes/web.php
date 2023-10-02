@@ -40,7 +40,7 @@ Route::get('/daftarmagang', function () {
 })->middleware('checkStatus:0')->name('daftarmagang');
 // });
 
-Route::post('/daftarcok', [MahasiswaController::class, 'store'])->name('daftarcok');
+Route::post('/daftar', [MahasiswaController::class, 'store'])->name('daftar');
 // Route::post('/daftarmagang/create', [MahasiswaController::class, 'create'])->name('create');
 // Route::get('/homepage', function () {
 //     return view('homepage');
@@ -64,8 +64,8 @@ Route::post('/simpan-masuk', [PresensiController::class, 'store'])->name('simpan
 Route::get('/presensi-masuk', [PresensiController::class, 'index'])->name('presensi-masuk');
 Route::get('/presensi-keluar', [PresensiController::class, 'keluar'])->name('presensi-keluar');
 Route::post('/ubah-presensi', [PresensiController::class, 'presensipulang'])->name('ubah-presensi');
-Route::get('rekap-absen',[PresensiController::class,'halamanrekap'])->name('rekap-absen'); 
-Route::get('rekap-absen/{tglawal}/{tglakhir}',[PresensiController::class,'tampildatakeseluruhan'])->name('rekap-absen-keseluruhan');
+Route::get('rekap-absen', [PresensiController::class, 'halamanrekap'])->name('rekap-absen');
+Route::get('rekap-absen/{tglawal}/{tglakhir}', [PresensiController::class, 'tampildatakeseluruhan'])->name('rekap-absen-keseluruhan');
 
 // Route::get('/redirects', [HomeController::class, "index"]);
 
@@ -80,4 +80,3 @@ Route::get('rekap-absen/{tglawal}/{tglakhir}',[PresensiController::class,'tampil
 // });
 
 Route::get('/user/profile-admin', [UserProfileController::class, 'showAdmin'])->name('profile.show-admin');
-
