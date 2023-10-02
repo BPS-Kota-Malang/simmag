@@ -22,6 +22,7 @@ class AdminSeeder extends Seeder
             'email' => 'Admin@gmail.com',
             'roles_id'  => 2,
             'divisions_id' => 0,
+            'status' => 1,
             'password' => Hash::make('password'),
         ]);
         DB::table('users')->insert([
@@ -29,6 +30,7 @@ class AdminSeeder extends Seeder
             'email' => 'Admin2@gmail.com',
             'roles_id'  => 2,
             'divisions_id' => 1,
+            'status' => 1,
             'password' => Hash::make('password'),
         ]);
         DB::table('users')->insert([
@@ -36,6 +38,7 @@ class AdminSeeder extends Seeder
             'email' => 'Admin3@gmail.com',
             'roles_id'  => 2,
             'divisions_id' => 2,
+            'status' => 1,
             'password' => Hash::make('password'),
         ]);
         DB::table('users')->insert([
@@ -43,6 +46,7 @@ class AdminSeeder extends Seeder
             'email' => 'Admin4@gmail.com',
             'roles_id'  => 2,
             'divisions_id' => 3,
+            'status' => 1,
             'password' => Hash::make('password'),
         ]);
         DB::table('users')->insert([
@@ -50,6 +54,7 @@ class AdminSeeder extends Seeder
             'email' => 'Admin5@gmail.com',
             'roles_id'  => 2,
             'divisions_id' => 4,
+            'status' => 1,
             'password' => Hash::make('password'),
         ]);
     }
