@@ -93,7 +93,7 @@ $admin = '';
             <li class="nav-item">
                 <a class="nav-link {{ $masuk }}" href="{{ url('presensi-masuk') }}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+                        <i class="ni ni-watch-time text-dark text-sm opacity-10"></i>
                     </div>
                     <span class="nav-link-text ms-1">Presensi Masuk</span>
                 </a>
@@ -101,15 +101,15 @@ $admin = '';
             <li class="nav-item">
                 <a class="nav-link {{ $keluar }}" href="{{ url('presensi-keluar') }}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+                        <i class="ni ni-watch-time text-dark text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Presensi Keluar</span>
+                    <span class="nav-link-text ms-1">Presensi Pulang</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link {{ $rekap }}" href="{{ url('rekap-absen') }}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+                        <i class="ni ni-collection text-dark text-sm opacity-10"></i>
                     </div>
                     <span class="nav-link-text ms-1">Rekap Presensi</span>
                 </a>
