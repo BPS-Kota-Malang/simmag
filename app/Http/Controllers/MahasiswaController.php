@@ -63,6 +63,12 @@ class MahasiswaController extends Controller
             'file_suratpengantar' => 'required', // Sesuaikan dengan format yang diperlukan
         ]);
 
+        $fileProposal = $request->file('file_proposal');
+        $pathProposal = $fileProposal->store('proposal', 'public');
+
+        $filePengantar = $request->file('file_suratpengantar');
+        $pathengantar = $filePengantar->store('pengantar', 'public');
+
         session()->put('pendaftaran_magang_berhasil', true);
         return redirect()->route('redirects');
     }

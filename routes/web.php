@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\PresensiController;
 use App\Http\Controllers\LogbookController;
+use App\Http\Controllers\MagangController;
 use App\Http\Controllers\UserProfileController;
 use Faker\Guesser\Name;
 
@@ -42,9 +43,8 @@ Route::get('/daftarmagang', function () {
 
 Route::post('/daftar', [MahasiswaController::class, 'store'])->name('daftar');
 // Route::post('/daftarmagang/create', [MahasiswaController::class, 'create'])->name('create');
-// Route::get('/homepage', function () {
-//     return view('homepage');
-// });
+
+Route::get('/magang', [MagangController::class, 'index'])->name('magang');
 
 // Route::get('/homepage', function () {
 //     return view('homepage');
