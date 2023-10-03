@@ -20,7 +20,7 @@ class CreateMahasiswasTable extends Migration
             $table->string('universitas');
             $table->string('fakultas');
             $table->string('program_studi');
-            $table->integer('telepon');
+            $table->string('telepon');
             $table->integer('jumlah_anggota');
             $table->string('file_proposal');
             $table->string('file_suratpengantar');

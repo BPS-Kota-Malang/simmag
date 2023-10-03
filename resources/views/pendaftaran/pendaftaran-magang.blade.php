@@ -16,13 +16,18 @@
                                     <div class="col-md-4">
                                         <label>NIM</label>
                                         <div class="input-group mb-3">
-                                            <input class="form-control" placeholder="" aria-label="NIM" type="text" name="nim" required>
+                                            <input class="form-control" placeholder="" aria-label="NIM" type="text" name="nim" required autofocus value="{{old('nim')}}">
                                         </div>
                                     </div>
                                     <div class="col-md-8">
                                         <label>Nama Lengkap</label>
                                         <div class="input-group">
-                                            <input type="text" class="form-control" placeholder="" name="nama" required>
+                                            <input type="text" class="form-control @error('nama') is-invalid @enderror" placeholder="" name="nama" required value="{{old('nama')}}">
+                                            @error('nama')
+                                            <div class="invalid-feedback">
+                                                {{$message}}
+                                            </div>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -30,7 +35,12 @@
                                 <div class="mb-3">
                                     <label>Nama Perguruan Tinggi</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Nama Tidak Boleh Di Singkat" name="universitas" required>
+                                        <input type="text" class="form-control @error('universitas') is-invalid @enderror" placeholder="ex: Universitas Brawijaya" name="universitas" id="universitas" required value="{{old('universitas')}}">
+                                        @error('universitas')
+                                        <div class="invalid-feedback">
+                                            {{$message}}
+                                        </div>
+                                        @enderror
                                     </div>
                                 </div>
 
@@ -38,13 +48,23 @@
                                     <div class="col-md-6">
                                         <label>Fakultas/Jurusan</label>
                                         <div class="input-group mb-3">
-                                            <input class="form-control" placeholder="" aria-label="Fakultas/Jurusan" type="text" name="fakultas" required>
+                                            <input class="form-control @error('fakultas') is-invalid @enderror" placeholder="ex: Ekonomi dan Bisnis" aria-label="Fakultas/Jurusan" type="text" name="fakultas" required value="{{old('fakultas')}}">
+                                            @error('fakultas')
+                                            <div class="invalid-feedback">
+                                                {{$message}}
+                                            </div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-md-6 ps-2">
                                         <label>Program Studi</label>
                                         <div class="input-group mb-3">
-                                            <input type="text" class="form-control" placeholder="" aria-label="Program Studi" name="program_studi" required>
+                                            <input type="text" class="form-control @error('program_studi') is-invalid @enderror" placeholder="ex: Ilmu Ekonomi" aria-label="Program Studi" name="program_studi" required value="{{old('program_studi')}}">
+                                            @error('program_studi')
+                                            <div class="invalid-feedback">
+                                                {{$message}}
+                                            </div>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -53,13 +73,23 @@
                                     <div class="col-md-6">
                                         <label>Nomor Telepon</label>
                                         <div class="input-group mb-3">
-                                            <input class="form-control" placeholder="" aria-label="Nomor Telepon" type="text" name="telepon" required>
+                                            <input class="form-control @error('telepon') is-invalid @enderror" placeholder="" aria-label="Nomor Telepon" type="text" name="telepon" required value="{{old('telepon')}}">
+                                            @error('telepon')
+                                            <div class="invalid-feedback">
+                                                {{$message}}
+                                            </div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <label>Jumlah Anggota Kelompok</label>
                                         <div class="input-group mb-3">
-                                            <input class="form-control" placeholder="" aria-label="Jumlah Anggota Kelompok" type="text" name="jumlah_anggota" required>
+                                            <input class="form-control @error('jumlah_anggota') is-invalid @enderror" placeholder="ex: 1 or 12" aria-label="Jumlah Anggota Kelompok" type="text" name="jumlah_anggota" required value="{{old('jumlah_anggota')}}">
+                                            @error('jumlah_anggota')
+                                            <div class="invalid-feedback">
+                                                {{$message}}
+                                            </div>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -116,13 +146,23 @@
                                     <div class="col-md-6">
                                         <label>Upload Proposal</label>
                                         <div class="input-group mb-3">
-                                            <input type="file" class="form-control" id="inputGroupFile01" name="file_proposal" required>
+                                            <input type="file" class="form-control @error('file_proposal') is-invalid @enderror" id="inputGroupFile01" name="file_proposal" required">
+                                            @error('file_proposal')
+                                            <div class="invalid-feedback">
+                                                {{$message}}
+                                            </div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <label>Upload Surat Pengantar</label>
                                         <div class="input-group mb-3">
-                                            <input type="file" class="form-control" id="inputGroupFile02" name="file_suratpengantar" required>
+                                            <input type="file" class="form-control @error('file_suratpengantar') is-invalid @enderror" id="inputGroupFile02" name="file_suratpengantar" required">
+                                            @error('file_suratpengantar')
+                                            <div class="invalid-feedback">
+                                                {{$message}}
+                                            </div>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -138,7 +178,7 @@
                                     <div class="col-md-5 mx-auto">
                                         <div class="input-group">
                                             <span class="input-group-text"><i class="fas fa-calendar"></i></span>
-                                            <input class="form-control datepicker" placeholder="Tanggal Mulai" type="text" name="tanggal_mulai" required>
+                                            <input class="form-control datepicker" placeholder="Tanggal Mulai" type="text" name="tanggal_mulai" required value="{{old('tanggal_mulai')}}">
                                         </div>
                                     </div>
 
@@ -150,7 +190,7 @@
                                         <!-- <label>Waktu Pelasanaan Magang</label> -->
                                         <div class="input-group">
                                             <span class="input-group-text"><i class="fas fa-calendar"></i></span>
-                                            <input class="form-control datepicker" placeholder="Tanggal Selesai" type="text" name="tanggal_selesai" required>
+                                            <input class="form-control datepicker" placeholder="Tanggal Selesai" type="text" name="tanggal_selesai" required value="{{old('tanggal_selesai')}}">
                                         </div>
                                     </div>
                                 </div>

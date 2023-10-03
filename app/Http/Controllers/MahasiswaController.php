@@ -52,6 +52,16 @@ class MahasiswaController extends Controller
 
         // Simpan data ke dalam tabel "mahasiswa"
         Mahasiswa::create($request->all());
+        $validatedData = $request->validate([
+            'nama' => 'required|alpha',
+            'universitas' => 'required|min:10',
+            'fakultas' => 'required',
+            'program_studi' => 'required',
+            'telepon' => 'required|numeric|min:11',
+            'jumlah_anggota' => 'required|max:2',
+            'file_proposal' => 'required', // Sesuaikan dengan format yang diperlukan
+            'file_suratpengantar' => 'required', // Sesuaikan dengan format yang diperlukan
+        ]);
 
         session()->put('pendaftaran_magang_berhasil', true);
         return redirect()->route('redirects');
