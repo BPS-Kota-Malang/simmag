@@ -19,15 +19,15 @@
                     </button>
 
                     <div class="collapse navbar-collapse pt-3 pb-2 py-lg-0 w-100 nav-right" id="navigation">
-                        <ul class="navbar-nav navbar-nav-hover ps-lg-12 w-100">
+                        <ul class="navbar-nav navbar-nav-hover ms-lg-12 ps-lg-12 w-100">
 
-                            <li class="nav-item">
+                            <!-- <li class="nav-item">
                                 <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center" href="{{route ('logbook')}}" aria-expanded="false">
-                                    Logbook
+                                    Status
                                 </a>
-                            </li>
+                            </li> -->
 
-                            <li class="nav-item dropdown dropdown-hover">
+                            <!-- <li class="nav-item dropdown dropdown-hover">
                                 <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center" href="javascript:;" id="dropdownMenuPages" data-bs-toggle="dropdown" aria-expanded="false">
                                     Presensi
                                     <img src="{{asset('assets/img/down-arrow-dark.svg')}}" alt="down-arrow" class="arrow ms-1">
@@ -45,7 +45,6 @@
                                         </a>
                                     </div>
 
-                                    <!-- Dropdown Resposive -->
                                     <div class="d-lg-none">
                                         <a href="{{route ('presensi-masuk')}}" class="dropdown-item border-radius-md">
                                             <span class="ps-3">Presensi Masuk</span>
@@ -56,7 +55,7 @@
                                         </a>
                                     </div>
                                 </div>
-                            </li>
+                            </li> -->
 
                             <!-- <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center" href="{{ url('/') }}" aria-expanded="false">
                                 Profil
@@ -79,6 +78,10 @@
                                     <div class="d-none d-lg-block">
                                         <a href="{{route ('profile.show')}}" class="dropdown-item border-radius-md">
                                             <span class="ps-3">Profil</span>
+                                        </a>
+
+                                        <a href="{{route ('profile.show')}}" class="dropdown-item border-radius-md">
+                                            <span class="ps-3">Status</span>
                                         </a>
 
                                         <form method="POST" action="{{ route('logout') }}" x-data>
@@ -115,6 +118,10 @@
                                     <div class="d-lg-none">
                                         <a href="{{route ('profile.show')}}" class="dropdown-item border-radius-md">
                                             <span class="ps-3">Profil</span>
+                                        </a>
+
+                                        <a href="{{route ('profile.show')}}" class="dropdown-item border-radius-md">
+                                            <span class="ps-3">Status</span>
                                         </a>
 
                                         <form method="POST" action="{{ route('logout') }}" x-data>

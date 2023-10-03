@@ -9,7 +9,7 @@
                 <div class="row">
                     <div class="col-lg-11 mx-auto d-flex justify-content-center flex-column">
                         <h3 class="text-center mb-5">Daftar Magang</h3>
-                        <form method="POST" action="{{ route('daftarcok') }}" entype="multipart/form-data" role="form" id="contact-form" autocomplete="off">
+                        <form method="POST" action="{{ route('daftar') }}" entype="multipart/form-data" role="form" id="contact-form" autocomplete="off">
                             @csrf
                             <div class="card-body">
                                 <div class="row">
@@ -30,7 +30,7 @@
                                 <div class="mb-3">
                                     <label>Nama Perguruan Tinggi</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="" name="universitas" required>
+                                        <input type="text" class="form-control" placeholder="Nama Tidak Boleh Di Singkat" name="universitas" required>
                                     </div>
                                 </div>
 
