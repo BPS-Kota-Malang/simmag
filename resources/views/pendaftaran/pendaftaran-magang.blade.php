@@ -9,7 +9,7 @@
                 <div class="row">
                     <div class="col-lg-11 mx-auto d-flex justify-content-center flex-column">
                         <h3 class="text-center mb-5">Daftar Magang</h3>
-                        <form method="POST" action="{{ route('daftar') }}" entype="multipart/form-data" role="form" id="contact-form" autocomplete="off">
+                        <form method="POST" action="{{ route('daftar') }}" enctype="multipart/form-data" role="form" id="contact-form" autocomplete="off">
                             @csrf
                             <div class="card-body">
                                 <div class="row">
@@ -146,7 +146,7 @@
                                     <div class="col-md-6">
                                         <label>Upload Proposal</label>
                                         <div class="input-group mb-3">
-                                            <input type="file" class="form-control @error('file_proposal') is-invalid @enderror" id="inputGroupFile01" name="file_proposal" required">
+                                            <input type="file" class="form-control @error('file_proposal') is-invalid @enderror" id="file_proposal" name="file_proposal" accept=".pdf" required">
                                             @error('file_proposal')
                                             <div class="invalid-feedback">
                                                 {{$message}}
@@ -157,7 +157,7 @@
                                     <div class="col-md-6">
                                         <label>Upload Surat Pengantar</label>
                                         <div class="input-group mb-3">
-                                            <input type="file" class="form-control @error('file_suratpengantar') is-invalid @enderror" id="inputGroupFile02" name="file_suratpengantar" required">
+                                            <input type="file" class="form-control @error('file_suratpengantar') is-invalid @enderror" id="file_suratpengantar" name="file_suratpengantar" accept=".pdf" required">
                                             @error('file_suratpengantar')
                                             <div class="invalid-feedback">
                                                 {{$message}}

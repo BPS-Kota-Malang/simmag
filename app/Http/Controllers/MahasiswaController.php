@@ -59,7 +59,7 @@ class MahasiswaController extends Controller
             'program_studi' => 'required',
             'telepon' => 'required|numeric|min:11',
             'jumlah_anggota' => 'required|max:2',
-            'file_proposal' => 'required', // Sesuaikan dengan format yang diperlukan
+            'file_proposal' => 'required|file|mimes:pdf', // Sesuaikan dengan format yang diperlukan
             'file_suratpengantar' => 'required', // Sesuaikan dengan format yang diperlukan
         ]);
 
@@ -71,6 +71,8 @@ class MahasiswaController extends Controller
 
         session()->put('pendaftaran_magang_berhasil', true);
         return redirect()->route('redirects');
+
+        dd($request->all());
     }
 
     /**

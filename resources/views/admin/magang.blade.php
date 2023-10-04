@@ -77,11 +77,11 @@
                                     </td>
 
                                     <td class="align-middle text-center text-md">
-                                        <a href="{{ asset('path/to/proposal/' . $data->file_proposal) }}" target="_blank">Lihat Proposal</a>
+                                        <a href="{{ asset('storage/proposal/' . $data->file_proposal) }}" target="_blank">Lihat Proposal</a>
                                     </td>
 
                                     <td class="align-middle text-center text-md">
-                                        <a href="{{ asset('path/to/proposal/' . $data->file_suratpengantar) }}" target="_blank">Lihat Surat Pengantar</a>
+                                        <a href="{{ asset('storage/pengantar/' . $data->file_suratpengantar) }}" target="_blank">Lihat Surat Pengantar</a>
                                     </td>
 
                                     <td class="align-middle text-center text-md">
