@@ -18,6 +18,7 @@
                         <div class="row text-center py-3">
                             <div class="col-12 mx-auto">
                                 @if(session('pendaftaran_magang_berhasil'))
+
                                 <a class="btn bg-gradient-dark w-auto me-1 mb-0" href="{{ url('/daftarmagang') }}" id="daftarMagangButton">Daftar Magang</a>
                                 @endif
                             </div>
