@@ -39,38 +39,50 @@ class MahasiswaController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'nim' => 'required',
-        //     'nama' => 'required',
-        //     'universitas' => 'required',
-        //     'fakultas' => 'required',
-        //     'program_studi' => 'required',
-        //     'telepon' => 'required',
-        //     'jumlah_anggota' => 'required',
-        //     'file_proposal' => 'required|mimes:pdf', // Sesuaikan dengan format yang diperlukan
-        //     'file_suratpengantar' => 'required|mimes:pdf', // Sesuaikan dengan format yang diperlukan
-        //     'tanggal_mulai' => 'required|date',
-        //     'tanggal_selesai' => 'required|date|after_or_equal:tanggal_mulai',
-        // ]);
-
-        // Simpan data ke dalam tabel "mahasiswa"
-        Mahasiswa::create($request->all());
-        $validatedData = $request->validate([
+        $this->validate($request, [
             'nama' => 'required|regex:/^[a-zA-Z\s]*$/',
             'universitas' => 'required|min:10',
             'fakultas' => 'required|regex:/^[a-zA-Z\s]*$/',
             'program_studi' => 'required|regex:/^[a-zA-Z\s]*$/',
             'telepon' => 'required|numeric|min:11',
             'jumlah_anggota' => 'required|max:2',
-            'file_proposal' => 'required|file|mimes:pdf', // Sesuaikan dengan format yang diperlukan
-            'file_suratpengantar' => 'required|file|mimes:pdf', // Sesuaikan dengan format yang diperlukan
+            'file_proposal' => 'required|file|mimes:pdf',
+            'file_suratpengantar' => 'required|file|mimes:pdf',
         ]);
 
+        // Untuk Ekstensi Pdf
+
         $fileProposal = $request->file('file_proposal');
-        $pathProposal = $fileProposal->store('proposal', 'public');
+        $nama_fileProp = $fileProposal->getClientOriginalName();
+        $fileProposal->storeAs('proposal', $nama_fileProp, 'public');
 
         $filePengantar = $request->file('file_suratpengantar');
-        $pathengantar = $filePengantar->store('pengantar', 'public');
+        $nama_filePeng = $filePengantar->getClientOriginalName();
+        $filePengantar->storeAs('pengantar', $nama_filePeng, 'public');
+
+        $data = new Mahasiswa();
+        $data->nim = $request->nim;
+        $data->nama = $request->nama;
+        $data->universitas = $request->universitas;
+        $data->fakultas = $request->fakultas;
+        $data->program_studi = $request->program_studi;
+        $data->telepon = $request->telepon;
+        $data->jumlah_anggota = $request->jumlah_anggota;
+        $data->file_proposal = $nama_fileProp;
+        $data->file_suratpengantar = $nama_filePeng;
+        $data->tanggal_mulai = $request->tanggal_mulai;
+        $data->tanggal_selesai = $request->tanggal_selesai;
+        $data->save();
+
+        // Lama Berhasil
+
+        // $fileProposal = $request->file('file_proposal');
+        // $pathProposal = $fileProposal->store('proposal', 'public');
+
+        // $filePengantar = $request->file('file_suratpengantar');
+        // $pathengantar = $filePengantar->store('pengantar', 'public');
+
+        // Percobaan Pengkondisian Button Daftar
 
         // $user = Auth::user(); // Mengambil objek pengguna yang saat ini login
         // $user->pendaftaran_magang_berhasil = false;

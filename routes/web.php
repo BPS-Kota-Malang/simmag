@@ -41,9 +41,11 @@ Route::get('/daftarmagang', function () {
 })->middleware('checkStatus:0')->name('daftarmagang');
 // });
 
+// Pendaftaran Magang User
 Route::post('/daftar', [MahasiswaController::class, 'store'])->name('daftar');
 // Route::post('/daftarmagang/create', [MahasiswaController::class, 'create'])->name('create');
 
+// Penerimaan Magang Admin
 Route::get('/magang', [MagangController::class, 'index'])->name('magang');
 
 // Route::get('/homepage', function () {
