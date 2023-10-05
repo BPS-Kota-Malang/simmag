@@ -7,6 +7,7 @@ $profile = '';
 $rekap = '';
 $masuk = '';
 $keluar = '';
+$logbook = '';
 $admin = '';
 @endphp
 @break
@@ -19,6 +20,7 @@ $profile = '';
 $rekap = '';
 $masuk = '';
 $keluar = '';
+$logbook = '';
 $admin = '';
 @endphp
 @break
@@ -31,6 +33,7 @@ $profile = 'active';
 $rekap = '';
 $masuk = '';
 $keluar = '';
+$logbook = '';
 $admin = '';
 @endphp
 @break
@@ -43,6 +46,7 @@ $profile = '';
 $rekap = 'active';
 $masuk = '';
 $keluar = '';
+$logbook = '';
 $admin = '';
 @endphp
 @break
@@ -55,6 +59,7 @@ $profile = '';
 $rekap = 'active';
 $masuk = '';
 $keluar = '';
+$logbook = '';
 $admin = '';
 @endphp
 @break
@@ -67,6 +72,7 @@ $profile = '';
 $rekap = '';
 $masuk = 'active';
 $keluar = '';
+$logbook = '';
 $admin = '';
 @endphp
 @break
@@ -79,6 +85,20 @@ $profile = '';
 $rekap = '';
 $masuk = '';
 $keluar = 'active';
+$logbook = '';
+$admin = '';
+@endphp
+@break
+
+@case('Logbook')
+@php
+$dashboard = '';
+$magang = '';
+$profile = '';
+$rekap = '';
+$masuk = '';
+$keluar = '';
+$logbook = 'active';
 $admin = '';
 @endphp
 @break
@@ -141,7 +161,7 @@ $admin = '';
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ url('rekap-absen') }}">
+            <a class="nav-link {{ $logbook }}" href="{{ url('logbook') }}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
                     </div>
