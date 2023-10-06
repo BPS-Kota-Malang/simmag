@@ -10,6 +10,8 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Hash;
+
 
 class User extends Authenticatable
 {
@@ -31,6 +33,10 @@ class User extends Authenticatable
      *
      * @var string[]
      */
+
+    protected $table = 'users';
+    protected $primaryKey = 'id';
+
     protected $fillable = [
         'name',
         'email',
@@ -76,4 +82,11 @@ class User extends Authenticatable
     {
         return $this->roles_id === '1'; // Ubah ini sesuai dengan logika peran Anda
     }
+
+    public function changePassword($newPassword)
+{
+    $this->update([
+        'password' => Hash::make($newPassword),
+    ]);
+}
 }

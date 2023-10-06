@@ -82,3 +82,8 @@ Route::get('rekap-absen/{tglawal}/{tglakhir}', [PresensiController::class, 'tamp
 // });
 
 Route::get('/user/profile-admin', [UserProfileController::class, 'showAdmin'])->name('profile.show-admin');
+Route::resource('users', \App\Http\Controllers\UserProfileController::class)->middleware('auth');
+// routes/web.php
+
+Route::post('/user/password/update', [UserProfileController::class, 'updatePassword'])->name('ganti.password');
+
