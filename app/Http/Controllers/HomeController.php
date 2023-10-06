@@ -9,19 +9,20 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    public function index(){
-        $status=Auth::user()->status;
+    public function index()
+    {
+        $status = Auth::user()->status;
 
-        if ($status =='1') {
-            
+        if ($status == '3') {
+
             return view('admin.admin-dashboard', ['menu' => 'Dashboard']);
-        }
-        else {
+        } else {
             return view('homepage');
         }
     }
 
-    public function logout(){
+    public function logout()
+    {
         Auth::logout();
         return redirect()->route('login');
     }

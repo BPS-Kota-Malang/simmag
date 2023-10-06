@@ -26,6 +26,7 @@ class CreateMahasiswasTable extends Migration
             $table->string('file_suratpengantar');
             $table->date('tanggal_mulai');
             $table->date('tanggal_selesai');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
     }

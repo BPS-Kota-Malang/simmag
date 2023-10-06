@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Mahasiswa;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
+
 
 
 class MahasiswaController extends Controller
@@ -41,17 +42,16 @@ class MahasiswaController extends Controller
     {
         $this->validate($request, [
             'nama' => 'required|regex:/^[a-zA-Z\s]*$/',
-            'universitas' => 'required|min:10',
-            'fakultas' => 'required|regex:/^[a-zA-Z\s]*$/',
-            'program_studi' => 'required|regex:/^[a-zA-Z\s]*$/',
-            'telepon' => 'required|numeric|min:11',
-            'jumlah_anggota' => 'required|max:2',
+            'universitas' => 'required|regex:/^.{10,}$/',
+            'fakultas' => 'required|regex:/^[a-zA-Z\s]{6,}$/',
+            'program_studi' => 'required|regex:/^[a-zA-Z\s]{4,}$/',
+            'telepon' => 'required|regex:/^[0-9]{11,13}$/',
+            'jumlah_anggota' => 'required|regex:/^\d{1,2}$/',
             'file_proposal' => 'required|file|mimes:pdf',
             'file_suratpengantar' => 'required|file|mimes:pdf',
         ]);
 
-        // Untuk Ekstensi Pdf
-
+        // Post dan Read File
         $fileProposal = $request->file('file_proposal');
         $nama_fileProp = $fileProposal->getClientOriginalName();
         $fileProposal->storeAs('proposal', $nama_fileProp, 'public');
@@ -59,6 +59,10 @@ class MahasiswaController extends Controller
         $filePengantar = $request->file('file_suratpengantar');
         $nama_filePeng = $filePengantar->getClientOriginalName();
         $filePengantar->storeAs('pengantar', $nama_filePeng, 'public');
+
+        $user = Auth::user();
+        $user->status = 1;
+        $user->save();
 
         $data = new Mahasiswa();
         $data->nim = $request->nim;
@@ -72,24 +76,9 @@ class MahasiswaController extends Controller
         $data->file_suratpengantar = $nama_filePeng;
         $data->tanggal_mulai = $request->tanggal_mulai;
         $data->tanggal_selesai = $request->tanggal_selesai;
+        $data->user_id = $user->id;
         $data->save();
 
-        // Lama Berhasil
-
-        // $fileProposal = $request->file('file_proposal');
-        // $pathProposal = $fileProposal->store('proposal', 'public');
-
-        // $filePengantar = $request->file('file_suratpengantar');
-        // $pathengantar = $filePengantar->store('pengantar', 'public');
-
-        // Percobaan Pengkondisian Button Daftar
-
-        // $user = Auth::user(); // Mengambil objek pengguna yang saat ini login
-        // $user->pendaftaran_magang_berhasil = false;
-        // $user->save();
-
-        // session()->forget('pendaftaran_magang_berhasil');
-        session()->put('pendaftaran_magang_berhasil', true);
         return redirect()->route('redirects');
     }
 
@@ -136,5 +125,14 @@ class MahasiswaController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getUserMahasiswa($userId, $mahasiswaId)
+    {
+        $user = User::find($userId);
+        $mahasiswa = $user->mahasiswa;
+
+        $mahasiswa = Mahasiswa::find($mahasiswaId);
+        $user = $mahasiswa->user;
     }
 }

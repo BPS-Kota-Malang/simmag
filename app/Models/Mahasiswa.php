@@ -10,5 +10,10 @@ class Mahasiswa extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $primaryKey = 'id_mahasiswa';
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }
