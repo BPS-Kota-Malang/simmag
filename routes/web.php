@@ -7,7 +7,7 @@ use App\Http\Controllers\PresensiController;
 use App\Http\Controllers\LogbookController;
 use App\Http\Controllers\MagangController;
 use App\Http\Controllers\UserProfileController;
-use Faker\Guesser\Name;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +29,7 @@ Route::get('/', function () {
 Route::get('/', function () {
     return redirect('/redirects');
 });
-Route::get('/redirects', [HomeController::class, 'index'])->name('redirects');
+// Route::get('/redirects', [HomeController::class, 'index'])->name('redirects');
 // Route::middleware(['auth'])->group(function () {
 //     Route::get('/redirects', [HomeController::class, 'index'])->name('redirects');
 // });
@@ -71,19 +71,19 @@ Route::get('rekap-absen/{tglawal}/{tglakhir}', [PresensiController::class, 'tamp
 
 // Route::get('/redirects', [HomeController::class, "index"]);
 
-// Route::middleware([
-//     'auth:sanctum',
-//     config('jetstream.auth_session'),
-//     'verified'
-// ])->group(function () {
-//     Route::get('/dashboard', function () {
-//         return view('dashboard');
-//     })->name('dashboard');
-// });
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('/redirects', [HomeController::class, 'index'])->name('redirects');
+});
 
 Route::get('/user/profile-admin', [UserProfileController::class, 'showAdmin'])->name('profile.show-admin');
 Route::resource('users', \App\Http\Controllers\UserProfileController::class)->middleware('auth');
-// routes/web.php
+
 
 Route::post('/user/password/update', [UserProfileController::class, 'updatePassword'])->name('ganti.password');
+
+
 

@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
 
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens;
     use HasFactory;
@@ -41,6 +41,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        // 'email_verified_at'
     ];
 
     /**
