@@ -164,14 +164,6 @@ $admin = '';
             <!-- <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Presensi</h6>
             </li> -->
-            <li class="nav-item">
-                <a class="nav-link {{ $magang }}" href="{{ url('magang') }}">
-                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-email-83 text-dark text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Penerimaan Magang</span>
-                </a>
-            </li>
             @if (Auth::user()->isUser()) {{-- Gantilah ini dengan metode autentikasi dan kondisi Anda --}}
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Presensi</h6>
@@ -218,6 +210,14 @@ $admin = '';
                 </a>
             </li>
             @if (Auth::user()->isSuperAdmin()) {{-- Gantilah ini dengan metode autentikasi dan kondisi Anda --}}
+            <li class="nav-item">
+                <a class="nav-link {{ $magang }}" href="{{ url('magang') }}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-email-83 text-dark text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Penerimaan Magang</span>
+                </a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link {{ $rekap }}" href="{{ url('rekap-absen') }}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">

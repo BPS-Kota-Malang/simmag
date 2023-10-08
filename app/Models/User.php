@@ -81,12 +81,12 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function isSuperAdmin()
     {
-        return $this->roles_id === '2'; // Ubah ini sesuai dengan logika peran Anda
+        return $this->roles_id === '1'; // Ubah ini sesuai dengan logika peran Anda
     }
 
     public function isUser()
     {
-        return $this->roles_id === '1'; // Ubah ini sesuai dengan logika peran Anda
+        return $this->roles_id === '0'; // Ubah ini sesuai dengan logika peran Anda
     }
 
     public function changePassword($newPassword)
