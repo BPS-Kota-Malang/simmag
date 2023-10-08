@@ -1,14 +1,14 @@
 @extends('admin.admin-main')
 
 @section('container')
-@include('components.topnav', ['title' => 'Rekap Presensi Admin'])
+@include('components.topnav', ['title' => 'Rekap Presensi User'])
 
 <div class="container-fluid py-4">
     <div class="row mt-4 mx-4">
         <div class="col-12">
             <div class="card mb-4">
                 <div class="card-header pb-0">
-                    <h6>Rekap Presensi</h6>
+                    <h6>Rekap Presensi User</h6>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="form-group">
@@ -20,7 +20,7 @@
                         <input type="date" name="tglakhir" id="tglakhir" class="form-control" />
                     </div>
                     <div class="form-group">
-                        <a href="" onclick="this.href='/rekap-absen/'+ document.getElementById('tglawal').value +
+                        <a href="" onclick="this.href='/rekap-user/'+ document.getElementById('tglawal').value +
                             '/' + document.getElementById('tglakhir').value " class="btn btn-primary col-md-12">
                             Lihat <i class="fas fa-print"></i>
                         </a>

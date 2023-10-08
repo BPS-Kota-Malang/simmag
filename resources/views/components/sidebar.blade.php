@@ -5,6 +5,7 @@ $dashboard = 'active';
 $magang = '';
 $profile = '';
 $rekap = '';
+$rekapuser = '';
 $masuk = '';
 $keluar = '';
 $logbook = '';
@@ -18,6 +19,7 @@ $dashboard = '';
 $magang = 'active';
 $profile = '';
 $rekap = '';
+$rekapuser = '';
 $masuk = '';
 $keluar = '';
 $logbook = '';
@@ -31,6 +33,7 @@ $dashboard = '';
 $magang = '';
 $profile = 'active';
 $rekap = '';
+$rekapuser = '';
 $masuk = '';
 $keluar = '';
 $logbook = '';
@@ -44,6 +47,7 @@ $dashboard = '';
 $magang = '';
 $profile = '';
 $rekap = 'active';
+$rekapuser = '';
 $masuk = '';
 $keluar = '';
 $logbook = '';
@@ -57,6 +61,35 @@ $dashboard = '';
 $magang = '';
 $profile = '';
 $rekap = 'active';
+$rekapuser = '';
+$masuk = '';
+$keluar = '';
+$logbook = '';
+$admin = '';
+@endphp
+@break
+
+@case('Rekap Absen User')
+@php
+$dashboard = '';
+$magang = '';
+$profile = '';
+$rekap = '';
+$rekapuser = 'active';
+$masuk = '';
+$keluar = '';
+$logbook = '';
+$admin = '';
+@endphp
+@break
+
+@case('Rekap User')
+@php
+$dashboard = '';
+$magang = '';
+$profile = '';
+$rekap = '';
+$rekapuser = 'active';
 $masuk = '';
 $keluar = '';
 $logbook = '';
@@ -70,6 +103,7 @@ $dashboard = '';
 $magang = '';
 $profile = '';
 $rekap = '';
+$rekapuser = '';
 $masuk = 'active';
 $keluar = '';
 $logbook = '';
@@ -83,6 +117,7 @@ $dashboard = '';
 $magang = '';
 $profile = '';
 $rekap = '';
+$rekapuser = '';
 $masuk = '';
 $keluar = 'active';
 $logbook = '';
@@ -96,6 +131,7 @@ $dashboard = '';
 $magang = '';
 $profile = '';
 $rekap = '';
+$rekapuser = '';
 $masuk = '';
 $keluar = '';
 $logbook = 'active';
@@ -136,6 +172,10 @@ $admin = '';
                     <span class="nav-link-text ms-1">Penerimaan Magang</span>
                 </a>
             </li>
+            @if (Auth::user()->isUser()) {{-- Gantilah ini dengan metode autentikasi dan kondisi Anda --}}
+            <li class="nav-item mt-3">
+                <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Presensi</h6>
+            </li>
             <li class="nav-item">
                 <a class="nav-link {{ $masuk }}" href="{{ url('presensi-masuk') }}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -153,13 +193,14 @@ $admin = '';
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ $rekap }}" href="{{ url('rekap-absen') }}">
+                <a class="nav-link {{ $rekapuser }}" href="{{ url('rekap-user') }}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-collection text-dark text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Rekap Presensi</span>
+                    <span class="nav-link-text ms-1">Rekap Presensi User</span>
                 </a>
             </li>
+            @endif
             <li class="nav-item">
             <a class="nav-link {{ $logbook }}" href="{{ url('logbook') }}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -177,6 +218,14 @@ $admin = '';
                 </a>
             </li>
             @if (Auth::user()->isSuperAdmin()) {{-- Gantilah ini dengan metode autentikasi dan kondisi Anda --}}
+            <li class="nav-item">
+                <a class="nav-link {{ $rekap }}" href="{{ url('rekap-absen') }}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-collection text-dark text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Rekap Presensi Admin</span>
+                </a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">

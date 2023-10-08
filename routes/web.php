@@ -68,6 +68,8 @@ Route::get('/presensi-keluar', [PresensiController::class, 'keluar'])->name('pre
 Route::post('/ubah-presensi', [PresensiController::class, 'presensipulang'])->name('ubah-presensi');
 Route::get('rekap-absen', [PresensiController::class, 'halamanrekap'])->name('rekap-absen');
 Route::get('rekap-absen/{tglawal}/{tglakhir}', [PresensiController::class, 'tampildatakeseluruhan'])->name('rekap-absen-keseluruhan');
+Route::get('rekap-user', [PresensiController::class, 'halamanrekapuser'])->name('rekap-absen-user');
+Route::get('rekap-user/{tglawal}/{tglakhir}', [PresensiController::class, 'tampildatauser'])->name('rekap-user');
 
 // Route::get('/redirects', [HomeController::class, "index"]);
 

@@ -66,6 +66,11 @@ class User extends Authenticatable
 
     public function isSuperAdmin()
     {
+        return $this->roles_id === '2'; // Ubah ini sesuai dengan logika peran Anda
+    }
+
+    public function isUser()
+    {
         return $this->roles_id === '1'; // Ubah ini sesuai dengan logika peran Anda
     }
 }
