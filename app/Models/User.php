@@ -9,8 +9,11 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Hash;
 
-class User extends Authenticatable
+
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens;
     use HasFactory;
@@ -18,15 +21,27 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
 
+    use Notifiable;
+
+    public function mahasiswa()
+    {
+        return $this->hasOne(Mahasiswa::class, 'user_id');
+    }
+
     /**
      * The attributes that are mass assignable.
      *
      * @var string[]
      */
+
+    protected $table = 'users';
+    protected $primaryKey = 'id';
+
     protected $fillable = [
         'name',
         'email',
         'password',
+        // 'email_verified_at'
     ];
 
     /**
@@ -73,4 +88,11 @@ class User extends Authenticatable
     {
         return $this->roles_id === '1'; // Ubah ini sesuai dengan logika peran Anda
     }
+
+    public function changePassword($newPassword)
+{
+    $this->update([
+        'password' => Hash::make($newPassword),
+    ]);
+}
 }

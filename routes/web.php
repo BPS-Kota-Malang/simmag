@@ -6,8 +6,10 @@ use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\PresensiController;
 use App\Http\Controllers\LogbookController;
 use App\Http\Controllers\MagangController;
+use App\Http\Controllers\StatusMagangUser;
 use App\Http\Controllers\UserProfileController;
-use Faker\Guesser\Name;
+use App\Http\Controllers\StatusMagangUserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +31,7 @@ Route::get('/', function () {
 Route::get('/', function () {
     return redirect('/redirects');
 });
-Route::get('/redirects', [HomeController::class, 'index'])->name('redirects');
+// Route::get('/redirects', [HomeController::class, 'index'])->name('redirects');
 // Route::middleware(['auth'])->group(function () {
 //     Route::get('/redirects', [HomeController::class, 'index'])->name('redirects');
 // });
@@ -44,6 +46,9 @@ Route::get('/daftarmagang', function () {
 // Pendaftaran Magang User
 Route::post('/daftar', [MahasiswaController::class, 'store'])->name('daftar');
 // Route::post('/daftarmagang/create', [MahasiswaController::class, 'create'])->name('create');
+
+Route::get('/status', [StatusMagangUserController::class, 'index'])->name('pendaftaran.status');
+
 
 // Penerimaan Magang Admin
 Route::get('/magang', [MagangController::class, 'index'])->name('magang');
@@ -73,14 +78,16 @@ Route::get('rekap-user/{tglawal}/{tglakhir}', [PresensiController::class, 'tampi
 
 // Route::get('/redirects', [HomeController::class, "index"]);
 
-// Route::middleware([
-//     'auth:sanctum',
-//     config('jetstream.auth_session'),
-//     'verified'
-// ])->group(function () {
-//     Route::get('/dashboard', function () {
-//         return view('dashboard');
-//     })->name('dashboard');
-// });
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('/redirects', [HomeController::class, 'index'])->name('redirects');
+});
 
 Route::get('/user/profile-admin', [UserProfileController::class, 'showAdmin'])->name('profile.show-admin');
+Route::resource('users', \App\Http\Controllers\UserProfileController::class)->middleware('auth');
+
+
+Route::post('/user/password/update', [UserProfileController::class, 'updatePassword'])->name('ganti.password');

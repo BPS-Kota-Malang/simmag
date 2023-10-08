@@ -80,7 +80,7 @@
                                             <span class="ps-3">Profil</span>
                                         </a>
 
-                                        <a href="{{route ('profile.show')}}" class="dropdown-item border-radius-md">
+                                        <a href="{{route ('pendaftaran.status')}}" class="dropdown-item border-radius-md">
                                             <span class="ps-3">Status</span>
                                         </a>
 
@@ -120,7 +120,7 @@
                                             <span class="ps-3">Profil</span>
                                         </a>
 
-                                        <a href="{{route ('profile.show')}}" class="dropdown-item border-radius-md">
+                                        <a href="{{route ('pendaftaran.status')}}" class="dropdown-item border-radius-md">
                                             <span class="ps-3">Status</span>
                                         </a>
 
