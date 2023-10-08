@@ -154,7 +154,7 @@
                                 </div>
 
                                 <div class="col-md-12">
-                                    <button type="submit" class="btn bg-gradient-dark w-100">Daftar Sekarang!</button>
+                                    <button type="submit" class="btn bg-gradient-dark w-100" id="daftar">Daftar Sekarang!</button>
                                 </div>
                             </div>
                         </form>

@@ -6,7 +6,9 @@ use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\PresensiController;
 use App\Http\Controllers\LogbookController;
 use App\Http\Controllers\MagangController;
+use App\Http\Controllers\StatusMagangUser;
 use App\Http\Controllers\UserProfileController;
+use App\Http\Controllers\StatusMagangUserController;
 
 
 /*
@@ -44,6 +46,9 @@ Route::get('/daftarmagang', function () {
 // Pendaftaran Magang User
 Route::post('/daftar', [MahasiswaController::class, 'store'])->name('daftar');
 // Route::post('/daftarmagang/create', [MahasiswaController::class, 'create'])->name('create');
+
+Route::get('/status', [StatusMagangUserController::class, 'index'])->name('pendaftaran.status');
+
 
 // Penerimaan Magang Admin
 Route::get('/magang', [MagangController::class, 'index'])->name('magang');
@@ -84,6 +89,3 @@ Route::resource('users', \App\Http\Controllers\UserProfileController::class)->mi
 
 
 Route::post('/user/password/update', [UserProfileController::class, 'updatePassword'])->name('ganti.password');
-
-
-

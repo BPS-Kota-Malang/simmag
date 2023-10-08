@@ -14,6 +14,12 @@
 <link href="{{url('/assets/css/nucleo-icons.css')}}" rel="stylesheet" />
 <link href="{{url('/assets/css/nucleo-svg.css')}}" rel="stylesheet" />
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- <script src="sweetalert2.all.min.js"></script>
+<link rel="stylesheet" href="sweetalert2.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"> -->
+
 <!-- Font Awesome Icons -->
 <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
 <link href="{{url('/assets/css/nucleo-svg.css')}}" rel="stylesheet" />
@@ -81,3 +87,21 @@
         };
     }
 </script>
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript">
+    $(function() {
+        $(document).on('click', '#daftar', function(e) {
+            e.preventDefault();
+            Swal.fire({
+                icon: 'success',
+                title: 'Your work has been saved',
+                showConfirmButton: false,
+                timer: 1500
+            }).then(function() {
+                // Redirect to the desired page after the alert is closed
+                window.location.href = '/user/profile'; // Ganti dengan URL halaman tujuan yang sesuai
+            });
+        });
+    });
+</script> -->
