@@ -87,21 +87,3 @@
         };
     }
 </script>
-
-<!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script type="text/javascript">
-    $(function() {
-        $(document).on('click', '#daftar', function(e) {
-            e.preventDefault();
-            Swal.fire({
-                icon: 'success',
-                title: 'Your work has been saved',
-                showConfirmButton: false,
-                timer: 1500
-            }).then(function() {
-                // Redirect to the desired page after the alert is closed
-                window.location.href = '/user/profile'; // Ganti dengan URL halaman tujuan yang sesuai
-            });
-        });
-    });
-</script> -->
