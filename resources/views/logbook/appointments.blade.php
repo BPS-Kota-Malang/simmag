@@ -8,6 +8,8 @@
 
 <div class="card">
     <div class="card-header py-3 d-flex">
+        <h6 class="m-0 font-weight-bold text-primary">
+        </h6>
         <div class="ml-auto">
         <a href="{{ route('logbook') }}" class="btn btn-primary">
                 <span class="icon text-white-50">
