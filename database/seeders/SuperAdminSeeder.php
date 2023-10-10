@@ -20,9 +20,8 @@ class SuperAdminSeeder extends Seeder
         DB::table('users')->insert([
             'name' => 'Superadmin',
             'email' => 'Superadmin@gmail.com',
-            'roles_id'  => 1,
-            'divisions_id' => 5,
-            'status' => 1,
+            'roles_id'  => 2,
+            'status' => 2,
             'password' => Hash::make('password'),
         ]);
     }
