@@ -21,7 +21,7 @@
             <div class="card mb-4 p-3">
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
-                        <table id="myTable" class="table align-items-center mb-0">
+                        <table id="example" class="table align-items-center mb-0">
                             <thead>
                                 <tr>
                                     <th class="text-center text-uppercase text-xs font-weight-bolder">No.</th>
@@ -40,8 +40,8 @@
                                     <!-- <th class="text-secondary opacity-7"></th> -->
                                 </tr>
                             </thead>
-                            @foreach($magang as $data)
                             <tbody>
+                                @foreach($magang as $data)
                                 <tr>
                                     <!-- NO -->
                                     <td class="align-middle text-center text-sm">
@@ -94,14 +94,8 @@
 
                                     <!-- Action -->
                                     <td class="align-middle text-center text-sm">
-                                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#terima">
+                                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#terima{{ $data->id_mahasiswa }}">
                                             <i class="fas fa-check-square fa-lg text-success"></i>
-                                        </a>
-                                        <a class="text-secondary font-weight-bold text-xs" data-toggle="tooltip">
-                                            |
-                                        </a>
-                                        <a href="javascript:;" class="text-danger font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#syarat">
-                                            <i class="fas fa-calendar-alt fa-lg text-warning"></i>
                                         </a>
                                         <a class="text-secondary font-weight-bold text-xs" data-toggle="tooltip">
                                             |
@@ -111,51 +105,36 @@
                                         </a>
                                     </td>
                                 </tr>
-                                </tr>
+                                @endforeach
                             </tbody>
-                            @endforeach
                         </table>
 
                         <!-- Modal Terima -->
-                        <div class="modal fade" id="terima" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="terima" aria-hidden="true">
+                        <div class="modal fade" id="terima{{ $data->id_mahasiswa }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="terima" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="terima">Penerimaan Magang</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <div class="modal-body">
-                                        Apakah Anda yakin ingin menerima permohonan magang tersebut?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                        <button type="button" class="btn btn-success">Terima</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Modal Syarat -->
-                        <div class="modal fade" id="syarat" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="syarat" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="syarat">Penerimaan Magang</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        .....
-                                        <!-- <select class="form-select" aria-label="Default select example">
-                                            <option selected>Open this select menu</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
-                                        </select> -->
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                        <button type="button" class="btn btn-primary">Batal</button>
-                                    </div>
+                                    <form action="{{url('magang/terima/'.$data->id_mahasiswa)}}" method="POST">
+                                        @csrf
+                                        <div class="modal-body">
+                                            Apakah Anda yakin ingin menerima permohonan magang tersebut?
+                                            <select class="form-select" name="divisi" aria-label="Default select example">
+                                                <option selected>Pilih Divisi</option>
+                                                <option value="1">Divisi 1</option>
+                                                <option value="2">Divisi 2</option>
+                                                <option value="3">Divisi 3</option>
+                                                <option value="4">Divisi 4</option>
+                                                <option value="5">Divisi 5</option>
+                                            </select>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                            <button type="submit" class="btn btn-success">Terima</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -171,12 +150,10 @@
                                     <div class="modal-body">
                                         Apakah Anda yakin ingin menolak permohonan magang tersebut?
                                         Jika Iya berikan alasannya
-                                        <select class="form-select" aria-label="Default select example">
-                                            <option selected>Open this select menu</option>
-                                            <option value="1">One</option>
-                                            <option value="2">Two</option>
-                                            <option value="3">Three</option>
-                                        </select>
+                                        <div class="mt-3">
+                                            <!-- <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label> -->
+                                            <textarea class="form-control" id="alasanpenolakan" rows="3"></textarea>
+                                        </div>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
@@ -190,5 +167,18 @@
             </div>
         </div>
     </div>
+
+    @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+    @endif
+
+    @if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+    @endif
+
 </section>
 @endsection

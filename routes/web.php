@@ -9,6 +9,7 @@ use App\Http\Controllers\MagangController;
 use App\Http\Controllers\StatusMagangUser;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\StatusMagangUserController;
+use App\Http\Controllers\PenerimaanMagangController;
 
 
 /*
@@ -49,6 +50,7 @@ Route::post('/daftar', [MahasiswaController::class, 'store'])->name('daftar');
 
 Route::get('/status', [StatusMagangUserController::class, 'index'])->name('pendaftaran.status');
 
+Route::post('/magang/terima/{id_mahasiswa}', [PenerimaanMagangController::class, 'update'])->name('magang.terima');
 
 // Penerimaan Magang Admin
 Route::get('/magang', [MagangController::class, 'index'])->name('magang');

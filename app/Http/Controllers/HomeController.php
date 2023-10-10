@@ -13,7 +13,7 @@ class HomeController extends Controller
     {
         $status = Auth::user()->status;
 
-        if ($status == '3') {
+        if ($status == '2') {
 
             return view('admin.admin-dashboard', ['menu' => 'Dashboard']);
         } else {

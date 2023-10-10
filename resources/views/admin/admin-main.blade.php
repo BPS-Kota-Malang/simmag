@@ -6,11 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="apple-touch-icon" sizes="76x76" href="/img/apple-icon.png">
     <link rel="icon" type="image/png" href="/img/favicon.png">
+
     <title>
         Admin SIMMAG
     </title>
-    <!-- Datatables -->
-    <link rel="stylesheet" href="//cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
+    <!-- Datatables CSS-->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css"> -->
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
     <!-- Nucleo Icons -->
@@ -20,7 +29,7 @@
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <link href="{{ asset('assets/argon/css/nucleo-svg.css') }}" rel="stylesheet" />
     <!-- CSS Files -->
-    <link id="pagestyle" href="{{ asset('assets/argon/css/argon-dashboard.css') }}" rel="stylesheet" />
+    <link id="pagestyle" href="{{ asset('assets/argon/css/argon-dashboard.css?v=2.0.4') }}" rel="stylesheet" />
 </head>
 
 <body class="{{ $class ?? '' }}">
@@ -63,14 +72,17 @@
         <script src="{{ asset('assets/argon/js/argon-dashboard.js') }}"></script>
         @stack('js')
 
-        <!-- Datatables -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="//cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+        <!-- Datatables Js -->
+        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+        <!-- <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script> -->
 
         <script>
-            $(document).ready(function() {
-                $('#myTable').DataTable();
-            });
+            // $(document).ready(function() {
+            //     $('#example').DataTable();
+            // });
+            // new DataTable('#example');
+            let table = new DataTable('#example');
         </script>
 
         <!-- SweetAlert -->
