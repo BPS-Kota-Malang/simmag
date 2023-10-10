@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Mahasiswa;
+use App\Models\Divisi;
+use App\Http\Controllers\Controller;
 use App\Models\User;
+use Illuminate\Http\Request;
 
-class PenerimaanMagangController extends Controller
+class DivisiController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +16,17 @@ class PenerimaanMagangController extends Controller
      */
     public function index()
     {
-        //
+        // $divisi = Divisi::whereHas('divisi', function ($query) {
+        //     $query->where('roles_id', 1);
+        // })->get();
+
+        $divisi = User::with('divisi')->get();
+
+        return view('divisi.index', compact('divisi'), [
+            'menu' => $divisi,
+            'dataDivisi' => 'Data Divisi'
+            
+        ]);
     }
 
     /**
@@ -42,10 +53,10 @@ class PenerimaanMagangController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Divisi  $divisi
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Divisi $divisi)
     {
         //
     }
@@ -53,10 +64,10 @@ class PenerimaanMagangController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Divisi  $divisi
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Divisi $divisi)
     {
         //
     }
@@ -65,45 +76,21 @@ class PenerimaanMagangController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Divisi  $divisi
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id_mahasiswa)
+    public function update(Request $request, Divisi $divisi)
     {
-        // Temukan mahasiswa berdasarkan ID
-        $mahasiswa = Mahasiswa::findOrFail($id_mahasiswa);
-
-        // Validasi dan simpan data
-        $request->validate([
-            'divisi' => 'required|integer|between:1,5', // Pastikan divisi berada dalam rentang 1-5
-        ]);
-
-        // Temukan pengguna yang sesuai berdasarkan kunci asing
-        $user = $mahasiswa->user;
-
-        if (!$user) {
-            return redirect()->back()->with('error', 'Pengguna tidak ditemukan.');
-        }
-
-        // Edit data pengguna yang sesuai
-        $user->divisions_id = $request->divisi;
-        $user->status = 2; // Ubah status user menjadi 2
-        $user->save();
-
-        // Hapus data mahasiswa
-        $mahasiswa->delete();
-
-        return redirect()->back();
+        //
     }
-
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Divisi  $divisi
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Divisi $divisi)
     {
         //
     }

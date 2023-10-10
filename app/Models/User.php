@@ -28,6 +28,11 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(Mahasiswa::class, 'user_id');
     }
 
+    public function divisi()
+    {
+        return $this->belongsTo(Divisi::class, 'divisions_id', 'id');
+    }
+
     /**
      * The attributes that are mass assignable.
      *

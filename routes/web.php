@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DivisiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MahasiswaController;
@@ -95,3 +96,5 @@ Route::resource('users', \App\Http\Controllers\UserProfileController::class)->mi
 
 
 Route::post('/user/password/update', [UserProfileController::class, 'updatePassword'])->name('ganti.password');
+
+Route::resource('/data/divisi', DivisiController::class)->middleware('auth');
