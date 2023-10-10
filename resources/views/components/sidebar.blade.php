@@ -1,3 +1,14 @@
+@php
+$dashboard = '';
+$magang = '';
+$profile = '';
+$rekap = '';
+$rekapuser = '';
+$masuk = '';
+$keluar = '';
+$logbook = '';
+$admin = '';
+@endphp
 @switch($menu)
 @case('Dashboard')
 @php

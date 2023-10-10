@@ -23,7 +23,7 @@ class LogbookController extends Controller
      */
     public function create()
     {
-        //
+        return view('logbook.create', ['menu' => 'logbook.create']);
     }
 
     /**
