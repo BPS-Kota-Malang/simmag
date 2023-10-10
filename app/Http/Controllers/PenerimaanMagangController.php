@@ -70,37 +70,30 @@ class PenerimaanMagangController extends Controller
      */
     public function update(Request $request, $id_mahasiswa)
     {
-        // Validasi input
+        // Temukan mahasiswa berdasarkan ID
+        $mahasiswa = Mahasiswa::findOrFail($id_mahasiswa);
+
+        // Validasi dan simpan data
         $request->validate([
-            'divisi' => 'required|integer', // Pastikan input divisi valid
+            'divisi' => 'required|integer|between:1,5', // Pastikan divisi berada dalam rentang 1-5
         ]);
 
-        // Temukan mahasiswa berdasarkan ID
-        $mahasiswa = Mahasiswa::find($id_mahasiswa);
-
-        if (!$mahasiswa) {
-            return redirect()->back()->with('error', 'Mahasiswa tidak ditemukan.');
-        }
-
-        // Ubah status mahasiswa menjadi 2 (diterima)
-        $mahasiswa->status = 2;
-        $mahasiswa->save();
-
-        // Temukan user yang terkait dengan mahasiswa
-        $user = User::find($mahasiswa->user_id);
+        // Temukan pengguna yang sesuai berdasarkan kunci asing
+        $user = $mahasiswa->user;
 
         if (!$user) {
-            return redirect()->back()->with('error', 'User tidak ditemukan.');
+            return redirect()->back()->with('error', 'Pengguna tidak ditemukan.');
         }
 
-        // Ubah roles_id user jika perlu
-        // Misalnya, jika roles_id 1 adalah role untuk mahasiswa, ubah menjadi role yang sesuai untuk pegawai.
-
-        // Set divisi user
-        $user->divisions_id = $request->input('divisi');
+        // Edit data pengguna yang sesuai
+        $user->divisions_id = $request->divisi;
+        $user->status = 2; // Ubah status user menjadi 2
         $user->save();
 
-        return redirect()->back()->with('success', 'Penerimaan magang berhasil.');
+        // Hapus data mahasiswa
+        $mahasiswa->delete();
+
+        return redirect()->back();
     }
 
 

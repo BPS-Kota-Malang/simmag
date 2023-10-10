@@ -41,6 +41,7 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @if(isset($magang) && count($magang) > 0)
                                 @foreach($magang as $data)
                                 <tr>
                                     <!-- NO -->
@@ -105,63 +106,71 @@
                                         </a>
                                     </td>
                                 </tr>
+
+                                <!-- Modal Terima -->
+                                <div class="modal fade" id="terima{{ $data->id_mahasiswa }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="terima" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="terima">Penerimaan Magang</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <form action="{{url('magang/terima/'.$data->id_mahasiswa)}}" method="POST">
+                                                @csrf
+                                                <div class="modal-body">
+                                                    Apakah Anda yakin ingin menerima permohonan magang tersebut?
+                                                    <select class="form-select" name="divisi" aria-label="Default select example" required>
+                                                        <option value="" selected disabled>Pilih Divisi</option>
+                                                        <option value="1">Divisi 1</option>
+                                                        <option value="2">Divisi 2</option>
+                                                        <option value="3">Divisi 3</option>
+                                                        <option value="4">Divisi 4</option>
+                                                        <option value="5">Divisi 5</option>
+                                                    </select>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                    <button type="submit" class="btn btn-success">Terima</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Modal Ditolak -->
+                                <div class="modal fade" id="tolak" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="tolak" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="tolak">Penerimaan Magang</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Apakah Anda yakin ingin menolak permohonan magang tersebut?
+                                                Jika Iya berikan alasannya
+                                                <div class="mt-3">
+                                                    <!-- <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label> -->
+                                                    <textarea class="form-control" id="alasanpenolakan" rows="3"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                <button type="button" class="btn btn-danger">Tolak</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 @endforeach
+                                @else
+                                <tr>
+                                    <td colspan="13" class="align-middle text-center text-sm">Data kosong.</td>
+                                </tr>
+                                @endif
                             </tbody>
                         </table>
 
-                        <!-- Modal Terima -->
-                        <div class="modal fade" id="terima{{ $data->id_mahasiswa }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="terima" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="terima">Penerimaan Magang</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <form action="{{url('magang/terima/'.$data->id_mahasiswa)}}" method="POST">
-                                        @csrf
-                                        <div class="modal-body">
-                                            Apakah Anda yakin ingin menerima permohonan magang tersebut?
-                                            <select class="form-select" name="divisi" aria-label="Default select example">
-                                                <option selected>Pilih Divisi</option>
-                                                <option value="1">Divisi 1</option>
-                                                <option value="2">Divisi 2</option>
-                                                <option value="3">Divisi 3</option>
-                                                <option value="4">Divisi 4</option>
-                                                <option value="5">Divisi 5</option>
-                                            </select>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                            <button type="submit" class="btn btn-success">Terima</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
 
-                        <!-- Modal Ditolak -->
-                        <div class="modal fade" id="tolak" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="tolak" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="tolak">Penerimaan Magang</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        Apakah Anda yakin ingin menolak permohonan magang tersebut?
-                                        Jika Iya berikan alasannya
-                                        <div class="mt-3">
-                                            <!-- <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label> -->
-                                            <textarea class="form-control" id="alasanpenolakan" rows="3"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                        <button type="button" class="btn btn-danger">Tolak</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
