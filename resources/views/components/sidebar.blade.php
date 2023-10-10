@@ -9,6 +9,7 @@ $keluar = '';
 $logbook = '';
 $admin = '';
 @endphp
+
 @switch($menu)
 @case('Dashboard')
 @php

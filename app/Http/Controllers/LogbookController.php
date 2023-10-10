@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Logbook;
+use Illuminate\Support\Facades\Auth;
+
 
 class LogbookController extends Controller
 {
@@ -13,7 +16,8 @@ class LogbookController extends Controller
      */
     public function index()
     {
-        return view('logbook.appointments', ['menu' => 'Logbook']);
+        $logbook = Logbook::all();
+        return view('logbook.appointments', compact('logbook'), ['menu' => 'Logbook']);
     }
 
     /**
@@ -23,7 +27,7 @@ class LogbookController extends Controller
      */
     public function create()
     {
-        return view('logbook.create', ['menu' => 'logbook.create']);
+        // return view('logbook.create', ['menu' => 'logbook.create']);
     }
 
     /**
@@ -33,9 +37,23 @@ class LogbookController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
-    }
+{
+    // Validate the form data (custom validation rules can be applied)
+    $request->validate([
+        // 'nama' => 'required|string',
+        // 'kampus' => 'required|string',
+        'tanggal' => 'required|date',
+        'jam_mulai' => 'required|string',
+        'jam_selesai' => 'required|string',
+        'keterangan' => 'nullable|string',
+    ]);
+
+    // Create a new logbook entry
+    Logbook::create($request->all());
+
+    // Redirect back with a success message
+    return redirect()->back()->with('success', 'Logbook entry created successfully');
+}
 
     /**
      * Display the specified resource.

@@ -95,4 +95,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'password' => Hash::make($newPassword),
     ]);
 }
+
+public function logbook()
+{
+    return $this->hasOne(Logbook::class, 'user_id');
+}
 }
