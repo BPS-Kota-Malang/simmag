@@ -37,13 +37,13 @@ class UserProfileController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:110'],
-            'email' => ['required', 'string', 'email', 'max:110'],
+            // 'email' => ['required', 'string', 'email', 'max:110'],
             // 'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
         $user = User::find($id);
         $user->name = $request->name;
-        $user->email = $request->email;
+        // $user->email = $request->email;
         // $user->password = Hash::make($request->password);
         $user->save();
 
