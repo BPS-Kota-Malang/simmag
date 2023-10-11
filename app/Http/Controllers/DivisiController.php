@@ -49,7 +49,14 @@ class DivisiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama_divisi' => 'required',
+        ]);
+        Divisi::create([
+            'nama_divisi' => $request->nama_divisi,
+        ]);
+
+        return redirect()->route('divisi.index')->with('message', 'Data Divisi Baru Berhasil di Tambahkan');
     }
 
     /**
@@ -103,8 +110,12 @@ class DivisiController extends Controller
      * @param  \App\Models\Divisi  $divisi
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Divisi $divisi)
+    public function destroy($id)
     {
-        //
+        $divisi = Divisi::find($id);
+        if($divisi) $divisi->delete();
+
+        return redirect()->route('divisi.index')
+            ->with('Delete', 'Berhasil menghapus data.');
     }
 }

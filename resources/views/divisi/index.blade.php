@@ -21,6 +21,11 @@
                 <div class="card mb-4 p-3">
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
+                            {{-- <button type="button" class="btn btn-primary my-4" data-toggle="modal" data-target="#createDataDivisi"> <i class="fas fa-user-plus"></i></button> --}}
+                            <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-bs-toggle="modal"
+                                data-bs-target="#createDataDivisi">
+                                <i class="fas fa-pen fa-lg text-success"></i>
+                            </a>
                             <table id="example" class="table align-items-center mb-0">
                                 <thead>
                                     <tr>
@@ -48,6 +53,19 @@
                                                     data-bs-target="#editDataAdmin{{ $data->id }}">
                                                     <i class="fas fa-pen fa-lg text-success"></i>
                                                 </a>
+                                                {{-- <a href="{{ route('divisi.destroy', $data) }}"
+                                                    onclick="notificationBeforeDelete(event, this)"
+                                                    class="btn btn-danger btn-xs">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </a> --}}
+                                                <form method="POST" action="{{ route('divisi.destroy', $data->id) }}" >
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-xs">
+                                                        <i class="fas fa-trash-alt"></i>
+                                                    </button>
+                                                </form>
+                                                
                                             </td>
                                         </tr>
 
@@ -65,14 +83,15 @@
                                                     <form method="POST" action="{{ route('divisi.update', $data->id) }}">
                                                         @csrf
                                                         @method('PUT')
-                                                
+
                                                         <div class="modal-body">
                                                             <div class="form-group">
                                                                 <label for="nama_divisi">Nama Divisi</label>
-                                                                <input type="text" class="form-control" id="nama_divisi" name="nama_divisi" value="{{ $data->nama_divisi }}">
+                                                                <input type="text" class="form-control" id="nama_divisi"
+                                                                    name="nama_divisi" value="{{ $data->nama_divisi }}">
                                                             </div>
                                                         </div>
-                                                
+
                                                         <button type="submit" class="btn btn-primary">Simpan</button>
                                                     </form>
                                                 </div>
@@ -100,5 +119,34 @@
             </div>
         @endif
 
+
+        <div class="modal fade" id="createDataDivisi" tabindex="-1" role="dialog" aria-labelledby="createDataDivisi"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Tambah Data Divisi</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        </button>
+                    </div>
+                    <form method="POST" action="{{ route('divisi.store') }}">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="nama_divisi">Nama Divisi</label>
+                                <input type="text" class="form-control @error('nama_divisi') is-invalid @enderror"
+                                    id="nama_divisi" name="nama_divisi" placeholder="Nama Divisi"
+                                    value="{{ old('nama_divisi') }}" required>
+                                @error('nama_divisi')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </section>
 @endsection
