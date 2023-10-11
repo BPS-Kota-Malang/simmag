@@ -22,32 +22,41 @@
                     <table class="table table-bordered table-striped table-hover datatable datatable-appointment" cellspacing="0" width="100%">
                         <thead>
                             <tr>
-                                <th width="10">
-
-                                </th>
-                                <th>Nama</th>
-                                <th>Asal Kampus</th>
+                                
                                 <th>Tanggal</th>
                                 <th>Jam Mulai</th>
                                 <th>Jam Selesai</th>
-                                <th>Keterangan</th>
+                                <th>Pekerjaan</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($logbook as $data)
                             <tr>
-                                <td>
-
+                                <td class="align-middle text-center text-sm">
+                                    {{$data -> tanggal}}
                                 </td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td>-</td>
-                                <td>
+                                <td class="align-middle text-center text-sm">
+                                    {{$data -> jam_mulai}}
                                 </td>
-                                <td>
+                                <td class="align-middle text-center text-sm">
+                                    {{$data -> jam_selesai}}
+                                </td>
+                                <td class="align-middle text-center text-sm">
+                                    {{$data -> pekerjaan}}
+                                </td>
+                                <td class="align-middle text-center text-sm">
+                                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#terima{{ $data->id_mahasiswa }}">
+                                            <i class="fas fa-check-square fa-lg text-success"></i>
+                                        </a>
+                                        <a class="text-secondary font-weight-bold text-xs" data-toggle="tooltip">
+                                            |
+                                        </a>
+                                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#tolak">
+                                            <i class="fas fa-window-close fa-lg text-danger"></i>
+                                        </a>
+                                    </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -71,8 +80,10 @@
                     <div class="modal-body">
                         <div class="card-body">
                             <div class="form-group">
+                            <input type="hidden" name="user_id" value="{{ auth()->id() }}">
+
                                 <label for="tanggal">Tanggal</label>
-                                <input type="text" class="form-control" id="tanggal" placeholder="Tanggal" name="tanggal" required value="{{old('tanggal')}}">
+                                <input type="date" class="form-control" id="tanggal" placeholder="Tanggal" name="tanggal" required value="{{old('tanggal')}}">
                                 @error('tanggal')
                                 <div class="invalid-feedback">
                                     {{$message}}
@@ -98,9 +109,9 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="keterangan">Keterangan</label>
-                                <input type="text" class="form-control" id="keterangan" placeholder="Keterangan" name="keterangan" required value="{{old('keterangan')}}">
-                                @error('keterangan')
+                                <label for="pekerjaan">Pekerjaan</label>
+                                <input type="text" class="form-control" id="pekerjaan" placeholder="Pekerjaan" name="pekerjaan" required value="{{old('pekerjaan')}}">
+                                @error('pekerjaan')
                                 <div class="invalid-feedback">
                                     {{$message}}
                                 </div>

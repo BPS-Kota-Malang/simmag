@@ -40,16 +40,21 @@ class LogbookController extends Controller
 {
     // Validate the form data (custom validation rules can be applied)
     $request->validate([
-        // 'nama' => 'required|string',
-        // 'kampus' => 'required|string',
-        'tanggal' => 'required|date',
+        'tanggal' => 'required|string',
         'jam_mulai' => 'required|string',
         'jam_selesai' => 'required|string',
-        'keterangan' => 'nullable|string',
+        'pekerjaan' => 'nullable|string',
+        'user_id' => 'required|integer', // pastikan user_id di-validasi
     ]);
 
-    // Create a new logbook entry
-    Logbook::create($request->all());
+    // Simpan data ke database
+    Logbook::create([
+        'user_id' => Auth::id(), // mengambil ID pengguna yang saat ini login
+        'tanggal' => $request->tanggal,
+        'jam_mulai' => $request->jam_mulai,
+        'jam_selesai' => $request->jam_selesai,
+        'pekerjaan' => $request->pekerjaan,
+    ]);
 
     // Redirect back with a success message
     return redirect()->back()->with('success', 'Logbook entry created successfully');
