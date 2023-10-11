@@ -14,7 +14,7 @@ class Logbook extends Model
 
     protected $primaryKey = 'id_logbook';
     protected $fillable = [
-        'tanggal', 'jam_mulai', 'jam_selesai', 'pekerjaan','user_id'
+        'tanggal', 'jam_mulai', 'jam_selesai', 'pekerjaan', 'division','user_id'
     ];
 
     public function logbook()

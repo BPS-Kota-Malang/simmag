@@ -27,6 +27,7 @@
                                 <th>Jam Mulai</th>
                                 <th>Jam Selesai</th>
                                 <th>Pekerjaan</th>
+                                <th>Divisi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -45,7 +46,11 @@
                                     {{$data -> pekerjaan}}
                                 </td>
                                 <td class="align-middle text-center text-sm">
-                                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#terima{{ $data->id_mahasiswa }}">
+                                    {{$data -> division.name}}
+                                </td>
+
+                                <td class="align-middle text-center text-sm">
+                                        <!-- <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#terima{{ $data->id_mahasiswa }}">
                                             <i class="fas fa-check-square fa-lg text-success"></i>
                                         </a>
                                         <a class="text-secondary font-weight-bold text-xs" data-toggle="tooltip">
@@ -53,7 +58,7 @@
                                         </a>
                                         <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#tolak">
                                             <i class="fas fa-window-close fa-lg text-danger"></i>
-                                        </a>
+                                        </a> -->
                                     </td>
                             </tr>
                             @endforeach
@@ -110,14 +115,23 @@
                             </div>
                             <div class="form-group">
                                 <label for="pekerjaan">Pekerjaan</label>
-                                <input type="text" class="form-control" id="pekerjaan" placeholder="Pekerjaan" name="pekerjaan" required value="{{old('pekerjaan')}}">
+                                <input type="text" class="form-control" id="pekerjaan" placeholder="Pekerjaan yang dilakukan - Divisi yang bersangkutan" name="pekerjaan" required value="{{old('pekerjaan')}}">
                                 @error('pekerjaan')
                                 <div class="invalid-feedback">
                                     {{$message}}
                                 </div>
                                 @enderror
                             </div>
-
+                            <div class="form-group">
+                            <label for="division">Divisi</label>
+                            <select class="form-control" id="division" name="division" required>
+                            <!-- <option value="">Pilih Divisi</option> -->
+                                @foreach($division as $divisi)
+                                    <option value="{{ $divisi-> id }}">{{ $divisi->nama_divisi }}</option>
+                                @endforeach
+                            </select>
+        
+        </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>

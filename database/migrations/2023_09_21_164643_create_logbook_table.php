@@ -20,6 +20,7 @@ class CreateLogbookTable extends Migration
             $table->string('jam_mulai');
             $table->string('jam_selesai');
             $table->string('pekerjaan');
+            $table->string('division');
             $table->timestamps();
         });
     }
