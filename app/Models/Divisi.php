@@ -12,6 +12,10 @@ class Divisi extends Model
     protected $table = "divisions";
     protected $primaryKey = 'id';
 
+    protected $fillable = [
+        'nama_divisi',
+    ];
+
     public function usersdivisi()
     {
         return $this->hasMany(User::class, 'divisions_id', 'id');

@@ -20,11 +20,13 @@ class DivisiController extends Controller
         //     $query->where('roles_id', 1);
         // })->get();
 
-        $divisi = User::with('divisi')->get();
+        // $divisi = User::with('divisi')->get();
 
-        return view('divisi.index', compact('divisi'), [
-            'menu' => $divisi,
-            'dataDivisi' => 'Data Divisi'
+        $divisi = Divisi::all();
+
+        return view('divisi.index', [
+            'divisi' => $divisi,
+            'menu' => 'Data Divisi'
             
         ]);
     }
@@ -47,7 +49,14 @@ class DivisiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama_divisi' => 'required',
+        ]);
+        Divisi::create([
+            'nama_divisi' => $request->nama_divisi,
+        ]);
+
+        return redirect()->route('divisi.index')->with('message', 'Data Divisi Baru Berhasil di Tambahkan');
     }
 
     /**
@@ -67,9 +76,11 @@ class DivisiController extends Controller
      * @param  \App\Models\Divisi  $divisi
      * @return \Illuminate\Http\Response
      */
-    public function edit(Divisi $divisi)
+    public function edit($id)
     {
-        //
+        $divisi = Divisi::find($id);
+
+        return view('divisi.edit', ['divisi' => $divisi]);
     }
 
     /**
@@ -79,9 +90,18 @@ class DivisiController extends Controller
      * @param  \App\Models\Divisi  $divisi
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Divisi $divisi)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nama_divisi' => 'required',
+        ]);
+
+        $divisi = Divisi::find($id);
+        $divisi->nama_divisi = $request->nama_divisi;
+        $divisi->save();
+
+        return redirect()->route('divisi.index')->with('success', 'Divisi berhasil diperbarui.');
+
     }
 
     /**
@@ -90,8 +110,12 @@ class DivisiController extends Controller
      * @param  \App\Models\Divisi  $divisi
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Divisi $divisi)
+    public function destroy($id)
     {
-        //
+        $divisi = Divisi::find($id);
+        if($divisi) $divisi->delete();
+
+        return redirect()->route('divisi.index')
+            ->with('Delete', 'Berhasil menghapus data.');
     }
 }
