@@ -10,6 +10,7 @@
     $admin = '';
     $divisi = '';
 @endphp
+
 @switch($menu)
     @case('Dashboard')
         @php

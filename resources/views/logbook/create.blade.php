@@ -4,13 +4,14 @@
 @include('components.topnav', ['title' => 'Logbook'])
 
 
+<div class="card-header">
     <h1 class="card-title">Logbook</h1>
 </div>
 <form>
     <div class="card-body">
         <div class="form-group">
             <label for="nama">Nama</label>
-            <input type="text" class="form-control" id="nama" placeholder="...">
+            <input type="text" class="form-control" id="nama" placeholder="Nama">
         </div>
         <div class="form-group">
             <label for="satuan">Satuan Barang</label>

@@ -69,7 +69,8 @@ Route::get('/magang', [MagangController::class, 'index'])->name('magang');
 //         return view('logbook.appointments');
 // });
 Route::get('/logbook', [LogbookController::class, 'index'])->name('logbook');
-Route::get('/logbook/create', [LogbookController::class, 'create'])->name('logbook.create');
+Route::post('/logbook/store', [LogbookController::class, 'store'])->name('logbook.store');
+
 
 Route::post('/simpan-masuk', [PresensiController::class, 'store'])->name('simpan-masuk');
 Route::get('/presensi-masuk', [PresensiController::class, 'index'])->name('presensi-masuk');

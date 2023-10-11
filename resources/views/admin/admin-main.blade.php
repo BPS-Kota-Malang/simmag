@@ -92,15 +92,11 @@
                 $(document).on('click', '#daftar', function(e) {
                     e.preventDefault();
                     var link = $(this).attr("href");
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'Your work has been saved',
-                        showConfirmButton: false,
-                        timer: 1500
+                    Swal.fire('Anda Telah Mengisi Absen')
+        
                     });
                 });
-            });
+            ;
         </script> -->
 </body>
 
