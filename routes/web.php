@@ -92,8 +92,14 @@ Route::middleware([
 
 Route::get('/user/profile-admin', [UserProfileController::class, 'showAdmin'])->name('profile.show-admin');
 Route::resource('users', \App\Http\Controllers\UserProfileController::class)->middleware('auth');
+Route::resource('/data/divisi', \App\Http\Controllers\DivisiController::class)->middleware('auth');
+// Rute untuk menampilkan halaman pengeditan divisi
+Route::get('/data/divisi/edit/{id}', [DivisiController::class, 'edit'])->name('divisi.edit');
+
+// Rute untuk menangani pembaruan divisi
+Route::put('/data/divisi/update/{id}', [DivisiController::class, 'update'])->name('divisi.update');
 
 
 Route::post('/user/password/update', [UserProfileController::class, 'updatePassword'])->name('ganti.password');
 
-Route::resource('/data/divisi', DivisiController::class)->middleware('auth');
+// Route::resource('/data/divisi', DivisiController::class)->middleware('auth');

@@ -14,7 +14,7 @@
                             <div class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
                                 <i class="ni ni-email-83 text-lg opacity-10" aria-hidden="true"></i>
                             </div>
-                            <xspan class="mx-3 fs-4">Data Divisi</xspan>
+                            <span class="mx-3 fs-4">Data Divisi</span>
                         </div>
                     </div>
                 </div>
@@ -25,10 +25,8 @@
                                 <thead>
                                     <tr>
                                         <th class="text-center text-uppercase text-xs font-weight-bolder">No.</th>
-                                        <th class="text-center text-uppercase text-xs font-weight-bolder">Nama</th>
                                         <th class="text-center text-uppercase text-xs font-weight-bolder">Divisi</th>
                                         <th class="text-center text-uppercase text-xs font-weight-bolder">Action</th>
-                                        <!-- <th class="text-secondary opacity-7"></th> -->
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -40,43 +38,54 @@
                                             </td>
 
                                             <td class="align-middle text-center text-sm">
-                                                {{ $data->name }}
+                                                {{ $data->nama_divisi }}
                                             </td>
-
-                                            @if ($data->divisi)
-                                                <td class="align-middle text-center text-sm">
-                                                    {{ $data->divisi->nama_divisi }}
-                                                </td>
-                                            @else
-                                                <td class="align-middle text-center text-sm">
-                                                    Tidak ada divisi terkait
-                                                </td>
-                                            @endif
 
                                             <!-- Action -->
                                             <td class="align-middle text-center text-sm">
                                                 <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
                                                     data-bs-toggle="modal"
-                                                    data-bs-target="#terima{{ $data->id_mahasiswa }}">
-                                                    <i class="fas fa-check-square fa-lg text-success"></i>
-                                                </a>
-                                                <a class="text-secondary font-weight-bold text-xs" data-toggle="tooltip">
-                                                    |
-                                                </a>
-                                                <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
-                                                    data-bs-toggle="modal" data-bs-target="#tolak">
-                                                    <i class="fas fa-window-close fa-lg text-danger"></i>
+                                                    data-bs-target="#editDataAdmin{{ $data->id }}">
+                                                    <i class="fas fa-pen fa-lg text-success"></i>
                                                 </a>
                                             </td>
                                         </tr>
+
+                                        <!-- Modal Edit Divisi -->
+                                        <div class="modal fade" id="editDataAdmin{{ $data->id }}" tabindex="-1"
+                                            role="dialog" aria-labelledby="editDataAdminLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="editDataDivisiLabel">Ganti Divisi</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                        </button>
+                                                    </div>
+                                                    <form method="POST" action="{{ route('divisi.update', $data->id) }}">
+                                                        @csrf
+                                                        @method('PUT')
+                                                
+                                                        <div class="modal-body">
+                                                            <div class="form-group">
+                                                                <label for="nama_divisi">Nama Divisi</label>
+                                                                <input type="text" class="form-control" id="nama_divisi" name="nama_divisi" value="{{ $data->nama_divisi }}">
+                                                            </div>
+                                                        </div>
+                                                
+                                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
                                     @endforeach
                                 </tbody>
                             </table>
-
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
 
         @if (session('success'))
