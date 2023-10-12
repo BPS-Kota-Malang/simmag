@@ -129,6 +129,7 @@ class PenerimaanMagangController extends Controller
         if ($user) {
             // Perbarui status pengguna menjadi 0 (atau status sesuai dengan kebutuhan Anda)
             $user->status = 0;
+            $user->divisions_id = null;
             $user->save();
         }
 
