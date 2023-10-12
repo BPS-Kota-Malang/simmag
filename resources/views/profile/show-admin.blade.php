@@ -32,7 +32,7 @@
                                             </span>
                                         @enderror
                                     </div>
-                                    <div class="form-group">
+                                    {{-- <div class="form-group">
                                         <label for="example-text-input" class="form-control-label">Email address</label>
                                         <input class="form-control @error('email') is-invalid @enderror" type="email"
                                             name="email" value="{{ old('email', auth()->user()->email) }}" required
@@ -42,7 +42,7 @@
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
-                                    </div>
+                                    </div> --}}
                                     <button type="submit" class="btn btn-success btn-sm ms-auto">Save</button>
                                 </form>
                             </div>

@@ -101,7 +101,7 @@
                                         <a class="text-secondary font-weight-bold text-xs" data-toggle="tooltip">
                                             |
                                         </a>
-                                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#tolak">
+                                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#tolak{{ $data->id_mahasiswa }}">
                                             <i class="fas fa-window-close fa-lg text-danger"></i>
                                         </a>
                                     </td>
@@ -138,28 +138,31 @@
                                 </div>
 
                                 <!-- Modal Ditolak -->
-                                <div class="modal fade" id="tolak" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="tolak" aria-hidden="true">
+                                <div class="modal fade" id="tolak{{ $data->id_mahasiswa }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="tolak" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title" id="tolak">Penerimaan Magang</h5>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
-                                            <div class="modal-body">
-                                                Apakah Anda yakin ingin menolak permohonan magang tersebut?
-                                                Jika Iya berikan alasannya
-                                                <div class="mt-3">
-                                                    <!-- <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label> -->
-                                                    <textarea class="form-control" id="alasanpenolakan" rows="3"></textarea>
+                                            <form method="post" action="{{url('magang/tolak/'.$data->id_mahasiswa)}}">
+                                                @csrf
+                                                <div class="modal-body">
+                                                    Apakah Anda yakin ingin menolak permohonan magang tersebut?
+                                                    <div class="mt-3">
+                                                        <!-- <label for="alasanpenolakan" class="form-label">Alasan Penolakan</label> -->
+                                                        <!-- <textarea class="form-control" id="alasanpenolakan" name="alasanpenolakan" rows="3"></textarea> -->
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                                                <button type="button" class="btn btn-danger">Tolak</button>
-                                            </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                    <button type="submit" class="btn btn-danger">Tolak</button>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
+
 
                                 @endforeach
                                 @else

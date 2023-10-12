@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SendEmail;
 use Illuminate\Http\Request;
 use App\Models\Mahasiswa;
 use App\Models\User;
+use Illuminate\Support\Facades\Mail;
 
 class PenerimaanMagangController extends Controller
 {
@@ -93,6 +95,13 @@ class PenerimaanMagangController extends Controller
         // Hapus data mahasiswa
         $mahasiswa->delete();
 
+        // Mengirim email pemberitahuan
+        $emailData = [
+            'body' => view('emailTerima')->render(), // Mengambil tampilan email yang telah Anda siapkan
+        ];
+
+        Mail::to($user->email)->send(new SendEmail($emailData)); // Menggunakan SendEmail untuk mengirim email
+
         return redirect()->back();
     }
 
@@ -103,8 +112,37 @@ class PenerimaanMagangController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id_mahasiswa)
     {
-        //
+        // Temukan mahasiswa berdasarkan ID
+        $mahasiswa = Mahasiswa::findOrFail($id_mahasiswa);
+
+        if (!$mahasiswa) {
+            return redirect()->back()->with('error', 'Mahasiswa tidak ditemukan.');
+        }
+
+        // Hapus data mahasiswa
+
+
+        // Mengirim email pemberitahuan untuk penolakan
+        $user = $mahasiswa->user;
+        if ($user) {
+            // Perbarui status pengguna menjadi 0 (atau status sesuai dengan kebutuhan Anda)
+            $user->status = 0;
+            $user->divisions_id = null;
+            $user->save();
+        }
+
+        $mahasiswa->delete();
+
+        if ($user) {
+            $emailData = [
+                'body' => view('emailTolak')->render(), // Mengambil tampilan email yang sesuai
+            ];
+
+            Mail::to($user->email)->send(new SendEmail($emailData));
+        }
+
+        return redirect()->back()->with('success', 'Permohonan magang telah ditolak.');
     }
 }

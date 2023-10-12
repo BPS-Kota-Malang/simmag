@@ -22,9 +22,9 @@
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
                             {{-- <button type="button" class="btn btn-primary my-4" data-toggle="modal" data-target="#createDataDivisi"> <i class="fas fa-user-plus"></i></button> --}}
-                            <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-bs-toggle="modal"
+                            <a href="javascript:;" class="text-secondary font-weight-bold text-xs btn btn-primary mt-2" data-bs-toggle="modal"
                                 data-bs-target="#createDataDivisi">
-                                <i class="fas fa-pen fa-lg text-success"></i>
+                                <i class="fas fa-plus" style="color: #ffffff;"></i>
                             </a>
                             <table id="example" class="table align-items-center mb-0">
                                 <thead>
@@ -48,16 +48,11 @@
 
                                             <!-- Action -->
                                             <td class="align-middle text-center text-sm">
-                                                <a href="javascript:;" class="text-secondary font-weight-bold text-xs"
-                                                    data-bs-toggle="modal"
+                                                <a href="javascript:;" class="btn btn-primary btn-xs" data-bs-toggle="modal"
                                                     data-bs-target="#editDataAdmin{{ $data->id }}">
-                                                    <i class="fas fa-pen fa-lg text-success"></i>
+                                                    <i class="fas fa-edit"></i>
                                                 </a>
-                                                {{-- <a href="{{ route('divisi.destroy', $data) }}"
-                                                    onclick="notificationBeforeDelete(event, this)"
-                                                    class="btn btn-danger btn-xs">
-                                                    <i class="fas fa-trash-alt"></i>
-                                                </a> --}}
+
                                                 <form method="POST" action="{{ route('divisi.destroy', $data->id) }}" >
                                                     @csrf
                                                     @method('DELETE')
@@ -65,7 +60,7 @@
                                                         <i class="fas fa-trash-alt"></i>
                                                     </button>
                                                 </form>
-                                                
+
                                             </td>
                                         </tr>
 
