@@ -17,8 +17,9 @@
                             <p style="font-size: 16px; color: #555;">Terima Kasih Telah Menggunakan Layanan Kami</p>
                             <p style="font-size: 16px; color: #555;">Silahkan Mohon Isi Feedback Untuk Layanan Kami Di
                                 Bawah ini</p>
-                            <a href="" target="_blank" style="background-color: #007bff; color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 5px; margin-top: 20px; display: inline-block; cursor: pointer;">Kunjungi
-                                Situs Kami</a>
+                            <a href="{{ url('/login') }}" target="_blank"
+                                style="background-color: #007bff; color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 5px; margin-top: 20px; display: inline-block; cursor: pointer;">Silahkan
+                                Login Kembali</a>
                         </td>
                     </tr>
                 </table>
