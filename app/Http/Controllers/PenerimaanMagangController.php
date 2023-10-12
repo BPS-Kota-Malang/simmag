@@ -122,10 +122,18 @@ class PenerimaanMagangController extends Controller
         }
 
         // Hapus data mahasiswa
-        $mahasiswa->delete();
+
 
         // Mengirim email pemberitahuan untuk penolakan
         $user = $mahasiswa->user;
+        if ($user) {
+            // Perbarui status pengguna menjadi 0 (atau status sesuai dengan kebutuhan Anda)
+            $user->status = 0;
+            $user->save();
+        }
+
+        $mahasiswa->delete();
+
         if ($user) {
             $emailData = [
                 'body' => view('emailTolak')->render(), // Mengambil tampilan email yang sesuai
