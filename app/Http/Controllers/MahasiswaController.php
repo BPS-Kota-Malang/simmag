@@ -53,11 +53,11 @@ class MahasiswaController extends Controller
 
         // Post dan Read File
         $fileProposal = $request->file('file_proposal');
-        $nama_fileProp = $fileProposal->getClientOriginalName();
+        $nama_fileProp = $request->nama . '-Proposal.' . $fileProposal->getClientOriginalExtension();
         $fileProposal->storeAs('proposal', $nama_fileProp, 'public');
 
         $filePengantar = $request->file('file_suratpengantar');
-        $nama_filePeng = $filePengantar->getClientOriginalName();
+        $nama_filePeng = $request->nama . '-Surat Pengantar.' . $filePengantar->getClientOriginalExtension();
         $filePengantar->storeAs('pengantar', $nama_filePeng, 'public');
 
         $user = Auth::user();
