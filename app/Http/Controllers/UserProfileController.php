@@ -17,6 +17,8 @@ class UserProfileController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\View\View
      */
+
+    
     public function show(Request $request)
     {
         return view('profile.show', [
@@ -69,6 +71,4 @@ class UserProfileController extends Controller
             return back()->withErrors(['current_password' => 'Password terkini tidak valid.'])->withInput();
         }
     }
-
-    
 }

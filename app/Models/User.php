@@ -32,6 +32,10 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsTo(Divisi::class, 'divisions_id', 'id');
     }
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'roles_id', 'id');
+    }
 
     /**
      * The attributes that are mass assignable.

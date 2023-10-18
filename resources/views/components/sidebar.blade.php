@@ -9,6 +9,7 @@
     $logbook = '';
     $admin = '';
     $divisi = '';
+    $user = '';
 @endphp
 
 @switch($menu)
@@ -24,7 +25,8 @@
             $logbook = '';
             $admin = '';
             $divisi = '';
-            $divisi = '';
+            $user = '';
+
         @endphp
     @break
 
@@ -40,6 +42,7 @@
             $logbook = '';
             $admin = '';
             $divisi = '';
+            $user = '';
         @endphp
     @break
 
@@ -55,6 +58,7 @@
             $logbook = '';
             $admin = '';
             $divisi = '';
+            $user = '';
         @endphp
     @break
 
@@ -70,6 +74,8 @@
             $logbook = '';
             $admin = '';
             $divisi = '';
+            $user = '';
+
         @endphp
     @break
 
@@ -85,6 +91,7 @@
             $logbook = '';
             $admin = '';
             $divisi = '';
+            $user = '';
         @endphp
     @break
 
@@ -100,6 +107,7 @@
             $logbook = '';
             $admin = '';
             $divisi = '';
+            $user = '';
         @endphp
     @break
 
@@ -115,6 +123,7 @@
             $logbook = '';
             $admin = '';
             $divisi = '';
+            $user = '';
         @endphp
     @break
 
@@ -130,6 +139,7 @@
             $logbook = '';
             $admin = '';
             $divisi = '';
+            $user = '';
         @endphp
     @break
 
@@ -145,6 +155,7 @@
             $logbook = '';
             $admin = '';
             $divisi = '';
+            $user = '';
         @endphp
     @break
 
@@ -160,8 +171,10 @@
             $logbook = 'active';
             $admin = '';
             $divisi = '';
+            $user = '';
         @endphp
     @break
+
     @case('Data Divisi')
         @php
             $dashboard = '';
@@ -174,6 +187,22 @@
             $logbook = '';
             $admin = '';
             $divisi = 'active';
+            $user = '';
+        @endphp
+    @break
+    @case('Data User')
+        @php
+            $dashboard = '';
+            $magang = '';
+            $profile = '';
+            $rekap = '';
+            $rekapuser = '';
+            $masuk = '';
+            $keluar = '';
+            $logbook = '';
+            $admin = '';
+            $divisi = '';
+            $user = 'active';
         @endphp
     @break
 
@@ -286,7 +315,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link">
+                    <a class="nav-link {{ $user }}" href="{{ url('user-management') }}">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>

@@ -95,6 +95,7 @@ Route::middleware([
 
 Route::get('/user/profile-admin', [UserProfileController::class, 'showAdmin'])->name('profile.show-admin');
 Route::resource('users', \App\Http\Controllers\UserProfileController::class)->middleware('auth');
+Route::resource('user-management', \App\Http\Controllers\UserManagementController::class)->middleware('auth');
 Route::resource('/data/divisi', \App\Http\Controllers\DivisiController::class)->middleware('auth');
 // Rute untuk menampilkan halaman pengeditan divisi
 Route::get('/data/divisi/edit/{id}', [DivisiController::class, 'edit'])->name('divisi.edit');
