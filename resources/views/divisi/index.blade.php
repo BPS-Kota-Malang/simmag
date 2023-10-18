@@ -26,7 +26,8 @@
                                 data-bs-toggle="modal" data-bs-target="#createDataDivisi">
                                 <i class="fas fa-plus" style="color: #ffffff;"></i>
                             </a>
-                            <table id="divisi" class="table table-hover table-bordered table-stripped align-items-center">
+                            <table id="divisi"
+                                class="table table-hover table-bordered table-stripped align-items-center">
                                 <thead>
                                     <tr>
                                         <th class="text-center text-uppercase text-xs font-weight-bolder w-15">No.</th>
@@ -61,10 +62,13 @@
                                                     </button>
                                                 </form> --}}
 
-                                                <a href=# class="btn btn-primary btn-xs" data-toggle="modal" data-target="#editDataAdmin{{ $data->id }}">
+                                                <a href=# class="btn btn-primary btn-xs" data-toggle="modal"
+                                                    data-target="#editDataAdmin{{ $data->id }}">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
-                                                <a href="{{route('divisi.destroy', $data->id)}}"  class="btn btn-danger btn-xs">
+                                                <a href="{{ route('divisi.destroy', $data->id) }}"
+                                                    onclick="notificationBeforeDelete(event, this)"
+                                                    class="btn btn-danger btn-xs">
                                                     <i class="fas fa-trash-alt"></i>
                                                 </a>
 
@@ -152,6 +156,11 @@
         </div>
     </section>
 
+    <form action="" id="delete-form" method="post">
+        @method('delete')
+        @csrf
+    </form>
+
     <script>
         $('#divisi').DataTable({
             "order": [
@@ -212,5 +221,24 @@
                 "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>"
 
         });
+
+        function notificationBeforeDelete(event, el) {
+            event.preventDefault();
+            Swal.fire({
+                title: 'Apakah Anda yakin ?',
+                text: "Jika dihapus, data ini tidak akan bisa dikembalian!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, hapus sekarang!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $("#delete-form").attr('action', $(el).attr('href'));
+                    $("#delete-form").submit();
+                }
+            })
+        }
     </script>
 @endsection

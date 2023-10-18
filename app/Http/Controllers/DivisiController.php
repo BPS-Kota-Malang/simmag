@@ -114,7 +114,6 @@ class DivisiController extends Controller
     {
         $divisi = Divisi::find($id);
         if($divisi) $divisi->delete();
-
         return redirect()->route('divisi.index')
             ->with('Delete', 'Berhasil menghapus data.');
     }
