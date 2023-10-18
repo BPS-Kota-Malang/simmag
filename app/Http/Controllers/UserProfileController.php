@@ -37,13 +37,13 @@ class UserProfileController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:110'],
-            // 'email' => ['required', 'string', 'email', 'max:110'],
+            'email' => ['required', 'string', 'email', 'max:110'],
             // 'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
         $user = User::find($id);
         $user->name = $request->name;
-        // $user->email = $request->email;
+        $user->email = $request->email;
         // $user->password = Hash::make($request->password);
         $user->save();
 
@@ -52,20 +52,23 @@ class UserProfileController extends Controller
     }
 
     public function updatePassword(Request $request)
-{
-    $user = Auth::user();
+    {
+        $user = Auth::user();
 
-    $request->validate([
-        'current_password' => 'required',
-        'new_password' => 'required|min:6|confirmed',
-    ]);
+        $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|min:6|confirmed',
+        ]);
 
-    if (Hash::check($request->current_password, $user->password)) {
-        $user->changePassword($request->new_password);
+        if (Hash::check($request->current_password, $user->password)) {
+            $user->password = Hash::make($request->new_password);
+            $user->save();
 
-        return redirect()->route('profile.show-admin')->with('success', 'Password berhasil diubah.');
-    } else {
-        return back()->withErrors(['current_password' => 'Password terkini tidak valid.'])->withInput();
+            return redirect()->route('profile.show-admin')->with('success', 'Password berhasil diubah.');
+        } else {
+            return back()->withErrors(['current_password' => 'Password terkini tidak valid.'])->withInput();
+        }
     }
-}
+
+    
 }

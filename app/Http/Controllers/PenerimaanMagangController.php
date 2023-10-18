@@ -92,9 +92,6 @@ class PenerimaanMagangController extends Controller
         $user->status = 2; // Ubah status user menjadi 2
         $user->save();
 
-        // Hapus data mahasiswa
-        $mahasiswa->delete();
-
         // Mengirim email pemberitahuan
         $emailData = [
             'body' => view('emailTerima')->render(), // Mengambil tampilan email yang telah Anda siapkan
@@ -132,8 +129,6 @@ class PenerimaanMagangController extends Controller
             $user->divisions_id = null;
             $user->save();
         }
-
-        $mahasiswa->delete();
 
         if ($user) {
             $emailData = [
