@@ -12,7 +12,7 @@
                     <div class="card-body p-3 fw-bold text-dark d-flex justify-content-between">
                         <div class="d-flex align-items-center">
                             <div class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
-                                <i class="ni ni-email-83 text-lg opacity-10" aria-hidden="true"></i>
+                                <i class="ni ni-bullet-list-67 text-lg opacity-10" aria-hidden="true"></i>
                             </div>
                             <span class="mx-3 fs-4">Data Divisi</span>
                         </div>
@@ -195,7 +195,7 @@
         buttons: [{
                 extend: 'pdf',
                 text: '<i class="fa fa-file-pdf text-danger"></i> PDF',
-                title: 'Daftar Admin',
+                title: 'Data User',
                 exportOptions: {
                     columns: ':visible'
                 },
