@@ -46,7 +46,7 @@
                                     {{$data -> pekerjaan}}
                                 </td>
                                 <td class="align-middle text-center text-sm">
-                                    {{$data -> division.name}}
+                                    {{$data -> division}}
                                 </td>
 
                                 <td class="align-middle text-center text-sm">
@@ -96,26 +96,26 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="mulai">Jam Mulai</label>
-                                <input type="text" class="form-control" id="mulai" placeholder="Jam Mulai" name="jam_mulai" required value="{{old('mulai')}}">
-                                @error('mulai')
-                                <div class="invalid-feedback">
-                                    {{$message}}
-                                </div>
-                                @enderror
-                            </div>
+                            <label for="jam_mulai">Jam Mulai</label>
+                            <select class="form-control" id="jam_mulai" name="jam_mulai" required>
+                                <!-- <option value="">Pilih Divisi</option> -->
+                                @foreach($jam as $waktu)
+                                    <option value="{{ $waktu->waktu }}">{{ $waktu->waktu }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                             <div class="form-group">
-                                <label for="selesai">Jam Selesai</label>
-                                <input type="text" class="form-control" id="selesai" placeholder="Jam Selesai" name="jam_selesai" required value="{{old('selesai')}}">
-                                @error('selesai')
-                                <div class="invalid-feedback">
-                                    {{$message}}
-                                </div>
-                                @enderror
-                            </div>
+                            <label for="jam_selesai">Jam Selesai</label>
+                            <select class="form-control" id="jam_selesai" name="jam_selesai" required>
+                                <!-- <option value="">Pilih Divisi</option> -->
+                                @foreach($jam as $waktu)
+                                    <option value="{{ $waktu->waktu }}">{{ $waktu->waktu }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                             <div class="form-group">
                                 <label for="pekerjaan">Pekerjaan</label>
-                                <input type="text" class="form-control" id="pekerjaan" placeholder="Pekerjaan yang dilakukan - Divisi yang bersangkutan" name="pekerjaan" required value="{{old('pekerjaan')}}">
+                                <input type="text" class="form-control" id="pekerjaan" placeholder="Pekerjaan" name="pekerjaan" required value="{{old('pekerjaan')}}">
                                 @error('pekerjaan')
                                 <div class="invalid-feedback">
                                     {{$message}}
@@ -125,12 +125,13 @@
                             <div class="form-group">
                             <label for="division">Divisi</label>
                             <select class="form-control" id="division" name="division" required>
-                            <!-- <option value="">Pilih Divisi</option> -->
-                                @foreach($division as $divisi)
-                                    <option value="{{ $divisi-> id }}">{{ $divisi->nama_divisi }}</option>
+                                <!-- <option value="">Pilih Divisi</option> -->
+                                @foreach($division as $div)
+                                    <option value="{{ $div->nama_divisi }}">{{ $div->nama_divisi }}</option>
                                 @endforeach
                             </select>
-        
+                        </div>
+
         </div>
                         </div>
                         <div class="modal-footer">
