@@ -22,7 +22,8 @@
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
                         <div class="col-md-12">
-                            <button type="button" class="btn bg-gradient-dark w-10" id="filterDiterima">Filter</button>
+                            <button type="button" class="btn bg-gradient-dark w-10" id="filterStatus">Filter</button>
+
                         </div>
                         <table id="example" class="table align-items-center mb-0">
                             <thead>
@@ -40,6 +41,7 @@
                                     <th class="text-center text-uppercase text-xs font-weight-bolder">Waktu Mulai Magang</th>
                                     <th class="text-center text-uppercase text-xs font-weight-bolder">Waktu Selesai Magang</th>
                                     <th class="text-center text-uppercase text-xs font-weight-bolder">Created</th>
+                                    <th class="text-center text-uppercase text-xs font-weight-bolder">Kode Status</th>
                                     <th class="text-center text-uppercase text-xs font-weight-bolder">Action</th>
                                     <!-- <th class="text-secondary opacity-7"></th> -->
                                 </tr>
@@ -100,6 +102,8 @@
                                     <td class="align-middle text-center text-sm">
                                         {{$data -> created_at}}
                                     </td>
+                                    <td class="align-middle text-center text-sm user-status">{{ $data->user->status }}</td>
+
 
                                     <!-- Action -->
                                     <td class="align-middle text-center text-sm">
@@ -201,26 +205,23 @@
     </div>
     @endif -->
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
     <script>
         $(document).ready(function() {
-            $('#filterDiterima').click(function() {
+            $('#filterStatus').click(function() {
                 // Tampilkan semua baris terlebih dahulu
                 $('table tbody tr').show();
 
-                // Sembunyikan baris mahasiswa dengan status user selain "1" (belum diterima atau ditolak)
+                // Sembunyikan baris dengan status selain "1"
                 $('table tbody tr').each(function() {
-                    var status = $(this).find('.user-status').text(); // Pastikan ini mengacu pada class yang benar
-                    if (status !== '1') { // Semua status selain "1" akan disembunyikan
+                    var status = $(this).find('.user-status').text();
+                    if (status !== '1') {
                         $(this).hide();
                     }
                 });
             });
+
         });
     </script>
-
-
-
-
-
 </section>
 @endsection
