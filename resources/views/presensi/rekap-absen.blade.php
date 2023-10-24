@@ -40,6 +40,7 @@
                                         <tr>
                                             <th class="text-center text-uppercase text-xs font-weight-bolder">No.</th>
                                             <th class="text-center text-uppercase text-xs font-weight-bolder">Nama</th>
+                                            <th class="text-center text-uppercase text-xs font-weight-bolder">Universitas</th>
                                             <th class="text-center text-uppercase text-xs font-weight-bolder">Divisi</th>
                                             <th class="text-center text-uppercase text-xs font-weight-bolder">Tanggal</th>
                                             <th class="text-center text-uppercase text-xs font-weight-bolder">Jam Masuk</th>
@@ -60,9 +61,15 @@
                                             <td class="text-center align-items-center">
                                                 {{ $item->user->name }}
                                             </td>
+
+                                            <td class="align-middle text-center text-sm">
+                                                {{ $item->user->mahasiswa->universitas }}
+                                            </td>
+
                                             <td class="text-center align-items-center">
                                                 {{ $item->user->divisi->nama_divisi }}
                                             </td>
+                                            
                                             <td class="text-center align-items-center">
                                                 {{ $item->tgl }}
                                             </td>
@@ -97,16 +104,16 @@
                 [0, 'asc']
             ],
             "columnDefs": [{
-                    "targets": [6],
+                    "targets": [7],
                     "orderable": false
                 },
                 {
-                    "targets": [0, 6],
+                    "targets": [0, 7],
                     "className": "text-center"
                 },
                 {
                     "width": "130px",
-                    "targets": 6
+                    "targets": 7
                 },
             ],
             dom: 'Bfrtip',
