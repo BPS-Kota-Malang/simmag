@@ -61,7 +61,7 @@
                                                 {{ $item->user->name }}
                                             </td>
                                             <td class="text-center align-items-center">
-                                                {{ $item->user->divisions_id }}
+                                                {{ $item->user->divisi->nama_divisi }}
                                             </td>
                                             <td class="text-center align-items-center">
                                                 {{ $item->tgl }}
