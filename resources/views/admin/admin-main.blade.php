@@ -44,7 +44,7 @@
 
     <!-- Nucleo Icons -->
     <link href="{{ asset('assets/argon/css/nucleo-icons.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/argon/css/nucleo-svg.css')}}" rel="stylesheet" />
+    <link href="{{ asset('assets/argon/css/nucleo-svg.css') }}" rel="stylesheet" />
 
     <!-- Font Awesome Icons -->
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
@@ -54,7 +54,7 @@
     <link id="pagestyle" href="{{ asset('assets/argon/css/argon-dashboard.css') }}" rel="stylesheet" />
 </head>
 
-<body>
+<body class="{{ $class ?? '' }}">
 
 
 

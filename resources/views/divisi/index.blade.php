@@ -15,16 +15,6 @@
                                 <i class="ni ni-email-83 text-lg opacity-10" aria-hidden="true"></i>
                             </div>
                             <span class="mx-3 fs-4">Data Divisi</span>
-                            <div class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                  Dropdown button
-                                </button>
-                                <ul class="dropdown-menu">
-                                  <li><a class="dropdown-item" href="#">Action</a></li>
-                                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                                  <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                </ul>
-                              </div>
                         </div>
                     </div>
                 </div>
@@ -72,8 +62,8 @@
                                                     </button>
                                                 </form> --}}
 
-                                                <a href=# class="btn btn-primary btn-xs" data-toggle="modal"
-                                                    data-target="#editDataAdmin{{ $data->id }}">
+                                                <a href=# class="btn btn-primary btn-xs" data-bs-toggle="modal"
+                                                    data-bs-target="#editDataAdmin{{ $data->id }}">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
                                                 <a href="{{ route('divisi.destroy', $data->id) }}"
@@ -123,19 +113,6 @@
         </div>
         </div>
 
-        @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
-
-        @if (session('error'))
-            <div class="alert alert-danger">
-                {{ session('error') }}
-            </div>
-        @endif
-
-
         <div class="modal fade" id="createDataDivisi" tabindex="-1" role="dialog" aria-labelledby="createDataDivisi"
             aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
@@ -164,6 +141,34 @@
                 </div>
             </div>
         </div>
+
+        @if ($message = Session::get('Delete'))
+            <script>
+                Swal.fire(
+                    'Deleted!',
+                    '{{ $message }}',
+                    'success'
+                )
+            </script>
+        @endif
+        @if ($message = Session::get('save_message'))
+            <script>
+                Swal.fire(
+                    'Tersimpan!',
+                    '{{ $message }}',
+                    'success'
+                )
+            </script>
+        @endif
+        @if ($message = Session::get('success_message'))
+            <script>
+                Swal.fire(
+                    'Tersimpan!',
+                    '{{ $message }}',
+                    'success'
+                )
+            </script>
+        @endif
     </section>
 
     <form action="" id="delete-form" method="post">
