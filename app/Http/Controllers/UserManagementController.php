@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Divisi;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserManagementController extends Controller
 {
@@ -16,9 +19,13 @@ class UserManagementController extends Controller
     public function index()
     {
         $admins = User::with('role')->get();
+        $roledata = Role::all();
+        $divisidata = Divisi::all();
 
         return view('user-management.index', [
             'admins' => $admins,
+            'roledata' => $roledata,
+            'divisidata' => $divisidata,
             'menu' => 'Data User'
         ]);
     }
@@ -41,7 +48,27 @@ class UserManagementController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'roles_id' => ['required', 'string', 'max:3'],
+            'divisions_id' => ['required', 'string', 'max:3'],
+            'status' => ['required', 'string', 'max:1'],
+            // 'password' => ['required', 'string', 'min:8'],
+        ]);
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'roles_id' => $request->roles_id,
+            'divisions_id' => $request->divisions_id,
+            'status' => $request->status,
+            'password' => Hash::make('password'),
+            // 'password' => Hash::make($request->password),
+        ]);
+
+        return redirect()->route('user-management.index')
+            ->with('save_message', 'Data admin baru telah berhasil disimpan.');
     }
 
     /**
@@ -63,7 +90,7 @@ class UserManagementController extends Controller
      */
     public function edit($id)
     {
-        //
+        //    
     }
 
     /**
@@ -75,7 +102,22 @@ class UserManagementController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'string', 'max:110'],
+            'email' => ['required', 'string', 'email', 'max:110'],
+            'roles_id' => ['required', 'integer', 'max:3'],
+            // 'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        $admins = User::find($id);
+        $admins->name = $request->name;
+        $admins->email = $request->email;
+        $admins->roles_id = $request->roles_id;
+        // $admins->password = Hash::make($request->password);
+        $admins->save();
+
+        return redirect()->route('user-management.index')
+            ->with('success_message', 'Berhasil mengubah Data User.');
     }
 
     /**
@@ -84,8 +126,13 @@ class UserManagementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $admins = User::find($id);
+        if ($id == $request->user()->id) return redirect()->route('user-management.index')
+            ->with('pesan_error', 'Anda tidak dapat menghapus diri sendiri.');
+        if ($admins) $admins->delete();
+        return redirect()->route('user-management.index')
+            ->with('Delete_admin', 'Berhasil menghapus data.');
     }
 }

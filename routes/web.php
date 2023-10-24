@@ -11,7 +11,7 @@ use App\Http\Controllers\StatusMagangUser;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\StatusMagangUserController;
 use App\Http\Controllers\PenerimaanMagangController;
-
+use App\Http\Controllers\UserManagementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -96,10 +96,12 @@ Route::middleware([
 Route::get('/user/profile-admin', [UserProfileController::class, 'showAdmin'])->name('profile.show-admin');
 Route::resource('users', \App\Http\Controllers\UserProfileController::class)->middleware('auth');
 Route::resource('user-management', \App\Http\Controllers\UserManagementController::class)->middleware('auth');
+Route::get('user-management/edit/{id}', [UserManagementController::class, 'edit'])->name('user-management.edit')->middleware('auth');
+Route::put('user-management/update/{id}', [UserManagementController::class, 'update'])->name('user-management.update')->middleware('auth');
+
 Route::resource('/data/divisi', \App\Http\Controllers\DivisiController::class)->middleware('auth');
 // Rute untuk menampilkan halaman pengeditan divisi
 Route::get('/data/divisi/edit/{id}', [DivisiController::class, 'edit'])->name('divisi.edit');
-
 // Rute untuk menangani pembaruan divisi
 Route::put('/data/divisi/update/{id}', [DivisiController::class, 'update'])->name('divisi.update');
 

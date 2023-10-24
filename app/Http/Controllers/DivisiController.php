@@ -56,7 +56,7 @@ class DivisiController extends Controller
             'nama_divisi' => $request->nama_divisi,
         ]);
 
-        return redirect()->route('divisi.index')->with('message', 'Data Divisi Baru Berhasil di Tambahkan');
+        return redirect()->route('divisi.index')->with('save_message', 'Data Divisi Baru Berhasil di Tambahkan');
     }
 
     /**
@@ -100,7 +100,7 @@ class DivisiController extends Controller
         $divisi->nama_divisi = $request->nama_divisi;
         $divisi->save();
 
-        return redirect()->route('divisi.index')->with('success', 'Divisi berhasil diperbarui.');
+        return redirect()->route('divisi.index')->with('success_message', 'Divisi berhasil diperbarui.');
 
     }
 
