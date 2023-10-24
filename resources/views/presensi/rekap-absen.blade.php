@@ -40,6 +40,7 @@
                                         <tr>
                                             <th class="text-center text-uppercase text-xs font-weight-bolder">No.</th>
                                             <th class="text-center text-uppercase text-xs font-weight-bolder">Nama</th>
+                                            <th class="text-center text-uppercase text-xs font-weight-bolder">Divisi</th>
                                             <th class="text-center text-uppercase text-xs font-weight-bolder">Tanggal</th>
                                             <th class="text-center text-uppercase text-xs font-weight-bolder">Jam Masuk</th>
                                             <th class="text-center text-uppercase text-xs font-weight-bolder">Jam Keluar</th>
@@ -59,7 +60,9 @@
                                             <td class="text-center align-items-center">
                                                 {{ $item->user->name }}
                                             </td>
-
+                                            <td class="text-center align-items-center">
+                                                {{ $item->user->divisi->nama_divisi }}
+                                            </td>
                                             <td class="text-center align-items-center">
                                                 {{ $item->tgl }}
                                             </td>
@@ -94,23 +97,23 @@
                 [0, 'asc']
             ],
             "columnDefs": [{
-                    "targets": [4],
+                    "targets": [6],
                     "orderable": false
                 },
                 {
-                    "targets": [0, 4],
+                    "targets": [0, 6],
                     "className": "text-center"
                 },
                 {
                     "width": "130px",
-                    "targets": 4
+                    "targets": 6
                 },
             ],
             dom: 'Bfrtip',
             buttons: [{
                     extend: 'pdf',
                     text: '<i class="fa fa-file-pdf text-danger"></i> PDF',
-                    title: 'Data Divisi',
+                    title: 'Rekap Presensi',
                     exportOptions: {
                         columns: ':visible'
                     },
@@ -121,7 +124,7 @@
                 {
                     extend: 'excel',
                     text: '<i class="fa fa-file-excel text-success" > </i> EXCEL',
-                    title: 'Daftar Admin',
+                    title: 'Rekap Presensi',
                     exportOptions: {
                         columns: ':visible'
                     },
@@ -130,7 +133,7 @@
                 {
                     extend: 'print',
                     text: '<i class="fa fa-print text-info" > </i> PRINT',
-                    title: 'Daftar Admin',
+                    title: 'Rekap Presensi',
                     exportOptions: {
                         columns: ':visible'
                     },

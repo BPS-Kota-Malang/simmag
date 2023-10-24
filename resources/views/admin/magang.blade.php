@@ -20,11 +20,19 @@
             </div>
             <div class="card mb-4 p-3">
                 <div class="card-body px-0 pt-0 pb-2">
-                    <div class="table-responsive p-0">
-                        <div class="col-md-12">
-                            <button type="button" class="btn bg-gradient-dark w-10" id="filterStatus">Filter</button>
-
+                    <div class="col-md-12">
+                        <div class="dropdown">
+                            <button class="btn bg-gradient-dark dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                Filter
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="filterDropdown">
+                                <li><a class="dropdown-item" href="#" data-status="1">Baru</a></li>
+                                <li><a class="dropdown-item" href="#" data-status="2">Diterima</a></li>
+                                <li><a class="dropdown-item" href="#" data-status="0">Ditolak</a></li>
+                            </ul>
                         </div>
+                    </div>
+                    <div class="table-responsive p-0">
                         <table id="example" class="table align-items-center mb-0">
                             <thead>
                                 <tr>
@@ -193,34 +201,45 @@
         </div>
     </div>
 
-    <!-- @if(session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-    @endif
-
-    @if(session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
-    </div>
-    @endif -->
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#example').DataTable();
+        });
+    </script>
 
     <script>
         $(document).ready(function() {
-            $('#filterStatus').click(function() {
+            // Saat pilihan dropdown dipilih
+            $('.dropdown-item').click(function() {
+                var selectedStatus = $(this).data('status');
+
                 // Tampilkan semua baris terlebih dahulu
                 $('table tbody tr').show();
 
-                // Sembunyikan baris dengan status selain "1"
-                $('table tbody tr').each(function() {
-                    var status = $(this).find('.user-status').text();
-                    if (status !== '1') {
-                        $(this).hide();
-                    }
-                });
+                // Sembunyikan baris dengan status yang tidak sesuai dengan pilihan
+                if (selectedStatus === 1) {
+                    $('table tbody tr').each(function() {
+                        var status = $(this).find('.user-status').text();
+                        if (status !== '1') {
+                            $(this).hide();
+                        }
+                    });
+                } else if (selectedStatus === 2) {
+                    $('table tbody tr').each(function() {
+                        var status = $(this).find('.user-status').text();
+                        if (status !== '2') {
+                            $(this).hide();
+                        }
+                    });
+                } else if (selectedStatus === 0) {
+                    $('table tbody tr').each(function() {
+                        var status = $(this).find('.user-status').text();
+                        if (status !== '0') {
+                            $(this).hide();
+                        }
+                    });
+                }
             });
-
         });
     </script>
 </section>
