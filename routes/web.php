@@ -49,7 +49,7 @@ Route::get('/daftarmagang', function () {
 Route::post('/daftar', [MahasiswaController::class, 'store'])->name('daftar');
 // Route::post('/daftarmagang/create', [MahasiswaController::class, 'create'])->name('create');
 
-Route::get('/status', [StatusMagangUserController::class, 'index'])->name('pendaftaran.status');
+// Route::get('/status', [StatusMagangUserController::class, 'index'])->name('pendaftaran.status');
 
 Route::post('/magang/terima/{id_mahasiswa}', [PenerimaanMagangController::class, 'update'])->name('magang.terima');
 Route::post('/magang/tolak/{id_mahasiswa}', [PenerimaanMagangController::class, 'destroy'])->name('magang.tolak');

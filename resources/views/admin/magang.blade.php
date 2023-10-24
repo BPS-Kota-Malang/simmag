@@ -39,6 +39,7 @@
                                     <th class="text-center text-uppercase text-xs font-weight-bolder">No.</th>
                                     <th class="text-center text-uppercase text-xs font-weight-bolder">NIM</th>
                                     <th class="text-center text-uppercase text-xs font-weight-bolder">Nama</th>
+                                    <th class="text-center text-uppercase text-xs font-weight-bolder">Email</th>
                                     <th class="text-center text-uppercase text-xs font-weight-bolder">Universitas</th>
                                     <th class="text-center text-uppercase text-xs font-weight-bolder">Fakultas/Jurusan</th>
                                     <th class="text-center text-uppercase text-xs font-weight-bolder">Program Studi</th>
@@ -69,6 +70,10 @@
 
                                     <td class="align-middle text-center text-sm">
                                         {{$data -> nama}}
+                                    </td>
+
+                                    <td class="align-middle text-center text-sm">
+                                        {{ $data->user->email }}
                                     </td>
 
                                     <td class="align-middle text-center text-sm">
