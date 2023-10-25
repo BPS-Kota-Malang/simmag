@@ -92,14 +92,25 @@ class PenerimaanMagangController extends Controller
         $user->status = 2; // Ubah status user menjadi 2
         $user->save();
 
-        // Mengirim email pemberitahuan
+        // Mengambil nama pendaftar
+        $namaPendaftar = $mahasiswa->nama;
+
+        // Mengambil tanggal mulai dan tanggal selesai dari pendaftar
+        $tanggalMulai = $mahasiswa->tanggal_mulai;
+        $tanggalSelesai = $mahasiswa->tanggal_selesai;
+
+        // Mengirim email pemberitahuan dengan nama pendaftar
         $emailData = [
-            'body' => view('emailTerima')->render(), // Mengambil tampilan email yang telah Anda siapkan
+            'namaPendaftar' => $namaPendaftar,
+            'tanggalMulai' => $tanggalMulai,
+            'tanggalSelesai' => $tanggalSelesai,
+            'body' => view('emailTerima', compact('namaPendaftar', 'tanggalMulai', 'tanggalSelesai'))->render(),
         ];
 
-        Mail::to($user->email)->send(new SendEmail($emailData)); // Menggunakan SendEmail untuk mengirim email
+        Mail::to($user->email)->send(new SendEmail($emailData));
 
-        return redirect()->back();
+        return redirect()->back()
+            ->with('success_message', 'Permohonan magang berhasil diterima.');
     }
 
 
@@ -130,14 +141,24 @@ class PenerimaanMagangController extends Controller
             $user->save();
         }
 
-        if ($user) {
-            $emailData = [
-                'body' => view('emailTolak')->render(), // Mengambil tampilan email yang sesuai
-            ];
+        // Mengambil nama pendaftar
+        $namaPendaftar = $mahasiswa->nama;
 
-            Mail::to($user->email)->send(new SendEmail($emailData));
-        }
+        // Mengambil tanggal mulai dan tanggal selesai dari pendaftar
+        $tanggalMulai = $mahasiswa->tanggal_mulai;
+        $tanggalSelesai = $mahasiswa->tanggal_selesai;
 
-        return redirect()->back()->with('success', 'Permohonan magang telah ditolak.');
+        // Mengirim email pemberitahuan dengan nama pendaftar
+        $emailData = [
+            'namaPendaftar' => $namaPendaftar,
+            'tanggalMulai' => $tanggalMulai,
+            'tanggalSelesai' => $tanggalSelesai,
+            'body' => view('emailTolak', compact('namaPendaftar', 'tanggalMulai', 'tanggalSelesai'))->render(),
+        ];
+
+        Mail::to($user->email)->send(new SendEmail($emailData));
+
+        return redirect()->back()
+            ->with('tolak', 'Permohonan magang berhasil ditolak.');
     }
 }

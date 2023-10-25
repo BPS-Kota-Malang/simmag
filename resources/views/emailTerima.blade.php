@@ -14,9 +14,9 @@
                     <tr>
                         <td style="background-color: #f0f0f0; padding: 20px; text-align: center;">
                             <h1 style="color: #333;">Badan Pusat Statistik Kota Malang</h1>
-                            <p style="font-size: 16px; color: #555;">Hi, Nama User</p>
-                            <p style="font-size: 16px; color: #555;">Pengajuan permohonan magang Anda pada tanggal sekian sampai dengan tanggal sekian</p>
-                            <h2 style="color: #333;">DITERIMA</h2>
+                            <p style="font-size: 16px; color: #555;">Hi, {{ $namaPendaftar }}</p>
+                            <p style="font-size: 16px; color: #555;">Pengajuan permohonan magang Anda yang dimulai pada tanggal {{ $tanggalMulai }} sampai berakhir pada tanggal {{ $tanggalSelesai }}</p>
+                            <h2 style="color: green;">DITERIMA</h2>
                             <a href="{{ url('/login') }}" target="_blank" style="background-color: #007bff; color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 5px; margin-top: 20px; display: inline-block; cursor: pointer;">Silahkan
                                 Login Kembali</a>
                         </td>
