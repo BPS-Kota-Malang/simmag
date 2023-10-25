@@ -151,11 +151,11 @@
                                                         Apakah Anda yakin ingin menerima permohonan magang tersebut?
                                                         <select class="form-select" name="divisi" aria-label="Default select example" required>
                                                             <option value="" selected disabled>Pilih Divisi</option>
-                                                            <option value="1">Divisi 1</option>
-                                                            <option value="2">Divisi 2</option>
-                                                            <option value="3">Divisi 3</option>
-                                                            <option value="4">Divisi 4</option>
-                                                            <option value="5">Divisi 5</option>
+                                                            <option value="1">Divisi Produksi</option>
+                                                            <option value="2">Divisi Sosial</option>
+                                                            <option value="3">Divisi Neraca</option>
+                                                            <option value="4">Divisi IPDS</option>
+                                                            <option value="5">Divisi Distribusi</option>
                                                         </select>
                                                     </div>
                                                     <div class="modal-footer">

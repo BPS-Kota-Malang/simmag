@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Presensi;
+use App\Models\User;
 use DateTime;
 use DateTimeZone;
 use Illuminate\Http\Request;
@@ -78,10 +79,16 @@ class PresensiController extends Controller
 
     public function tampildatakeseluruhan($tglawal, $tglakhir)
     {
-        $presensi = Presensi::with('user')->whereBetween('tgl', [$tglawal, $tglakhir])->orderBy('tgl', 'asc')->get();
+        $presensi = Presensi::with('user')
+        
+
+        ->whereBetween('tgl', [$tglawal, $tglakhir])
+            ->orderBy('tgl', 'asc')
+            ->get();
+    
         return view('presensi.rekap-absen', compact('presensi'), ['menu' => 'Rekap Absen Done']);
     }
-
+    
     public function halamanrekapuser()
     {
         return view('presensi.halaman-rekap-user', ['menu' => 'Rekap User']);
