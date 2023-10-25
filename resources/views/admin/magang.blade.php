@@ -123,7 +123,7 @@
                                         @if ($data->user->status == 2) <!-- Anggap 2 mewakili status "DITERIMA" -->
                                         <span class="text-success font-weight-bold text-xs">DITERIMA</span>
                                         @elseif ($data->user->status == 0)
-                                        <span class="text-danger font-weight-bold text-xs">TOLAK</span>
+                                        <span class="text-danger font-weight-bold text-xs">DITOLAK</span>
                                         @else
                                         <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#terima{{ $data->id_mahasiswa }}">
                                             <i class="fas fa-check-square fa-lg text-success"></i>
@@ -247,5 +247,24 @@
             });
         });
     </script>
+
+    @if ($message = Session::get('tolak'))
+    <script>
+        Swal.fire(
+            'Ditolak!',
+            '{{ $message }}',
+            'success'
+        )
+    </script>
+    @endif
+    @if ($message = Session::get('success_message'))
+    <script>
+        Swal.fire(
+            'Diterima!',
+            '{{ $message }}',
+            'success'
+        )
+    </script>
+    @endif
 </section>
 @endsection

@@ -109,7 +109,8 @@ class PenerimaanMagangController extends Controller
 
         Mail::to($user->email)->send(new SendEmail($emailData));
 
-        return redirect()->back();
+        return redirect()->back()
+            ->with('success_message', 'Permohonan magang berhasil diterima.');
     }
 
 
@@ -157,6 +158,7 @@ class PenerimaanMagangController extends Controller
 
         Mail::to($user->email)->send(new SendEmail($emailData));
 
-        return redirect()->back();
+        return redirect()->back()
+            ->with('tolak', 'Permohonan magang berhasil ditolak.');
     }
 }
