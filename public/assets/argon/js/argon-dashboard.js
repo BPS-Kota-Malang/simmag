@@ -2614,47 +2614,47 @@ function debounce(func, wait, immediate) {
     timeout = setTimeout(later, wait);
     if (callNow) func.apply(context, args);
   };
-}
+}; 
 
-; // Toggle Sidenav
+// Toggle Sidenav
+// var iconNavbarSidenav = document.getElementById('iconNavbarSidenav');
+// var iconSidenav = document.getElementById('iconSidenav');
+// var sidenav = document.getElementById('sidenav-main');
+// var body = document.getElementsByTagName('body')[0];
+// var className = 'g-sidenav-pinned';
 
-var iconNavbarSidenav = document.getElementById('iconNavbarSidenav');
-var iconSidenav = document.getElementById('iconSidenav');
-var sidenav = document.getElementById('sidenav-main');
-var body = document.getElementsByTagName('body')[0];
-var className = 'g-sidenav-pinned';
+// if (iconNavbarSidenav) {
+//   iconNavbarSidenav.addEventListener("click", toggleSidenav);
+// }
 
-if (iconNavbarSidenav) {
-  iconNavbarSidenav.addEventListener("click", toggleSidenav);
-}
+// if (iconSidenav) {
+//   iconSidenav.addEventListener("click", toggleSidenav);
+// }
 
-if (iconSidenav) {
-  iconSidenav.addEventListener("click", toggleSidenav);
-}
+// function toggleSidenav() {
+//   if (body.classList.contains(className)) {
+//     body.classList.remove(className);
+//     setTimeout(function () {
+//       sidenav.classList.remove('bg-white');
+//     }, 100);
+//     sidenav.classList.remove('bg-transparent');
+//   } else {
+//     body.classList.add(className);
+//     sidenav.classList.add('bg-white');
+//     sidenav.classList.remove('bg-transparent');
+//     iconSidenav.classList.remove('d-none');
+//   }
+// }
 
-function toggleSidenav() {
-  if (body.classList.contains(className)) {
-    body.classList.remove(className);
-    setTimeout(function () {
-      sidenav.classList.remove('bg-white');
-    }, 100);
-    sidenav.classList.remove('bg-transparent');
-  } else {
-    body.classList.add(className);
-    sidenav.classList.add('bg-white');
-    sidenav.classList.remove('bg-transparent');
-    iconSidenav.classList.remove('d-none');
-  }
-}
+// var html = document.getElementsByTagName('html')[0];
+// html.addEventListener("click", function (e) {
+//   if (body.classList.contains('g-sidenav-pinned') && !e.target.classList.contains('sidenav-toggler-line')) {
+//     body.classList.remove(className);
+//   }
+// }); // Resize navbar color depends on configurator active type of sidenav
 
-var html = document.getElementsByTagName('html')[0];
-html.addEventListener("click", function (e) {
-  if (body.classList.contains('g-sidenav-pinned') && !e.target.classList.contains('sidenav-toggler-line')) {
-    body.classList.remove(className);
-  }
-}); // Resize navbar color depends on configurator active type of sidenav
+let referenceButtons = document.querySelector('[data-class]');
 
-var referenceButtons = document.querySelector('[data-class]');
 window.addEventListener("resize", navbarColorOnResize);
 
 function navbarColorOnResize() {
@@ -2662,27 +2662,28 @@ function navbarColorOnResize() {
     if (referenceButtons.classList.contains('active') && referenceButtons.getAttribute('data-class') === 'bg-transparent') {
       sidenav.classList.remove('bg-white');
     } else {
-      sidenav.classList.add('bg-white');
+      if (!body.classList.contains('dark-version')) {
+        sidenav.classList.add('bg-white');
+      }
     }
   } else {
     sidenav.classList.add('bg-white');
     sidenav.classList.remove('bg-transparent');
   }
-} // Deactivate sidenav type buttons on resize and small screens
+}
 
-
+// Deactivate sidenav type buttons on resize and small screens
 window.addEventListener("resize", sidenavTypeOnResize);
 window.addEventListener("load", sidenavTypeOnResize);
 
 function sidenavTypeOnResize() {
-  var elements = document.querySelectorAll('[onclick="sidebarType(this)"]');
-
+  let elements = document.querySelectorAll('[onclick="sidebarType(this)"]');
   if (window.innerWidth < 1200) {
-    elements.forEach(function (el) {
+    elements.forEach(function(el) {
       el.classList.add('disabled');
     });
   } else {
-    elements.forEach(function (el) {
+    elements.forEach(function(el) {
       el.classList.remove('disabled');
     });
   }

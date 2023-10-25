@@ -195,7 +195,7 @@
                                     @endforeach
                                     @else
                                 <tr>
-                                    <td colspan="13" class="align-middle text-center text-sm">Data kosong.</td>
+                                    <td colspan="13" class="align-middle text-center text-sm">Tidak Ada Data Pendaftaran Magang</td>
                                 </tr>
                                 @endif
                             </tbody>
