@@ -53,7 +53,7 @@ class PresensiController extends Controller
             ['tgl', '=', $tanggal],
         ])->first();
         if ($presensi) {
-            dd("Anda Telah Absen Hari Ini");
+            return redirect('presensi-masuk');
         } else {
             Presensi::create([
                 'user_id' => auth()->user()->id,
@@ -62,7 +62,8 @@ class PresensiController extends Controller
             ]);
         }
 
-        return redirect('presensi-masuk');
+        return redirect('presensi-masuk')
+            ->with('save_message', 'Anda Telah Absen Hari Ini');
     }
 
     /**
@@ -80,15 +81,15 @@ class PresensiController extends Controller
     public function tampildatakeseluruhan($tglawal, $tglakhir)
     {
         $presensi = Presensi::with('user')
-        
 
-        ->whereBetween('tgl', [$tglawal, $tglakhir])
+
+            ->whereBetween('tgl', [$tglawal, $tglakhir])
             ->orderBy('tgl', 'asc')
             ->get();
-    
+
         return view('presensi.rekap-absen', compact('presensi'), ['menu' => 'Rekap Absen Done']);
     }
-    
+
     public function halamanrekapuser()
     {
         return view('presensi.halaman-rekap-user', ['menu' => 'Rekap User']);
@@ -125,9 +126,11 @@ class PresensiController extends Controller
 
         if ($presensi->jamkeluar == "") {
             $presensi->update($dt);
-            return redirect('presensi-keluar');
+            return redirect('presensi-keluar')
+            ->with('success_message', 'Anda Telah Absen Pulang Hari Ini');
         } else {
-            dd("Anda Telah Absen Untuk Pulang");
+            // return redirect('presensi-keluar')
+            //     ->with('Delete', 'Anda Telah Absen Pulang Hari Ini');
         }
     }
 

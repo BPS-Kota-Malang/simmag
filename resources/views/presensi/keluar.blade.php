@@ -48,8 +48,33 @@
             </div>
         </div>
     </div>
-    </div>
-    </div>
+    @if ($message = Session::get('Delete'))
+    <script>
+        Swal.fire(
+            'Deleted!',
+            '{{ $message }}',
+            'success'
+        )
+    </script>
+    @endif
+    @if ($message = Session::get('save_message'))
+    <script>
+        Swal.fire(
+            'Berhasil!',
+            '{{ $message }}',
+            'success'
+        )
+    </script>
+    @endif
+    @if ($message = Session::get('success_message'))
+    <script>
+        Swal.fire(
+            'Berhasil!',
+            '{{ $message }}',
+            'success'
+        )
+    </script>
+    @endif
 </section>
 
 <script type="text/javascript">
