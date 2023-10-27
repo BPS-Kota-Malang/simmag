@@ -261,6 +261,15 @@
                 )
             </script>
         @endif
+        @if ($message = Session::get('pesan_error'))
+            <script>
+                Swal.fire(
+                    'Tersimpan!',
+                    '{{ $message }}',
+                    'error'
+                )
+            </script>
+        @endif
     </section>
 
     <form action="" id="delete-form" method="post">

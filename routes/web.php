@@ -24,9 +24,9 @@ use App\Http\Controllers\UserManagementController;
 |
 */
 
-Route::get('/', function () {
-    return view('login');
-})->middleware('guest')->name('redirects');
+// Route::get('/', function () {
+//     return view('login');
+// })->middleware('guest')->name('redirects');
 
 // Route::middleware(['auth'])->group(function () {
 // });
@@ -95,17 +95,20 @@ Route::middleware([
 
 Route::get('/user/profile-admin', [UserProfileController::class, 'showAdmin'])->name('profile.show-admin');
 Route::resource('users', \App\Http\Controllers\UserProfileController::class)->middleware('auth');
-Route::resource('user-management', \App\Http\Controllers\UserManagementController::class)->middleware('auth');
-Route::get('user-management/edit/{id}', [UserManagementController::class, 'edit'])->name('user-management.edit')->middleware('auth');
-Route::put('user-management/update/{id}', [UserManagementController::class, 'update'])->name('user-management.update')->middleware('auth');
 
-Route::resource('/data/divisi', \App\Http\Controllers\DivisiController::class)->middleware('auth');
-// Rute untuk menampilkan halaman pengeditan divisi
-Route::get('/data/divisi/edit/{id}', [DivisiController::class, 'edit'])->name('divisi.edit');
-// Rute untuk menangani pembaruan divisi
-Route::put('/data/divisi/update/{id}', [DivisiController::class, 'update'])->name('divisi.update');
 
 
 Route::post('/user/password/update', [UserProfileController::class, 'updatePassword'])->name('ganti.password');
 
 // Route::resource('/data/divisi', DivisiController::class)->middleware('auth');
+
+
+// ROUTE GROUP SUPERADMIN
+Route::middleware(['auth', 'checkStatus:2,2', 'verified'])->group(function () {
+    Route::resource('user-management', \App\Http\Controllers\UserManagementController::class)->middleware('auth');
+    Route::get('user-management/edit/{id}', [UserManagementController::class, 'edit'])->name('user-management.edit');
+    Route::put('user-management/update/{id}', [UserManagementController::class, 'update'])->name('user-management.update');
+    Route::resource('/data/divisi', \App\Http\Controllers\DivisiController::class);
+    Route::get('/data/divisi/edit/{id}', [DivisiController::class, 'edit'])->name('divisi.edit');
+    Route::put('/data/divisi/update/{id}', [DivisiController::class, 'update'])->name('divisi.update');
+});

@@ -133,6 +133,6 @@ class UserManagementController extends Controller
             ->with('pesan_error', 'Anda tidak dapat menghapus diri sendiri.');
         if ($admins) $admins->delete();
         return redirect()->route('user-management.index')
-            ->with('Delete_admin', 'Berhasil menghapus data.');
+            ->with('Delete', 'Berhasil menghapus data.');
     }
 }
