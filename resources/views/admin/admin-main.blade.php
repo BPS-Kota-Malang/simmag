@@ -52,7 +52,7 @@
     <link id="pagestyle" href="{{ asset('assets/argon/css/argon-dashboard.css') }}" rel="stylesheet" />
 </head>
 
-<body>
+<body class="g-sidenav-show bg-gray-100">
     <div class="min-height-300 bg-primary position-absolute w-100"></div>
     @include('components.sidebar')
     <main class="main-content border-radius-lg">

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnggotaDivisiController;
 use App\Http\Controllers\DivisiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -101,6 +102,11 @@ Route::resource('users', \App\Http\Controllers\UserProfileController::class)->mi
 Route::post('/user/password/update', [UserProfileController::class, 'updatePassword'])->name('ganti.password');
 
 // Route::resource('/data/divisi', DivisiController::class)->middleware('auth');
+
+Route::resource('/anggota-divisi', AnggotaDivisiController::class)->middleware('auth');
+Route::get('/anggota-divisi/edit/{id}', [AnggotaDivisiController::class, 'edit'])->name('anggota-divisi.edit')->middleware('auth');
+Route::put('/anggota-divisi/update/{id}', [AnggotaDivisiController::class, 'update'])->name('anggota-divisi.update')->middleware('auth');
+
 
 
 // ROUTE GROUP SUPERADMIN
