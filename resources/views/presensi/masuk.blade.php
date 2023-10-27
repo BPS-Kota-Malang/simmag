@@ -31,7 +31,7 @@
                                         <div class="row px-3">
                                             <div class="col text-center py-3">
                                                 <div class="col-6 mx-auto">
-                                                    <button type="submit" class="btn bg-gradient-dark w-auto me-1 mb-0" >Absen Masuk</button>
+                                                    <button type="submit" class="btn bg-gradient-dark w-auto me-1 mb-0">Absen Masuk</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -45,6 +45,34 @@
             </div>
         </div>
     </div>
+
+    @if ($message = Session::get('Delete'))
+    <script>
+        Swal.fire(
+            'Deleted!',
+            '{{ $message }}',
+            'success'
+        )
+    </script>
+    @endif
+    @if ($message = Session::get('save_message'))
+    <script>
+        Swal.fire(
+            'Berhasil!',
+            '{{ $message }}',
+            'success'
+        )
+    </script>
+    @endif
+    @if ($message = Session::get('success_message'))
+    <script>
+        Swal.fire(
+            'Tersimpan!',
+            '{{ $message }}',
+            'success'
+        )
+    </script>
+    @endif
 </section>
 
 <script type="text/javascript">

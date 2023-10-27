@@ -39,6 +39,7 @@
                                     <th class="text-center text-uppercase text-xs font-weight-bolder">No.</th>
                                     <th class="text-center text-uppercase text-xs font-weight-bolder">NIM</th>
                                     <th class="text-center text-uppercase text-xs font-weight-bolder">Nama</th>
+                                    <th class="text-center text-uppercase text-xs font-weight-bolder">Email</th>
                                     <th class="text-center text-uppercase text-xs font-weight-bolder">Universitas</th>
                                     <th class="text-center text-uppercase text-xs font-weight-bolder">Fakultas/Jurusan</th>
                                     <th class="text-center text-uppercase text-xs font-weight-bolder">Program Studi</th>
@@ -69,6 +70,10 @@
 
                                     <td class="align-middle text-center text-sm">
                                         {{$data -> nama}}
+                                    </td>
+
+                                    <td class="align-middle text-center text-sm">
+                                        {{ $data->user->email }}
                                     </td>
 
                                     <td class="align-middle text-center text-sm">
@@ -118,7 +123,7 @@
                                         @if ($data->user->status == 2) <!-- Anggap 2 mewakili status "DITERIMA" -->
                                         <span class="text-success font-weight-bold text-xs">DITERIMA</span>
                                         @elseif ($data->user->status == 0)
-                                        <span class="text-danger font-weight-bold text-xs">TOLAK</span>
+                                        <span class="text-danger font-weight-bold text-xs">DITOLAK</span>
                                         @else
                                         <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#terima{{ $data->id_mahasiswa }}">
                                             <i class="fas fa-check-square fa-lg text-success"></i>
@@ -146,11 +151,11 @@
                                                         Apakah Anda yakin ingin menerima permohonan magang tersebut?
                                                         <select class="form-select" name="divisi" aria-label="Default select example" required>
                                                             <option value="" selected disabled>Pilih Divisi</option>
-                                                            <option value="1">Divisi 1</option>
-                                                            <option value="2">Divisi 2</option>
-                                                            <option value="3">Divisi 3</option>
-                                                            <option value="4">Divisi 4</option>
-                                                            <option value="5">Divisi 5</option>
+                                                            <option value="1">Divisi Produksi</option>
+                                                            <option value="2">Divisi Sosial</option>
+                                                            <option value="3">Divisi Neraca</option>
+                                                            <option value="4">Divisi IPDS</option>
+                                                            <option value="5">Divisi Distribusi</option>
                                                         </select>
                                                     </div>
                                                     <div class="modal-footer">
@@ -190,7 +195,7 @@
                                     @endforeach
                                     @else
                                 <tr>
-                                    <td colspan="13" class="align-middle text-center text-sm">Data kosong.</td>
+                                    <td colspan="13" class="align-middle text-center text-sm">Tidak Ada Data Pendaftaran Magang</td>
                                 </tr>
                                 @endif
                             </tbody>
@@ -242,5 +247,24 @@
             });
         });
     </script>
+
+    @if ($message = Session::get('tolak'))
+    <script>
+        Swal.fire(
+            'Ditolak!',
+            '{{ $message }}',
+            'success'
+        )
+    </script>
+    @endif
+    @if ($message = Session::get('success_message'))
+    <script>
+        Swal.fire(
+            'Diterima!',
+            '{{ $message }}',
+            'success'
+        )
+    </script>
+    @endif
 </section>
 @endsection

@@ -14,10 +14,11 @@
                     <tr>
                         <td style="background-color: #f0f0f0; padding: 20px; text-align: center;">
                             <h1 style="color: #333;">Badan Pusat Statistik Kota Malang</h1>
-                            <p style="font-size: 16px; color: #555;">Tolak</p>
-                            <p style="font-size: 16px; color: #555;">Silahkan Mohon Isi Feedback Untuk Layanan Kami Di
-                                Bawah ini</p>
-                            <a href="" target="_blank" style="background-color: #007bff; color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 5px; margin-top: 20px; display: inline-block; cursor: pointer;">Kunjungi
+                            <p style="font-size: 16px; color: #555;">Hi, {{ $namaPendaftar }}</p>
+                            <p style="font-size: 16px; color: #555;">Mohon maaf pengajuan permohonan magang Anda yang dimulai pada tanggal {{ $tanggalMulai }} sampai berakhir pada tanggal {{ $tanggalSelesai }}</p>
+                            <h2 style="color: red;">BELUM DAPAT KAMI TERIMA</h2>
+                            <p style="font-size: 16px; color: #555;">Dikarenakan kuota magang sudah penuh</p>
+                            <a href="https://malangkota.bps.go.id/" target="_blank" style="background-color: #007bff; color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 5px; margin-top: 20px; display: inline-block; cursor: pointer;">Kunjungi
                                 Situs Kami</a>
                         </td>
                     </tr>

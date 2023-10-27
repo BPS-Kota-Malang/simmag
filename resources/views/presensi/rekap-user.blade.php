@@ -36,10 +36,13 @@
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
-                            <table id="example" class="table align-items-center mb-0">
+                            <table id="rekap" class="table align-items-center mb-0">
                                 <thead>
                                     <tr>
+                                        <th class="text-center text-uppercase text-xs font-weight-bolder">No.</th>
                                         <th class="text-center text-uppercase text-xs font-weight-bolder">Nama</th>
+                                        <th class="text-center text-uppercase text-xs font-weight-bolder">Universitas</th>
+                                        <th class="text-center text-uppercase text-xs font-weight-bolder">Divisi</th>
                                         <th class="text-center text-uppercase text-xs font-weight-bolder">Tanggal</th>
                                         <th class="text-center text-uppercase text-xs font-weight-bolder">Jam Masuk</th>
                                         <th class="text-center text-uppercase text-xs font-weight-bolder">Jam Keluar</th>
@@ -47,27 +50,40 @@
                                         <!-- <th class="text-secondary opacity-7"></th> -->
                                     </tr>
                                 </thead>
+                                @php
+                                $count = 1;
+                                @endphp
                                 <tbody>
                                     @foreach($presensi as $item)
                                     <tr>
                                         <!-- NO -->
-                                        <td class="align-middle text-center text-sm">
+                                        <td class="text-center align-items-center">{{ $count++ }}</td>
+
+                                        <td class="text-center align-items-center">
                                             {{ $item->user->name }}
                                         </td>
 
                                         <td class="align-middle text-center text-sm">
+                                            {{ $item->user->mahasiswa->universitas }}
+                                        </td>
+
+                                        <td class="text-center align-items-center">
+                                            {{ $item->user->divisi->nama_divisi }}
+                                        </td>
+
+                                        <td class="text-center align-items-center">
                                             {{ $item->tgl }}
                                         </td>
 
-                                        <td class="align-middle text-center text-sm">
+                                        <td class="text-center align-items-center">
                                             {{ $item->jammasuk }}
                                         </td>
 
-                                        <td class="align-middle text-center text-sm">
+                                        <td class="text-center align-items-center">
                                             {{ $item->jamkeluar }}
                                         </td>
 
-                                        <td class="align-middle text-center text-sm">
+                                        <td class="text-center align-items-center">
                                             {{ $item->jamkerja }}
                                         </td>
                                     </tr>
@@ -81,5 +97,67 @@
         </div>
     </div>
 </section>
-    @include('components/footer')
-    @endsection
+@include('components/footer')
+
+<script>
+    $('#rekap').DataTable({
+        "order": [
+            [0, 'asc']
+        ],
+        "columnDefs": [{
+                "targets": [7],
+                "orderable": false
+            },
+            {
+                "targets": [0, 7],
+                "className": "text-center"
+            },
+            {
+                "width": "130px",
+                "targets": 7
+            },
+        ],
+        dom: 'Bfrtip',
+        buttons: [{
+                extend: 'pdf',
+                text: '<i class="fa fa-file-pdf text-danger"></i> PDF',
+                title: 'Rekap Presensi',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                messageTop: '',
+                orientation: 'portrait',
+                pageSize: 'A4'
+            },
+            {
+                extend: 'excel',
+                text: '<i class="fa fa-file-excel text-success" > </i> EXCEL',
+                title: 'Rekap Presensi',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                messageTop: ''
+            },
+            {
+                extend: 'print',
+                text: '<i class="fa fa-print text-info" > </i> PRINT',
+                title: 'Rekap Presensi',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                messageTop: '',
+            },
+            {
+                extend: 'colvis',
+                text: '<i class="fa fa-table" > </i> Columns',
+                postfixButtons: ['colvisRestore']
+            },
+        ],
+
+        "dom": "<'row'<'col-sm-12 col-md-2'l><'col-sm-12 col-md-6'B><'col-sm-12 col-md-4'f>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>"
+
+    });
+</script>
+@endsection

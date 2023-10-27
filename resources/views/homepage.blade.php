@@ -10,8 +10,8 @@
                     @if (Auth::user() && Auth::user()->status == 1)
                     <div class="col position-relative">
                         <div class="p-3 text-center">
-                            <h4 class="mt-3">Pengajuan Anda Akan Segera Kami Proses</h4>
-                            <h4 class="mt-3">Terima Kasih</h4>
+                            <h5 class="mt-3">Pengajuan magang Anda akan segera kami proses, untuk kabar selanjutnya akan Kami infokan melalui email Anda.</h5>
+                            <h4 class="mt-3">- Terima Kasih -</h4>
                         </div>
                     </div>
                     @else
