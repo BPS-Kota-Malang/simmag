@@ -53,7 +53,8 @@ class PresensiController extends Controller
             ['tgl', '=', $tanggal],
         ])->first();
         if ($presensi) {
-            return redirect('presensi-masuk');
+            return redirect('presensi-masuk')
+                ->with('save_message', 'Anda Telah Absen Hari Ini');
         } else {
             Presensi::create([
                 'user_id' => auth()->user()->id,
@@ -127,10 +128,10 @@ class PresensiController extends Controller
         if ($presensi->jamkeluar == "") {
             $presensi->update($dt);
             return redirect('presensi-keluar')
-            ->with('success_message', 'Anda Telah Absen Pulang Hari Ini');
+                ->with('success_message', 'Anda Telah Absen Pulang Hari Ini');
         } else {
-            // return redirect('presensi-keluar')
-            //     ->with('Delete', 'Anda Telah Absen Pulang Hari Ini');
+            return redirect('presensi-keluar')
+                ->with('success_message', 'Anda Telah Absen Pulang Hari Ini');
         }
     }
 
