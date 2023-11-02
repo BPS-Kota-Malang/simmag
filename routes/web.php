@@ -42,16 +42,6 @@ Route::get('/daftarmagang', function () {
 Route::post('/daftar', [MahasiswaController::class, 'store'])->name('daftar');
 
 
-<<<<<<< Updated upstream
-=======
-Route::post('/magang/terima/{id_mahasiswa}', [PenerimaanMagangController::class, 'update'])->name('magang.terima');
-Route::post('/magang/tolak/{id_mahasiswa}', [PenerimaanMagangController::class, 'destroy'])->name('magang.tolak');
-Route::post('/magang/hapus/{id_mahasiswa}', [PenerimaanMagangController::class, 'hapus'])->name('magang.hapus');
->>>>>>> Stashed changes
-
-
-// Penerimaan Magang Admin
-
 Route::get('/logbook', [LogbookController::class, 'index'])->name('logbook');
 Route::post('/logbook/store', [LogbookController::class, 'store'])->name('logbook.store');
 
@@ -69,42 +59,41 @@ Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified'
-    ])->group(function () {
-        Route::get('/redirects', [HomeController::class, 'index'])->name('redirects');
-    });
-    
-    Route::get('/user/profile-admin', [UserProfileController::class, 'showAdmin'])->name('profile.show-admin');
-    Route::resource('users', \App\Http\Controllers\UserProfileController::class)->middleware('auth');
-    
-    
-    
-    Route::post('/user/password/update', [UserProfileController::class, 'updatePassword'])->name('ganti.password');
-    
-    // Route::resource('/data/divisi', DivisiController::class)->middleware('auth');
-    
-    
-    
-    
-    // ROUTE GROUP SUPERADMIN ONLY
-    Route::middleware(['auth', 'checkStatus:2','checkRole:2', 'verified'])->group(function () {
-        Route::resource('user-management', \App\Http\Controllers\UserManagementController::class);
-        Route::get('user-management/edit/{id}', [UserManagementController::class, 'edit'])->name('user-management.edit');
-        Route::put('user-management/update/{id}', [UserManagementController::class, 'update'])->name('user-management.update');
-        Route::resource('/data/divisi', \App\Http\Controllers\DivisiController::class);
-        Route::get('/data/divisi/edit/{id}', [DivisiController::class, 'edit'])->name('divisi.edit');
-        Route::put('/data/divisi/update/{id}', [DivisiController::class, 'update'])->name('divisi.update');
-        Route::get('rekap-absen', [PresensiController::class, 'halamanrekap'])->name('rekap-absen');
-        Route::get('rekap-absen/{tglawal}/{tglakhir}', [PresensiController::class, 'tampildatakeseluruhan'])->name('rekap-absen-keseluruhan');
-        Route::get('/magang', [MagangController::class, 'index'])->name('magang');
-        Route::post('/magang/terima/{id_mahasiswa}', [PenerimaanMagangController::class, 'update'])->name('magang.terima');
-        Route::post('/magang/tolak/{id_mahasiswa}', [PenerimaanMagangController::class, 'destroy'])->name('magang.tolak');
-    });
-    
-    // ROUTE GROUP ADMIN ONLY
-    Route::middleware(['auth', 'checkStatus:2','checkRole:3', 'verified'])->group(function () {
-        Route::resource('/anggota-divisi', AnggotaDivisiController::class);
-        Route::get('/anggota-divisi/edit/{id}', [AnggotaDivisiController::class, 'edit'])->name('anggota-divisi.edit');
-        Route::put('/anggota-divisi/update/{id}', [AnggotaDivisiController::class, 'update'])->name('anggota-divisi.update'); 
-    });
-    
-    
+])->group(function () {
+    Route::get('/redirects', [HomeController::class, 'index'])->name('redirects');
+});
+
+Route::get('/user/profile-admin', [UserProfileController::class, 'showAdmin'])->name('profile.show-admin');
+Route::resource('users', \App\Http\Controllers\UserProfileController::class)->middleware('auth');
+
+
+
+Route::post('/user/password/update', [UserProfileController::class, 'updatePassword'])->name('ganti.password');
+
+// Route::resource('/data/divisi', DivisiController::class)->middleware('auth');
+
+
+
+
+// ROUTE GROUP SUPERADMIN ONLY
+Route::middleware(['auth', 'checkStatus:2', 'checkRole:2', 'verified'])->group(function () {
+    Route::resource('user-management', \App\Http\Controllers\UserManagementController::class);
+    Route::get('user-management/edit/{id}', [UserManagementController::class, 'edit'])->name('user-management.edit');
+    Route::put('user-management/update/{id}', [UserManagementController::class, 'update'])->name('user-management.update');
+    Route::resource('/data/divisi', \App\Http\Controllers\DivisiController::class);
+    Route::get('/data/divisi/edit/{id}', [DivisiController::class, 'edit'])->name('divisi.edit');
+    Route::put('/data/divisi/update/{id}', [DivisiController::class, 'update'])->name('divisi.update');
+    Route::get('rekap-absen', [PresensiController::class, 'halamanrekap'])->name('rekap-absen');
+    Route::get('rekap-absen/{tglawal}/{tglakhir}', [PresensiController::class, 'tampildatakeseluruhan'])->name('rekap-absen-keseluruhan');
+    Route::get('/magang', [MagangController::class, 'index'])->name('magang');
+    Route::post('/magang/terima/{id_mahasiswa}', [PenerimaanMagangController::class, 'update'])->name('magang.terima');
+    Route::post('/magang/tolak/{id_mahasiswa}', [PenerimaanMagangController::class, 'destroy'])->name('magang.tolak');
+    Route::post('/magang/hapus/{id_mahasiswa}', [PenerimaanMagangController::class, 'hapus'])->name('magang.hapus');
+});
+
+// ROUTE GROUP ADMIN ONLY
+Route::middleware(['auth', 'checkStatus:2', 'checkRole:3', 'verified'])->group(function () {
+    Route::resource('/anggota-divisi', AnggotaDivisiController::class);
+    Route::get('/anggota-divisi/edit/{id}', [AnggotaDivisiController::class, 'edit'])->name('anggota-divisi.edit');
+    Route::put('/anggota-divisi/update/{id}', [AnggotaDivisiController::class, 'update'])->name('anggota-divisi.update');
+});
