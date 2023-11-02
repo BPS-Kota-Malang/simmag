@@ -22,7 +22,7 @@
                     <table class="table table-bordered table-striped table-hover datatable datatable-appointment" cellspacing="0" width="100%">
                         <thead>
                             <tr>
-                                
+
                                 <th>Tanggal</th>
                                 <th>Jam Mulai</th>
                                 <th>Jam Selesai</th>
@@ -50,7 +50,7 @@
                                 </td>
 
                                 <td class="align-middle text-center text-sm">
-                                        <!-- <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#terima{{ $data->id_mahasiswa }}">
+                                    <!-- <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#terima{{ $data->id_mahasiswa }}">
                                             <i class="fas fa-check-square fa-lg text-success"></i>
                                         </a>
                                         <a class="text-secondary font-weight-bold text-xs" data-toggle="tooltip">
@@ -59,7 +59,7 @@
                                         <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#tolak">
                                             <i class="fas fa-window-close fa-lg text-danger"></i>
                                         </a> -->
-                                    </td>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -85,7 +85,7 @@
                     <div class="modal-body">
                         <div class="card-body">
                             <div class="form-group">
-                            <input type="hidden" name="user_id" value="{{ auth()->id() }}">
+                                <input type="hidden" name="user_id" value="{{ auth()->id() }}">
 
                                 <label for="tanggal">Tanggal</label>
                                 <input type="date" class="form-control" id="tanggal" placeholder="Tanggal" name="tanggal" required value="{{old('tanggal')}}">
@@ -96,23 +96,20 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                            <label for="jam_mulai">Jam Mulai</label>
-                            <select class="form-control" id="jam_mulai" name="jam_mulai" required>
-                                <!-- <option value="">Pilih Divisi</option> -->
-                                @foreach($jam as $waktu)
-                                    <option value="{{ $waktu->waktu }}">{{ $waktu->waktu }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                                <label for="jam_mulai">Jam Mulai</label>
+                            <div class='form-group'>
+                                <input type='time' class="form-control" name="jam_mulai"/>
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-time"></span>
+                                </span>
+                            </div>
                             <div class="form-group">
-                            <label for="jam_selesai">Jam Selesai</label>
-                            <select class="form-control" id="jam_selesai" name="jam_selesai" required>
-                                <!-- <option value="">Pilih Divisi</option> -->
-                                @foreach($jam as $waktu)
-                                    <option value="{{ $waktu->waktu }}">{{ $waktu->waktu }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                                <label for="jam_selesai">Jam Selesai</label>
+                                <input type='time' class="form-control" name="jam_selesai" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-time"></span>
+                                </span>
+                            </div>
                             <div class="form-group">
                                 <label for="pekerjaan">Pekerjaan</label>
                                 <input type="text" class="form-control" id="pekerjaan" placeholder="Pekerjaan" name="pekerjaan" required value="{{old('pekerjaan')}}">
@@ -123,24 +120,25 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                            <label for="division">Divisi</label>
-                            <select class="form-control" id="division" name="division" required>
-                                <!-- <option value="">Pilih Divisi</option> -->
-                                @foreach($division as $div)
+                                <label for="division">Divisi</label>
+                                <select class="form-control" id="division" name="division" required>
+                                    <!-- <option value="">Pilih Divisi</option> -->
+                                    @foreach($division as $div)
                                     <option value="{{ $div->nama_divisi }}">{{ $div->nama_divisi }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                                    @endforeach
+                                </select>
+                            </div>
 
-        </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
                     </div>
-                </form>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
             </div>
+            </form>
         </div>
-        @include('components/footer')
-        @endsection
+    </div>
+
+    @include('components/footer')
+    @endsection

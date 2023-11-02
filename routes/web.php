@@ -43,7 +43,7 @@ Route::get('/logout', [HomeController::class, 'logout'])->name('logout');
 
 Route::get('/daftarmagang', function () {
     return view('pendaftaran.pendaftaran-magang');
-})->middleware('checkStatus:0')->name('daftarmagang');
+})->name('daftarmagang');
 // });
 
 // Pendaftaran Magang User
