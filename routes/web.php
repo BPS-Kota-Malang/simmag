@@ -33,15 +33,6 @@ Route::get('/', function () {
 
 Route::get('/logout', [HomeController::class, 'logout'])->name('logout');
 
-Route::get('/daftarmagang', function () {
-    return view('pendaftaran.pendaftaran-magang');
-})->name('daftarmagang');
-
-
-// Pendaftaran Magang User
-Route::post('/daftar', [MahasiswaController::class, 'store'])->name('daftar');
-
-
 Route::get('/logbook', [LogbookController::class, 'index'])->name('logbook');
 Route::post('/logbook/store', [LogbookController::class, 'store'])->name('logbook.store');
 
@@ -53,8 +44,6 @@ Route::post('/ubah-presensi', [PresensiController::class, 'presensipulang'])->na
 Route::get('rekap-user', [PresensiController::class, 'halamanrekapuser'])->name('rekap-absen-user');
 Route::get('rekap-user/{tglawal}/{tglakhir}', [PresensiController::class, 'tampildatauser'])->name('rekap-user');
 
-// Route::get('/redirects', [HomeController::class, "index"]);
-
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
@@ -62,17 +51,6 @@ Route::middleware([
 ])->group(function () {
     Route::get('/redirects', [HomeController::class, 'index'])->name('redirects');
 });
-
-Route::get('/user/profile-admin', [UserProfileController::class, 'showAdmin'])->name('profile.show-admin');
-Route::resource('users', \App\Http\Controllers\UserProfileController::class)->middleware('auth');
-
-
-
-Route::post('/user/password/update', [UserProfileController::class, 'updatePassword'])->name('ganti.password');
-
-// Route::resource('/data/divisi', DivisiController::class)->middleware('auth');
-
-
 
 
 // ROUTE GROUP SUPERADMIN ONLY
@@ -96,4 +74,23 @@ Route::middleware(['auth', 'checkStatus:2', 'checkRole:3', 'verified'])->group(f
     Route::resource('/anggota-divisi', AnggotaDivisiController::class);
     Route::get('/anggota-divisi/edit/{id}', [AnggotaDivisiController::class, 'edit'])->name('anggota-divisi.edit');
     Route::put('/anggota-divisi/update/{id}', [AnggotaDivisiController::class, 'update'])->name('anggota-divisi.update');
+});
+
+// ROUTE GROUP USER 
+Route::middleware(['auth', 'checkRole:1', 'verified'])->group(function () {
+    Route::get('/daftarmagang', function () {
+        return view('pendaftaran.pendaftaran-magang');
+    })->name('daftarmagang');
+    Route::post('/daftar', [MahasiswaController::class, 'store'])->name('daftar');
+});
+
+// ROUTE GROUP USER DITERIMA
+Route::middleware(['auth', 'checkStatus:2', 'checkRole:1', 'verified'])->group(function () {
+});
+
+// ROUTE GROUP PROFILE DITERIMA
+Route::middleware(['auth', 'checkStatus:2', 'verified'])->group(function () {
+    Route::resource('users', \App\Http\Controllers\UserProfileController::class);
+    Route::get('/user/profile-admin', [UserProfileController::class, 'showAdmin'])->name('profile.show-admin');
+    Route::post('/user/password/update', [UserProfileController::class, 'updatePassword'])->name('ganti.password');
 });

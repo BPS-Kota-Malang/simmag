@@ -22,6 +22,7 @@ class SuperAdminSeeder extends Seeder
             'email' => 'Superadmin@gmail.com',
             'roles_id'  => 2,
             'status' => 2,
+            'email_verified_at' => '2023-10-07 05:26:42',
             'password' => Hash::make('password'),
         ]);
     }
