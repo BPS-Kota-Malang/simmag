@@ -29,7 +29,7 @@
                                         <th class="text-center text-uppercase text-xs font-weight-bolder">Nama</th>
                                         <th class="text-center text-uppercase text-xs font-weight-bolder">E-mail</th>
                                         <th class="text-center text-uppercase text-xs font-weight-bolder">Role</th>
-                                        <th class="text-center text-uppercase text-xs font-weight-bolder">Opsi</th>
+                                        {{-- <th class="text-center text-uppercase text-xs font-weight-bolder">Opsi</th> --}}
                                     </tr>
                                 </thead>
 
@@ -44,16 +44,16 @@
                                         <td class="text-center align-items-center">{{ $data->email }}</td>
                                         <td class="text-center align-items-center">{{ $data->role->nama_role }}</td>
 
-                                        <td>
+                                        {{-- <td>
                                             <a href=# class="btn btn-primary btn-xs" data-bs-toggle="modal"
                                                 data-bs-target="#editDataAdmin{{ $data->id }}">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                        </td>
+                                        </td> --}}
                                     </tr>
 
                                     <!-- Modal Edit Admin -->
-                                    <div class="modal fade" id="editDataAdmin{{ $data->id }}" tabindex="-1"
+                                    {{-- <div class="modal fade" id="editDataAdmin{{ $data->id }}" tabindex="-1"
                                         role="dialog" aria-labelledby="editDataAdminLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-lg" role="document">
                                             <div class="modal-content">
@@ -110,7 +110,7 @@
                                                 </form>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 @endforeach
                             </table>
                         </div>

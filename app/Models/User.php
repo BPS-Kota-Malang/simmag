@@ -95,6 +95,10 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->roles_id === '2'; // Ubah ini sesuai dengan logika peran Anda
     }
+    public function isAdmin()
+    {
+        return $this->roles_id === '3'; // Ubah ini sesuai dengan logika peran Anda
+    }
 
     public function isUser()
     {
