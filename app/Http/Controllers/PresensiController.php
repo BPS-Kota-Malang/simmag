@@ -107,6 +107,27 @@ class PresensiController extends Controller
         return view('presensi.rekap-user', compact('presensi'), ['menu' => 'Rekap Absen User']);
     }
 
+    public function halamanrekapadmin()
+    {
+        return view('presensi.halaman-rekap-admin', ['menu' => 'Rekap Admin']);
+    }
+
+
+    public function tampildataadmin($tglawal, $tglakhir)
+    {
+        $user = auth()->user();
+        $divisionsId = $user->divisions_id;
+
+        $presensi = Presensi::with('user')
+            ->whereIn('divisions_id', $divisionsId) // Menggunakan 'whereIn' untuk mencocokkan lebih dari satu divisions_id
+            ->whereBetween('tgl', [$tglawal, $tglakhir])
+            ->orderBy('tgl', 'asc')
+            ->get();
+
+        return view('presensi.rekap-admin', compact('presensi'), ['menu' => 'Rekap Absen Admin']);
+    }
+
+
 
     public function presensipulang()
     {
