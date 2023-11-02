@@ -283,9 +283,6 @@
             </li> -->
             @if (Auth::user()->isUser())
                 {{-- Gantilah ini dengan metode autentikasi dan kondisi Anda --}}
-                <li class="nav-item mt-3">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Presensi</h6>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link {{ $masuk }}" href="{{ url('presensi-masuk') }}">
                         <div
@@ -313,7 +310,7 @@
                         <span class="nav-link-text ms-1">Rekap Presensi User</span>
                     </a>
                 </li>
-            @endif
+            
             <li class="nav-item">
                 <a class="nav-link {{ $logbook }}" href="{{ url('logbook') }}">
                     <div
@@ -332,6 +329,8 @@
                     <span class="nav-link-text ms-1">Profile</span>
                 </a>
             </li>
+            @endif
+
             @if (Auth::user()->isSuperAdmin())
                 {{-- Gantilah ini dengan metode autentikasi dan kondisi Anda --}}
                 <li class="nav-item">
