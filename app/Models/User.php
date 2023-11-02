@@ -88,7 +88,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function presensi()
     {
-        return $this->hasMany(Presensi::class);
+        return $this->hasMany(Presensi::class, 'user_id', 'id');
     }
 
     public function isSuperAdmin()

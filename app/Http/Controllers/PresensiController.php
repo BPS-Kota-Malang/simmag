@@ -7,6 +7,7 @@ use App\Models\User;
 use DateTime;
 use DateTimeZone;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PresensiController extends Controller
 {
@@ -115,14 +116,13 @@ class PresensiController extends Controller
 
     public function tampildataadmin($tglawal, $tglakhir)
     {
-        $user = auth()->user();
-        $divisionsId = $user->divisions_id;
+        $userDivisionsId = Auth::user()->divisions_id;
 
-        $presensi = Presensi::with('user')
-            ->whereIn('divisions_id', $divisionsId) // Menggunakan 'whereIn' untuk mencocokkan lebih dari satu divisions_id
-            ->whereBetween('tgl', [$tglawal, $tglakhir])
-            ->orderBy('tgl', 'asc')
-            ->get();
+        $presensi = Presensi::join('users', 'presensis.user_id', '=', 'users.id')
+        ->where('users.divisions_id', $userDivisionsId)
+        ->whereBetween('presensis.tgl', [$tglawal, $tglakhir])
+        ->orderBy('presensis.tgl', 'asc')
+        ->get();
 
         return view('presensi.rekap-admin', compact('presensi'), ['menu' => 'Rekap Absen Admin']);
     }

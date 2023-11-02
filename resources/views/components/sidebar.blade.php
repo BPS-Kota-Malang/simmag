@@ -4,6 +4,7 @@
     $profile = '';
     $rekap = '';
     $rekapuser = '';
+    $rekapadmin = '';
     $masuk = '';
     $keluar = '';
     $logbook = '';
@@ -20,6 +21,7 @@
             $profile = '';
             $rekap = '';
             $rekapuser = '';
+            $rekapadmin = '';
             $masuk = '';
             $keluar = '';
             $logbook = '';
@@ -37,6 +39,7 @@
             $profile = '';
             $rekap = '';
             $rekapuser = '';
+            $rekapadmin = '';
             $masuk = '';
             $keluar = '';
             $logbook = '';
@@ -53,6 +56,7 @@
             $profile = 'active';
             $rekap = '';
             $rekapuser = '';
+            $rekapadmin = '';
             $masuk = '';
             $keluar = '';
             $logbook = '';
@@ -69,6 +73,7 @@
             $profile = '';
             $rekap = 'active';
             $rekapuser = '';
+            $rekapadmin = '';
             $masuk = '';
             $keluar = '';
             $logbook = '';
@@ -86,6 +91,7 @@
             $profile = '';
             $rekap = 'active';
             $rekapuser = '';
+            $rekapadmin = '';
             $masuk = '';
             $keluar = '';
             $logbook = '';
@@ -102,6 +108,7 @@
             $profile = '';
             $rekap = '';
             $rekapuser = 'active';
+            $rekapadmin = '';
             $masuk = '';
             $keluar = '';
             $logbook = '';
@@ -118,6 +125,41 @@
             $profile = '';
             $rekap = '';
             $rekapuser = 'active';
+            $rekapadmin = '';
+            $masuk = '';
+            $keluar = '';
+            $logbook = '';
+            $admin = '';
+            $divisi = '';
+            $user = '';
+        @endphp
+    @break
+
+    @case('Rekap Absen Admin')
+        @php
+            $dashboard = '';
+            $magang = '';
+            $profile = '';
+            $rekap = '';
+            $rekapuser = '';
+            $rekapadmin = 'active';
+            $masuk = '';
+            $keluar = '';
+            $logbook = '';
+            $admin = '';
+            $divisi = '';
+            $user = '';
+        @endphp
+    @break
+
+    @case('Rekap Admin')
+        @php
+            $dashboard = '';
+            $magang = '';
+            $profile = '';
+            $rekap = '';
+            $rekapuser = '';
+            $rekapadmin = 'active';
             $masuk = '';
             $keluar = '';
             $logbook = '';
@@ -134,6 +176,7 @@
             $profile = '';
             $rekap = '';
             $rekapuser = '';
+            $rekapadmin = '';
             $masuk = 'active';
             $keluar = '';
             $logbook = '';
@@ -150,6 +193,7 @@
             $profile = '';
             $rekap = '';
             $rekapuser = '';
+            $rekapadmin = '';
             $masuk = '';
             $keluar = 'active';
             $logbook = '';
@@ -166,6 +210,7 @@
             $profile = '';
             $rekap = '';
             $rekapuser = '';
+            $rekapadmin = '';
             $masuk = '';
             $keluar = '';
             $logbook = 'active';
@@ -182,6 +227,7 @@
             $profile = '';
             $rekap = '';
             $rekapuser = '';
+            $rekapadmin = '';
             $masuk = '';
             $keluar = '';
             $logbook = '';
@@ -197,6 +243,7 @@
             $profile = '';
             $rekap = '';
             $rekapuser = '';
+            $rekapadmin = '';
             $masuk = '';
             $keluar = '';
             $logbook = '';
@@ -335,6 +382,15 @@
                     <span class="nav-link-text ms-1">Anggota Divisi</span>
                 </a>
             </li>
+            <li class="nav-item">
+                    <a class="nav-link {{ $rekapadmin }}" href="{{ url('rekap-admin') }}">
+                        <div
+                            class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                            <i class="ni ni-collection text-dark text-sm opacity-10"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Rekap Presensi Admin</span>
+                    </a>
+                </li>
             @endif
         </ul>
     </div>
