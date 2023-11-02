@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Auth;
 
-class CheckStatus
+class CheckRole
 {
     /**
      * Handle an incoming request.
@@ -16,7 +16,7 @@ class CheckStatus
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
 
-    public function handle($request, Closure $next, $status)
+    public function handle($request, Closure $next, $roles_id)
     {
         if (!Auth::check()) {
             // Pengguna belum login, alihkan ke halaman login jika diperlukan.
@@ -25,7 +25,7 @@ class CheckStatus
     
         $user = Auth::user();
     
-        if ($user->status == $status ) {
+        if ($user->roles_id == $roles_id ) {
             return $next($request);
         }
 
