@@ -309,7 +309,7 @@
                     <a class="nav-link {{ $divisi }}" href="{{ url('data/divisi') }}">
                         <div
                             class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                            <i class="ni ni-collection text-dark text-sm opacity-10"></i>
+                            <i class="fas fa-building text-dark text-sm opacity-10"></i>
                         </div>
                         <span class="nav-link-text ms-1">Data Divisi</span>
                     </a>
