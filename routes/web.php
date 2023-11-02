@@ -33,31 +33,11 @@ Route::get('/', function () {
 
 Route::get('/logout', [HomeController::class, 'logout'])->name('logout');
 
-Route::get('/daftarmagang', function () {
-    return view('pendaftaran.pendaftaran-magang');
-})->name('daftarmagang');
-
-
-// Pendaftaran Magang User
-Route::post('/daftar', [MahasiswaController::class, 'store'])->name('daftar');
-
-
-
-
-// Penerimaan Magang Admin
-
 Route::get('/logbook', [LogbookController::class, 'index'])->name('logbook');
 Route::post('/logbook/store', [LogbookController::class, 'store'])->name('logbook.store');
 
 
-Route::post('/simpan-masuk', [PresensiController::class, 'store'])->name('simpan-masuk');
-Route::get('/presensi-masuk', [PresensiController::class, 'index'])->name('presensi-masuk');
-Route::get('/presensi-keluar', [PresensiController::class, 'keluar'])->name('presensi-keluar');
-Route::post('/ubah-presensi', [PresensiController::class, 'presensipulang'])->name('ubah-presensi');
-Route::get('rekap-user', [PresensiController::class, 'halamanrekapuser'])->name('rekap-absen-user');
-Route::get('rekap-user/{tglawal}/{tglakhir}', [PresensiController::class, 'tampildatauser'])->name('rekap-user');
 
-// Route::get('/redirects', [HomeController::class, "index"]);
 
 Route::middleware([
     'auth:sanctum',
@@ -66,17 +46,6 @@ Route::middleware([
 ])->group(function () {
     Route::get('/redirects', [HomeController::class, 'index'])->name('redirects');
 });
-
-Route::get('/user/profile-admin', [UserProfileController::class, 'showAdmin'])->name('profile.show-admin');
-Route::resource('users', \App\Http\Controllers\UserProfileController::class)->middleware('auth');
-
-
-
-Route::post('/user/password/update', [UserProfileController::class, 'updatePassword'])->name('ganti.password');
-
-// Route::resource('/data/divisi', DivisiController::class)->middleware('auth');
-
-
 
 
 // ROUTE GROUP SUPERADMIN ONLY
@@ -92,6 +61,7 @@ Route::middleware(['auth', 'checkStatus:2', 'checkRole:2', 'verified'])->group(f
     Route::get('/magang', [MagangController::class, 'index'])->name('magang');
     Route::post('/magang/terima/{id_mahasiswa}', [PenerimaanMagangController::class, 'update'])->name('magang.terima');
     Route::post('/magang/tolak/{id_mahasiswa}', [PenerimaanMagangController::class, 'destroy'])->name('magang.tolak');
+    Route::post('/magang/hapus/{id_mahasiswa}', [PenerimaanMagangController::class, 'hapus'])->name('magang.hapus');
 });
 
 // ROUTE GROUP ADMIN ONLY
@@ -99,6 +69,31 @@ Route::middleware(['auth', 'checkStatus:2', 'checkRole:3', 'verified'])->group(f
     Route::resource('/anggota-divisi', AnggotaDivisiController::class);
     Route::get('/anggota-divisi/edit/{id}', [AnggotaDivisiController::class, 'edit'])->name('anggota-divisi.edit');
     Route::put('/anggota-divisi/update/{id}', [AnggotaDivisiController::class, 'update'])->name('anggota-divisi.update');
-    Route::get('rekap-admin', [PresensiController::class, 'halamanrekapadmin'])->name('rekap-absen-admin');
-    Route::get('rekap-admin/{tglawal}/{tglakhir}', [PresensiController::class, 'tampildataadmin'])->name('rekap-admin');
+    Route::get('rekap-admin', [PresensiController::class, 'halamanrekapuser'])->name('rekap-absen-admin');
+    Route::get('rekap-admin/{tglawal}/{tglakhir}', [PresensiController::class, 'tampildatauser'])->name('rekap-admin');
+});
+
+// ROUTE GROUP USER 
+Route::middleware(['auth', 'checkRole:1', 'verified'])->group(function () {
+    Route::get('/daftarmagang', function () {
+        return view('pendaftaran.pendaftaran-magang');
+    })->name('daftarmagang');
+    Route::post('/daftar', [MahasiswaController::class, 'store'])->name('daftar');
+});
+
+// ROUTE GROUP USER DITERIMA
+Route::middleware(['auth', 'checkStatus:2', 'checkRole:1', 'verified'])->group(function () {
+});
+Route::post('/simpan-masuk', [PresensiController::class, 'store'])->name('simpan-masuk');
+Route::get('/presensi-masuk', [PresensiController::class, 'index'])->name('presensi-masuk');
+Route::get('/presensi-keluar', [PresensiController::class, 'keluar'])->name('presensi-keluar');
+Route::post('/ubah-presensi', [PresensiController::class, 'presensipulang'])->name('ubah-presensi');
+Route::get('rekap-user', [PresensiController::class, 'halamanrekapuser'])->name('rekap-absen-user');
+Route::get('rekap-user/{tglawal}/{tglakhir}', [PresensiController::class, 'tampildatauser'])->name('rekap-user');
+
+// ROUTE GROUP PROFILE DITERIMA
+Route::middleware(['auth', 'checkStatus:2', 'verified'])->group(function () {
+    Route::resource('users', \App\Http\Controllers\UserProfileController::class);
+    Route::get('/user/profile-admin', [UserProfileController::class, 'showAdmin'])->name('profile.show-admin');
+    Route::post('/user/password/update', [UserProfileController::class, 'updatePassword'])->name('ganti.password');
 });

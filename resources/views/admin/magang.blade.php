@@ -51,6 +51,7 @@
                                     <th class="text-center text-uppercase text-xs font-weight-bolder">Waktu Selesai Magang</th>
                                     <th class="text-center text-uppercase text-xs font-weight-bolder">Created</th>
                                     <th class="text-center text-uppercase text-xs font-weight-bolder">Kode Status</th>
+                                    <th class="text-center text-uppercase text-xs font-weight-bolder">Status</th>
                                     <th class="text-center text-uppercase text-xs font-weight-bolder">Action</th>
                                     <!-- <th class="text-secondary opacity-7"></th> -->
                                 </tr>
@@ -118,7 +119,7 @@
                                     <td class="align-middle text-center text-sm user-status">{{ $data->user->status }}</td>
 
 
-                                    <!-- Action -->
+                                    <!-- Status -->
                                     <td class="align-middle text-center text-sm">
                                         @if ($data->user->status == 2) <!-- Anggap 2 mewakili status "DITERIMA" -->
                                         <span class="text-success font-weight-bold text-xs">DITERIMA</span>
@@ -135,6 +136,13 @@
                                             <i class="fas fa-window-close fa-lg text-danger"></i>
                                         </a>
                                         @endif
+                                    </td>
+
+                                    <!-- Action -->
+                                    <td class="align-middle text-center text-sm">
+                                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#hapus{{ $data->id_mahasiswa }}">
+                                            <i class="fas fa-trash-alt fa-lg text-danger"></i>
+                                        </a>
                                     </td>
 
                                     <!-- Modal Terima -->
@@ -192,6 +200,32 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <!-- Modal Hapus -->
+                                    <div class="modal fade" id="hapus{{ $data->id_mahasiswa }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="hapus" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="tolak">Penerimaan Magang</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <form method="post" action="{{url('magang/hapus/'.$data->id_mahasiswa)}}">
+                                                    @csrf
+                                                    <div class="modal-body">
+                                                        Apakah Anda yakin ingin menghapus permanen permohonan magang tersebut?
+                                                        <div class="mt-3">
+                                                            <!-- <label for="alasanpenolakan" class="form-label">Alasan Penolakan</label> -->
+                                                            <!-- <textarea class="form-control" id="alasanpenolakan" name="alasanpenolakan" rows="3"></textarea> -->
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                        <button type="submit" class="btn btn-danger">Hapus</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
                                     @endforeach
                                     @else
                                 <tr>
@@ -214,35 +248,18 @@
 
     <script>
         $(document).ready(function() {
-            // Saat pilihan dropdown dipilih
             $('.dropdown-item').click(function() {
-                var selectedStatus = $(this).data('status');
+                var selectedStatus = $(this).text(); // Mengambil teks dari opsi yang dipilih
+                $('#filterDropdown').text(selectedStatus); // Mengubah teks tombol dropdown
 
-                // Tampilkan semua baris terlebih dahulu
-                $('table tbody tr').show();
+                var statusValue = $(this).data('status');
 
-                // Sembunyikan baris dengan status yang tidak sesuai dengan pilihan
-                if (selectedStatus === 1) {
-                    $('table tbody tr').each(function() {
-                        var status = $(this).find('.user-status').text();
-                        if (status !== '1') {
-                            $(this).hide();
-                        }
-                    });
-                } else if (selectedStatus === 2) {
-                    $('table tbody tr').each(function() {
-                        var status = $(this).find('.user-status').text();
-                        if (status !== '2') {
-                            $(this).hide();
-                        }
-                    });
-                } else if (selectedStatus === 0) {
-                    $('table tbody tr').each(function() {
-                        var status = $(this).find('.user-status').text();
-                        if (status !== '0') {
-                            $(this).hide();
-                        }
-                    });
+                if (statusValue !== undefined) {
+                    $('table tbody tr').hide().filter(function() {
+                        return $(this).find('.user-status').text() === statusValue.toString();
+                    }).show();
+                } else {
+                    $('table tbody tr').show(); // Jika tidak ada status yang dipilih, tampilkan semua baris
                 }
             });
         });
@@ -261,6 +278,15 @@
     <script>
         Swal.fire(
             'Diterima!',
+            '{{ $message }}',
+            'success'
+        )
+    </script>
+    @endif
+    @if ($message = Session::get('hapus'))
+    <script>
+        Swal.fire(
+            'Dihapus!',
             '{{ $message }}',
             'success'
         )
