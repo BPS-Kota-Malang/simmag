@@ -42,6 +42,12 @@ Route::get('/daftarmagang', function () {
 Route::post('/daftar', [MahasiswaController::class, 'store'])->name('daftar');
 
 
+<<<<<<< Updated upstream
+=======
+Route::post('/magang/terima/{id_mahasiswa}', [PenerimaanMagangController::class, 'update'])->name('magang.terima');
+Route::post('/magang/tolak/{id_mahasiswa}', [PenerimaanMagangController::class, 'destroy'])->name('magang.tolak');
+Route::post('/magang/hapus/{id_mahasiswa}', [PenerimaanMagangController::class, 'hapus'])->name('magang.hapus');
+>>>>>>> Stashed changes
 
 
 // Penerimaan Magang Admin
