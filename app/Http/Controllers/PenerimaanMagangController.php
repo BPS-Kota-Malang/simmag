@@ -129,9 +129,6 @@ class PenerimaanMagangController extends Controller
             return redirect()->back()->with('error', 'Mahasiswa tidak ditemukan.');
         }
 
-        // Hapus data mahasiswa
-
-
         // Mengirim email pemberitahuan untuk penolakan
         $user = $mahasiswa->user;
         if ($user) {
@@ -160,5 +157,18 @@ class PenerimaanMagangController extends Controller
 
         return redirect()->back()
             ->with('tolak', 'Permohonan magang berhasil ditolak.');
+    }
+
+    public function hapus($id_mahasiswa)
+    {
+        $mahasiswa = Mahasiswa::find($id_mahasiswa);
+
+        if (!$mahasiswa) {
+            return redirect()->back()->with('error', 'Mahasiswa tidak ditemukan.');
+        }
+
+        $mahasiswa->delete();
+
+        return redirect()->back()->with('hapus', 'Permohonan magang berhasil dihapus.');
     }
 }
