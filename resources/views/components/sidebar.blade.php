@@ -320,6 +320,7 @@
                     <span class="nav-link-text ms-1">Logbook</span>
                 </a>
             </li>
+            @endif
             <li class="nav-item">
                 <a class="nav-link {{ $profile }}" href="{{ route('profile.show-admin') }}">
                     <div
@@ -329,7 +330,6 @@
                     <span class="nav-link-text ms-1">Profile</span>
                 </a>
             </li>
-            @endif
 
             @if (Auth::user()->isSuperAdmin())
                 {{-- Gantilah ini dengan metode autentikasi dan kondisi Anda --}}
