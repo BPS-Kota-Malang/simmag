@@ -58,7 +58,7 @@ class LogbookController extends Controller
             'jam_mulai' => 'required|string',
             'jam_selesai' => 'required|string',
             'pekerjaan' => 'nullable|string',
-            'division' => 'required|exists:divisions,nama_divisi',
+            'divisions' => 'required|string',
             'user_id' => 'required|integer', // pastikan user_id di-validasi
         ]);
 
@@ -69,7 +69,7 @@ class LogbookController extends Controller
             'jam_mulai' => $request->jam_mulai,
             'jam_selesai' => $request->jam_selesai,
             'pekerjaan' => $request->pekerjaan,
-            'division' => $request->division,
+            'division' => $request->divisions,
         ]);
 
         // Redirect back with a success message

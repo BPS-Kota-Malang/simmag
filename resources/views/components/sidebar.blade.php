@@ -283,6 +283,8 @@
             </li> -->
             @if (Auth::user()->isUser())
                 {{-- Gantilah ini dengan metode autentikasi dan kondisi Anda --}}
+                @endif
+
                 <li class="nav-item">
                     <a class="nav-link {{ $masuk }}" href="{{ url('presensi-masuk') }}">
                         <div
@@ -329,7 +331,6 @@
                     <span class="nav-link-text ms-1">Profile</span>
                 </a>
             </li>
-            @endif
 
             @if (Auth::user()->isSuperAdmin())
                 {{-- Gantilah ini dengan metode autentikasi dan kondisi Anda --}}

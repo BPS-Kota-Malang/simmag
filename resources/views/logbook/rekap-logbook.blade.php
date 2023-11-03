@@ -12,13 +12,6 @@
         </h6>
         <div class="ml-auto">
 
-        @if(auth()->check() && auth()->user()->roles_id <= 1) <!-- Ganti $userId dengan ID pengguna yang diizinkan -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tambahlogbook">
-        <i class="fa fa-plus"></i>
-        Buat Logbook
-    </button>
-@endif
-
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped table-hover datatable datatable-appointment" cellspacing="0" width="100%">
@@ -123,7 +116,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="division">Divisi</label>
-                                <select class="form-control" id="division" name="divisions" required>
+                                <select class="form-control" id="division" name="division" required>
                                     <!-- <option value="">Pilih Divisi</option> -->
                                     @foreach($division as $div)
                                     <option value="{{ $div->nama_divisi }}">{{ $div->nama_divisi }}</option>
