@@ -119,10 +119,10 @@ class PresensiController extends Controller
         $userDivisionsId = Auth::user()->divisions_id;
 
         $presensi = Presensi::join('users', 'presensis.user_id', '=', 'users.id')
-        ->where('users.divisions_id', $userDivisionsId)
-        ->whereBetween('presensis.tgl', [$tglawal, $tglakhir])
-        ->orderBy('presensis.tgl', 'asc')
-        ->get();
+            ->where('users.divisions_id', $userDivisionsId)
+            ->whereBetween('presensis.tgl', [$tglawal, $tglakhir])
+            ->orderBy('presensis.tgl', 'asc')
+            ->get();
 
         return view('presensi.rekap-admin', compact('presensi'), ['menu' => 'Rekap Absen Admin']);
     }
