@@ -33,7 +33,8 @@ Route::get('/', function () {
 
 Route::get('/logout', [HomeController::class, 'logout'])->name('logout');
 
-Route::get('/logbook', [LogbookController::class, 'index'])->name('logbook');
+Route::get('/logbook', [LogbookController::class, 'index'])->name('logbook.index');
+Route::get('/logbook/create', [LogbookController::class, 'create'])->name('logbook.create');
 Route::post('/logbook/store', [LogbookController::class, 'store'])->name('logbook.store');
 
 

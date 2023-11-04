@@ -1,139 +1,176 @@
 @extends('admin.admin-main')
 
 @section('container')
-@include('components.topnav', ['title' => 'Logbook'])
+@include('components.topnav', ['title' => 'Rekap Presensi User'])
 
-
-<!-- Content Row -->
-
-<div class="card">
-    <div class="card-header py-3 d-flex">
-        <h6 class="m-0 font-weight-bold text-primary">
-        </h6>
-        <div class="ml-auto">
-
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered table-striped table-hover datatable datatable-appointment" cellspacing="0" width="100%">
-                        <thead>
-                            <tr>
-
-                                <th>Tanggal</th>
-                                <th>Jam Mulai</th>
-                                <th>Jam Selesai</th>
-                                <th>Pekerjaan</th>
-                                <th>Divisi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($logbook as $data)
-                            <tr>
-                                <td class="align-middle text-center text-sm">
-                                    {{$data -> tanggal}}
-                                </td>
-                                <td class="align-middle text-center text-sm">
-                                    {{$data -> jam_mulai}}
-                                </td>
-                                <td class="align-middle text-center text-sm">
-                                    {{$data -> jam_selesai}}
-                                </td>
-                                <td class="align-middle text-center text-sm">
-                                    {{$data -> pekerjaan}}
-                                </td>
-                                <td class="align-middle text-center text-sm">
-                                    {{$data -> division}}
-                                </td>
-
-                                <td class="align-middle text-center text-sm">
-                                    <!-- <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#terima{{ $data->id_mahasiswa }}">
-                                            <i class="fas fa-check-square fa-lg text-success"></i>
-                                        </a>
-                                        <a class="text-secondary font-weight-bold text-xs" data-toggle="tooltip">
-                                            |
-                                        </a>
-                                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#tolak">
-                                            <i class="fas fa-window-close fa-lg text-danger"></i>
-                                        </a> -->
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <!-- Content Row -->
-
-    </div>
-
-    <!-- Modal -->
-    <div class="modal fade" id="tambahlogbook" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="tambahlogbook" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Logbook</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form action="{{ route('logbook.store') }}" method="post">
-                    @method('POST')
-                    @csrf
-                    <div class="modal-body">
-                        <div class="card-body">
-                            <div class="form-group">
-                                <input type="hidden" name="user_id" value="{{ auth()->id() }}">
-
-                                <label for="tanggal">Tanggal</label>
-                                <input type="date" class="form-control" id="tanggal" placeholder="Tanggal" name="tanggal" required value="{{old('tanggal')}}">
-                                @error('tanggal')
-                                <div class="invalid-feedback">
-                                    {{$message}}
-                                </div>
-                                @enderror
+<section class="pt-3 pb-4" id="count-stats">
+    <div class="container-fluid py-4">
+        <div class="row mt-4 mx-4">
+            <div class="col-12">
+                <div class="card mb-3">
+                    <div class="card-body p-3 fw-bold text-dark d-flex justify-content-between">
+                        <div class="d-flex align-items-center">
+                            <div class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
+                                <i class="ni ni-collection text-lg opacity-10" aria-hidden="true"></i>
                             </div>
-                            <div class="form-group">
-                                <label for="jam_mulai">Jam Mulai</label>
-                            <div class='form-group'>
-                                <input type='time' class="form-control" name="jam_mulai"/>
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-time"></span>
-                                </span>
-                            </div>
-                            <div class="form-group">
-                                <label for="jam_selesai">Jam Selesai</label>
-                                <input type='time' class="form-control" name="jam_selesai" />
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-time"></span>
-                                </span>
-                            </div>
-                            <div class="form-group">
-                                <label for="pekerjaan">Pekerjaan</label>
-                                <input type="text" class="form-control" id="pekerjaan" placeholder="Pekerjaan" name="pekerjaan" required value="{{old('pekerjaan')}}">
-                                @error('pekerjaan')
-                                <div class="invalid-feedback">
-                                    {{$message}}
-                                </div>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="division">Divisi</label>
-                                <select class="form-control" id="division" name="division" required>
-                                    <!-- <option value="">Pilih Divisi</option> -->
-                                    @foreach($division as $div)
-                                    <option value="{{ $div->nama_divisi }}">{{ $div->nama_divisi }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-
+                            <xspan class="mx-3 fs-4">Rekap Presensi</xspan>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+                <div class="card mb-4 p-3">
+                    <div class="card-body px-0 pt-0 pb-2">
+                        <div class="form-group">
+                            <label for="label">Tanggal Awal</label>
+                            <input type="date" name="tglawal" id="tglawal" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label for="label">Tanggal Akhir</label>
+                            <input type="date" name="tglakhir" id="tglakhir" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <a href="" onclick="this.href='/rekap-absen/'+ document.getElementById('tglawal').value +
+                            '/' + document.getElementById('tglakhir').value " class="btn btn-primary col-md-12">
+                                Lihat
+                            </a>
+                        </div>
                     </div>
+                    <div class="card-body px-0 pt-0 pb-2">
+                        <div class="table-responsive p-0">
+                            <table id="rekap" class="table align-items-center mb-0">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center text-uppercase text-xs font-weight-bolder">No.</th>
+                                        <th class="text-center text-uppercase text-xs font-weight-bolder">Nama</th>
+                                        <th class="text-center text-uppercase text-xs font-weight-bolder">Universitas</th>
+                                        <th class="text-center text-uppercase text-xs font-weight-bolder">Divisi</th>
+                                        <th class="text-center text-uppercase text-xs font-weight-bolder">Tanggal</th>
+                                        <th class="text-center text-uppercase text-xs font-weight-bolder">Jam Masuk</th>
+                                        <th class="text-center text-uppercase text-xs font-weight-bolder">Jam Keluar</th>
+                                        <th class="text-center text-uppercase text-xs font-weight-bolder">Jam Kerja</th>
+                                        <!-- <th class="text-secondary opacity-7"></th> -->
+                                    </tr>
+                                </thead>
+                                @php
+                                $count = 1;
+                                @endphp
+                                <tbody>
+                                    @foreach($presensi as $item)
+                                    <tr>
+                                        <!-- NO -->
+                                        <td class="text-center align-items-center">{{ $count++ }}</td>
+
+                                        <td class="text-center align-items-center">
+                                            @if($item->user)
+                                            {{ $item->user->name }}
+                                            @else
+                                            User Tidak Ditemukan
+                                            @endif
+                                        </td>
+
+                                        <td class="align-middle text-center text-sm">
+                                            @if($item->user && $item->user->mahasiswa)
+                                            {{ $item->user->mahasiswa->universitas }}
+                                            @else
+                                            Universitas Tidak Ditemukan
+                                            @endif
+                                        </td>
+
+                                        <td class="text-center align-items-center">
+                                            @if($item->user && $item->user->divisi)
+                                            {{ $item->user->divisi->nama_divisi }}
+                                            @else
+                                            Divisi Tidak Ditemukan
+                                            @endif
+                                        </td>
+
+                                        <td class="text-center align-items-center">
+                                            {{ $item->tgl }}
+                                        </td>
+
+                                        <td class="text-center align-items-center">
+                                            {{ $item->jammasuk }}
+                                        </td>
+
+                                        <td class="text-center align-items-center">
+                                            {{ $item->jamkeluar }}
+                                        </td>
+
+                                        <td class="text-center align-items-center">
+                                            {{ $item->jamkerja }}
+                                        </td>
+                                    </tr>
+                                    @endforeach
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
-            </form>
         </div>
     </div>
+</section>
+@include('components/footer')
 
-    @include('components/footer')
-    @endsection
+<script>
+    $('#rekap').DataTable({
+        "order": [
+            [0, 'asc']
+        ],
+        "columnDefs": [{
+                "targets": [7],
+                "orderable": false
+            },
+            {
+                "targets": [0, 7],
+                "className": "text-center"
+            },
+            {
+                "width": "130px",
+                "targets": 7
+            },
+        ],
+        dom: 'Bfrtip',
+        buttons: [{
+                extend: 'pdf',
+                text: '<i class="fa fa-file-pdf text-danger"></i> PDF',
+                title: 'Rekap Presensi',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                messageTop: '',
+                orientation: 'portrait',
+                pageSize: 'A4'
+            },
+            {
+                extend: 'excel',
+                text: '<i class="fa fa-file-excel text-success" > </i> EXCEL',
+                title: 'Rekap Presensi',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                messageTop: ''
+            },
+            {
+                extend: 'print',
+                text: '<i class="fa fa-print text-info" > </i> PRINT',
+                title: 'Rekap Presensi',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                messageTop: '',
+            },
+            {
+                extend: 'colvis',
+                text: '<i class="fa fa-table" > </i> Columns',
+                postfixButtons: ['colvisRestore']
+            },
+        ],
+
+        "dom": "<'row'<'col-sm-12 col-md-2'l><'col-sm-12 col-md-6'B><'col-sm-12 col-md-4'f>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>"
+
+    });
+</script>
+@endsection

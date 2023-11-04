@@ -7,6 +7,7 @@ use App\Models\Logbook;
 use App\Models\Divisi;
 use App\Models\Jam;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 
 class LogbookController extends Controller
@@ -18,11 +19,36 @@ class LogbookController extends Controller
      */
     public function index()
     {
-        $logbook = Logbook::all();
+        /**
+         * Edited BIma
+         * 
+         */
+        $userDivisionsId = Auth::user()->divisions_id;
+        // $user = User::all();
+        $userRoleId = Auth::user()->roles_id;
+        $userId = Auth::user()->id;
+        // $logbook = Logbook::whereBelongsTo($user)->get();
+        // $logbook = Logbook::with('user')
+        //             ->where($user->divisions_id, $userDivisionsId )->get();
+        if ($userRoleId == 1) {
+            $logbook = Logbook::whereHas('user', function ($query) use ($userId) {
+                $query->where('id', $userId);
+            })->get();
+        } else if ($userRoleId == 3) {
+            # code...
+            $logbook = Logbook::whereHas('user', function ($query) use ($userDivisionsId) {
+                $query->where('divisions_id', $userDivisionsId);
+            })->get();
+        } else {
+            $logbook = Logbook::all();
+        }
+       
+
         $division = Divisi::all();
         $jam = Jam::all();
         $menu = 'Logbook'; // Ambil semua data divisi dari tabel
 
+        // dd($logbook);
         // Kirim data logbook dan divisions ke tampilan (view) appointments
         return view('logbook.appointments', compact('logbook', 'division', 'jam','menu'));
     }
@@ -58,7 +84,7 @@ class LogbookController extends Controller
             'jam_mulai' => 'required|string',
             'jam_selesai' => 'required|string',
             'pekerjaan' => 'nullable|string',
-            'divisions' => 'required|string',
+            'division' => 'required|exists:divisions,nama_divisi',
             'user_id' => 'required|integer', // pastikan user_id di-validasi
         ]);
 
@@ -69,7 +95,7 @@ class LogbookController extends Controller
             'jam_mulai' => $request->jam_mulai,
             'jam_selesai' => $request->jam_selesai,
             'pekerjaan' => $request->pekerjaan,
-            'division' => $request->divisions,
+            'division' => $request->division,
         ]);
 
         // Redirect back with a success message

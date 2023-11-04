@@ -106,14 +106,14 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     public function changePassword($newPassword)
-{
-    $this->update([
-        'password' => Hash::make($newPassword),
-    ]);
-}
+    {
+        $this->update([
+            'password' => Hash::make($newPassword),
+        ]);
+    }
 
-public function logbook()
-{
-    return $this->hasOne(Logbook::class, 'user_id');
-}
+    public function logbook()
+    {
+        return $this->hasMany(Logbook::class);
+    }
 }
