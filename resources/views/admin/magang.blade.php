@@ -44,7 +44,7 @@
                                     <th class="text-center text-uppercase text-xs font-weight-bolder">Fakultas/Jurusan</th>
                                     <th class="text-center text-uppercase text-xs font-weight-bolder">Program Studi</th>
                                     <th class="text-center text-uppercase text-xs font-weight-bolder">Nomor Telepon</th>
-                                    <th class="text-center text-uppercase text-xs font-weight-bolder">Jumlah Anggota</th>
+                                    {{-- <th class="text-center text-uppercase text-xs font-weight-bolder">Jumlah Anggota</th> --}}
                                     <th class="text-center text-uppercase text-xs font-weight-bolder">Proposal</th>
                                     <th class="text-center text-uppercase text-xs font-weight-bolder">Surat Pengantar</th>
                                     <th class="text-center text-uppercase text-xs font-weight-bolder">Waktu Mulai Magang</th>
@@ -93,9 +93,9 @@
                                         {{$data -> telepon}}
                                     </td>
 
-                                    <td class="align-middle text-center text-sm">
+                                    {{-- <td class="align-middle text-center text-sm">
                                         {{$data -> jumlah_anggota}}
-                                    </td>
+                                    </td> --}}
 
                                     <td class="align-middle text-center text-sm">
                                         <a href="{{ asset('storage/proposal/' . $data->file_proposal) }}" target="_blank">Lihat Proposal</a>

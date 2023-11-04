@@ -46,7 +46,7 @@ class MahasiswaController extends Controller
             'fakultas' => 'required|regex:/^[a-zA-Z\s]{6,}$/',
             'program_studi' => 'required|regex:/^[a-zA-Z\s]{4,}$/',
             'telepon' => 'required|regex:/^[0-9]{11,13}$/',
-            'jumlah_anggota' => 'required|regex:/^\d{1,2}$/',
+            // 'jumlah_anggota' => 'required|regex:/^\d{1,2}$/',
             'file_proposal' => 'required|file|mimes:pdf',
             'file_suratpengantar' => 'required|file|mimes:pdf',
         ]);
@@ -71,7 +71,7 @@ class MahasiswaController extends Controller
         $data->fakultas = $request->fakultas;
         $data->program_studi = $request->program_studi;
         $data->telepon = $request->telepon;
-        $data->jumlah_anggota = $request->jumlah_anggota;
+        // $data->jumlah_anggota = $request->jumlah_anggota;
         $data->file_proposal = $nama_fileProp;
         $data->file_suratpengantar = $nama_filePeng;
         $data->tanggal_mulai = $request->tanggal_mulai;

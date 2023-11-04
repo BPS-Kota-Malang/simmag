@@ -86,7 +86,7 @@
                                         </div>
                                         <p class="text-danger small" id="telepon-error"></p>
                                     </div>
-                                    <div class="col-md-6">
+                                    {{-- <div class="col-md-6">
                                         <label>Jumlah Anggota Kelompok</label>
                                         <div class="input-group mb-3">
                                             <input class="form-control @error('jumlah_anggota') is-invalid @enderror" placeholder="ex: 1 or 12" aria-label="Jumlah Anggota Kelompok" type="text" name="jumlah_anggota" id="anggota" required value="{{old('jumlah_anggota')}}">
@@ -97,7 +97,7 @@
                                             @enderror
                                         </div>
                                         <p class="text-danger small" id="anggota-error"></p>
-                                    </div>
+                                    </div> --}}
                                 </div>
 
                                 <div class="row">
