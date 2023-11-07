@@ -118,7 +118,7 @@
                                                                 required>
 
                                                                 @foreach ($roledata as $item)
-                                                                    <option value="{{ $item->id }}" selected>
+                                                                    <option value="{{ $item->id }}" {{ $item->id == $data->roles_id ? 'selected' : '' }}>
                                                                         {{ $item->nama_role }}</option>
                                                                 @endforeach
                                                             </select>

@@ -36,7 +36,7 @@ Route::get('/logout', [HomeController::class, 'logout'])->name('logout');
 Route::get('/logbook', [LogbookController::class, 'index'])->name('logbook.index');
 Route::get('/logbook/create', [LogbookController::class, 'create'])->name('logbook.create');
 Route::post('/logbook/store', [LogbookController::class, 'store'])->name('logbook.store');
-
+Route::put('/logbook/update/{id}', [LogbookController::class, 'update'])->name('logbook.update');
 
 
 

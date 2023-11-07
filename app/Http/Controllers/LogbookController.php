@@ -42,7 +42,7 @@ class LogbookController extends Controller
         } else {
             $logbook = Logbook::all();
         }
-       
+
 
         $division = Divisi::all();
         $jam = Jam::all();
@@ -50,7 +50,7 @@ class LogbookController extends Controller
 
         // dd($logbook);
         // Kirim data logbook dan divisions ke tampilan (view) appointments
-        return view('logbook.appointments', compact('logbook', 'division', 'jam','menu'));
+        return view('logbook.appointments', compact('logbook', 'division', 'jam', 'menu'));
     }
 
 
@@ -133,7 +133,25 @@ class LogbookController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'tanggal' => 'required|string',
+            'jam_mulai' => 'required|string',
+            'jam_selesai' => 'required|string',
+            'pekerjaan' => 'nullable|string',
+            'division' => 'required|exists:divisions,nama_divisi',
+            'user_id' => 'required|integer', // pastikan user_id di-validasi
+        ]);
+
+        $logbook = Logbook::find($id);
+        $logbook->tanggal = $request->tanggal;
+        $logbook->jam_mulai = $request->jam_mulai;
+        $logbook->jam_selesai = $request->jam_selesai;
+        $logbook->pekerjaan = $request->pekerjaan;
+        $logbook->division = $request->division;
+        $logbook->save();
+
+        return redirect()->route('logbook.index')
+            ->with('success_message', 'Berhasil mengubah Data Logbook.');
     }
 
     /**
