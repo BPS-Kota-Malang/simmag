@@ -65,7 +65,8 @@
                                             <th class="text-center text-uppercase text-xs font-weight-bolder">Jam Selesai</th>
                                             <th class="text-center text-uppercase text-xs font-weight-bolder" style=" word-wrap:break-word">Pekerjaan</th>
                                             <th class="text-center text-uppercase text-xs font-weight-bolder">Divisi</th>
-                                            <th class="text-center text-uppercase text-xs font-weight-bolder">Edit</th>
+                                            @if(auth()->check() && auth()->user()->roles_id <= 1) <th class="text-center text-uppercase text-xs font-weight-bolder">Edit</th>
+                                                @endif
                                         </tr>
                                     </thead>
 
@@ -89,15 +90,15 @@
                                             </td>
                                             <td class="align-middle text-center text-sm">
                                                 {{$data -> divisi->nama_divisi}}
-                                            <td class="align-middle text-center text-sm">
+                                            </td>
+                                            @if(auth()->check() && auth()->user()->roles_id <= 1) <td class="align-middle text-center text-sm">
                                                 <a href=# class="btn btn-primary btn-xs" data-bs-toggle="modal" data-bs-target="#editlogbook{{ $data->id }}">
                                                     <i class="fas fa-edit">Edit</i>
                                                 </a>
-                                            </td>
+                                                </td>
+                                                @endif
 
-                                            </td>
-
-                                            <!-- <td class="align-middle text-center text-sm">
+                                                <!-- <td class="align-middle text-center text-sm">
                                         <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#terima{{ $data->id_mahasiswa }}">
                                             <i class="fas fa-check-square fa-lg text-success"></i>
                                         </a>
@@ -306,68 +307,63 @@
         </style> -->
         <script>
             $('#logbook').DataTable({
-    "order": [
-        [0, 'asc']
-    ],
-    "columnDefs": [{
-            "targets": [5],
-            "orderable": false
-        },
-        {
-            "targets": 4,
-            "render": function(data, type, row, meta) {
-                if (type === 'display') {
-                    return '<div style="white-space: normal; word-wrap: break-word;">' + data + '</div>';
-                }
-                return data;
-            }
-        },
-        {
-            "targets": [0, 5],
-            "className": "text-center"
-        },
-    ],
-    dom: 'Bfrtip',
-    buttons: [{
-            extend: 'pdf',
-            text: '<i class="fa fa-file-pdf text-danger"></i> PDF',
-            title: 'Data Logbook',
-            exportOptions: {
-                columns: ':visible:not(:eq(6))'
-            },
-            messageTop: '',
-            orientation: 'portrait',
-            pageSize: 'A4'
-        },
-        {
-            extend: 'excel',
-            text: '<i class="fa fa-file-excel text-success" > </i> EXCEL',
-            title: 'Data Logbook',
-            exportOptions: {
-                columns: ':visible:not(:eq(6))'
-            },
-            messageTop: ''
-        },
-        {
-            extend: 'print',
-            text: '<i class="fa fa-print text-info" > </i> PRINT',
-            title: 'Data Logbook',
-            exportOptions: {
-                columns: ':visible:not(:eq(6))'
-            },
-            messageTop: '',
-        },
-        {
-            extend: 'colvis',
-            text: '<i class="fa fa-table" > </i> Columns',
-            postfixButtons: ['colvisRestore']
-        },
-    ],
-    "dom": "<'row'<'col-sm-12 col-md-2'l><'col-sm-12 col-md-6'B><'col-sm-12 col-md-4'f>>" +
-        "<'row'<'col-sm-12'tr>>" +
-        "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>"
-});
-
+                "order": [
+                    [0, 'asc']
+                ],
+                "columnDefs": [{
+                        "targets": 4,
+                        "render": function(data, type, row, meta) {
+                            if (type === 'display') {
+                                return '<div style="white-space: normal; word-wrap: break-word; width: 300px;">' + data + '</div>';
+                            }
+                            return data;
+                        }
+                    },
+                    {
+                        "targets": [0],
+                        "className": "text-center"
+                    },
+                ],
+                dom: 'Bfrtip',
+                buttons: [{
+                        extend: 'pdf',
+                        text: '<i class="fa fa-file-pdf text-danger"></i> PDF',
+                        title: 'Data Logbook',
+                        exportOptions: {
+                            columns: ':visible:not(:eq(6))'
+                        },
+                        messageTop: '',
+                        orientation: 'portrait',
+                        pageSize: 'A4'
+                    },
+                    {
+                        extend: 'excel',
+                        text: '<i class="fa fa-file-excel text-success" > </i> EXCEL',
+                        title: 'Data Logbook',
+                        exportOptions: {
+                            columns: ':visible:not(:eq(6))'
+                        },
+                        messageTop: ''
+                    },
+                    {
+                        extend: 'print',
+                        text: '<i class="fa fa-print text-info" > </i> PRINT',
+                        title: 'Data Logbook',
+                        exportOptions: {
+                            columns: ':visible:not(:eq(6))'
+                        },
+                        messageTop: '',
+                    },
+                    {
+                        extend: 'colvis',
+                        text: '<i class="fa fa-table" > </i> Columns',
+                        postfixButtons: ['colvisRestore']
+                    },
+                ],
+                "dom": "<'row'<'col-sm-12 col-md-2'l><'col-sm-12 col-md-6'B><'col-sm-12 col-md-4'f>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>"
+            });
         </script>
 </section>
 @endsection
