@@ -29,6 +29,7 @@
                                         <th class="text-center text-uppercase text-xs font-weight-bolder">Nama</th>
                                         <th class="text-center text-uppercase text-xs font-weight-bolder">E-mail</th>
                                         <th class="text-center text-uppercase text-xs font-weight-bolder">Role</th>
+                                        <th class="text-center text-uppercase text-xs font-weight-bolder">div</th>
                                         {{-- <th class="text-center text-uppercase text-xs font-weight-bolder">Opsi</th> --}}
                                     </tr>
                                 </thead>
@@ -43,6 +44,7 @@
                                         <td class="text-center align-items-center">{{ $data->name }}</td>
                                         <td class="text-center align-items-center">{{ $data->email }}</td>
                                         <td class="text-center align-items-center">{{ $data->role->nama_role }}</td>
+                                        <td class="text-center align-items-center">{{ $data->divisi->nama_divisi }}</td>
 
                                         {{-- <td>
                                             <a href=# class="btn btn-primary btn-xs" data-bs-toggle="modal"

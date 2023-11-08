@@ -20,4 +20,8 @@ class Divisi extends Model
     {
         return $this->hasMany(User::class, 'divisions_id', 'id');
     }
+    public function logbooksdivisi()
+    {
+        return $this->hasMany(Logbook::class, 'divisions_id', 'id');
+    }
 }

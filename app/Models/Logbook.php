@@ -23,4 +23,8 @@ class Logbook extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
+    public function divisi()
+    {
+        return $this->belongsTo(Divisi::class, 'divisions_id', 'id');
+    }
 }
