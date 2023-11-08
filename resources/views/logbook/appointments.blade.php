@@ -20,6 +20,34 @@
             </div>
 
             <div class="card mb-4 p-3">
+                    <div class="card-body px-0 pt-0 pb-2">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="label">Tanggal Awal</label>
+                                    <input type="date" name="tglawal" id="tglawal" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="label">Tanggal Akhir</label>
+                                    <input type="date" name="tglakhir" id="tglakhir" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <a href="" onclick="this.href='/logbook/'+ document.getElementById('tglawal').value +
+                                    '/' + document.getElementById('tglakhir').value " class="btn btn-primary col-md-12 ">
+                                        Lihat
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+            <div class="card mb-4 p-3">
                 <div class="card-body  px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
                         @if(auth()->check() && auth()->user()->roles_id <= 1) <!-- Ganti $userId dengan ID pengguna yang diizinkan -->
@@ -300,9 +328,9 @@
             buttons: [{
                     extend: 'pdf',
                     text: '<i class="fa fa-file-pdf text-danger"></i> PDF',
-                    title: 'Data User',
+                    title: 'Data Logbook',
                     exportOptions: {
-                        columns: ':visible'
+                        columns: ':visible:not(:eq(6))'
                     },
                     messageTop: '',
                     orientation: 'portrait',
@@ -311,18 +339,18 @@
                 {
                     extend: 'excel',
                     text: '<i class="fa fa-file-excel text-success" > </i> EXCEL',
-                    title: 'Daftar Admin',
+                    title: 'Data Logbook',
                     exportOptions: {
-                        columns: ':visible'
+                        columns: ':visible:not(:eq(6))'
                     },
                     messageTop: ''
                 },
                 {
                     extend: 'print',
                     text: '<i class="fa fa-print text-info" > </i> PRINT',
-                    title: 'Daftar Admin',
+                    title: 'Data Logbook',
                     exportOptions: {
-                        columns: ':visible'
+                        columns: ':visible:not(:eq(6))'
                     },
                     messageTop: '',
                 },

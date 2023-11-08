@@ -160,8 +160,33 @@ class LogbookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function rekaplogbook($tglawal, $tglakhir)
     {
-        //
-    }
+        $userDivisionsId = Auth::user()->divisions_id;
+        $userRoleId = Auth::user()->roles_id;
+        $userId = Auth::user()->id;
+    
+        // Memeriksa peran pengguna
+        if ($userRoleId == 1) {
+            $logbook = Logbook::where('user_id', $userId)
+                ->whereBetween('tanggal', [$tglawal, $tglakhir])
+                ->orderBy('tanggal', 'asc')
+                ->get();
+        } elseif ($userRoleId == 3) {
+            $logbook = Logbook::where('divisions_id', $userDivisionsId)
+                ->whereBetween('tanggal', [$tglawal, $tglakhir])
+                ->orderBy('tanggal', 'asc')
+                ->get();
+        } else {
+            $logbook = Logbook::whereBetween('tanggal', [$tglawal, $tglakhir])
+                ->orderBy('tanggal', 'asc')
+                ->get();
+        }
+    
+        $division = Divisi::all();
+        $jam = Jam::all();
+        $menu = 'Logbook';
+    
+        return view('logbook.appointments', compact('logbook', 'division', 'jam', 'menu'));
+        }
 }
