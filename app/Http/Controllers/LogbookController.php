@@ -31,7 +31,7 @@ class LogbookController extends Controller
         // $logbook = Logbook::with('user')
         //             ->where($user->divisions_id, $userDivisionsId )->get();
         if ($userRoleId == 1) {
-            $logbook = Logbook::whereHas('user', function ($query) use ($userId) {
+            $logbook = Logbook::with('divisi')->whereHas('user', function ($query) use ($userId) {
                 $query->where('id', $userId);
             })->get();
         } else if ($userRoleId == 3) {
@@ -83,7 +83,7 @@ class LogbookController extends Controller
             'jam_mulai' => 'required|string',
             'jam_selesai' => 'required|string',
             'pekerjaan' => 'nullable|string',
-            'division' => 'required|exists:divisions,nama_divisi',
+            'divisions_id' => 'required|integer',
             'user_id' => 'required|integer', // pastikan user_id di-validasi
         ]);
 
@@ -94,7 +94,7 @@ class LogbookController extends Controller
             'jam_mulai' => $request->jam_mulai,
             'jam_selesai' => $request->jam_selesai,
             'pekerjaan' => $request->pekerjaan,
-            'division' => $request->division,
+            'divisions_id' => $request->divisions_id,
         ]);
 
         // Redirect back with a success message
@@ -137,7 +137,7 @@ class LogbookController extends Controller
             'jam_mulai' => 'required|string',
             'jam_selesai' => 'required|string',
             'pekerjaan' => 'nullable|string',
-            'division' => 'required|exists:divisions,nama_divisi',
+            'divisions_id' => 'required|integer',
             'user_id' => 'required|integer', // pastikan user_id di-validasi
         ]);
 
@@ -146,7 +146,7 @@ class LogbookController extends Controller
         $logbook->jam_mulai = $request->jam_mulai;
         $logbook->jam_selesai = $request->jam_selesai;
         $logbook->pekerjaan = $request->pekerjaan;
-        $logbook->division = $request->division;
+        $logbook->divisions_id = $request->divisions_id;
         $logbook->save();
 
         return redirect()->route('logbook.index')

@@ -14,13 +14,13 @@ class CreateLogbookTable extends Migration
     public function up()
     {
         Schema::create('logbooks', function (Blueprint $table) {
-            $table->id('id_logbook');
+            $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('tanggal');
             $table->string('jam_mulai');
             $table->string('jam_selesai');
             $table->string('pekerjaan');
-            $table->string('division');
+            $table->integer('divisions_id');
             $table->timestamps();
         });
     }

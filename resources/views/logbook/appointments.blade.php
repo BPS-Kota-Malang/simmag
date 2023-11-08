@@ -160,11 +160,11 @@
                                                                         @enderror
                                                                     </div>
                                                                     <div class="form-group">
-                                                                        <label for="division">Divisi</label>
-                                                                        <select class="form-control" id="division" name="division" required>
+                                                                        <label for="divisions_id">Divisi</label>
+                                                                        <select class="form-control" id="divisions_id" name="divisions_id" required>
                                                                             <!-- <option value="">Pilih Divisi</option> -->
                                                                             @foreach($division as $div)
-                                                                            <option value="{{ $div->nama_divisi }}" {{ $div->nama_divisi == $data->division ? 'selected' : '' }}>{{ $div->nama_divisi }}</option>
+                                                                            <option value="{{ $div->id }}" {{ $div->id == $data->divisions_id ? 'selected' : '' }}>{{ $div->nama_divisi }}</option>
                                                                             @endforeach
                                                                         </select>
                                                                     </div>
@@ -238,11 +238,11 @@
                                             @enderror
                                         </div>
                                         <div class="form-group">
-                                            <label for="division">Divisi</label>
-                                            <select class="form-control" id="division" name="division" required>
+                                            <label for="divisions_id">Divisi</label>
+                                            <select class="form-control" id="divisions_id" name="divisions_id" required>
                                                 <!-- <option value="">Pilih Divisi</option> -->
                                                 @foreach($division as $div)
-                                                <option value="{{ $div->nama_divisi }}">{{ $div->nama_divisi }}</option>
+                                                <option value="{{ $div->id }}">{{ $div->nama_divisi }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
