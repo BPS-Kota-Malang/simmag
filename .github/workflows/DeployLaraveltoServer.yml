@@ -1,4 +1,4 @@
-name : Publish Website to Cpanel
+name : Publish Website to Cpanel V2
 on :
   push :
     branches :
