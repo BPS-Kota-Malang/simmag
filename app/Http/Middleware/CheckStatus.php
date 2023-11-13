@@ -15,6 +15,7 @@ class CheckStatus
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
+
     public function handle($request, Closure $next, $status)
     {
         if (!Auth::check()) {
@@ -24,12 +25,12 @@ class CheckStatus
     
         $user = Auth::user();
     
-        if ($user->status != $status) {
-            // Jika peran pengguna tidak sesuai, alihkan atau kembalikan respon sesuai kebijakan Anda.
-            abort(403, 'Unauthorized');
+        if ($user->status == $status ) {
+            return $next($request);
         }
-    
-        return $next($request);
+
+        // Jika status atau role pengguna tidak sesuai, alihkan atau kembalikan respon sesuai kebijakan Anda.
+        abort(403, 'Unauthorized');
     }
     
 }

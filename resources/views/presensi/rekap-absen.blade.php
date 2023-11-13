@@ -1,83 +1,117 @@
 @extends('admin.admin-main')
 
 @section('container')
-@include('components.topnav', ['title' => 'Rekap Presensi'])
+@include('components.topnav', ['title' => 'Rekap Presensi User'])
 
-<div class="container-fluid py-4">
-    <div class="row mt-4 mx-4">
-        <div class="col-12">
-            <div class="card mb-4">
-                <div class="card-header pb-0">
-                    <h6>Rekap Presensi</h6>
+<section class="pt-3 pb-4" id="count-stats">
+    <div class="container-fluid py-4">
+        <div class="row mt-4 mx-4">
+            <div class="col-12">
+                <div class="card mb-3">
+                    <div class="card-body p-3 fw-bold text-dark d-flex justify-content-between">
+                        <div class="d-flex align-items-center">
+                            <div class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
+                                <i class="ni ni-collection text-lg opacity-10" aria-hidden="true"></i>
+                            </div>
+                            <xspan class="mx-3 fs-4">Rekap Presensi</xspan>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body px-0 pt-0 pb-2">
-                    <div class="form-group">
-                        <label for="label">Tanggal Awal</label>
-                        <input type="date" name="tglawal" id="tglawal" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                        <label for="label">Tanggal Akhir</label>
-                        <input type="date" name="tglakhir" id="tglakhir" class="form-control" />
-                    </div>
-                    <div class="form-group">
-                        <a href="" onclick="this.href='/filter-data/'+ document.getElementById('tglawal').value +
-                            '/' + document.getElementById('tglakhir').value " class="btn btn-primary col-md-12">
-                            Lihat <i class="fas fa-print"></i>
-                        </a>
+                <div class="card mb-4 p-3">
+                    <div class="card-body px-0 pt-0 pb-2">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="label">Tanggal Awal</label>
+                                    <input type="date" name="tglawal" id="tglawal" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="label">Tanggal Akhir</label>
+                                    <input type="date" name="tglakhir" id="tglakhir" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <a href="" onclick="this.href='/rekap-absen/'+ document.getElementById('tglawal').value +
+                                    '/' + document.getElementById('tglakhir').value " class="btn btn-primary col-md-12 ">
+                                        Lihat
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
-                            <table class="table align-items-center mb-0">
+                            <table id="rekap" class="table align-items-center mb-0">
                                 <thead>
                                     <tr>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama
-                                        </th>
-                                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Tanggal
-                                        </th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Masuk
-                                        </th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Keluar
-                                        </th>
-                                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                            Jumlah Jam Kerja
-                                        </th>
+                                        <th class="text-center text-uppercase text-xs font-weight-bolder">No.</th>
+                                        <th class="text-center text-uppercase text-xs font-weight-bolder">Nama</th>
+                                        <th class="text-center text-uppercase text-xs font-weight-bolder">Universitas</th>
+                                        <th class="text-center text-uppercase text-xs font-weight-bolder">Divisi</th>
+                                        <th class="text-center text-uppercase text-xs font-weight-bolder">Tanggal</th>
+                                        <th class="text-center text-uppercase text-xs font-weight-bolder">Jam Masuk</th>
+                                        <th class="text-center text-uppercase text-xs font-weight-bolder">Jam Keluar</th>
+                                        <th class="text-center text-uppercase text-xs font-weight-bolder">Jam Kerja</th>
+                                        <!-- <th class="text-secondary opacity-7"></th> -->
                                     </tr>
                                 </thead>
-                                @foreach ($presensi as $item)
+                                @php
+                                $count = 1;
+                                @endphp
                                 <tbody>
+                                    @foreach($presensi as $item)
                                     <tr>
-                                        <td>
-                                            <div class="d-flex px-3 py-1">
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{ $item->user->name }}</h6>
-                                                </div>
-                                            </div>
+                                        <!-- NO -->
+                                        <td class="text-center align-items-center">{{ $count++ }}</td>
+
+                                        <td class="text-center align-items-center">
+                                            @if($item->user)
+                                            {{ $item->user->name }}
+                                            @else
+                                            User Tidak Ditemukan
+                                            @endif
                                         </td>
-                                        <td>
-                                            <p class="text-sm font-weight-bold mb-0">{{ $item->tgl }}</p>
-                                        </td>
+
                                         <td class="align-middle text-center text-sm">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $item->jammasuk }}</p>
+                                            @if($item->user && $item->user->mahasiswa)
+                                            {{ $item->user->mahasiswa->universitas }}
+                                            @else
+                                            Universitas Tidak Ditemukan
+                                            @endif
                                         </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $item->jamkeluar }}</p>
+
+                                        <td class="text-center align-items-center">
+                                            @if($item->user && $item->user->divisi)
+                                            {{ $item->user->divisi->nama_divisi }}
+                                            @else
+                                            Divisi Tidak Ditemukan
+                                            @endif
                                         </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <p class="text-sm font-weight-bold mb-0">{{ $item->jamkerja }}</p>
+
+                                        <td class="text-center align-items-center">
+                                            {{ $item->tgl }}
+                                        </td>
+
+                                        <td class="text-center align-items-center">
+                                            {{ $item->jammasuk }}
+                                        </td>
+
+                                        <td class="text-center align-items-center">
+                                            {{ $item->jamkeluar }}
+                                        </td>
+
+                                        <td class="text-center align-items-center">
+                                            {{ $item->jamkerja }}
                                         </td>
                                     </tr>
+                                    @endforeach
+
                                 </tbody>
-                                <!-- <tr>
-                                        <td>{{ $item->user->name }}</td>
-                                        <td>{{ $item->tgl }}</td>
-                                        <td>{{ $item->jammasuk }}</td>
-                                        <td>{{ $item->jamkeluar }}</td>
-                                        <td>{{ $item->jamkerja }}</td>
-                                    </tr> -->
-                                @endforeach
                             </table>
                         </div>
                     </div>
@@ -85,41 +119,68 @@
             </div>
         </div>
     </div>
-</div>
-<section class="py-7">
-    <div class="container">
-        <div class="row justify-space-between py-2">
-            <div class="col-lg-4 mx-auto">
-                <ul class="pagination pagination-primary m-4">
-                    <li class="page-item">
-                        <a class="page-link" href="javascript:;" aria-label="Previous">
-                            <span aria-hidden="true"><i class="fa fa-angle-double-left" aria-hidden="true"></i></span>
-                        </a>
-                    </li>
-                    <li class="page-item active">
-                        <a class="page-link" href="javascript:;">1</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="javascript:;">2</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="javascript:;">3</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="javascript:;">4</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="javascript:;">5</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="javascript:;" aria-label="Next">
-                            <span aria-hidden="true"><i class="fa fa-angle-double-right" aria-hidden="true"></i></span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
 </section>
 @include('components/footer')
+
+<script>
+    $('#rekap').DataTable({
+        "order": [
+            [0, 'asc']
+        ],
+        "columnDefs": [{
+                "targets": [7],
+                "orderable": false
+            },
+            {
+                "targets": [0, 7],
+                "className": "text-center"
+            },
+            {
+                "width": "130px",
+                "targets": 7
+            },
+        ],
+        dom: 'Bfrtip',
+        buttons: [{
+                extend: 'pdf',
+                text: '<i class="fa fa-file-pdf text-danger"></i> PDF',
+                title: 'Rekap Presensi',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                messageTop: '',
+                orientation: 'portrait',
+                pageSize: 'A4'
+            },
+            {
+                extend: 'excel',
+                text: '<i class="fa fa-file-excel text-success" > </i> EXCEL',
+                title: 'Rekap Presensi',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                messageTop: ''
+            },
+            {
+                extend: 'print',
+                text: '<i class="fa fa-print text-info" > </i> PRINT',
+                title: 'Rekap Presensi',
+                exportOptions: {
+                    columns: ':visible'
+                },
+                messageTop: '',
+            },
+            {
+                extend: 'colvis',
+                text: '<i class="fa fa-table" > </i> Columns',
+                postfixButtons: ['colvisRestore']
+            },
+        ],
+
+        "dom": "<'row'<'col-sm-12 col-md-2'l><'col-sm-12 col-md-6'B><'col-sm-12 col-md-4'f>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>"
+
+    });
+</script>
 @endsection

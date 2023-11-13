@@ -1,3 +1,18 @@
+@php
+$dashboard = '';
+$magang = '';
+$profile = '';
+$rekap = '';
+$rekapuser = '';
+$rekapadmin = '';
+$masuk = '';
+$keluar = '';
+$logbook = '';
+$admin = '';
+$divisi = '';
+$user = '';
+@endphp
+
 @switch($menu)
 @case('Dashboard')
 @php
@@ -5,10 +20,15 @@ $dashboard = 'active';
 $magang = '';
 $profile = '';
 $rekap = '';
+$rekapuser = '';
+$rekapadmin = '';
 $masuk = '';
 $keluar = '';
 $logbook = '';
 $admin = '';
+$divisi = '';
+$user = '';
+
 @endphp
 @break
 
@@ -18,10 +38,14 @@ $dashboard = '';
 $magang = 'active';
 $profile = '';
 $rekap = '';
+$rekapuser = '';
+$rekapadmin = '';
 $masuk = '';
 $keluar = '';
 $logbook = '';
 $admin = '';
+$divisi = '';
+$user = '';
 @endphp
 @break
 
@@ -31,10 +55,14 @@ $dashboard = '';
 $magang = '';
 $profile = 'active';
 $rekap = '';
+$rekapuser = '';
+$rekapadmin = '';
 $masuk = '';
 $keluar = '';
 $logbook = '';
 $admin = '';
+$divisi = '';
+$user = '';
 @endphp
 @break
 
@@ -44,10 +72,15 @@ $dashboard = '';
 $magang = '';
 $profile = '';
 $rekap = 'active';
+$rekapuser = '';
+$rekapadmin = '';
 $masuk = '';
 $keluar = '';
 $logbook = '';
 $admin = '';
+$divisi = '';
+$user = '';
+
 @endphp
 @break
 
@@ -57,10 +90,82 @@ $dashboard = '';
 $magang = '';
 $profile = '';
 $rekap = 'active';
+$rekapuser = '';
+$rekapadmin = '';
 $masuk = '';
 $keluar = '';
 $logbook = '';
 $admin = '';
+$divisi = '';
+$user = '';
+@endphp
+@break
+
+@case('Rekap Absen User')
+@php
+$dashboard = '';
+$magang = '';
+$profile = '';
+$rekap = '';
+$rekapuser = 'active';
+$rekapadmin = '';
+$masuk = '';
+$keluar = '';
+$logbook = '';
+$admin = '';
+$divisi = '';
+$user = '';
+@endphp
+@break
+
+@case('Rekap User')
+@php
+$dashboard = '';
+$magang = '';
+$profile = '';
+$rekap = '';
+$rekapuser = 'active';
+$rekapadmin = '';
+$masuk = '';
+$keluar = '';
+$logbook = '';
+$admin = '';
+$divisi = '';
+$user = '';
+@endphp
+@break
+
+@case('Rekap Absen Admin')
+@php
+$dashboard = '';
+$magang = '';
+$profile = '';
+$rekap = '';
+$rekapuser = '';
+$rekapadmin = 'active';
+$masuk = '';
+$keluar = '';
+$logbook = '';
+$admin = '';
+$divisi = '';
+$user = '';
+@endphp
+@break
+
+@case('Rekap Admin')
+@php
+$dashboard = '';
+$magang = '';
+$profile = '';
+$rekap = '';
+$rekapuser = '';
+$rekapadmin = 'active';
+$masuk = '';
+$keluar = '';
+$logbook = '';
+$admin = '';
+$divisi = '';
+$user = '';
 @endphp
 @break
 
@@ -70,10 +175,14 @@ $dashboard = '';
 $magang = '';
 $profile = '';
 $rekap = '';
+$rekapuser = '';
+$rekapadmin = '';
 $masuk = 'active';
 $keluar = '';
 $logbook = '';
 $admin = '';
+$divisi = '';
+$user = '';
 @endphp
 @break
 
@@ -83,10 +192,14 @@ $dashboard = '';
 $magang = '';
 $profile = '';
 $rekap = '';
+$rekapuser = '';
+$rekapadmin = '';
 $masuk = '';
 $keluar = 'active';
 $logbook = '';
 $admin = '';
+$divisi = '';
+$user = '';
 @endphp
 @break
 
@@ -96,10 +209,47 @@ $dashboard = '';
 $magang = '';
 $profile = '';
 $rekap = '';
+$rekapuser = '';
+$rekapadmin = '';
 $masuk = '';
 $keluar = '';
 $logbook = 'active';
 $admin = '';
+$divisi = '';
+$user = '';
+@endphp
+@break
+
+@case('Data Divisi')
+@php
+$dashboard = '';
+$magang = '';
+$profile = '';
+$rekap = '';
+$rekapuser = '';
+$rekapadmin = '';
+$masuk = '';
+$keluar = '';
+$logbook = '';
+$admin = '';
+$divisi = 'active';
+$user = '';
+@endphp
+@break
+@case('Data User')
+@php
+$dashboard = '';
+$magang = '';
+$profile = '';
+$rekap = '';
+$rekapuser = '';
+$rekapadmin = '';
+$masuk = '';
+$keluar = '';
+$logbook = '';
+$admin = '';
+$divisi = '';
+$user = 'active';
 @endphp
 @break
 
@@ -128,14 +278,8 @@ $admin = '';
             <!-- <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Presensi</h6>
             </li> -->
-            <li class="nav-item">
-                <a class="nav-link {{ $magang }}" href="{{ url('magang') }}">
-                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-email-83 text-dark text-sm opacity-10"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Penerimaan Magang</span>
-                </a>
-            </li>
+            @if (Auth::user()->isUser())
+            {{-- Gantilah ini dengan metode autentikasi dan kondisi Anda --}}
             <li class="nav-item">
                 <a class="nav-link {{ $masuk }}" href="{{ url('presensi-masuk') }}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
@@ -153,19 +297,32 @@ $admin = '';
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ $rekap }}" href="{{ url('rekap-absen') }}">
+                <a class="nav-link {{ $rekapuser }}" href="{{ url('rekap-user') }}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-collection text-dark text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Rekap Presensi</span>
+                    <span class="nav-link-text ms-1">Rekap Presensi User</span>
                 </a>
             </li>
+            @endif
+
             <li class="nav-item">
-            <a class="nav-link {{ $logbook }}" href="{{ url('logbook') }}">
+                <a class="nav-link {{ $logbook }}" href="{{ url('logbook') }}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
+                        <i class="ni ni-collection text-dark text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Logbook</span>
+                    <span class="nav-link-text ms-1">
+                        @if (Auth::user()->isUser())
+                        Logbook
+                        @endif
+                        @if (Auth::user()->isAdmin())
+                        Rekap Logbook Divisi
+                        @endif
+                        @if (Auth::user()->isSuperAdmin())
+                        Rekap Logbook
+                        @endif
+
+                    </span>
                 </a>
             </li>
             <li class="nav-item">
@@ -176,13 +333,58 @@ $admin = '';
                     <span class="nav-link-text ms-1">Profile</span>
                 </a>
             </li>
-            @if (Auth::user()->isSuperAdmin()) {{-- Gantilah ini dengan metode autentikasi dan kondisi Anda --}}
+
+            @if (Auth::user()->isSuperAdmin())
+            {{-- Gantilah ini dengan metode autentikasi dan kondisi Anda --}}
             <li class="nav-item">
-                <a class="nav-link">
+                <a class="nav-link {{ $magang }}" href="{{ url('magang') }}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-email-83 text-dark text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Penerimaan Magang</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ $rekap }}" href="{{ url('rekap-absen') }}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-collection text-dark text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Rekap Presensi Admin</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ $divisi }}" href="{{ url('data/divisi') }}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fas fa-building text-dark text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Data Divisi</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ $user }}" href="{{ url('user-management') }}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
                     </div>
                     <span class="nav-link-text ms-1">User Management</span>
+                </a>
+            </li>
+            @endif
+
+            @if (Auth::user()->isAdmin())
+            <li class="nav-item">
+                <a class="nav-link {{ $user }}" href="{{ url('anggota-divisi') }}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fas fa-users text-dark text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Anggota Divisi</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ $rekapadmin }}" href="{{ url('rekap-admin') }}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-collection text-dark text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Rekap Presensi Admin</span>
                 </a>
             </li>
             @endif

@@ -21,11 +21,12 @@ class CreateMahasiswasTable extends Migration
             $table->string('fakultas');
             $table->string('program_studi');
             $table->string('telepon');
-            $table->integer('jumlah_anggota');
+            // $table->integer('jumlah_anggota');
             $table->string('file_proposal');
             $table->string('file_suratpengantar');
             $table->date('tanggal_mulai');
             $table->date('tanggal_selesai');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
     }

@@ -7,10 +7,17 @@
     <div class="container-fluid py-4">
         <div class="row mt-4 mx-4">
             <div class="col-12">
-                <div class="card mb-4">
-                    <div class="card-header pb-0">
-                        <h6>Silahkan Absen Masuk Disini!!!</h6>
+                <div class="card mb-3">
+                    <div class="card-body p-3 fw-bold text-dark d-flex justify-content-between">
+                        <div class="d-flex align-items-center">
+                            <div class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
+                                <i class="ni ni-watch-time text-lg opacity-10" aria-hidden="true"></i>
+                            </div>
+                            <xspan class="mx-3 fs-4">Presensi Masuk</xspan>
+                        </div>
                     </div>
+                </div>
+                <div class="card mb-4 p-3">
                     <div class="content">
                         <div class="row justify-content-center">
                             <form action="{{ route('simpan-masuk') }}" method="post">
@@ -24,20 +31,12 @@
                                         <div class="row px-3">
                                             <div class="col text-center py-3">
                                                 <div class="col-6 mx-auto">
-                                                    <!-- <div class="col" style="font-size: 18px;">Jam Masuk</div>
-                                                        <div class="jam" style="font-size: 36px; font-weight: bold;">07.30</div> -->
                                                     <button type="submit" class="btn bg-gradient-dark w-auto me-1 mb-0">Absen Masuk</button>
-                                                    <!-- <hr class="vertical dark"> -->
                                                 </div>
                                             </div>
                                         </div>
                                     </center>
                                 </div>
-                                <!-- <center>
-                                                <div class="form-group">
-                                                    <button type="submit" class="btn btn-primary">Klik Untuk Presensi Masuk</button>
-                                                </div>
-                                            </center> -->
                             </form>
 
                         </div>
@@ -46,8 +45,34 @@
             </div>
         </div>
     </div>
-    </div>
-    </div>
+
+    @if ($message = Session::get('Delete'))
+    <script>
+        Swal.fire(
+            'Deleted!',
+            '{{ $message }}',
+            'success'
+        )
+    </script>
+    @endif
+    @if ($message = Session::get('save_message'))
+    <script>
+        Swal.fire(
+            'Berhasil!',
+            '{{ $message }}',
+            'success'
+        )
+    </script>
+    @endif
+    @if ($message = Session::get('success_message'))
+    <script>
+        Swal.fire(
+            'Tersimpan!',
+            '{{ $message }}',
+            'success'
+        )
+    </script>
+    @endif
 </section>
 
 <script type="text/javascript">

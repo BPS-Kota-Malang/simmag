@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Presensi;
+use App\Models\User;
 use DateTime;
 use DateTimeZone;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PresensiController extends Controller
 {
@@ -42,26 +44,28 @@ class PresensiController extends Controller
      */
     public function store(Request $request)
     {
-        $timezone = 'Asia/Jakarta'; 
-        $date = new DateTime('now', new DateTimeZone($timezone)); 
+        $timezone = 'Asia/Jakarta';
+        $date = new DateTime('now', new DateTimeZone($timezone));
         $tanggal = $date->format('Y-m-d');
         $localtime = $date->format('H:i:s');
 
         $presensi = Presensi::where([
-            ['user_id','=',auth()->user()->id],
-            ['tgl','=',$tanggal],
+            ['user_id', '=', auth()->user()->id],
+            ['tgl', '=', $tanggal],
         ])->first();
-        if ($presensi){
-            dd("Anda Telah Absen Hari Ini");
-        }else{
+        if ($presensi) {
+            return redirect('presensi-masuk')
+                ->with('save_message', 'Anda Telah Absen Hari Ini');
+        } else {
             Presensi::create([
                 'user_id' => auth()->user()->id,
                 'tgl' => $tanggal,
                 'jammasuk' => $localtime,
             ]);
         }
- 
-        return redirect('presensi-masuk');
+
+        return redirect('presensi-masuk')
+            ->with('save_message', 'Anda Telah Absen Hari Ini');
     }
 
     /**
@@ -78,33 +82,77 @@ class PresensiController extends Controller
 
     public function tampildatakeseluruhan($tglawal, $tglakhir)
     {
+        $presensi = Presensi::with('user')
 
-        $presensi = Presensi::with('user')->whereBetween('tgl',[$tglawal, $tglakhir])->orderBy('tgl','asc')->get();
-        return view('presensi.rekap-absen',compact('presensi'),['menu' => 'Rekap Absen Done']);
+
+            ->whereBetween('tgl', [$tglawal, $tglakhir])
+            ->orderBy('tgl', 'asc')
+            ->get();
+
+        return view('presensi.rekap-absen', compact('presensi'), ['menu' => 'Rekap Absen Done']);
+    }
+
+    public function halamanrekapuser()
+    {
+        return view('presensi.halaman-rekap-user', ['menu' => 'Rekap User']);
+    }
+
+    public function tampildatauser($tglawal, $tglakhir)
+    {
+        $presensi = Presensi::with('user')
+            ->where('user_id', auth()->user()->id)
+            ->whereBetween('tgl', [$tglawal, $tglakhir])
+            ->orderBy('tgl', 'asc')
+            ->get();
+
+        return view('presensi.rekap-user', compact('presensi'), ['menu' => 'Rekap Absen User']);
+    }
+
+    public function halamanrekapadmin()
+    {
+        return view('presensi.halaman-rekap-admin', ['menu' => 'Rekap Admin']);
     }
 
 
-    public function presensipulang(){
-        $timezone = 'Asia/Jakarta'; 
-        $date = new DateTime('now', new DateTimeZone($timezone)); 
+    public function tampildataadmin($tglawal, $tglakhir)
+    {
+        $userDivisionsId = Auth::user()->divisions_id;
+
+        $presensi = Presensi::join('users', 'presensis.user_id', '=', 'users.id')
+            ->where('users.divisions_id', $userDivisionsId)
+            ->whereBetween('presensis.tgl', [$tglawal, $tglakhir])
+            ->orderBy('presensis.tgl', 'asc')
+            ->get();
+
+        return view('presensi.rekap-admin', compact('presensi'), ['menu' => 'Rekap Absen Admin']);
+    }
+
+
+
+    public function presensipulang()
+    {
+        $timezone = 'Asia/Jakarta';
+        $date = new DateTime('now', new DateTimeZone($timezone));
         $tanggal = $date->format('Y-m-d');
         $localtime = $date->format('H:i:s');
 
         $presensi = Presensi::where([
-            ['user_id','=',auth()->user()->id],
-            ['tgl','=',$tanggal],
+            ['user_id', '=', auth()->user()->id],
+            ['tgl', '=', $tanggal],
         ])->first();
-        
-        $dt=[
+
+        $dt = [
             'jamkeluar' => $localtime,
             'jamkerja' => date('H:i:s', strtotime($localtime) - strtotime($presensi->jammasuk))
         ];
 
-        if ($presensi->jamkeluar == ""){
+        if ($presensi->jamkeluar == "") {
             $presensi->update($dt);
-            return redirect('presensi-keluar');
-        }else{
-            dd("Anda Telah Absen Untuk Pulang");
+            return redirect('presensi-keluar')
+                ->with('success_message', 'Anda Telah Absen Pulang Hari Ini');
+        } else {
+            return redirect('presensi-keluar')
+                ->with('success_message', 'Anda Telah Absen Pulang Hari Ini');
         }
     }
 

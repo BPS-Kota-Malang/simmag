@@ -9,8 +9,11 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Hash;
 
-class User extends Authenticatable
+
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens;
     use HasFactory;
@@ -18,15 +21,39 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
 
+    use Notifiable;
+
+    public function mahasiswa()
+    {
+        return $this->hasOne(Mahasiswa::class, 'user_id');
+    }
+
+    public function divisi()
+    {
+        return $this->belongsTo(Divisi::class, 'divisions_id', 'id');
+    }
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'roles_id', 'id');
+    }
+
     /**
      * The attributes that are mass assignable.
      *
      * @var string[]
      */
+
+    protected $table = 'users';
+    protected $primaryKey = 'id';
+
     protected $fillable = [
         'name',
         'email',
         'password',
+        'roles_id',
+        'status',
+        'divisions_id'
+        // 'email_verified_at'
     ];
 
     /**
@@ -61,11 +88,32 @@ class User extends Authenticatable
 
     public function presensi()
     {
-        return $this->hasMany(Presensi::class);
+        return $this->hasMany(Presensi::class, 'user_id', 'id');
     }
 
     public function isSuperAdmin()
     {
+        return $this->roles_id === '2'; // Ubah ini sesuai dengan logika peran Anda
+    }
+    public function isAdmin()
+    {
+        return $this->roles_id === '3'; // Ubah ini sesuai dengan logika peran Anda
+    }
+
+    public function isUser()
+    {
         return $this->roles_id === '1'; // Ubah ini sesuai dengan logika peran Anda
+    }
+
+    public function changePassword($newPassword)
+    {
+        $this->update([
+            'password' => Hash::make($newPassword),
+        ]);
+    }
+
+    public function logbook()
+    {
+        return $this->hasMany(Logbook::class);
     }
 }

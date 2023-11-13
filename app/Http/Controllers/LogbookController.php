@@ -3,6 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Logbook;
+use App\Models\Divisi;
+use App\Models\Jam;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+
 
 class LogbookController extends Controller
 {
@@ -13,8 +19,39 @@ class LogbookController extends Controller
      */
     public function index()
     {
-        return view('logbook.appointments', ['menu' => 'Logbook']);
+        /**
+         * Edited BIma
+         * 
+         */
+        $userDivisionsId = Auth::user()->divisions_id;
+        // $user = User::all();
+        $userRoleId = Auth::user()->roles_id;
+        $userId = Auth::user()->id;
+        // $logbook = Logbook::whereBelongsTo($user)->get();
+        // $logbook = Logbook::with('user')
+        //             ->where($user->divisions_id, $userDivisionsId )->get();
+        if ($userRoleId == 1) {
+            $logbook = Logbook::with('divisi')->whereHas('user', function ($query) use ($userId) {
+                $query->where('id', $userId);
+            })->get();
+        } else if ($userRoleId == 3) {
+            # code...
+            $userDivisionsId = Auth::user()->divisions_id;
+            $logbook = Logbook::where('divisions_id', $userDivisionsId)->get();
+        } else {
+            $logbook = Logbook::all();
+        }
+
+
+        $division = Divisi::all();
+        $jam = Jam::all();
+        $menu = 'Logbook'; // Ambil semua data divisi dari tabel
+
+        // dd($logbook);
+        // Kirim data logbook dan divisions ke tampilan (view) appointments
+        return view('logbook.appointments', compact('logbook', 'division', 'jam', 'menu'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -23,7 +60,12 @@ class LogbookController extends Controller
      */
     public function create()
     {
-        //
+        $divisions = Divisi::all(); // Ambil semua data divisi dari tabel
+
+        // Kirim data divisi ke tampilan (view) formulir
+        return view('logbook.appointments', compact('divisions'));
+        // return view('logbook.appointments', ['Divisi' => $divisions]);
+        // return view('logbook.create', ['menu' => 'logbook.create']);
     }
 
     /**
@@ -34,7 +76,29 @@ class LogbookController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        // Validate the form data (custom validation rules can be applied)
+        $request->validate([
+            'tanggal' => 'required|string',
+            'jam_mulai' => 'required|string',
+            'jam_selesai' => 'required|string',
+            'pekerjaan' => 'nullable|string',
+            'divisions_id' => 'required|integer',
+            'user_id' => 'required|integer', // pastikan user_id di-validasi
+        ]);
+
+        // Simpan data ke database
+        Logbook::create([
+            'user_id' => Auth::id(), // mengambil ID pengguna yang saat ini login
+            'tanggal' => $request->tanggal,
+            'jam_mulai' => $request->jam_mulai,
+            'jam_selesai' => $request->jam_selesai,
+            'pekerjaan' => $request->pekerjaan,
+            'divisions_id' => $request->divisions_id,
+        ]);
+
+        // Redirect back with a success message
+        return redirect()->back()->with('success', 'Logbook entry created successfully');
     }
 
     /**
@@ -68,7 +132,25 @@ class LogbookController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'tanggal' => 'required|string',
+            'jam_mulai' => 'required|string',
+            'jam_selesai' => 'required|string',
+            'pekerjaan' => 'nullable|string',
+            'divisions_id' => 'required|integer',
+            'user_id' => 'required|integer', // pastikan user_id di-validasi
+        ]);
+
+        $logbook = Logbook::find($id);
+        $logbook->tanggal = $request->tanggal;
+        $logbook->jam_mulai = $request->jam_mulai;
+        $logbook->jam_selesai = $request->jam_selesai;
+        $logbook->pekerjaan = $request->pekerjaan;
+        $logbook->divisions_id = $request->divisions_id;
+        $logbook->save();
+
+        return redirect()->route('logbook.index')
+            ->with('success_message', 'Berhasil mengubah Data Logbook.');
     }
 
     /**
@@ -77,8 +159,33 @@ class LogbookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function rekaplogbook($tglawal, $tglakhir)
     {
-        //
+    $userDivisionsId = Auth::user()->divisions_id;
+    $userRoleId = Auth::user()->roles_id;
+    $userId = Auth::user()->id;
+
+    // Memeriksa peran pengguna
+    if ($userRoleId == 1) {
+        $logbook = Logbook::where('user_id', $userId)
+            ->whereBetween('tanggal', [$tglawal, $tglakhir])
+            ->orderBy('tanggal', 'asc')
+            ->get();
+    } elseif ($userRoleId == 3) {
+        $logbook = Logbook::where('divisions_id', $userDivisionsId)
+            ->whereBetween('tanggal', [$tglawal, $tglakhir])
+            ->orderBy('tanggal', 'asc')
+            ->get();
+    } else {
+        $logbook = Logbook::whereBetween('tanggal', [$tglawal, $tglakhir])
+            ->orderBy('tanggal', 'asc')
+            ->get();
+    }
+
+    $division = Divisi::all();
+    $jam = Jam::all();
+    $menu = 'Logbook';
+
+    return view('logbook.appointments', compact('logbook', 'division', 'jam', 'menu'));
     }
 }

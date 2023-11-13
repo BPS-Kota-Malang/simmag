@@ -35,37 +35,41 @@
                                 <div class="mb-3">
                                     <label>Nama Perguruan Tinggi</label>
                                     <div class="input-group">
-                                        <input type="text" class="form-control @error('universitas') is-invalid @enderror" placeholder="ex: Universitas Brawijaya" name="universitas" id="universitas" required value="{{old('universitas')}}">
+                                        <input type="text" class="form-control @error('universitas') is-invalid @enderror" placeholder="ex: Universitas Negeri Malang" name="universitas" id="universitas" required value="{{old('universitas')}}">
                                         @error('universitas')
                                         <div class="invalid-feedback">
                                             {{$message}}
                                         </div>
                                         @enderror
                                     </div>
+                                    <p class="small text-muted">*Tuliskan nama perguruang tinggi dengan lengkap. Nama tidak boleh singkatan.</p>
+                                    <p class="text-danger small" id="universitas-error"></p>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label>Fakultas/Jurusan</label>
                                         <div class="input-group mb-3">
-                                            <input class="form-control @error('fakultas') is-invalid @enderror" placeholder="ex: Ekonomi dan Bisnis" aria-label="Fakultas/Jurusan" type="text" name="fakultas" required value="{{old('fakultas')}}">
+                                            <input class="form-control @error('fakultas') is-invalid @enderror" placeholder="ex: Ekonomi dan Bisnis" aria-label="Fakultas/Jurusan" type="text" name="fakultas" id="fakultas" required value="{{old('fakultas')}}">
                                             @error('fakultas')
                                             <div class="invalid-feedback">
                                                 {{$message}}
                                             </div>
                                             @enderror
                                         </div>
+                                        <p class="text-danger small" id="fakultas-error"></p>
                                     </div>
                                     <div class="col-md-6 ps-2">
                                         <label>Program Studi</label>
                                         <div class="input-group mb-3">
-                                            <input type="text" class="form-control @error('program_studi') is-invalid @enderror" placeholder="ex: Ilmu Ekonomi" aria-label="Program Studi" name="program_studi" required value="{{old('program_studi')}}">
+                                            <input type="text" class="form-control @error('program_studi') is-invalid @enderror" placeholder="ex: Ilmu Ekonomi" aria-label="Program Studi" name="program_studi" id="prodi" required value="{{old('program_studi')}}">
                                             @error('program_studi')
                                             <div class="invalid-feedback">
                                                 {{$message}}
                                             </div>
                                             @enderror
                                         </div>
+                                        <p class="text-danger small" id="prodi-error"></p>
                                     </div>
                                 </div>
 
@@ -73,74 +77,28 @@
                                     <div class="col-md-6">
                                         <label>Nomor Telepon</label>
                                         <div class="input-group mb-3">
-                                            <input class="form-control @error('telepon') is-invalid @enderror" placeholder="" aria-label="Nomor Telepon" type="text" name="telepon" required value="{{old('telepon')}}">
+                                            <input class="form-control @error('telepon') is-invalid @enderror" placeholder="ex: 082345678912" aria-label="Nomor Telepon" type="text" name="telepon" id="telepon" required value="{{old('telepon')}}">
                                             @error('telepon')
                                             <div class="invalid-feedback">
                                                 {{$message}}
                                             </div>
                                             @enderror
                                         </div>
+                                        <p class="text-danger small" id="telepon-error"></p>
                                     </div>
-                                    <div class="col-md-6">
+                                    {{-- <div class="col-md-6">
                                         <label>Jumlah Anggota Kelompok</label>
                                         <div class="input-group mb-3">
-                                            <input class="form-control @error('jumlah_anggota') is-invalid @enderror" placeholder="ex: 1 or 12" aria-label="Jumlah Anggota Kelompok" type="text" name="jumlah_anggota" required value="{{old('jumlah_anggota')}}">
+                                            <input class="form-control @error('jumlah_anggota') is-invalid @enderror" placeholder="ex: 1 or 12" aria-label="Jumlah Anggota Kelompok" type="text" name="jumlah_anggota" id="anggota" required value="{{old('jumlah_anggota')}}">
                                             @error('jumlah_anggota')
                                             <div class="invalid-feedback">
                                                 {{$message}}
                                             </div>
                                             @enderror
                                         </div>
-                                    </div>
+                                        <p class="text-danger small" id="anggota-error"></p>
+                                    </div> --}}
                                 </div>
-
-                                <!-- <hr class="horizontal dark mb-4"> -->
-
-                                <!-- <div class="col-auto">
-                                    <label>*Tambah Anggota Kelompok (Opsional)</label>
-                                </div>
-
-                                <div class="row g-3">
-                                    <div class="col-md-4">
-                                        <label>NIM Anggota</label>
-                                        <div class="input-group mb-3">
-                                            <input class="form-control" placeholder="" aria-label="NIM" type="text">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-5 ps-2">
-                                        <label>Nama Anggota</label>
-                                        <div class="input-group mb-3">
-                                            <input type="text" class="form-control" placeholder="" aria-label="Last Name...">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 ps-2 align-self-end">
-                                        <button class="btn bg-gradient-dark btn-icon" type="button">
-                                            <div class="d-flex align-items-center">
-                                                <i class="ni ni-fat-add me-2" aria-hidden="true"></i>
-                                                Tambah
-                                            </div>
-                                        </button>
-                                    </div>
-                                </div>
-
-                                <table class="table">
-                                    <thead class="table-light">
-                                        <tr>
-                                            <th scope="col">#</th>
-                                            <th scope="col">NIM</th>
-                                            <th scope="col">Nama Mahasiswa</th>
-                                            <th scope="col"></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>Aksi</td>
-                                        </tr>
-                                    </tbody>
-                                </table> -->
 
                                 <div class="row">
                                     <div class="col-md-6">
@@ -196,7 +154,7 @@
                                 </div>
 
                                 <div class="col-md-12">
-                                    <button type="submit" class="btn bg-gradient-dark w-100">Daftar Sekarang!</button>
+                                    <button type="submit" class="btn bg-gradient-dark w-100" id="daftar">Daftar Sekarang!</button>
                                 </div>
                             </div>
                         </form>
@@ -212,6 +170,81 @@
     if (document.querySelector(".datepicker")) {
         flatpickr(".datepicker", {});
     }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        var universitasInput = document.getElementById("universitas");
+        var universitasError = document.getElementById("universitas-error");
+
+        universitasInput.addEventListener("input", function() {
+            var inputValue = universitasInput.value.trim();
+            var regex = /^.{10,}$/;
+            if (!regex.test(inputValue)) {
+                universitasError.textContent = "Nama perguruan tinggi harus ditulis dengan lengkap sesuai data dari pemerintah.";
+            } else {
+                universitasError.textContent = "";
+            }
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+        var fakultasInput = document.getElementById("fakultas");
+        var fakultasError = document.getElementById("fakultas-error");
+
+        fakultasInput.addEventListener("input", function() {
+            var inputValue = fakultasInput.value.trim();
+            var regex = /^[a-zA-Z\s]{6,}$/;
+            if (!regex.test(inputValue)) {
+                fakultasError.textContent = "Tuliskan nama fakultas dengan benar dan lengkap tanpa singkatan.";
+            } else {
+                fakultasError.textContent = "";
+            }
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+        var prodiInput = document.getElementById("prodi");
+        var prodiError = document.getElementById("prodi-error");
+
+        prodiInput.addEventListener("input", function() {
+            var inputValue = prodiInput.value.trim();
+            var regex = /^[a-zA-Z\s]{4,}$/;
+            if (!regex.test(inputValue)) {
+                prodiError.textContent = "Tuliskan nama prodi dengan benar dan lengkap tanpa singkatan.";
+            } else {
+                prodiError.textContent = "";
+            }
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+        var teleponInput = document.getElementById("telepon");
+        var teleponError = document.getElementById("telepon-error");
+
+        teleponInput.addEventListener("input", function() {
+            var inputValue = teleponInput.value.trim();
+            var regex = /^[0-9]{11,13}$/;
+            if (!regex.test(inputValue)) {
+                teleponError.textContent = "Isian nomer telepon minimal 11 digit.";
+            } else {
+                teleponError.textContent = "";
+            }
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+        var anggotaInput = document.getElementById("anggota");
+        var anggotaError = document.getElementById("anggota-error");
+
+        anggotaInput.addEventListener("input", function() {
+            var inputValue = anggotaInput.value.trim();
+            var regex = /^\d{1,2}$/;
+            if (!regex.test(inputValue)) {
+                anggotaError.textContent = "Tuliskan tanpa 0 contoh: 1 atau 12.";
+            } else {
+                anggotaError.textContent = "";
+            }
+        });
+    });
 </script>
 
 @endsection

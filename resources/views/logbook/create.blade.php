@@ -1,51 +1,64 @@
-@extends('main')
+@extends('admin.admin-main')
 
 @section('container')
-
-<!-- <div class="box-0-0-1 flex-0-0-2"><div class="box-0-0-1 container-0-0-1422"><div class="box-0-0-1 row-0-0-4 centerY-0-0-6"><div class="box-0-0-1 icon-0-0-1425"><img srcset="https://kampusmerdeka.kemdikbud.go.id/static/media/report_accepted.508d8a86.webp, https://kampusmerdeka.kemdikbud.go.id/static/media/report_accepted@2x.5730e4c6.webp 2x, https://kampusmerdeka.kemdikbud.go.id/static/media/report_accepted@3x.7b6e1dc5.webp 3x" class="image-0-0-19 contain-0-0-21" style="background-color: transparent;"></div><p class="text-0-0-26 sans-0-0-40 heading-6-0-0-46" style="color: rgb(0, 161, 117);">Disetujui</p></div><p class="text-0-0-26 sans-0-0-40 heading-2-0-0-50">26 - 30 Jun 2023</p><p class="text-0-0-26 sans-0-0-40 small-0-0-43 week-0-0-1424">Minggu ke-20</p><div class="box-0-0-1 row-0-0-4 between-0-0-13 box-0-0-646 moods-0-0-1428"><div class="box-0-0-1 flex-0-0-2 centering-0-0-7"><p class="text-0-0-26 sans-0-0-40 heading-5-0-0-47 label-0-0-644">S</p><div class="box-0-0-1 image-0-0-645"><img srcset="https://kampusmerdeka.kemdikbud.go.id/static/media/mood_5.f8cde02f.webp, https://kampusmerdeka.kemdikbud.go.id/static/media/mood_5@2x.fd0afe22.webp 2x, https://kampusmerdeka.kemdikbud.go.id/static/media/mood_5@3x.21b4190c.webp 3x" class="image-0-0-19 contain-0-0-21" style="background-color: transparent;"></div></div><div class="box-0-0-1 flex-0-0-2 centering-0-0-7"><p class="text-0-0-26 sans-0-0-40 heading-5-0-0-47 label-0-0-644">S</p><div class="box-0-0-1 image-0-0-645"><img srcset="https://kampusmerdeka.kemdikbud.go.id/static/media/mood_5.f8cde02f.webp, https://kampusmerdeka.kemdikbud.go.id/static/media/mood_5@2x.fd0afe22.webp 2x, https://kampusmerdeka.kemdikbud.go.id/static/media/mood_5@3x.21b4190c.webp 3x" class="image-0-0-19 contain-0-0-21" style="background-color: transparent;"></div></div><div class="box-0-0-1 flex-0-0-2 centering-0-0-7"><p class="text-0-0-26 sans-0-0-40 heading-5-0-0-47 label-0-0-644">R</p><div class="box-0-0-1 image-0-0-645"><img srcset="https://kampusmerdeka.kemdikbud.go.id/static/media/mood_5.f8cde02f.webp, https://kampusmerdeka.kemdikbud.go.id/static/media/mood_5@2x.fd0afe22.webp 2x, https://kampusmerdeka.kemdikbud.go.id/static/media/mood_5@3x.21b4190c.webp 3x" class="image-0-0-19 contain-0-0-21" style="background-color: transparent;"></div></div><div class="box-0-0-1 flex-0-0-2 centering-0-0-7"><p class="text-0-0-26 sans-0-0-40 heading-5-0-0-47 label-0-0-644">K</p><div class="box-0-0-1 image-0-0-645"><img srcset="https://kampusmerdeka.kemdikbud.go.id/static/media/mood_5.f8cde02f.webp, https://kampusmerdeka.kemdikbud.go.id/static/media/mood_5@2x.fd0afe22.webp 2x, https://kampusmerdeka.kemdikbud.go.id/static/media/mood_5@3x.21b4190c.webp 3x" class="image-0-0-19 contain-0-0-21" style="background-color: transparent;"></div></div><div class="box-0-0-1 flex-0-0-2 centering-0-0-7"><p class="text-0-0-26 sans-0-0-40 heading-5-0-0-47 label-0-0-644">J</p><div class="box-0-0-1 image-0-0-645"><img srcset="https://kampusmerdeka.kemdikbud.go.id/static/media/mood_5.f8cde02f.webp, https://kampusmerdeka.kemdikbud.go.id/static/media/mood_5@2x.fd0afe22.webp 2x, https://kampusmerdeka.kemdikbud.go.id/static/media/mood_5@3x.21b4190c.webp 3x" class="image-0-0-19 contain-0-0-21" style="background-color: transparent;"></div></div></div></div></div>
-<div class="box-0-0-1 container-0-0-1422"><div class="box-0-0-1 row-0-0-4 centerY-0-0-6"><div class="box-0-0-1 icon-0-0-1425"><img srcset="https://kampusmerdeka.kemdikbud.go.id/static/media/report_accepted.508d8a86.webp, https://kampusmerdeka.kemdikbud.go.id/static/media/report_accepted@2x.5730e4c6.webp 2x, https://kampusmerdeka.kemdikbud.go.id/static/media/report_accepted@3x.7b6e1dc5.webp 3x" class="image-0-0-19 contain-0-0-21" style="background-color: transparent;"></div><p class="text-0-0-26 sans-0-0-40 heading-6-0-0-46" style="color: rgb(0, 161, 117);">Disetujui</p></div><p class="text-0-0-26 sans-0-0-40 heading-2-0-0-50">26 - 30 Jun 2023</p><p class="text-0-0-26 sans-0-0-40 small-0-0-43 week-0-0-1424">Minggu ke-20</p><div class="box-0-0-1 row-0-0-4 between-0-0-13 box-0-0-646 moods-0-0-1428"><div class="box-0-0-1 flex-0-0-2 centering-0-0-7"><p class="text-0-0-26 sans-0-0-40 heading-5-0-0-47 label-0-0-644">S</p><div class="box-0-0-1 image-0-0-645"><img srcset="https://kampusmerdeka.kemdikbud.go.id/static/media/mood_5.f8cde02f.webp, https://kampusmerdeka.kemdikbud.go.id/static/media/mood_5@2x.fd0afe22.webp 2x, https://kampusmerdeka.kemdikbud.go.id/static/media/mood_5@3x.21b4190c.webp 3x" class="image-0-0-19 contain-0-0-21" style="background-color: transparent;"></div></div><div class="box-0-0-1 flex-0-0-2 centering-0-0-7"><p class="text-0-0-26 sans-0-0-40 heading-5-0-0-47 label-0-0-644">S</p><div class="box-0-0-1 image-0-0-645"><img srcset="https://kampusmerdeka.kemdikbud.go.id/static/media/mood_5.f8cde02f.webp, https://kampusmerdeka.kemdikbud.go.id/static/media/mood_5@2x.fd0afe22.webp 2x, https://kampusmerdeka.kemdikbud.go.id/static/media/mood_5@3x.21b4190c.webp 3x" class="image-0-0-19 contain-0-0-21" style="background-color: transparent;"></div></div><div class="box-0-0-1 flex-0-0-2 centering-0-0-7"><p class="text-0-0-26 sans-0-0-40 heading-5-0-0-47 label-0-0-644">R</p><div class="box-0-0-1 image-0-0-645"><img srcset="https://kampusmerdeka.kemdikbud.go.id/static/media/mood_5.f8cde02f.webp, https://kampusmerdeka.kemdikbud.go.id/static/media/mood_5@2x.fd0afe22.webp 2x, https://kampusmerdeka.kemdikbud.go.id/static/media/mood_5@3x.21b4190c.webp 3x" class="image-0-0-19 contain-0-0-21" style="background-color: transparent;"></div></div><div class="box-0-0-1 flex-0-0-2 centering-0-0-7"><p class="text-0-0-26 sans-0-0-40 heading-5-0-0-47 label-0-0-644">K</p><div class="box-0-0-1 image-0-0-645"><img srcset="https://kampusmerdeka.kemdikbud.go.id/static/media/mood_5.f8cde02f.webp, https://kampusmerdeka.kemdikbud.go.id/static/media/mood_5@2x.fd0afe22.webp 2x, https://kampusmerdeka.kemdikbud.go.id/static/media/mood_5@3x.21b4190c.webp 3x" class="image-0-0-19 contain-0-0-21" style="background-color: transparent;"></div></div><div class="box-0-0-1 flex-0-0-2 centering-0-0-7"><p class="text-0-0-26 sans-0-0-40 heading-5-0-0-47 label-0-0-644">J</p><div class="box-0-0-1 image-0-0-645"><img srcset="https://kampusmerdeka.kemdikbud.go.id/static/media/mood_5.f8cde02f.webp, https://kampusmerdeka.kemdikbud.go.id/static/media/mood_5@2x.fd0afe22.webp 2x, https://kampusmerdeka.kemdikbud.go.id/static/media/mood_5@3x.21b4190c.webp 3x" class="image-0-0-19 contain-0-0-21" style="background-color: transparent;"></div></div></div></div>
-<p class="text-0-0-26 sans-0-0-40 heading-2-0-0-50">26 - 30 Jun 2023</p>
-<p class="text-0-0-26 sans-0-0-40 small-0-0-43 week-0-0-1424">Minggu ke-20</p>
-<div class="box-0-0-1 row-0-0-4 between-0-0-13 box-0-0-646 moods-0-0-1428"><div class="box-0-0-1 flex-0-0-2 centering-0-0-7"><p class="text-0-0-26 sans-0-0-40 heading-5-0-0-47 label-0-0-644">S</p><div class="box-0-0-1 image-0-0-645"><img srcset="https://kampusmerdeka.kemdikbud.go.id/static/media/mood_5.f8cde02f.webp, https://kampusmerdeka.kemdikbud.go.id/static/media/mood_5@2x.fd0afe22.webp 2x, https://kampusmerdeka.kemdikbud.go.id/static/media/mood_5@3x.21b4190c.webp 3x" class="image-0-0-19 contain-0-0-21" style="background-color: transparent;"></div></div><div class="box-0-0-1 flex-0-0-2 centering-0-0-7"><p class="text-0-0-26 sans-0-0-40 heading-5-0-0-47 label-0-0-644">S</p><div class="box-0-0-1 image-0-0-645"><img srcset="https://kampusmerdeka.kemdikbud.go.id/static/media/mood_5.f8cde02f.webp, https://kampusmerdeka.kemdikbud.go.id/static/media/mood_5@2x.fd0afe22.webp 2x, https://kampusmerdeka.kemdikbud.go.id/static/media/mood_5@3x.21b4190c.webp 3x" class="image-0-0-19 contain-0-0-21" style="background-color: transparent;"></div></div><div class="box-0-0-1 flex-0-0-2 centering-0-0-7"><p class="text-0-0-26 sans-0-0-40 heading-5-0-0-47 label-0-0-644">R</p><div class="box-0-0-1 image-0-0-645"><img srcset="https://kampusmerdeka.kemdikbud.go.id/static/media/mood_5.f8cde02f.webp, https://kampusmerdeka.kemdikbud.go.id/static/media/mood_5@2x.fd0afe22.webp 2x, https://kampusmerdeka.kemdikbud.go.id/static/media/mood_5@3x.21b4190c.webp 3x" class="image-0-0-19 contain-0-0-21" style="background-color: transparent;"></div></div><div class="box-0-0-1 flex-0-0-2 centering-0-0-7"><p class="text-0-0-26 sans-0-0-40 heading-5-0-0-47 label-0-0-644">K</p><div class="box-0-0-1 image-0-0-645"><img srcset="https://kampusmerdeka.kemdikbud.go.id/static/media/mood_5.f8cde02f.webp, https://kampusmerdeka.kemdikbud.go.id/static/media/mood_5@2x.fd0afe22.webp 2x, https://kampusmerdeka.kemdikbud.go.id/static/media/mood_5@3x.21b4190c.webp 3x" class="image-0-0-19 contain-0-0-21" style="background-color: transparent;"></div></div><div class="box-0-0-1 flex-0-0-2 centering-0-0-7"><p class="text-0-0-26 sans-0-0-40 heading-5-0-0-47 label-0-0-644">J</p><div class="box-0-0-1 image-0-0-645"><img srcset="https://kampusmerdeka.kemdikbud.go.id/static/media/mood_5.f8cde02f.webp, https://kampusmerdeka.kemdikbud.go.id/static/media/mood_5@2x.fd0afe22.webp 2x, https://kampusmerdeka.kemdikbud.go.id/static/media/mood_5@3x.21b4190c.webp 3x" class="image-0-0-19 contain-0-0-21" style="background-color: transparent;"></div></div></div>
-
-<div class="box-0-0-1 row-0-0-4 content-0-0-671 white-0-0-672" style="transform: translateY(0px);"><div data-testid="btn-header-kembali" class="box-0-0-1 centering-0-0-7 clickable-0-0-8 box-0-0-683"><svg viewBox="0 0 24 24" height="24" fill="#000000" stroke=""><path d="M11,19c-0.3,0-0.5-0.1-0.7-0.3l-6-6c-0.1-0.1-0.2-0.2-0.2-0.3C4,12.3,4,12.1,4,12l0,0c0,0,0,0,0,0l0,0c0-0.1,0-0.3,0.1-0.4  c0-0.1,0.1-0.2,0.2-0.3l6-6c0.4-0.4,1-0.4,1.4,0s0.4,1,0,1.4L7.4,11H19c0.6,0,1,0.4,1,1s-0.4,1-1,1H7.4l4.3,4.3c0.4,0.4,0.4,1,0,1.4  C11.5,18.9,11.3,19,11,19z"></path></svg></div><div class="box-0-0-1 flex-0-0-2 centerX-0-0-5 head-0-0-673"><p class="text-0-0-26 sans-0-0-40 small-0-0-43 bold-0-0-60 center-0-0-32 title-0-0-674">Info Kegiatan </p></div><div class="box-0-0-1 blank-0-0-679"></div></div> -->
+@include('components.topnav', ['title' => 'Logbook'])
 
 
- <div class="col-lg-9 z-index-2 border-radius-xl mt-5 mx-auto py-3 blur shadow-blur">
-                <div class="row">
-                    <div class="col position-relative">
-                        <div class="p-3 text-center">
-                            <!-- <h1 class="text-gradient text-primary"><span id="state1" countTo="70">0</span>+</h1> -->
-                            <h4 class="mt-3">Silahkan lakukan pencatatan harian anda selama anda berada di BPS Kota Malang!</h4>
-                            <p class="text-sm">Catat semua kegiatan yang kalian lakukan.
-                            </p>
-                        </div>
-                        <div class="row text-center py-3">
-                            <div class="col-12 mx-auto">
-                                <button type="button" class="btn bg-gradient-dark w-auto me-1 mb-0">Logbook</button>
-                                <!-- <hr class="vertical dark"> -->
-                            </div>
-                        </div>
-                    </div>
+<div class="card-header">
+    <h1 class="card-title">Logbook</h1>
+</div>
+<form>
+    <div class="card-body">
+        <div class="form-group">
+            <label for="nama">Nama</label>
+            <input type="text" class="form-control" id="nama" placeholder="Nama">
+        </div>
+        <div class="form-group">
+            <label for="satuan">Satuan Barang</label>
+            <input type="text" class="form-control" id="satuan" placeholder="...">
+        </div>
+        <div class="form-group">
+            <label for="kategori">Kategori Barang</label>
+            <input type="text" class="form-control" id="kategori" placeholder="...">
+        </div>
+        <div class="form-group">
+            <label for="jmlbaik">Jumlah Barang Baik</label>
+            <input type="text" class="form-control" id="jmlbaik" placeholder="...">
+        </div>
+        <div class="form-group">
+            <label for="jmlrusak">Jumlah Barang Rusak</label>
+            <input type="text" class="form-control" id="jmlrusak" placeholder="...">
+        </div>
+        <div class="form-group">
+            <label>Ruangan</label>
+            <select class="form-control">
+                <option>null</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="file">Foto</label>
+            <div class="input-group">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="exampleInputFile">
+                    <label class="custom-file-label" for="file">Choose file</label>
+                </div>
+                <div class="input-group-append">
+                    <span class="input-group-text">Upload</span>
                 </div>
             </div>
-<!-- <div class="box-0-0-1 row-0-0-4 content-0-0-671 white-0-0-672" style="transform: translateY(0px);">
-    <div data-testid="btn-header-kembali" class="box-0-0-1 centering-0-0-7 clickable-0-0-8 box-0-0-683"><svg viewBox="0 0 24 24" height="24" fill="#000000" stroke="">
-            <path d="M11,19c-0.3,0-0.5-0.1-0.7-0.3l-6-6c-0.1-0.1-0.2-0.2-0.2-0.3C4,12.3,4,12.1,4,12l0,0c0,0,0,0,0,0l0,0c0-0.1,0-0.3,0.1-0.4  c0-0.1,0.1-0.2,0.2-0.3l6-6c0.4-0.4,1-0.4,1.4,0s0.4,1,0,1.4L7.4,11H19c0.6,0,1,0.4,1,1s-0.4,1-1,1H7.4l4.3,4.3c0.4,0.4,0.4,1,0,1.4  C11.5,18.9,11.3,19,11,19z"></path>
-        </svg></div>
-    <div class="box-0-0-1 flex-0-0-2 centerX-0-0-5 head-0-0-673">
-        <p class="text-0-0-26 sans-0-0-40 small-0-0-43 bold-0-0-60 center-0-0-32 title-0-0-674">Info Kegiatan </p>
+        </div>
     </div>
-    <div class="box-0-0-1 blank-0-0-679"></div>
-</div>
-<div data-testid="btn-header-kembali" class="box-0-0-1 centering-0-0-7 clickable-0-0-8 box-0-0-683"><svg viewBox="0 0 24 24" height="24" fill="#000000" stroke="">
-        <path d="M11,19c-0.3,0-0.5-0.1-0.7-0.3l-6-6c-0.1-0.1-0.2-0.2-0.2-0.3C4,12.3,4,12.1,4,12l0,0c0,0,0,0,0,0l0,0c0-0.1,0-0.3,0.1-0.4  c0-0.1,0.1-0.2,0.2-0.3l6-6c0.4-0.4,1-0.4,1.4,0s0.4,1,0,1.4L7.4,11H19c0.6,0,1,0.4,1,1s-0.4,1-1,1H7.4l4.3,4.3c0.4,0.4,0.4,1,0,1.4  C11.5,18.9,11.3,19,11,19z"></path>
-    </svg></div>
-<svg viewBox="0 0 24 24" height="24" fill="#000000" stroke="">
-    <path d="M11,19c-0.3,0-0.5-0.1-0.7-0.3l-6-6c-0.1-0.1-0.2-0.2-0.2-0.3C4,12.3,4,12.1,4,12l0,0c0,0,0,0,0,0l0,0c0-0.1,0-0.3,0.1-0.4  c0-0.1,0.1-0.2,0.2-0.3l6-6c0.4-0.4,1-0.4,1.4,0s0.4,1,0,1.4L7.4,11H19c0.6,0,1,0.4,1,1s-0.4,1-1,1H7.4l4.3,4.3c0.4,0.4,0.4,1,0,1.4  C11.5,18.9,11.3,19,11,19z"></path>
-</svg>
-<div class="box-0-0-1 flex-0-0-2 centerX-0-0-5 head-0-0-673">
-    <p class="text-0-0-26 sans-0-0-40 small-0-0-43 bold-0-0-60 center-0-0-32 title-0-0-674">Info Kegiatan </p>
-</div> -->
+    <div class="card-footer">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  Launch static backdrop modal
+</button>
 
+<!-- Modal -->
+
+@include('components/footer')
 @endsection

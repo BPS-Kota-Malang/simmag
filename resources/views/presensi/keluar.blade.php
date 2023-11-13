@@ -7,10 +7,17 @@
     <div class="container-fluid py-4">
         <div class="row mt-4 mx-4">
             <div class="col-12">
-                <div class="card mb-4">
-                    <div class="card-header pb-0">
-                        <h6>Silahkan Absen Pulang Disini!!!</h6>
+                <div class="card mb-3">
+                    <div class="card-body p-3 fw-bold text-dark d-flex justify-content-between">
+                        <div class="d-flex align-items-center">
+                            <div class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
+                                <i class="ni ni-watch-time text-lg opacity-10" aria-hidden="true"></i>
+                            </div>
+                            <xspan class="mx-3 fs-4">Presensi Pulang</xspan>
+                        </div>
                     </div>
+                </div>
+                <div class="card mb-4 p-3">
                     <div class="content">
                         <div class="row justify-content-center">
                             <form action="{{ route('ubah-presensi') }}" method="post">
@@ -41,8 +48,33 @@
             </div>
         </div>
     </div>
-    </div>
-    </div>
+    @if ($message = Session::get('Delete'))
+    <script>
+        Swal.fire(
+            'Deleted!',
+            '{{ $message }}',
+            'success'
+        )
+    </script>
+    @endif
+    @if ($message = Session::get('save_message'))
+    <script>
+        Swal.fire(
+            'Berhasil!',
+            '{{ $message }}',
+            'success'
+        )
+    </script>
+    @endif
+    @if ($message = Session::get('success_message'))
+    <script>
+        Swal.fire(
+            'Berhasil!',
+            '{{ $message }}',
+            'success'
+        )
+    </script>
+    @endif
 </section>
 
 <script type="text/javascript">

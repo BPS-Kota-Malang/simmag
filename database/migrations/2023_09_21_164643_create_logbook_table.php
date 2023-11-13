@@ -13,13 +13,14 @@ class CreateLogbookTable extends Migration
      */
     public function up()
     {
-        Schema::create('logbook', function (Blueprint $table) {
+        Schema::create('logbooks', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id');
-            $table->date('tgl');
-            $table->time('waktumulai')->nullable();
-            $table->time('waktuselesai')->nullable();
-            // $table->array('keterangan')->nullable();
+            $table->unsignedBigInteger('user_id');
+            $table->string('tanggal');
+            $table->string('jam_mulai');
+            $table->string('jam_selesai');
+            $table->string('pekerjaan');
+            $table->integer('divisions_id');
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ class CreateLogbookTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('logbook');
+        Schema::dropIfExists('logbooks');
     }
 }
