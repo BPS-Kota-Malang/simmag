@@ -8,12 +8,18 @@ jobs:
     name: FTP-Deploy-Action
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2.1.0
+    - uses: actions/checkout@v3
       with:
         fetch-depth: 2
     - name : FTP-Deploy-Action
-      uses: SamKirkland/FTP-Deploy-Action@4.0.0
+      uses: SamKirkland/FTP-Deploy-Action@4.3.4
       with:
         server : ${{secrets.FTP_SERVER}}
         username : ${{secrets.FTP_USERNAME}}
         password: ${{secrets.FTP_PASSWORD}}
+    # - name: Copy .env
+    #   run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+    # - name: Install Dependencies
+    #   run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+    # - name: Generate key
+    #   run: php artisan key:generate
