@@ -1,4 +1,4 @@
-name : Publish Website to Cpanel Version 4.0
+name : Publish Website to Cpanel Version 4.0.1
 on :
   push :
     branches :
