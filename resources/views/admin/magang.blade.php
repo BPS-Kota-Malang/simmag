@@ -98,11 +98,11 @@
                                     </td> --}}
 
                                     <td class="align-middle text-center text-sm">
-                                        <a href="{{ asset('storage/proposal/' . $data->file_proposal) }}" target="_blank">Lihat Proposal</a>
+                                        <a href="{{ route('download.proposal', $data->id_mahasiswa) }}" >Download Proposal</a>
                                     </td>
 
                                     <td class="align-middle text-center text-sm">
-                                        <a href="{{ asset('storage/pengantar/' . $data->file_suratpengantar) }}" target="_blank">Lihat Surat Pengantar</a>
+                                        <a href="{{ route('download.surat', $data->id_mahasiswa) }}" >Download Surat Pengantar</a>
                                     </td>
 
                                     <td class="align-middle text-center text-sm">

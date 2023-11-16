@@ -166,7 +166,10 @@ class PenerimaanMagangController extends Controller
         if (!$mahasiswa) {
             return redirect()->back()->with('error', 'Mahasiswa tidak ditemukan.');
         }
-
+        $user = $mahasiswa->user;
+        $user->status = 0;
+        $user->divisions_id = null;
+        $user->save();
         $mahasiswa->delete();
 
         return redirect()->back()->with('hapus', 'Permohonan magang berhasil dihapus.');

@@ -7,6 +7,8 @@ use App\Models\Mahasiswa;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+
 
 
 
@@ -52,12 +54,15 @@ class MahasiswaController extends Controller
         ]);
 
         // Post dan Read File
+        $user = Auth::user();
+        $id = $user->id;
+        $nim = $request->nim;
         $fileProposal = $request->file('file_proposal');
-        $nama_fileProp = $request->nama . '-Proposal.' . $fileProposal->getClientOriginalExtension();
+        $nama_fileProp = $id . '_' . $nim . '_' . $request->nama . '-Proposal.' . $fileProposal->getClientOriginalExtension();
         $fileProposal->storeAs('proposal', $nama_fileProp, 'public');
 
         $filePengantar = $request->file('file_suratpengantar');
-        $nama_filePeng = $request->nama . '-Surat Pengantar.' . $filePengantar->getClientOriginalExtension();
+        $nama_filePeng = $id . '_' . $nim . '_' . $request->nama . '-Surat Pengantar.' . $filePengantar->getClientOriginalExtension();
         $filePengantar->storeAs('pengantar', $nama_filePeng, 'public');
 
         $user = Auth::user();
@@ -134,5 +139,43 @@ class MahasiswaController extends Controller
 
         $mahasiswa = Mahasiswa::find($mahasiswaId);
         $user = $mahasiswa->user;
+    }
+    
+    public function download_proposal($id_mahasiswa){
+        $mahasiswa = Mahasiswa::find($id_mahasiswa);
+    
+        if(!$mahasiswa) {
+            // Handle jika Mahasiswa tidak ditemukan
+            return abort(404);
+        }
+    
+        $file = $mahasiswa->file_proposal;
+        $file_path = storage_path('app/public/proposal/' . $file);
+    
+        if(!Storage::exists('public/proposal/' . $file)) {
+            // Handle jika file tidak ditemukan di storage
+            return abort(404);
+        }
+    
+        return response()->download($file_path, $file);
+    }
+    
+    public function download_surat($id_mahasiswa){
+        $mahasiswa = Mahasiswa::find($id_mahasiswa);
+    
+        if(!$mahasiswa) {
+            // Handle jika Mahasiswa tidak ditemukan
+            return abort(404);
+        }
+    
+        $file = $mahasiswa->file_suratpengantar;
+        $file_path = storage_path('app/public/pengantar/' . $file);
+    
+        if(!Storage::exists('public/pengantar/' . $file)) {
+            // Handle jika file tidak ditemukan di storage
+            return abort(404);
+        }
+    
+        return response()->download($file_path, $file);
     }
 }

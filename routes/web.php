@@ -64,6 +64,9 @@ Route::middleware(['auth', 'checkStatus:2', 'checkRole:2', 'verified'])->group(f
     Route::post('/magang/terima/{id_mahasiswa}', [PenerimaanMagangController::class, 'update'])->name('magang.terima');
     Route::post('/magang/tolak/{id_mahasiswa}', [PenerimaanMagangController::class, 'destroy'])->name('magang.tolak');
     Route::post('/magang/hapus/{id_mahasiswa}', [PenerimaanMagangController::class, 'hapus'])->name('magang.hapus');
+    Route::get('/download/proposal/{id_mahasiswa}', [MahasiswaController::class, 'download_proposal'])->name('download.proposal');
+    Route::get('/download/surat/{id_mahasiswa}', [MahasiswaController::class, 'download_surat'])->name('download.surat');
+
 });
 
 // ROUTE GROUP ADMIN ONLY
