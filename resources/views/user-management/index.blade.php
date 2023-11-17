@@ -283,16 +283,16 @@
                 [0, 'asc']
             ],
             "columnDefs": [{
-                    "targets": [5],
+                    "targets": [4],
                     "orderable": false
                 },
                 {
-                    "targets": [0, 5],
+                    "targets": [0, 4],
                     "className": "text-center"
                 },
                 {
                     "width": "130px",
-                    "targets": 5
+                    "targets": 4
                 },
             ],
             dom: 'Bfrtip',
