@@ -89,7 +89,7 @@ class PenerimaanMagangController extends Controller
 
         // Edit data pengguna yang sesuai
         $user->divisions_id = $request->divisi;
-        $user->status = 2; // Ubah status user menjadi 2
+        $user->status = 2; // Ubah status user menjadi 2 (DITERIMA)
         $user->save();
 
         // Mengambil nama pendaftar

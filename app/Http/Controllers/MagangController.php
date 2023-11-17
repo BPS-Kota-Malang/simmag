@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Mahasiswa;
+use App\Models\Divisi;
 use Illuminate\Http\Request;
 
 class MagangController extends Controller
@@ -16,8 +17,10 @@ class MagangController extends Controller
     public function index()
     {
         $magang = Mahasiswa::all(); // Ambil semua data mahasiswa
-        return view('admin.magang', compact('magang'), ['menu' => 'Penerimaan Magang']);
+        $divisions = Divisi::all(); // Ambil semua data divisi
+        return view('admin.magang', compact('magang', 'divisions'), ['menu' => 'Penerimaan Magang']);
     }
+
 
     /**
      * Show the form for creating a new resource.

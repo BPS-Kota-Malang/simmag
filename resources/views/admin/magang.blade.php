@@ -159,11 +159,9 @@
                                                         Apakah Anda yakin ingin menerima permohonan magang tersebut?
                                                         <select class="form-select" name="divisi" aria-label="Default select example" required>
                                                             <option value="" selected disabled>Pilih Divisi</option>
-                                                            <option value="1">Divisi Produksi</option>
-                                                            <option value="2">Divisi Sosial</option>
-                                                            <option value="3">Divisi Neraca</option>
-                                                            <option value="4">Divisi IPDS</option>
-                                                            <option value="5">Divisi Distribusi</option>
+                                                            @foreach($divisions as $divisi)
+                                                                <option value="{{ $divisi->id }}">{{ $divisi->nama_divisi }}</option>
+                                                            @endforeach
                                                         </select>
                                                     </div>
                                                     <div class="modal-footer">
