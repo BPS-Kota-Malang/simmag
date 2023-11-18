@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Divisi;
 use App\Models\Role;
+use App\Models\StatusKerja;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -21,14 +22,16 @@ class AnggotaDivisiController extends Controller
         $userDivisionsId = Auth::user()->divisions_id;
 
         // Filter data pengguna (admins) berdasarkan divisions_id.
-        $anggota = User::with('role')->where('divisions_id', $userDivisionsId)->get();
+        $anggota = User::with(['role', 'statusKerja'])->where('divisions_id', $userDivisionsId)->get();
         $roledata = Role::all();
         $divisidata = Divisi::all();
+        $statusKerjaAnggota = StatusKerja::all();
 
         return view('anggota-divisi.index', [
             'anggota' => $anggota,
             'roledata' => $roledata,
             'divisidata' => $divisidata,
+            'statusKerjaAnggota' => $statusKerjaAnggota,
             'menu' => 'Data User'
         ]);
     }
@@ -112,5 +115,11 @@ class AnggotaDivisiController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getUsersByStatus($status_kerjas_id)
+    {
+        $users = User::where('status_kerjas_id', $status_kerjas_id)->get();
+        return response()->json($users);
     }
 }

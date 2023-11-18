@@ -23,7 +23,7 @@ class PresensiController extends Controller
 
     public function keluar()
     {
-        return view('presensi.Keluar', ['menu' => 'Presensi Keluar']);
+        return view('presensi.keluar', ['menu' => 'Presensi Keluar']);
     }
 
     /**
