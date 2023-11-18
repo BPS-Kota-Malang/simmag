@@ -65,6 +65,8 @@
                                             <th class="text-center text-uppercase text-xs font-weight-bolder">Jam Selesai</th>
                                             <th class="text-center text-uppercase text-xs font-weight-bolder" style=" word-wrap:break-word">Pekerjaan</th>
                                             <th class="text-center text-uppercase text-xs font-weight-bolder">Divisi</th>
+                                            <th class="text-center text-uppercase text-xs font-weight-bolder">Nilai</th>
+                                            <th class="text-center text-uppercase text-xs font-weight-bolder">Entry Nilai</th>
                                             @if(auth()->check() && auth()->user()->roles_id <= 1) <th class="text-center text-uppercase text-xs font-weight-bolder">Edit</th>
                                                 @endif
                                         </tr>
@@ -90,6 +92,14 @@
                                             </td>
                                             <td class="align-middle text-center text-sm">
                                                 {{$data -> divisi->nama_divisi}}
+                                            <td class="align-middle text-center text-sm">
+
+                                            <td class="align-middle text-center text-sm">
+                                                {{$data -> nilai}}
+                                                <a href=# class="btn btn-primary btn-xs" data-bs-toggle="modal" data-bs-target="#editlogbook{{ $data->id }}">
+                                                    <i class="fas fa-edit">Entry Nilai</i>
+                                                </a>
+
                                             </td>
                                             @if(auth()->check() && auth()->user()->roles_id <= 1) <td class="align-middle text-center text-sm">
                                                 <a href=# class="btn btn-primary btn-xs" data-bs-toggle="modal" data-bs-target="#editlogbook{{ $data->id }}">
