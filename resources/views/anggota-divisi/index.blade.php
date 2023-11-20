@@ -74,32 +74,70 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Edit Status Kerja</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
+                        <button class="btn btn-danger btn-close" data-bs-dismiss="modal">
                         </button>
                     </div>
+
                     <div class="modal-body">
-                        <form id="editStatusForm">
+                        <form id="editStatusForm" action="{{ route('anggota-divisi.update') }}" method="POST">
+                            @csrf
+                            @method('PUT')
                             <div class="form-group">
                                 <label for="statusSelection">Pilih Status Kerja</label>
-                                <select class="form-control" id="selectedStatus">
+                                <select class="form-control" name="selectedStatus" id="selectedStatus">
+                                    <option selected>Pilih Status Kerja</option>
                                     @foreach ($statusKerjaAnggota as $item)
-                                        <option value={{ $item->id }}>{{ $item->nama_status }}</option>
+                                        <option value="{{ $item->id }}">
+                                            {{ $item->nama_status }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>
-                            @foreach ($anggota as $data)
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value={{ $data->id }}
-                                        id="flexCheckDefault">
-                                    <label class="form-check-label" for="flexCheckDefault">{{ $data->name }}
-                                    </label>
-                                    <label class="form-check-label" for="flexCheckDefault">{{ $data->statusKerja->nama_status }}
-                                    </label>
-                                </div>
-                            @endforeach
-                            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+
+                            {{-- WFO to WFH --}}
+                            <div id="checkBoxElement1" style="display: none;">
+                                @if (count($WFO) > 0)
+                                    @foreach ($WFO as $item)
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value={{ $item->id }}
+                                                name="user_ids[]">
+                                            <label class="form-check-label" for="flexCheckDefault">{{ $item->name }} ->
+                                                {{ $item->statusKerja->nama_status }}</label>
+                                            </label>
+                                        </div>
+                                    @endforeach
+                                @else
+                                    <div class="d-flex justify-content-center">
+                                        <h4>Tidak Ada Data</h4>
+                                    </div>
+                                @endif
+                            </div>
+
+                            {{-- WFH to WFO --}}
+                            <div id="checkBoxElement2" style="display: none;">
+                                @if (count($WFH) > 0)
+                                    @foreach ($WFH as $item)
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value={{ $item->id }}
+                                                name="user_ids[]">
+                                            <label class="form-check-label" for="flexCheckDefault">{{ $item->name }} ->
+                                                {{ $item->statusKerja->nama_status }}</label>
+                                            </label>
+                                        </div>
+                                    @endforeach
+                                @else
+                                    <div class="d-flex justify-content-center">
+                                        <h4>Tidak Ada Data</h4>
+                                    </div>
+                                @endif
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn bg-gradient-secondary"
+                                    data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn bg-gradient-primary">Save changes</button>
+                            </div>
                         </form>
+
                     </div>
                 </div>
             </div>
@@ -227,5 +265,21 @@
                 }
             })
         }
+
+        document.getElementById('selectedStatus').addEventListener('change', function() {
+            var selectedValue = this.value;
+            var data = selectedValue; // Simpan nilai terpilih dari dropdown ke variabel JavaScript 'tes'
+            var checkBoxElement1 = document.getElementById('checkBoxElement1');
+            var checkBoxElement2 = document.getElementById('checkBoxElement2');
+            if (data === '1') {
+                checkBoxElement2.style.display = 'block'; // Menampilkan elemen jika nilai 'tes' sama dengan '1'
+                checkBoxElement1.style.display = 'none'; // Menampilkan elemen jika nilai 'tes' sama dengan '1'
+            } else {
+                checkBoxElement2.style.display = 'none'; // Menyembunyikan elemen jika nilai 'tes' bukan '1'
+                checkBoxElement1.style.display = 'block'; // Menyembunyikan elemen jika nilai 'tes' bukan '1'
+            }
+            // Untuk memeriksa apakah nilai tes berhasil diubah:
+            console.log('Nilai terbaru dari dropdown: ' + data);
+        });
     </script>
 @endsection

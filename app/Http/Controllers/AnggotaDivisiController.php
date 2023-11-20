@@ -20,9 +20,13 @@ class AnggotaDivisiController extends Controller
     public function index()
     {
         $userDivisionsId = Auth::user()->divisions_id;
+        $statusWFO = 1;
+        $statusWFH = 2;
 
         // Filter data pengguna (admins) berdasarkan divisions_id.
         $anggota = User::with(['role', 'statusKerja'])->where('divisions_id', $userDivisionsId)->get();
+        $WFO = User::with(['role', 'statusKerja'])->where('divisions_id', $userDivisionsId)->where('status_kerjas_id', $statusWFO)->get();
+        $WFH = User::with(['role', 'statusKerja'])->where('divisions_id', $userDivisionsId)->where('status_kerjas_id', $statusWFH)->get();
         $roledata = Role::all();
         $divisidata = Divisi::all();
         $statusKerjaAnggota = StatusKerja::all();
@@ -32,6 +36,8 @@ class AnggotaDivisiController extends Controller
             'roledata' => $roledata,
             'divisidata' => $divisidata,
             'statusKerjaAnggota' => $statusKerjaAnggota,
+            'WFO' => $WFO,
+            'WFH' => $WFH,
             'menu' => 'Data User'
         ]);
     }
@@ -86,24 +92,28 @@ class AnggotaDivisiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:110'],
-            'email' => ['required', 'string', 'email', 'max:110'],
-            'divisions_id' => ['required', 'integer', 'max:3'],
-            // 'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        // $request->validate([
+        //     'name' => ['required', 'string', 'max:110'],
+        //     'email' => ['required', 'string', 'email', 'max:110'],
+        //     'divisions_id' => ['required', 'integer', 'max:3'],
+        //     // 'password' => ['required', 'string', 'min:8', 'confirmed'],
+        // ]);
 
-        $anggota = User::find($id);
-        $anggota->name = $request->name;
-        $anggota->email = $request->email;
-        $anggota->divisions_id = $request->divisions_id;
-        // $anggota->password = Hash::make($request->password);
-        $anggota->save();
+        // $anggota = User::find($id);
+        // $anggota->name = $request->name;
+        // $anggota->email = $request->email;
+        // $anggota->divisions_id = $request->divisions_id;
+        // // $anggota->password = Hash::make($request->password);
+        // $anggota->save();
+
+        $selectedStatus = $request->input('selectedStatus');
+        $userIds = $request->input('user_ids');   
+        User::whereIn('id', $userIds)->update(['status_kerjas_id' => $selectedStatus]);
 
         return redirect()->route('anggota-divisi.index')
-            ->with('success_message', 'Berhasil memindahkan Anggota.');
+            ->with('success_message', 'Berhasil Merubah Status Kerja Anggota.');
     }
 
     /**
