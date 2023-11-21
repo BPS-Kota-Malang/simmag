@@ -149,7 +149,7 @@
         // Sukses mendapatkan lokasi
         var lokasi = document.getElementById('lokasi');
         lokasi.value = position.coords.latitude + "," + position.coords.longitude;
-        var map = L.map('map').setView([position.coords.latitude, position.coords.longitude], 13);
+        var map = L.map('map').setView([position.coords.latitude, position.coords.longitude], 16);
         L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
             attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
