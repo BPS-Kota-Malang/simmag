@@ -84,6 +84,7 @@ class LogbookController extends Controller
             'jam_selesai' => 'required|string',
             'pekerjaan' => 'nullable|string',
             'divisions_id' => 'required|integer',
+            'grade' => 'required|integer',
             'user_id' => 'required|integer', // pastikan user_id di-validasi
         ]);
 
@@ -95,6 +96,7 @@ class LogbookController extends Controller
             'jam_selesai' => $request->jam_selesai,
             'pekerjaan' => $request->pekerjaan,
             'divisions_id' => $request->divisions_id,
+            'grade' => 0,
         ]);
 
         // Redirect back with a success message
@@ -161,31 +163,47 @@ class LogbookController extends Controller
      */
     public function rekaplogbook($tglawal, $tglakhir)
     {
-    $userDivisionsId = Auth::user()->divisions_id;
-    $userRoleId = Auth::user()->roles_id;
-    $userId = Auth::user()->id;
+        $userDivisionsId = Auth::user()->divisions_id;
+        $userRoleId = Auth::user()->roles_id;
+        $userId = Auth::user()->id;
 
-    // Memeriksa peran pengguna
-    if ($userRoleId == 1) {
-        $logbook = Logbook::where('user_id', $userId)
-            ->whereBetween('tanggal', [$tglawal, $tglakhir])
-            ->orderBy('tanggal', 'asc')
-            ->get();
-    } elseif ($userRoleId == 3) {
-        $logbook = Logbook::where('divisions_id', $userDivisionsId)
-            ->whereBetween('tanggal', [$tglawal, $tglakhir])
-            ->orderBy('tanggal', 'asc')
-            ->get();
-    } else {
-        $logbook = Logbook::whereBetween('tanggal', [$tglawal, $tglakhir])
-            ->orderBy('tanggal', 'asc')
-            ->get();
+        // Memeriksa peran pengguna
+        if ($userRoleId == 1) {
+            $logbook = Logbook::where('user_id', $userId)
+                ->whereBetween('tanggal', [$tglawal, $tglakhir])
+                ->orderBy('tanggal', 'asc')
+                ->get();
+        } elseif ($userRoleId == 3) {
+            $logbook = Logbook::where('divisions_id', $userDivisionsId)
+                ->whereBetween('tanggal', [$tglawal, $tglakhir])
+                ->orderBy('tanggal', 'asc')
+                ->get();
+        } else {
+            $logbook = Logbook::whereBetween('tanggal', [$tglawal, $tglakhir])
+                ->orderBy('tanggal', 'asc')
+                ->get();
+        }
+
+        $division = Divisi::all();
+        $jam = Jam::all();
+        $menu = 'Logbook';
+
+        return view('logbook.appointments', compact('logbook', 'division', 'jam', 'menu'));
     }
 
-    $division = Divisi::all();
-    $jam = Jam::all();
-    $menu = 'Logbook';
+    public function entry(Request $request, $id)
+    {
+        $logbook = Logbook::find($id);
 
-    return view('logbook.appointments', compact('logbook', 'division', 'jam', 'menu'));
+        $request->validate([
+            'grade' => 'required|integer',
+            // pastikan user_id di-validasi
+        ]);
+
+        $logbook->grade = $request->grade;
+
+        $logbook->save();
+        return redirect()->route('logbook.index')
+            ->with('success_message', 'Berhasil mengubah Data Logbook.');
     }
 }
