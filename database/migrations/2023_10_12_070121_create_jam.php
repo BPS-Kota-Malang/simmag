@@ -27,6 +27,6 @@ class CreateJam extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('jam');
+        Schema::dropIfExists('jams');
     }
 }
