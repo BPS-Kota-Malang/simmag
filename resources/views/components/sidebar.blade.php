@@ -296,12 +296,13 @@ $user = 'active';
                     <span class="nav-link-text ms-1">Presensi Pulang</span>
                 </a>
             </li>
+            <!-- rekap presensi user -->
             <li class="nav-item">
                 <a class="nav-link {{ $rekapuser }}" href="{{ url('rekap-user') }}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-collection text-dark text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Rekap Presensi User</span>
+                    <span class="nav-link-text ms-1">Rekap Presensi</span>
                 </a>
             </li>
             @endif
@@ -344,12 +345,13 @@ $user = 'active';
                     <span class="nav-link-text ms-1">Penerimaan Magang</span>
                 </a>
             </li>
+            <!-- rekap presensi Superadmin -->
             <li class="nav-item">
                 <a class="nav-link {{ $rekap }}" href="{{ url('rekap-absen') }}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-collection text-dark text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Rekap Presensi Admin</span>
+                    <span class="nav-link-text ms-1">Rekap Presensi</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -379,12 +381,13 @@ $user = 'active';
                     <span class="nav-link-text ms-1">Anggota Divisi</span>
                 </a>
             </li>
+            <!-- rekap presensi admin -->
             <li class="nav-item">
                 <a class="nav-link {{ $rekapadmin }}" href="{{ url('rekap-admin') }}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-collection text-dark text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Rekap Presensi Admin</span>
+                    <span class="nav-link-text ms-1">Rekap Presensi</span>
                 </a>
             </li>
             @endif
