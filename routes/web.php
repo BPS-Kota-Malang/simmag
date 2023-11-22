@@ -28,7 +28,7 @@ use Illuminate\Routing\RouteGroup;
 
 
 Route::get('/', function () {
-    return redirect('/redirects');
+    return view('welcome');
 });
 
 Route::get('/logout', [HomeController::class, 'logout'])->name('logout');
@@ -66,7 +66,6 @@ Route::middleware(['auth', 'checkStatus:2', 'checkRole:2', 'verified'])->group(f
     Route::post('/magang/hapus/{id_mahasiswa}', [PenerimaanMagangController::class, 'hapus'])->name('magang.hapus');
     Route::get('/download/proposal/{id_mahasiswa}', [MahasiswaController::class, 'download_proposal'])->name('download.proposal');
     Route::get('/download/surat/{id_mahasiswa}', [MahasiswaController::class, 'download_surat'])->name('download.surat');
-
 });
 
 // ROUTE GROUP ADMIN ONLY
