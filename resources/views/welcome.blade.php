@@ -18,7 +18,7 @@
                 <nav class="navbar navbar-expand-lg  blur blur-rounded top-0 z-index-fixed shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
                     <div class="container-fluid px-0">
                         <img src="{{ asset('assets/img/logo-bps.png') }}" width="4%">
-                        <a class="navbar-brand font-weight-bolder ms-sm-3" href="https://demos.creative-tim.com/soft-ui-design-system/index.html" rel="tooltip" title="Designed and Coded by Creative Tim" data-placement="bottom" target="_blank">
+                        <a class="navbar-brand font-weight-bolder ms-sm-3" href="#" rel="tooltip" title="Designed and Coded by Creative Tim" data-placement="bottom" target="_blank">
                             Sistem Informasi Magang
                         </a>
                         <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,7 +31,7 @@
                         <div class="collapse navbar-collapse pt-3 pb-2 py-lg-0 w-100" id="navigation">
                             <ul class="navbar-nav navbar-nav-hover ms-lg-12 ps-lg-5 w-100">
                                 <li class="nav-item ms-lg-auto">
-                                    <a href="#" class="btn btn-sm btn-outline-info btn-round mb-0 me-1 mt-2 mt-md-0">Login</a>
+                                    <a href="{{ route('login') }}" class="btn btn-sm btn-outline-info btn-round mb-0 me-1 mt-2 mt-md-0">Login</a>
                                 </li>
                             </ul>
                         </div>
@@ -54,7 +54,7 @@
                         <h1 class="mb-4">Sistem Informasi Magang</h1>
                         <p class="lead pe-5 me-5">BPS KOTA MALANG</p>
                         <div class="buttons">
-                            <button type="button" class="btn bg-gradient-info mt-4">Login</button>
+                            <a href="{{ route('login') }}" class="btn bg-gradient-info mt-4">Login</a>
                             <!-- <button type="button" class="btn text-info shadow-none mt-4">Read more</button> -->
                         </div>
                     </div>
@@ -191,7 +191,7 @@
                     <div class="col-md-7 mx-auto text-center">
                         <h3 class="text-white mb-0">Silahkan registrasi dan daftarkan </h3>
                         <h3 class="text-info text-gradient mb-4">pengajuan magang Anda melalui website kami</h3>
-                        <a href="#" class="btn btn-info btn-lg mb-3 mb-sm-0">Daftar Magang</a>
+                        <a href="{{ route('register') }}" class="btn btn-info btn-lg mb-3 mb-sm-0">Daftar Magang</a>
                     </div>
                 </div>
             </div>
