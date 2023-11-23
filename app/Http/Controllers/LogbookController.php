@@ -8,7 +8,8 @@ use App\Models\Divisi;
 use App\Models\Jam;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
-
+use Dotenv\Validator;
+use Illuminate\Support\Facades\Validator as FacadesValidator;
 
 class LogbookController extends Controller
 {
@@ -191,19 +192,47 @@ class LogbookController extends Controller
         return view('logbook.appointments', compact('logbook', 'division', 'jam', 'menu'));
     }
 
+    // public function entry(Request $request, $id)
+    // {
+    //     $logbook = Logbook::find($id);
+
+    //     $validator = $request->validate([
+    //         'grade' => 'required|numeric|min:60|max:100',
+    //         // pastikan user_id di-validasi
+    //     ]);
+
+    //     if ($validator->fails()) {
+    //         return redirect()->back()->withErrors(['current_password' => 'Password terkini tidak valid.'])->withInput();
+    //     }
+
+    //     $logbook->grade = $request->grade;
+    //     $logbook->save();
+
+    //     return redirect()->route('logbook.index')
+    //         ->with('success_message', 'Berhasil mengubah Data Logbook.');
+    // }
+
+
     public function entry(Request $request, $id)
     {
         $logbook = Logbook::find($id);
-
-        $request->validate([
-            'grade' => 'required|integer',
+        
+        $logbook->grade = $request->grade;
+        $validator = FacadesValidator::make($request->all(), [
+            'grade' => ['required', 'numeric','regex:/^(100|[1-9]?[0-9])$/'],
             // pastikan user_id di-validasi
         ]);
 
-        $logbook->grade = $request->grade;
+        // if ($validator->fails()) {
+        //     return back()->withErrors(['error_message' => 'Range Nilai Berupa Angka dari 0 -100.']);
+        // }
 
-        $logbook->save();
-        return redirect()->route('logbook.index')
+        if ($validator->fails()) {
+            return redirect()->route('logbook.index')->withErrors(['error_message' => 'Range Nilai Berupa Angka dari 0 -100.']);
+        } else {
+            $logbook->save();
+            return redirect()->route('logbook.index')
             ->with('success_message', 'Berhasil mengubah Data Logbook.');
+        }
     }
 }

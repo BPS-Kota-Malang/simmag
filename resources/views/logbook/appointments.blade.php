@@ -68,9 +68,9 @@
                                             <th class="text-center text-uppercase text-xs font-weight-bolder">Nilai</th>
 
                                             @if (auth()->check() && auth()->user()->roles_id == 1)
-                                                <th class="text-center text-uppercase text-xs font-weight-bolder">Edit</th>
+                                            <th class="text-center text-uppercase text-xs font-weight-bolder">Edit</th>
                                             @elseif (auth()->check() && auth()->user()->roles_id == 3)
-                                                <th class="text-center text-uppercase text-xs font-weight-bolder">Entry Nilai</th>
+                                            <th class="text-center text-uppercase text-xs font-weight-bolder">Entry Nilai</th>
                                             @endif
                                         </tr>
                                     </thead>
@@ -98,23 +98,23 @@
                                             <td class="align-middle text-center text-sm">
                                                 {{$data -> grade}}
                                             </td>
-                                            
+
                                             @if(auth()->check() && auth()->user()->roles_id == 1) <td class="align-middle text-center text-sm">
                                                 <a href=# class="btn btn-primary btn-xs" data-bs-toggle="modal" data-bs-target="#editlogbook{{ $data->id }}">
                                                     <i class="fas fa-edit">Edit</i>
                                                 </a>
-                                                </td>
-                                                
-                                                @elseif (auth()->check() && auth()->user()->roles_id == 3)
-                                                <td class="align-middle text-center text-sm">
+                                            </td>
+
+                                            @elseif (auth()->check() && auth()->user()->roles_id == 3)
+                                            <td class="align-middle text-center text-sm">
                                                 <a href=# class="btn btn-primary btn-xs" data-bs-toggle="modal" data-bs-target="#entrynilai{{ $data->id }}">
                                                     <i class="fas fa-edit">Entry Nilai</i>
                                                 </a>
 
                                             </td>
-                                                @endif
+                                            @endif
 
-                                                <!-- <td class="align-middle text-center text-sm">
+                                            <!-- <td class="align-middle text-center text-sm">
                                         <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-bs-toggle="modal" data-bs-target="#terima{{ $data->id_mahasiswa }}">
                                             <i class="fas fa-check-square fa-lg text-success"></i>
                                         </a>
@@ -215,12 +215,7 @@
                                                                     <input type="hidden" name="user_id" value="{{ auth()->id() }}">
                                                                     <div class="form-group">
                                                                         <label for="grade">Berikan Nilai</label>
-                                                                        <input type="text" class="form-control" id="grade" placeholder="Nilai" name="grade" required value="{{old('grade')}}">
-                                                                        @error('pekerjaan')
-                                                                        <div class="invalid-feedback">
-                                                                            {{$message}}
-                                                                        </div>
-                                                                        @enderror
+                                                                        <input type="number" class="form-control" id="grade" placeholder="Input Nillai 0 - 100." name="grade" required value="{{old('grade')}}">
                                                                     </div>
 
                                                                 </div>
@@ -345,15 +340,17 @@
         )
     </script>
     @endif
-    @if ($message = Session::get('pesan_error'))
+    @if($errors->any())
     <script>
-        Swal.fire(
-            'Tersimpan!',
-            '{{ $message }}',
-            'error'
-        )
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: '{{ $errors->first("error_message") }}',
+        });
     </script>
     @endif
+
+
 
     <!-- <style>
             #logbook th,
@@ -421,5 +418,7 @@
                 "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>"
         });
     </script>
+
+
 </section>
 @endsection
