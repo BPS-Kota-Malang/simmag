@@ -137,13 +137,14 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="kuota_magang_{{ $index }}">Kuota Magang</label>
-                            <input type="number" class="form-control @error('kuota_magang') is-invalid @enderror" id="kuota_magang_{{ $index }}" name="kuota_magang" placeholder="Kuota Magang" value="{{ old('kuota_magang') }}" required>
+                            <label for="kuota_magang">Kuota Magang</label>
+                            <input type="number" class="form-control @error('kuota_magang') is-invalid @enderror" id="kuota_magang" name="kuota_magang" placeholder="Kuota Magang" value="{{ old('kuota_magang') }}" required>
                             @error('kuota_magang')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
-                            <div class="invalid-feedback" id="kuota_magang_error_{{ $index }}"></div>
+                            <span class="invalid-feedback" role="alert" id="kuota_magang_error_add"></span>
                         </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
@@ -153,6 +154,7 @@
             </div>
         </div>
     </div>
+
 
 
     @if ($message = Session::get('Delete'))
@@ -267,6 +269,32 @@
                 $("#delete-form").submit();
             }
         })
+    }
+</script>
+
+<script>
+    // Ambil elemen input dan span untuk pesan kesalahan
+    const inputKuotaMagang = document.getElementById('kuota_magang');
+    const kuotaMagangError = document.getElementById('kuota_magang_error_add');
+
+    // Deteksi perubahan pada input
+    inputKuotaMagang.addEventListener('input', function() {
+        validateKuotaMagang(this.value);
+    });
+
+    // Fungsi validasi
+    function validateKuotaMagang(value) {
+        const regex = /^(?:[1-9]|1[0-9]|20)$/;
+        const isValid = regex.test(value);
+
+        // Jika tidak valid, tampilkan pesan kesalahan
+        if (!isValid) {
+            kuotaMagangError.innerText = 'Kuota magang harus berupa angka antara 1 sampai 20.';
+            inputKuotaMagang.classList.add('is-invalid');
+        } else {
+            kuotaMagangError.innerText = '';
+            inputKuotaMagang.classList.remove('is-invalid');
+        }
     }
 </script>
 
