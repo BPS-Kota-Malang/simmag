@@ -27,7 +27,7 @@ class DivisiController extends Controller
         return view('divisi.index', [
             'divisi' => $divisi,
             'menu' => 'Data Divisi'
-            
+
         ]);
     }
 
@@ -51,9 +51,14 @@ class DivisiController extends Controller
     {
         $request->validate([
             'nama_divisi' => 'required',
+            'kuota_magang' => ['required', 'numeric', 'regex:/^(?:[1-9]|1[0-9]|20)$/'],
+        ], [
+            'kuota_magang.regex' => 'Kuota magang harus berupa angka antara 1 sampai 20.',
         ]);
+
         Divisi::create([
             'nama_divisi' => $request->nama_divisi,
+            'kuota_magang' => $request->kuota_magang,
         ]);
 
         return redirect()->route('divisi.index')->with('save_message', 'Data Divisi Baru Berhasil di Tambahkan');
@@ -94,14 +99,15 @@ class DivisiController extends Controller
     {
         $request->validate([
             'nama_divisi' => 'required',
+            'kuota_magang' => ['required', 'numeric', 'regex:/^(?:[1-9]|1[0-9]|20)$/'], // Validasi dengan regex untuk angka 1-20
         ]);
 
         $divisi = Divisi::find($id);
         $divisi->nama_divisi = $request->nama_divisi;
+        $divisi->kuota_magang = $request->kuota_magang;
         $divisi->save();
 
         return redirect()->route('divisi.index')->with('success_message', 'Divisi berhasil diperbarui.');
-
     }
 
     /**
@@ -113,7 +119,7 @@ class DivisiController extends Controller
     public function destroy($id)
     {
         $divisi = Divisi::find($id);
-        if($divisi) $divisi->delete();
+        if ($divisi) $divisi->delete();
         return redirect()->route('divisi.index')
             ->with('Delete', 'Berhasil menghapus data.');
     }

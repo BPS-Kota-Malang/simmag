@@ -14,6 +14,7 @@ class Divisi extends Model
 
     protected $fillable = [
         'nama_divisi',
+        'kuota_magang',
     ];
 
     public function usersdivisi()

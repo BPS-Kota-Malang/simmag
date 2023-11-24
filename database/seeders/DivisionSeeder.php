@@ -16,20 +16,22 @@ class DivisionSeeder extends Seeder
     public function run()
     {
         DB::table('divisions')->insert([
+            'nama_divisi' => 'Tata Usaha',
+        ]);
+        DB::table('divisions')->insert([
+            'nama_divisi' => 'Distribusi',
+        ]);
+        DB::table('divisions')->insert([
             'nama_divisi' => 'Produksi',
         ]);
         DB::table('divisions')->insert([
             'nama_divisi' => 'Sosial',
         ]);
         DB::table('divisions')->insert([
-            'nama_divisi' => 'Neraca',
+            'nama_divisi' => 'Nerwilis',
         ]);
         DB::table('divisions')->insert([
             'nama_divisi' => 'IPDS',
         ]);
-        DB::table('divisions')->insert([
-            'nama_divisi' => 'Distribusi',
-        ]);
-        
     }
 }
