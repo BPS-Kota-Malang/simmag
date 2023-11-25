@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\SendEmail;
 use Illuminate\Http\Request;
 use App\Models\Mahasiswa;
+use App\Models\Divisi;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 
@@ -19,6 +20,7 @@ class PenerimaanMagangController extends Controller
     {
         //
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -92,6 +94,17 @@ class PenerimaanMagangController extends Controller
         $user->status = 2; // Ubah status user menjadi 2 (DITERIMA)
         $user->save();
 
+        // Check kuota magang di divisi terkait
+        $divisi = Divisi::findOrFail($request->divisi);
+        $jumlahMagang = $divisi->usersdivisi()->count();
+
+        if ($jumlahMagang >= $divisi->kuota_magang) {
+            // Ubah status kuota jika kuota terpenuhi
+            $divisi->status_kuota = 1; // Magang sudah penuh pada divisi tersebut
+            $divisi->save();
+        }
+
+        // EMAIL
         // Mengambil nama pendaftar
         $namaPendaftar = $mahasiswa->nama;
 
@@ -109,9 +122,10 @@ class PenerimaanMagangController extends Controller
 
         Mail::to($user->email)->send(new SendEmail($emailData));
 
-        return redirect()->back()
-            ->with('success_message', 'Permohonan magang berhasil diterima.');
+        return redirect()->back()->with('success_message', 'Permohonan magang berhasil diterima.');
     }
+
+
 
 
     /**

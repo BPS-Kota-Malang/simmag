@@ -98,11 +98,11 @@
                                     </td> --}}
 
                                     <td class="align-middle text-center text-sm">
-                                        <a href="{{ route('download.proposal', $data->id_mahasiswa) }}" >Download Proposal</a>
+                                        <a href="{{ route('download.proposal', $data->id_mahasiswa) }}">Download Proposal</a>
                                     </td>
 
                                     <td class="align-middle text-center text-sm">
-                                        <a href="{{ route('download.surat', $data->id_mahasiswa) }}" >Download Surat Pengantar</a>
+                                        <a href="{{ route('download.surat', $data->id_mahasiswa) }}">Download Surat Pengantar</a>
                                     </td>
 
                                     <td class="align-middle text-center text-sm">
@@ -158,9 +158,10 @@
                                                     <div class="modal-body">
                                                         Apakah Anda yakin ingin menerima permohonan magang tersebut?
                                                         <select class="form-select" name="divisi" aria-label="Default select example" required>
-                                                            <option value="" selected disabled>Pilih Divisi</option>
-                                                            @foreach($divisions as $divisi)
-                                                                <option value="{{ $divisi->id }}">{{ $divisi->nama_divisi }}</option>
+                                                            @foreach($divisions as $division)
+                                                            @if($division->status_kuota !== 1)
+                                                            <option value="{{ $division->id }}">{{ $division->nama_divisi }}</option>
+                                                            @endif
                                                             @endforeach
                                                         </select>
                                                     </div>

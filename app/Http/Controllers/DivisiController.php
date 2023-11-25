@@ -104,11 +104,20 @@ class DivisiController extends Controller
 
         $divisi = Divisi::find($id);
         $divisi->nama_divisi = $request->nama_divisi;
+
+        // Cek apakah nilai yang dimasukkan lebih besar dari kuota_magang sebelumnya
+        if ($request->kuota_magang > $divisi->kuota_magang) {
+            $divisi->status_kuota = null; // Jika lebih besar, set status_kuota menjadi null
+        } else {
+            $divisi->status_kuota = 1; // Jika kurang dari atau sama dengan, set status_kuota menjadi 1
+        }
+
         $divisi->kuota_magang = $request->kuota_magang;
         $divisi->save();
 
         return redirect()->route('divisi.index')->with('success_message', 'Divisi berhasil diperbarui.');
     }
+
 
     /**
      * Remove the specified resource from storage.
