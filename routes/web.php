@@ -4,6 +4,7 @@ use App\Http\Controllers\AnggotaDivisiController;
 use App\Http\Controllers\DivisiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LandingpageController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\PresensiController;
 use App\Http\Controllers\LogbookController;
@@ -26,10 +27,10 @@ use Illuminate\Routing\RouteGroup;
 |
 */
 
-
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [LandingpageController::class, 'index'])->name('landingpage.index');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/logout', [HomeController::class, 'logout'])->name('logout');
 

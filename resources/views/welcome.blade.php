@@ -70,22 +70,24 @@
                     <div class="row">
                         <div class="col-md-4 position-relative">
                             <div class="p-3 text-center">
-                                <h1 class="text-gradient text-info"><span id="state1" countTo="70">0</span>+</h1>
-                                <h5 class="mt-3">Magang Aktif</h5>
+                                <h1 class="text-gradient text-info"><span id="state1" countTo="{{ $countPendaftar }}">{{ $countPendaftar }}</span></h1>
+                                <h5 class="mt-3">Pendaftar</h5>
                             </div>
                             <hr class="vertical dark">
                         </div>
+
+
                         <div class="col-md-4 position-relative">
                             <div class="p-3 text-center">
-                                <h1 class="text-gradient text-info"> <span id="state2" countTo="15">0</span>+</h1>
-                                <h5 class="mt-3">User Aktif</h5>
+                                <h1 class="text-gradient text-info"> <span id="state2" countTo="{{ $countMagang }}">{{ $countMagang }}</span></h1>
+                                <h5 class="mt-3">Magang Aktif</h5>
                             </div>
                             <hr class="vertical dark">
                         </div>
                         <div class="col-md-4">
                             <div class="p-3 text-center">
-                                <h1 class="text-gradient text-info" id="state3" countTo="4">0</h1>
-                                <h5 class="mt-3">Pages</h5>
+                                <h1 class="text-gradient text-info" id="state3" countTo="{{ $countUser }}">{{ $countUser }}</span></h1>
+                                <h5 class="mt-3">User Aktif</h5>
                             </div>
                         </div>
                     </div>
@@ -94,21 +96,24 @@
         </div>
     </section>
 
-    <!-- <section class="my-5 py-5">
+    @if($allDivisionsFull)
+    <section class="py-5">
         <div class="container">
             <div class="row">
                 <div class="row justify-content-center text-center my-sm-5">
                     <div class="col-lg-9">
                         <h2 class="text-dark mb-0">Mohon Maaf</h2>
                         <h2 class="text-info text-gradient">Untuk Saat Ini Pendaftaran Magang Ditutup!</h2>
-                        <p class="lead">Dikarenakan kuota magang di BPS Kota Malang sedang penuh. Silahkan mendaftar di lain waktu </p>
+                        <p class="lead">Dikarenakan kuota magang di BPS Kota Malang sedang penuh. <br>Silahkan mendaftar di lain waktu. </p>
+                        <p class="lead">Terima Kasih</p>
                     </div>
                 </div>
             </div>
         </div>
-    </section> -->
+    </section>
+    @endif
 
-    <section class="my-5 py-5">
+    <section class="py-5">
         <div class="container">
             <div class="row">
                 <div class="row justify-content-center text-center my-sm-5">
@@ -191,30 +196,30 @@
                     <div class="col-md-7 mx-auto text-center">
                         <h3 class="text-white mb-0">Silahkan registrasi dan daftarkan </h3>
                         <h3 class="text-info text-gradient mb-4">pengajuan magang Anda melalui website kami</h3>
+                        @if($allDivisionsFull)
+                        @else
                         <a href="{{ route('register') }}" class="btn btn-info btn-lg mb-3 mb-sm-0">Daftar Magang</a>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- <div class="pt-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-5 ms-auto">
-                    <h4 class="mb-1">ANDA INGIN MENDAFTAR MAGANG?</h4>
-                    <p class="lead mb-0">Silahkan registrasi dan daftarkan diri Anda!</p>
-                </div>
-                <div class="col-lg-5 me-lg-auto my-lg-auto text-lg-end mt-5">
-                    <a href="https://twitter.com/intent/tweet?text=Check%20Soft%20UI%20Design%20System%20made%20by%20%40CreativeTim%20%23webdesign%20%23designsystem%20%23bootstrap5&url=https%3A%2F%2Fwww.creative-tim.com%2Fproduct%2Fsoft-ui-design-system" class="btn btn-info mb-0 me-2" target="_blank">
-                        <i class="fab fa-twitter me-1"></i> Tweet
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div> -->
-
     @include('components.footer')
+
+    <!-- <script type="text/javascript">
+        // Function to scroll to the top of the page
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            }); // Smooth scroll to top
+        }
+
+        // When the page finishes loading, scroll to the top
+        window.addEventListener('load', scrollToTop);
+    </script> -->
 
     <script type="text/javascript">
         if (document.getElementById('state1')) {
