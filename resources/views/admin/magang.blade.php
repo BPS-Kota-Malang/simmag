@@ -157,6 +157,9 @@
                                                     @csrf
                                                     <div class="modal-body">
                                                         Apakah Anda yakin ingin menerima permohonan magang tersebut?
+                                                        @if($allDivisionsFull)
+                                                        <p class="text-danger">Kuota Magang Penuh Saat Ini.</p>
+                                                        @else
                                                         <select class="form-select" name="divisi" aria-label="Default select example" required>
                                                             @foreach($divisions as $division)
                                                             @if($division->status_kuota !== 1)
@@ -164,15 +167,19 @@
                                                             @endif
                                                             @endforeach
                                                         </select>
+                                                        @endif
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                        @unless($allDivisionsFull)
                                                         <button type="submit" class="btn btn-success">Terima</button>
+                                                        @endunless
                                                     </div>
                                                 </form>
                                             </div>
                                         </div>
                                     </div>
+
 
                                     <!-- Modal Ditolak -->
                                     <div class="modal fade" id="tolak{{ $data->id_mahasiswa }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="tolak" aria-hidden="true">

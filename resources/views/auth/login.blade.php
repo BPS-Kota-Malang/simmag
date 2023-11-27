@@ -64,12 +64,12 @@
                                 </p>
                             </div>
 
-                            <div class="card-footer text-center pt-0 px-sm-4 px-1">
+                            <!-- <div class="card-footer text-center pt-0 px-sm-4 px-1">
                                 <p class="mb-4 mx-auto">
                                     Don't have Account?
                                     <a href="{{ route('register') }}" class="text-info text-gradient font-weight-bold">Register</a>
                                 </p>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
 

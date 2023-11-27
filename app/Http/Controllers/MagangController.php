@@ -18,7 +18,20 @@ class MagangController extends Controller
     {
         $magang = Mahasiswa::all(); // Ambil semua data mahasiswa
         $divisions = Divisi::all(); // Ambil semua data divisi
-        return view('admin.magang', compact('magang', 'divisions'), ['menu' => 'Penerimaan Magang']);
+
+        $allDivisionsFull = true;
+        foreach ($divisions as $division) {
+            // Jika ada divisi yang belum penuh (status kuota magang != 1), set variabel $allDivisionsFull menjadi false
+            if ($division->status_kuota !== 1) {
+                $allDivisionsFull = false;
+                break; // Jika ada divisi yang tidak penuh, hentikan pengecekan
+            }
+        }
+
+        return view('admin.magang', compact('magang', 'divisions'))->with([
+            'menu' => 'Penerimaan Magang',
+            'allDivisionsFull' => $allDivisionsFull
+        ]);
     }
 
 

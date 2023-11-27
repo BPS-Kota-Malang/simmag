@@ -112,11 +112,22 @@ class DivisiController extends Controller
             $divisi->status_kuota = 1; // Jika kurang dari atau sama dengan, set status_kuota menjadi 1
         }
 
+        // Hitung jumlah pengguna yang memiliki roles_id = 1 dan divisions_id yang sama dengan ID divisi yang sedang diubah
+        $jumlah_pengguna_divisi = User::where('divisions_id', $id)->where('roles_id', 1)->count();
+
+        // Cek apakah kuota magang yang baru kurang dari jumlah pengguna divisi dengan roles_id = 1
+        if ($request->kuota_magang < $jumlah_pengguna_divisi) {
+            return redirect()->back()->with('error_message', 'Kuota magang tidak boleh kurang dari jumlah anggota divisi yang sudah terdaftar saat ini!.');
+        }
+
+        // Jika tidak, simpan perubahan kuota magang
         $divisi->kuota_magang = $request->kuota_magang;
         $divisi->save();
 
         return redirect()->route('divisi.index')->with('success_message', 'Divisi berhasil diperbarui.');
     }
+
+
 
 
     /**

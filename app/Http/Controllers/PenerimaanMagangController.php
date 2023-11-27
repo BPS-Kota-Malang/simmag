@@ -96,9 +96,15 @@ class PenerimaanMagangController extends Controller
 
         // Check kuota magang di divisi terkait
         $divisi = Divisi::findOrFail($request->divisi);
-        $jumlahMagang = $divisi->usersdivisi()->count();
 
-        if ($jumlahMagang >= $divisi->kuota_magang) {
+        // Menghitung jumlah mahasiswa dengan roles_id 1 yang telah diterima dalam divisi tersebut
+        $jumlahMahasiswa = User::where('divisions_id', $request->divisi)
+            ->where('roles_id', 1) // Hanya mahasiswa dengan roles_id 1
+            ->count();
+
+        // $jumlahMahasiswa += 1; // Menambah satu pendaftar baru
+
+        if ($jumlahMahasiswa >= $divisi->kuota_magang) {
             // Ubah status kuota jika kuota terpenuhi
             $divisi->status_kuota = 1; // Magang sudah penuh pada divisi tersebut
             $divisi->save();

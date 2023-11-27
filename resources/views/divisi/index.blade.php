@@ -184,6 +184,15 @@
         )
     </script>
     @endif
+    @if ($message = Session::get('error_message'))
+    <script>
+        Swal.fire(
+            'Error!',
+            '{{ $message }}',
+            'question'
+        )
+    </script>
+    @endif
 </section>
 
 <form action="" id="delete-form" method="post">
