@@ -74,9 +74,10 @@ Route::middleware(['auth', 'checkStatus:2', 'checkRole:2', 'verified'])->group(f
 Route::middleware(['auth', 'checkStatus:2', 'checkRole:3', 'verified'])->group(function () {
     Route::resource('/anggota-divisi', AnggotaDivisiController::class);
     Route::get('/anggota-divisi/edit/{id}', [AnggotaDivisiController::class, 'edit'])->name('anggota-divisi.edit');
-    Route::put('/anggota-divisi/update/{id}', [AnggotaDivisiController::class, 'update'])->name('anggota-divisi.update');
+    Route::put('/anggota-divisi/update', [AnggotaDivisiController::class, 'update'])->name('anggota-divisi.update');
     Route::get('rekap-admin', [PresensiController::class, 'halamanrekapadmin'])->name('rekap-absen-admin');
     Route::get('rekap-admin/{tglawal}/{tglakhir}', [PresensiController::class, 'tampildataadmin'])->name('rekap-admin');
+    Route::get('/getUsersByStatus/{status}', [AnggotaDivisiController::class, 'getUsersByStatus']);
 });
 
 // ROUTE GROUP USER 

@@ -70,16 +70,29 @@
                                         <td class="text-center align-items-center">{{ $count++ }}</td>
 
                                         <td class="text-center align-items-center">
+                                            @if($item->user)
                                             {{ $item->user->name }}
+                                            @else
+                                            User Tidak Ditemukan
+                                            @endif
                                         </td>
 
                                         <td class="align-middle text-center text-sm">
+                                            @if($item->user && $item->user->mahasiswa)
                                             {{ $item->user->mahasiswa->universitas }}
+                                            @else
+                                            Universitas Tidak Ditemukan
+                                            @endif
                                         </td>
 
                                         <td class="text-center align-items-center">
+                                            @if($item->user && $item->user->divisi)
                                             {{ $item->user->divisi->nama_divisi }}
+                                            @else
+                                            Divisi Tidak Ditemukan
+                                            @endif
                                         </td>
+
 
                                         <td class="text-center align-items-center">
                                             {{ $item->tgl }}

@@ -25,8 +25,12 @@ class TambahKolomKeTabel extends Migration
      */
     public function down()
     {
+<<<<<<< HEAD:database/migrations/2023_11_18_091414_tambah_kolom_ke_tabel.php
         Schema::table('logbooks', function (Blueprint $table) {
             //
         });
+=======
+        Schema::dropIfExists('jams');
+>>>>>>> fitur-statuskerja:database/migrations/2023_10_12_070121_create_jam.php
     }
 }

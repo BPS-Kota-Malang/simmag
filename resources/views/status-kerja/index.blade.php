@@ -1,7 +1,7 @@
 @extends('admin.admin-main')
 
 @section('container')
-    @include('components.topnav', ['title' => 'Anggota Divisi'])
+    @include('components.topnav', ['title' => 'Status Kerja Anggota'])
 
     <section class="pt-3 pb-4" id="count-stats">
         <div class="container-fluid py-4">
@@ -9,21 +9,18 @@
 
                 <!-- Card Title -->
                 <div class="card mb-3">
-                    <div class="card-body p-3 fw-bold text-dark">
+                    <div class="card-body p-3 fw-bold text-dark d-flex justify-content-between">
                         <div class="d-flex align-items-center">
                             <div class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
                                 <i class="ni ni-bullet-list-67 text-lg opacity-10" aria-hidden="true"></i>
                             </div>
                             <span class="mx-3 fs-4">Anggota Divisi {{ Auth::user()->divisi->nama_divisi }}</span>
-
                         </div>
                     </div>
                 </div>
                 <div class="card mb-4 p-3">
                     <div class="card-body px-0 pt-0 pb-2">
                         <div class="table-responsive p-0">
-                            <button class="btn btn-primary ms-auto mt-2 mb-4" data-bs-toggle="modal"
-                                data-bs-target="#editStatusModal">Ubah Status Kerja</button>
                             <table class="table table-hover table-bordered table-stripped align-items-center"
                                 id="users">
                                 <thead>
@@ -33,7 +30,6 @@
                                         <th class="text-center text-uppercase text-xs font-weight-bolder">E-mail</th>
                                         <th class="text-center text-uppercase text-xs font-weight-bolder">Role</th>
                                         <th class="text-center text-uppercase text-xs font-weight-bolder">div</th>
-                                        <th class="text-center text-uppercase text-xs font-weight-bolder">Status Kerja</th>
                                         {{-- <th class="text-center text-uppercase text-xs font-weight-bolder">Opsi</th> --}}
                                     </tr>
                                 </thead>
@@ -49,8 +45,6 @@
                                         <td class="text-center align-items-center">{{ $data->email }}</td>
                                         <td class="text-center align-items-center">{{ $data->role->nama_role }}</td>
                                         <td class="text-center align-items-center">{{ $data->divisi->nama_divisi }}</td>
-                                        <td class="text-center align-items-center">{{ $data->statusKerja->nama_status }}
-                                        </td>
 
                                         {{-- <td>
                                             <a href=# class="btn btn-primary btn-xs" data-bs-toggle="modal"
@@ -59,6 +53,66 @@
                                             </a>
                                         </td> --}}
                                     </tr>
+
+                                    <!-- Modal Edit Admin -->
+                                    {{-- <div class="modal fade" id="editDataAdmin{{ $data->id }}" tabindex="-1"
+                                        role="dialog" aria-labelledby="editDataAdminLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="editDataAdminLabel">Edit Data Anggota</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    </button>
+                                                </div>
+                                                <form action="{{ route('anggota-divisi.update', $data->id) }}"
+                                                    method="POST">
+                                                    @method('PUT')
+                                                    @csrf
+
+                                                    <div class="modal-body">
+                                                        <div class="form-group">
+                                                            <label for="name">Nama</label>
+                                                            <input type="text"
+                                                                class="form-control @error('name') is-invalid @enderror"
+                                                                id="name" placeholder="Nama" name="name"
+                                                                value="{{ $data->name ?? old('name') }}" required>
+                                                            @error('name')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="email">E-mail</label>
+                                                            <input type="email"
+                                                                class="form-control @error('email') is-invalid @enderror"
+                                                                id="email" placeholder="Masukkan Email" name="email"
+                                                                value="{{ $data->email ?? old('email') }}" required>
+                                                            @error('email')
+                                                                <span class="text-danger">{{ $message }}</span>
+                                                            @enderror
+                                                        </div>
+
+
+                                                        <div class="form-group">
+                                                            <label for="roles_id">Divisi</label>
+                                                            <select class="form-control" name="divisions_id" id="divisions_id"
+                                                                required>
+
+                                                                @foreach ($divisidata as $item)
+                                                                    <option value="{{ $item->id }}" selected>
+                                                                        {{ $item->nama_divisi }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="submit" class="btn btn-primary">Simpan</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div> --}}
                                 @endforeach
                             </table>
                         </div>
@@ -66,81 +120,6 @@
                 </div>
             </div>
         </div>
-
-        </div>
-
-        <div class="modal" id="editStatusModal" tabindex="-1" role="dialog">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Edit Status Kerja</h5>
-                        <button class="btn btn-danger btn-close" data-bs-dismiss="modal">
-                        </button>
-                    </div>
-
-                    <div class="modal-body">
-                        <form id="editStatusForm" action="{{ route('anggota-divisi.update') }}" method="POST">
-                            @csrf
-                            @method('PUT')
-                            <div class="form-group">
-                                <label for="statusSelection">Pilih Status Kerja</label>
-                                <select class="form-control" name="selectedStatus" id="selectedStatus">
-                                    <option selected>Pilih Status Kerja</option>
-                                    @foreach ($statusKerjaAnggota as $item)
-                                        <option value="{{ $item->id }}">
-                                            {{ $item->nama_status }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-
-                            {{-- WFO to WFH --}}
-                            <div id="checkBoxElement1" style="display: none;">
-                                @if (count($WFO) > 0)
-                                    @foreach ($WFO as $item)
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value={{ $item->id }}
-                                                name="user_ids[]">
-                                            <label class="form-check-label" for="flexCheckDefault">{{ $item->name }} ->
-                                                {{ $item->statusKerja->nama_status }}</label>
-                                            </label>
-                                        </div>
-                                    @endforeach
-                                @else
-                                    <div class="d-flex justify-content-center">
-                                        <h4>Tidak Ada Data</h4>
-                                    </div>
-                                @endif
-                            </div>
-
-                            {{-- WFH to WFO --}}
-                            <div id="checkBoxElement2" style="display: none;">
-                                @if (count($WFH) > 0)
-                                    @foreach ($WFH as $item)
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value={{ $item->id }}
-                                                name="user_ids[]">
-                                            <label class="form-check-label" for="flexCheckDefault">{{ $item->name }} ->
-                                                {{ $item->statusKerja->nama_status }}</label>
-                                            </label>
-                                        </div>
-                                    @endforeach
-                                @else
-                                    <div class="d-flex justify-content-center">
-                                        <h4>Tidak Ada Data</h4>
-                                    </div>
-                                @endif
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn bg-gradient-secondary"
-                                    data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn bg-gradient-primary">Save changes</button>
-                            </div>
-                        </form>
-
-                    </div>
-                </div>
-            </div>
         </div>
 
         @if ($message = Session::get('Delete'))
@@ -192,16 +171,16 @@
                 [0, 'asc']
             ],
             "columnDefs": [{
-                    "targets": [5],
+                    "targets": [4],
                     "orderable": false
                 },
                 {
-                    "targets": [0, 5],
+                    "targets": [0, 4],
                     "className": "text-center"
                 },
                 {
                     "width": "130px",
-                    "targets": 5
+                    "targets": 4
                 },
             ],
             dom: 'Bfrtip',
@@ -265,21 +244,5 @@
                 }
             })
         }
-
-        document.getElementById('selectedStatus').addEventListener('change', function() {
-            var selectedValue = this.value;
-            var data = selectedValue; // Simpan nilai terpilih dari dropdown ke variabel JavaScript 'tes'
-            var checkBoxElement1 = document.getElementById('checkBoxElement1');
-            var checkBoxElement2 = document.getElementById('checkBoxElement2');
-            if (data === '1') {
-                checkBoxElement2.style.display = 'block'; // Menampilkan elemen jika nilai 'tes' sama dengan '1'
-                checkBoxElement1.style.display = 'none'; // Menampilkan elemen jika nilai 'tes' sama dengan '1'
-            } else {
-                checkBoxElement2.style.display = 'none'; // Menyembunyikan elemen jika nilai 'tes' bukan '1'
-                checkBoxElement1.style.display = 'block'; // Menyembunyikan elemen jika nilai 'tes' bukan '1'
-            }
-            // Untuk memeriksa apakah nilai tes berhasil diubah:
-            console.log('Nilai terbaru dari dropdown: ' + data);
-        });
     </script>
 @endsection

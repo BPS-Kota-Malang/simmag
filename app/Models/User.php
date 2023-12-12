@@ -23,39 +23,27 @@ class User extends Authenticatable implements MustVerifyEmail
 
     use Notifiable;
 
-    public function mahasiswa()
-    {
-        return $this->hasOne(Mahasiswa::class, 'user_id');
-    }
-
-    public function divisi()
-    {
-        return $this->belongsTo(Divisi::class, 'divisions_id', 'id');
-    }
-    public function role()
-    {
-        return $this->belongsTo(Role::class, 'roles_id', 'id');
-    }
-
+    
     /**
      * The attributes that are mass assignable.
      *
      * @var string[]
      */
-
+    
     protected $table = 'users';
     protected $primaryKey = 'id';
-
+    
     protected $fillable = [
         'name',
         'email',
         'password',
         'roles_id',
         'status',
+        'status_kerjas_id',
         'divisions_id'
         // 'email_verified_at'
     ];
-
+    
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -76,7 +64,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
+    
     /**
      * The accessors to append to the model's array form.
      *
@@ -85,12 +73,28 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $appends = [
         'profile_photo_url',
     ];
-
+    
+    public function mahasiswa()
+    {
+        return $this->hasOne(Mahasiswa::class, 'user_id');
+    }
+    public function divisi()
+    {
+        return $this->belongsTo(Divisi::class, 'divisions_id', 'id');
+    }
+    public function statusKerja()
+    {
+        return $this->belongsTo(StatusKerja::class, 'status_kerjas_id', 'id');
+    }
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'roles_id', 'id');
+    }
     public function presensi()
     {
         return $this->hasMany(Presensi::class, 'user_id', 'id');
     }
-
+    
     public function isSuperAdmin()
     {
         return $this->roles_id === '2'; // Ubah ini sesuai dengan logika peran Anda
