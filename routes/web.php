@@ -38,6 +38,7 @@ Route::get('/logbook', [LogbookController::class, 'index'])->name('logbook.index
 Route::get('/logbook/create', [LogbookController::class, 'create'])->name('logbook.create');
 Route::post('/logbook/store', [LogbookController::class, 'store'])->name('logbook.store');
 Route::put('/logbook/update/{id}', [LogbookController::class, 'update'])->name('logbook.update');
+Route::put('/logbook/entry/{id}', [LogbookController::class, 'entry'])->name('logbook.entry');
 Route::get('/logbook/{tglawal}/{tglakhir}', [LogbookController::class, 'rekaplogbook'])->name('logbook.rekap');
 
 
