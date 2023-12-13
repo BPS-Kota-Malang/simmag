@@ -135,4 +135,19 @@ class UserManagementController extends Controller
         return redirect()->route('user-management.index')
             ->with('Delete', 'Berhasil menghapus data.');
     }
+
+    public function resetPassword($id)
+{
+    $user = User::find($id);
+
+    if ($user) {
+        $user->password = Hash::make('bps03573');
+        $user->save();
+
+        return redirect()->route('user-management.index')->with('success_message', 'Password reset successfully!');
+    }
+
+    return redirect()->route('user-management.index')->with('error', 'User not found.');
+}
+
 }
