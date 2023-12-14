@@ -266,7 +266,7 @@
     @if ($message = Session::get('success_message'))
     <script>
         Swal.fire(
-            'Tersimpan!',
+            'Berhasil!',
             '{{ $message }}',
             'success'
         )
