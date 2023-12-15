@@ -96,26 +96,48 @@ class ReportController extends Controller
         //
     }
 
-    public function generatePDF()
+    public function generatePDF(Request $request)
     {
-        $presensi = Presensi::all();
-        $data = [
-            'presensi' => $presensi,
-        ];
+        // Ambil informasi bulan yang dipilih dari permintaan
+        $selectedMonth = $request->input('month');
 
-        $pdf = new Dompdf();
-        $pdf->loadHtml(View::make('report.reportpresensi', $data)->render());
+        // Ambil informasi pengguna yang sedang login
+        $user = auth()->user();
 
-        // (Opsional) Atur opsi Dompdf jika diperlukan
-        $options = new Options();
-        $options->set('isRemoteEnabled', true);
+        // Periksa apakah pengguna ada
+        if ($user) {
+            // Ambil ID pengguna
+            $userId = $user->id;
 
-        $pdf->setOptions($options);
+            // Ambil data presensi berdasarkan ID pengguna dan bulan yang dipilih
+            $presensi = Presensi::where('user_id', $userId)
+                ->whereMonth('tgl', $selectedMonth)
+                ->get();
 
-        // Render PDF
-        $pdf->render();
+            // Jika presensi ditemukan, lanjutkan proses membuat PDF
+            if ($presensi->isNotEmpty()) {
+                $monthName = date("F", mktime(0, 0, 0, $selectedMonth, 10)); // Nama bulan
+                $fileName = 'Laporan_Presensi_' . str_replace(' ', '_', $user->name) . '_' . $monthName . '.pdf'; // Nama file PDF
 
-        // Unduh atau tampilkan PDF
-        return $pdf->stream('report.pdf');
+                $data = [
+                    'user' => $user, // Mengirim informasi pengguna ke tampilan PDF
+                    'presensi' => $presensi,
+                ];
+
+                $pdf = new Dompdf();
+                $pdf->loadHtml(View::make('report.reportpresensi', $data)->render());
+
+                // Atur opsi Dompdf jika diperlukan
+                $options = new Options();
+                $options->set('isRemoteEnabled', true);
+                $pdf->setOptions($options);
+
+                // Render PDF dengan nama file yang khusus
+                return $pdf->stream($fileName);
+            }
+        }
+
+        // Jika ada masalah atau presensi kosong, mungkin perlu ditangani di sini
+        return redirect()->back()->with('error', 'Tidak ada data presensi yang ditemukan.');
     }
 }

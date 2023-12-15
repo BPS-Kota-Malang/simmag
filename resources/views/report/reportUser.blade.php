@@ -18,22 +18,60 @@
             </div>
 
             <div class="col-xl-6 col-sm-6 mb-xl-0 mb-4">
-                <div class="card mb-4">
+                <div class="card mb-4" data-bs-toggle="modal" data-bs-target="#bulan">
                     <div class="card-body p-3">
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <a class="text-sm mb-0 text-uppercase font-weight-bold" style="color: inherit;" href="{{ url('/generate-pdf') }}">Report Absensi</a>
+                                    <a class="text-sm mb-0 text-uppercase font-weight-bold" style="color: inherit;">Report Absensi</a>
                                     <h5 class="font-weight-bolder">
                                     </h5>
                                 </div>
                             </div>
                             <div class="col-4 text-end">
                                 <div class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
-                                    <a href="{{ url('/generate-pdf') }}"><i class="ni ni-collection text-lg opacity-10" aria-hidden="true"></i></a>
+                                    <i class="ni ni-collection text-lg opacity-10" aria-hidden="true"></i>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Pilih Bulan -->
+            <div class="modal fade" id="bulan" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="terima" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="terima">Pilih Bulan</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <form action="/generate-pdf" method="GET">
+                            <div class="modal-body">
+                                Silahkan pilih bulan
+                                <select class="form-select mt-2" name="month" id="bulanSelect" aria-label="Default select example" required>
+                                    <!-- Opsi bulan -->
+                                    <option value="" selected disabled>Pilih Bulan</option>
+                                    <option value="1">Januari</option>
+                                    <option value="2">Februari</option>
+                                    <option value="3">Maret</option>
+                                    <option value="4">April</option>
+                                    <option value="5">Mei</option>
+                                    <option value="6">Juni</option>
+                                    <option value="7">Juli</option>
+                                    <option value="8">Agustus</option>
+                                    <option value="9">September</option>
+                                    <option value="10">Oktober</option>
+                                    <option value="11">November</option>
+                                    <option value="12">Desember</option>
+                                </select>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                <button type="submit" class="btn btn-success">Download</button>
+                            </div>
+                        </form>
+
                     </div>
                 </div>
             </div>
@@ -62,66 +100,4 @@
     </div>
 </section>
 @include('components/footer')
-
-<script>
-    $('#rekap').DataTable({
-        "order": [
-            [0, 'asc']
-        ],
-        "columnDefs": [{
-                "targets": [7],
-                "orderable": false
-            },
-            {
-                "targets": [0, 7],
-                "className": "text-center"
-            },
-            {
-                "width": "130px",
-                "targets": 7
-            },
-        ],
-        dom: 'Bfrtip',
-        buttons: [{
-                extend: 'pdf',
-                text: '<i class="fa fa-file-pdf text-danger"></i> PDF',
-                title: 'Rekap Presensi',
-                exportOptions: {
-                    columns: ':visible'
-                },
-                messageTop: '',
-                orientation: 'portrait',
-                pageSize: 'A4'
-            },
-            {
-                extend: 'excel',
-                text: '<i class="fa fa-file-excel text-success" > </i> EXCEL',
-                title: 'Rekap Presensi',
-                exportOptions: {
-                    columns: ':visible'
-                },
-                messageTop: ''
-            },
-            {
-                extend: 'print',
-                text: '<i class="fa fa-print text-info" > </i> PRINT',
-                title: 'Rekap Presensi',
-                exportOptions: {
-                    columns: ':visible'
-                },
-                messageTop: '',
-            },
-            {
-                extend: 'colvis',
-                text: '<i class="fa fa-table" > </i> Columns',
-                postfixButtons: ['colvisRestore']
-            },
-        ],
-
-        "dom": "<'row'<'col-sm-12 col-md-2'l><'col-sm-12 col-md-6'B><'col-sm-12 col-md-4'f>>" +
-            "<'row'<'col-sm-12'tr>>" +
-            "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>"
-
-    });
-</script>
 @endsection
