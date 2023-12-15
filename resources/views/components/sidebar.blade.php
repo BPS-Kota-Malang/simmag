@@ -11,6 +11,7 @@ $logbook = '';
 $admin = '';
 $divisi = '';
 $user = '';
+$report = '';
 @endphp
 
 @switch($menu)
@@ -28,6 +29,7 @@ $logbook = '';
 $admin = '';
 $divisi = '';
 $user = '';
+$report = '';
 
 @endphp
 @break
@@ -46,6 +48,7 @@ $logbook = '';
 $admin = '';
 $divisi = '';
 $user = '';
+$report = '';
 @endphp
 @break
 
@@ -63,6 +66,7 @@ $logbook = '';
 $admin = '';
 $divisi = '';
 $user = '';
+$report = '';
 @endphp
 @break
 
@@ -80,6 +84,7 @@ $logbook = '';
 $admin = '';
 $divisi = '';
 $user = '';
+$report = '';
 
 @endphp
 @break
@@ -98,6 +103,7 @@ $logbook = '';
 $admin = '';
 $divisi = '';
 $user = '';
+$report = '';
 @endphp
 @break
 
@@ -115,6 +121,7 @@ $logbook = '';
 $admin = '';
 $divisi = '';
 $user = '';
+$report = '';
 @endphp
 @break
 
@@ -132,6 +139,7 @@ $logbook = '';
 $admin = '';
 $divisi = '';
 $user = '';
+$report = '';
 @endphp
 @break
 
@@ -149,6 +157,7 @@ $logbook = '';
 $admin = '';
 $divisi = '';
 $user = '';
+$report = '';
 @endphp
 @break
 
@@ -166,6 +175,7 @@ $logbook = '';
 $admin = '';
 $divisi = '';
 $user = '';
+$report = '';
 @endphp
 @break
 
@@ -183,6 +193,7 @@ $logbook = '';
 $admin = '';
 $divisi = '';
 $user = '';
+$report = '';
 @endphp
 @break
 
@@ -200,6 +211,7 @@ $logbook = '';
 $admin = '';
 $divisi = '';
 $user = '';
+$report = '';
 @endphp
 @break
 
@@ -217,6 +229,7 @@ $logbook = 'active';
 $admin = '';
 $divisi = '';
 $user = '';
+$report = '';
 @endphp
 @break
 
@@ -234,8 +247,10 @@ $logbook = '';
 $admin = '';
 $divisi = 'active';
 $user = '';
+$report = '';
 @endphp
 @break
+
 @case('Data User')
 @php
 $dashboard = '';
@@ -250,6 +265,25 @@ $logbook = '';
 $admin = '';
 $divisi = '';
 $user = 'active';
+$report = '';
+@endphp
+@break
+
+@case('Report')
+@php
+$dashboard = '';
+$magang = '';
+$profile = '';
+$rekap = '';
+$rekapuser = '';
+$rekapadmin = '';
+$masuk = '';
+$keluar = '';
+$logbook = '';
+$admin = '';
+$divisi = '';
+$user = '';
+$report = 'active';
 @endphp
 @break
 
@@ -305,6 +339,7 @@ $user = 'active';
                     <span class="nav-link-text ms-1">Rekap Presensi</span>
                 </a>
             </li>
+
             @endif
 
             <li class="nav-item">
@@ -332,6 +367,15 @@ $user = 'active';
                         <i class="ni ni-single-02 text-dark text-sm opacity-10"></i>
                     </div>
                     <span class="nav-link-text ms-1">Profile</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link {{ $report }}" href="{{ url('reportUser') }}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fas fa-book text-dark text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Report</span>
                 </a>
             </li>
 
@@ -388,6 +432,14 @@ $user = 'active';
                         <i class="ni ni-collection text-dark text-sm opacity-10"></i>
                     </div>
                     <span class="nav-link-text ms-1">Rekap Presensi</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ $report }}" href="{{ url('report-admin') }}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fas fa-book text-dark text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Report</span>
                 </a>
             </li>
             @endif

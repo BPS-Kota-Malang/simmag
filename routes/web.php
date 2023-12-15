@@ -13,6 +13,7 @@ use App\Http\Controllers\StatusMagangUser;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\StatusMagangUserController;
 use App\Http\Controllers\PenerimaanMagangController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UserManagementController;
 use Illuminate\Routing\RouteGroup;
 
@@ -69,7 +70,6 @@ Route::middleware(['auth', 'checkStatus:2', 'checkRole:2', 'verified'])->group(f
     Route::get('/download/proposal/{id_mahasiswa}', [MahasiswaController::class, 'download_proposal'])->name('download.proposal');
     Route::get('/download/surat/{id_mahasiswa}', [MahasiswaController::class, 'download_surat'])->name('download.surat');
     Route::get('/admin/reset-password/{id}', [UserManagementController::class, 'resetPassword'])->name('user-management.reset-password');
-
 });
 
 // ROUTE GROUP ADMIN ONLY
@@ -99,6 +99,7 @@ Route::get('/presensi-keluar', [PresensiController::class, 'keluar'])->name('pre
 Route::post('/ubah-presensi', [PresensiController::class, 'presensipulang'])->name('ubah-presensi');
 Route::get('rekap-user', [PresensiController::class, 'halamanrekapuser'])->name('rekap-absen-user');
 Route::get('rekap-user/{tglawal}/{tglakhir}', [PresensiController::class, 'tampildatauser'])->name('rekap-user');
+Route::get('reportUser', [ReportController::class, 'reportUser'])->name('reportUser');
 
 // ROUTE GROUP PROFILE DITERIMA
 Route::middleware(['auth', 'checkStatus:2', 'verified'])->group(function () {
