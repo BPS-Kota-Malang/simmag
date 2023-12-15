@@ -23,14 +23,14 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <a class="text-sm mb-0 text-uppercase font-weight-bold" style="color: inherit;" href="{{ url('') }}">Report Absensi</a>
+                                    <a class="text-sm mb-0 text-uppercase font-weight-bold" style="color: inherit;" href="{{ url('/generate-pdf') }}">Report Absensi</a>
                                     <h5 class="font-weight-bolder">
                                     </h5>
                                 </div>
                             </div>
                             <div class="col-4 text-end">
                                 <div class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
-                                    <a href="{{ url('') }}"><i class="ni ni-collection text-lg opacity-10" aria-hidden="true"></i></a>
+                                    <a href="{{ url('/generate-pdf') }}"><i class="ni ni-collection text-lg opacity-10" aria-hidden="true"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -44,14 +44,14 @@
                         <div class="row">
                             <div class="col-8">
                                 <div class="numbers">
-                                    <a class="text-sm mb-0 text-uppercase font-weight-bold" style="color: inherit;" href="{{ url('data/divisi') }}">Report Logbook</a>
+                                    <a class="text-sm mb-0 text-uppercase font-weight-bold" style="color: inherit;" href="{{ url('/logbook') }}">Report Logbook</a>
                                     <h5 class="font-weight-bolder">
                                     </h5>
                                 </div>
                             </div>
                             <div class="col-4 text-end">
                                 <div class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
-                                    <a href="{{ url('data/divisi') }}"><i class="ni ni-collection text-lg opacity-10" aria-hidden="true"></i></a>
+                                    <a href="{{ url('/logbook') }}"><i class="ni ni-collection text-lg opacity-10" aria-hidden="true"></i></a>
                                 </div>
                             </div>
                         </div>

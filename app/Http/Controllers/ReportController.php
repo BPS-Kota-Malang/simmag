@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Presensi;
 use Illuminate\Http\Request;
+use Dompdf\Dompdf;
+use Dompdf\Options;
+use Illuminate\Support\Facades\View;
 
 class ReportController extends Controller
 {
@@ -90,5 +94,28 @@ class ReportController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function generatePDF()
+    {
+        $presensi = Presensi::all();
+        $data = [
+            'presensi' => $presensi,
+        ];
+
+        $pdf = new Dompdf();
+        $pdf->loadHtml(View::make('report.reportpresensi', $data)->render());
+
+        // (Opsional) Atur opsi Dompdf jika diperlukan
+        $options = new Options();
+        $options->set('isRemoteEnabled', true);
+
+        $pdf->setOptions($options);
+
+        // Render PDF
+        $pdf->render();
+
+        // Unduh atau tampilkan PDF
+        return $pdf->stream('report.pdf');
     }
 }

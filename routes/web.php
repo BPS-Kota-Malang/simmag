@@ -15,6 +15,7 @@ use App\Http\Controllers\StatusMagangUserController;
 use App\Http\Controllers\PenerimaanMagangController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UserManagementController;
+use Facade\FlareClient\Report;
 use Illuminate\Routing\RouteGroup;
 
 /*
@@ -33,6 +34,7 @@ Route::get('/', [LandingpageController::class, 'index'])->name('landingpage.inde
 //     return view('welcome');
 // });
 
+Route::get('/generate-pdf', [ReportController::class, 'generatePDF']);
 Route::get('/logout', [HomeController::class, 'logout'])->name('logout');
 
 Route::get('/logbook', [LogbookController::class, 'index'])->name('logbook.index');
