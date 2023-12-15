@@ -121,6 +121,8 @@
         @endif
 
     </div>
+    <div class="mt-8">
     @include('components/footer')
+    </div>
 </div>
 @endsection
