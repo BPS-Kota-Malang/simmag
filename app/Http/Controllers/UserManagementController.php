@@ -137,17 +137,18 @@ class UserManagementController extends Controller
     }
 
     public function resetPassword($id)
-{
-    $user = User::find($id);
+    {
+        $user = User::find($id);
+        $currentPassword = $user->password;
 
-    if ($user) {
-        $user->password = Hash::make('bps03573');
-        $user->save();
+        // Memeriksa apakah kata sandi saat ini bukan "magang3573"
+        if (!Hash::check('magang3573', $currentPassword)) {
+            $user->password = Hash::make('magang3573');
+            $user->save();
 
-        return redirect()->route('user-management.index')->with('success_message', 'Password reset successfully!');
+            return redirect()->route('user-management.index')->with('success_message', 'Password telah diganti ke default');
+        } else {
+            return redirect()->route('user-management.index')->with('pesan_error', 'Password ini telah menggunakan password default');
+        }
     }
-
-    return redirect()->route('user-management.index')->with('error', 'User not found.');
-}
-
 }

@@ -48,7 +48,7 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/redirects', [HomeController::class, 'index'])->name('redirects');
+    Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
 });
 
 
