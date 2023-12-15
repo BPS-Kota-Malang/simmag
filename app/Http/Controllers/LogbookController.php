@@ -85,7 +85,7 @@ class LogbookController extends Controller
             'jam_selesai' => 'required|string',
             'pekerjaan' => 'nullable|string',
             'divisions_id' => 'required|integer',
-            'grade' => 'required|integer',
+            // 'grade' => 'required|integer',
             'user_id' => 'required|integer', // pastikan user_id di-validasi
         ]);
 
@@ -97,7 +97,7 @@ class LogbookController extends Controller
             'jam_selesai' => $request->jam_selesai,
             'pekerjaan' => $request->pekerjaan,
             'divisions_id' => $request->divisions_id,
-            'grade' => 0,
+            // 'grade' => 0,
         ]);
 
         // Redirect back with a success message
@@ -216,10 +216,10 @@ class LogbookController extends Controller
     public function entry(Request $request, $id)
     {
         $logbook = Logbook::find($id);
-        
+
         $logbook->grade = $request->grade;
         $validator = FacadesValidator::make($request->all(), [
-            'grade' => ['required', 'numeric','regex:/^(100|[1-9]?[0-9])$/'],
+            'grade' => ['required', 'numeric', 'regex:/^(100|[1-9]?[0-9])$/'],
             // pastikan user_id di-validasi
         ]);
 
@@ -232,7 +232,7 @@ class LogbookController extends Controller
         } else {
             $logbook->save();
             return redirect()->route('logbook.index')
-            ->with('success_message', 'Berhasil mengubah Data Logbook.');
+                ->with('success_message', 'Berhasil mengubah Data Logbook.');
         }
     }
 }
