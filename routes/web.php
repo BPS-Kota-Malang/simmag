@@ -86,6 +86,7 @@ Route::middleware(['auth', 'checkStatus:2', 'checkRole:3', 'verified'])->group(f
     Route::get('/getUsersByStatus/{status}', [AnggotaDivisiController::class, 'getUsersByStatus']);
     Route::get('report-admin', [ReportController::class, 'reportAdmin'])->name('reportAdmin');
     Route::get('/report-presensi-admin', [ReportController::class, 'reportpresensiadmin'])->name('report-presensi-admin');
+    Route::get('/reportlogbookadmin', [ReportController::class, 'reportlogbookadmin'])->name('report-logbook-admin');
 });
 
 // ROUTE GROUP USER 
