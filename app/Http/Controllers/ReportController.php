@@ -223,4 +223,56 @@ class ReportController extends Controller
         // Jika ada masalah atau presensi kosong, mungkin perlu ditangani di sini
         return redirect()->back()->with('error', 'Tidak ada data presensi yang ditemukan.');
     }
+
+    public function reportpresensiadmin(Request $request)
+    {
+        $selectedMonth = $request->input('month');
+        $selectedDivisionId = $request->input('division_id'); // Ambil ID divisi dari permintaan
+
+        $usersInDivision = User::where('divisions_id', $selectedDivisionId)->get();
+
+        if ($usersInDivision->isNotEmpty()) {
+            foreach ($usersInDivision as $user) {
+                $userId = $user->id;
+
+                $presensi = Presensi::where('user_id', $userId)
+                    ->whereMonth('tgl', $selectedMonth)
+                    ->get();
+
+                if ($presensi->isNotEmpty()) {
+                    $monthName = date("F", mktime(0, 0, 0, $selectedMonth, 10)); // Nama bulan
+                    $fileName = 'Laporan_Presensi_' . str_replace(' ', '_', $user->name) . '_' . $monthName . '.pdf'; // Nama file PDF
+
+                    $data = [
+                        'user' => $user,
+                        'presensi' => $presensi,
+                    ];
+
+                    $pdf = new Dompdf();
+                    $pdf->loadHtml(View::make('report.reportpresensi_admin', $data)->render());
+
+                    $options = new Options();
+                    $options->set('isRemoteEnabled', true);
+                    $pdf->setOptions($options);
+
+                    $pdf->render();
+
+                    $output = $pdf->output();
+                    file_put_contents(public_path('pdf/' . $fileName), $output); // Simpan file di folder 'pdf'
+
+                    // Kumpulkan file PDF yang dihasilkan untuk diunduh
+                    $pdfFiles[] = public_path('pdf/' . $fileName);
+                }
+            }
+
+            // Implementasi penggabungan atau zip file-file PDF di sini jika diperlukan
+
+            // Kirimkan file atau file zip untuk diunduh kepada pengguna
+            // return response()->download(...);
+            return response()->download(public_path('pdf/' . $fileName))->deleteFileAfterSend(true);
+        }
+
+        // Tangani jika tidak ada presensi atau masalah lain
+        return redirect()->back()->with('error', 'Tidak ada data presensi yang ditemukan untuk divisi ini.');
+    }
 }

@@ -25,9 +25,8 @@
                             <div class="row">
                                 <div class="col-8">
                                     <div class="numbers">
-                                        <a class="text-sm mb-0 text-uppercase font-weight-bold" style="color: inherit;">Report Absensi</a>
-                                        <h5 class="font-weight-bolder">
-                                        </h5>
+                                        <a href="#" class="text-sm mb-0 text-uppercase font-weight-bold" style="color: inherit;">Report Absensi</a>
+                                        <h5 class="font-weight-bolder"></h5>
                                     </div>
                                 </div>
                                 <div class="col-4 text-end">
@@ -45,10 +44,10 @@
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="terima">Pilih Bulan</h5>
+                                <h5 class="modal-title" id="terima">Rekap Presensi Semua User Di Divisi Ini</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <form action="/generate-pdf" method="GET">
+                            <form action="{{ url('/reportpresensiadmin') }}" method="GET"> <!-- Ubah aksi form ke URL yang benar -->
                                 <div class="modal-body">
                                     Silahkan pilih bulan
                                     <select class="form-select mt-2" name="month" id="bulanSelect" aria-label="Default select example" required>
@@ -73,7 +72,6 @@
                                     <button type="submit" class="btn btn-success">Download</button>
                                 </div>
                             </form>
-
                         </div>
                     </div>
                 </div>
