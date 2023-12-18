@@ -148,7 +148,7 @@ class UserManagementController extends Controller
 
             return redirect()->route('user-management.index')->with('success_message', 'Password telah diganti ke default');
         } else {
-            return redirect()->route('user-management.index')->with('pesan_error', 'Password ini telah menggunakan password default');
+            return redirect()->route('user-management.index')->with('pesan_error', 'User ini telah menggunakan password default');
         }
     }
 }

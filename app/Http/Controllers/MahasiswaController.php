@@ -84,7 +84,7 @@ class MahasiswaController extends Controller
         $data->user_id = $user->id;
         $data->save();
 
-        return redirect()->route('redirects');
+        return redirect()->route('dashboard');
     }
 
     /**
