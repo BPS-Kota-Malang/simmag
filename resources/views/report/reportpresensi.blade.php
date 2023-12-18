@@ -1,4 +1,3 @@
-@section('container')
 <!DOCTYPE html>
 <html lang="en">
 
@@ -63,118 +62,159 @@
             padding: 20px;
         }
 
-        .left-signature,
-        .right-signature {
-            /* Format TTD kiri dan kanan */
+        .left-signature {
+            /* Format TTD kiri */
+            float: left;
+            /* Atur posisi kiri */
+            clear: both;
+            /* Pastikan tidak ada elemen lain di sebelah kiri */
+            text-align: left;
+            /* Atur teks menjadi rata kiri */
         }
+
+        .right-signature {
+            /* Format TTD kanan */
+            float: right;
+            /* Atur posisi kanan */
+            text-align: right;
+            /* Atur teks menjadi rata kanan */
+        }
+
+        .right-signature p {
+            margin: 5px 0;
+            /* Berikan margin antar paragraf */
+        }
+
+        .left-signature p {
+            margin: 5px 0;
+            /* Berikan margin antar paragraf */
+        }
+
+        .right-signature div {
+            margin-top: 50px;
+            /* Atur margin atas untuk elemen div */
+        }
+
+        .left-signature div {
+            margin-top: 50px;
+            /* Atur margin atas untuk elemen div */
+        }
+
+        .right-signature p:last-child {
+            margin-bottom: 30px;
+            /* Atur margin bawah untuk teks terakhir */
+        }
+
+        /* .right-signature .signature-line {
+            width: 200px;
+            border-bottom: 1px solid #000;
+            margin-bottom: 20px;
+            float: right;
+        } */
     </style>
 </head>
-<section>
 
-    <body>
-        <div class="header">
-            <div class="logo"></div>
-            <div class="user-info">
-                <p>Nama: {{ auth()->user()->name }}</p>
-                <p>Universitas: {{ auth()->user()->mahasiswa->universitas }}</p>
-                <p>Jurusan: {{ auth()->user()->mahasiswa->fakultas }}</p>
-                <p>Prodi: {{ auth()->user()->mahasiswa->program_studi }}</p>
-            </div>
-
+<body>
+    <div class="header">
+        <div class="logo"></div>
+        <div class="user-info">
+            <p>Nama: {{ auth()->user()->name }}</p>
+            <p>Universitas: {{ auth()->user()->mahasiswa->universitas }}</p>
+            <p>Jurusan: {{ auth()->user()->mahasiswa->fakultas }}</p>
+            <p>Prodi: {{ auth()->user()->mahasiswa->program_studi }}</p>
         </div>
 
-        <div class="card-body px-0 pt-0 pb-2">
-            <div class="table-responsive p-0">
-                <table id="rekap" class="table align-items-center mb-0">
-                    <thead>
-                        <tr>
-                            <th class="text-uppercase font-weight-bolder">No.</th>
-                            <th class="text-uppercase font-weight-bolder">Nama</th>
-                            <th class="text-uppercase font-weight-bolder">Universitas</th>
-                            <th class="text-uppercase font-weight-bolder">Divisi</th>
-                            <th class="text-uppercase font-weight-bolder">Tanggal</th>
-                            <th class="text-uppercase font-weight-bolder">Jam Masuk</th>
-                            <th class="text-uppercase font-weight-bolder">Jam Keluar</th>
-                            <th class="text-uppercase font-weight-bolder">Jam Kerja</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @php
-                        $count = 1;
-                        @endphp
-                        @foreach($presensi as $item)
-                        <tr>
-                            <!-- NO -->
-                            <td>{{ $count++ }}</td>
+    </div>
 
-                            <td>
-                                @if($item->user)
-                                {{ $item->user->name }}
-                                @else
-                                User Tidak Ditemukan
-                                @endif
-                            </td>
+    <div class="card-body px-0 pt-0 pb-2">
+        <div class="table-responsive p-0">
+            <table id="rekap" class="table align-items-center mb-0">
+                <thead>
+                    <tr>
+                        <th class="text-uppercase font-weight-bolder">No.</th>
+                        <!-- <th class="text-uppercase font-weight-bolder">Nama</th>
+                        <th class="text-uppercase font-weight-bolder">Universitas</th>
+                        <th class="text-uppercase font-weight-bolder">Divisi</th> -->
+                        <th class="text-uppercase font-weight-bolder">Tanggal</th>
+                        <th class="text-uppercase font-weight-bolder">Jam Masuk</th>
+                        <th class="text-uppercase font-weight-bolder">Jam Keluar</th>
+                        <th class="text-uppercase font-weight-bolder">Jam Kerja</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @php
+                    $count = 1;
+                    @endphp
+                    @foreach($presensi as $item)
+                    <tr>
+                        <!-- NO -->
+                        <td>{{ $count++ }}</td>
 
-                            <td>
-                                @if($item->user && $item->user->mahasiswa)
-                                {{ $item->user->mahasiswa->universitas }}
-                                @else
-                                Universitas Tidak Ditemukan
-                                @endif
-                            </td>
+                        <!-- <td>
+                            @if($item->user)
+                            {{ $item->user->name }}
+                            @else
+                            User Tidak Ditemukan
+                            @endif
+                        </td>
 
-                            <td>
-                                @if($item->user && $item->user->divisi)
-                                {{ $item->user->divisi->nama_divisi }}
-                                @else
-                                Divisi Tidak Ditemukan
-                                @endif
-                            </td>
+                        <td>
+                            @if($item->user && $item->user->mahasiswa)
+                            {{ $item->user->mahasiswa->universitas }}
+                            @else
+                            Universitas Tidak Ditemukan
+                            @endif
+                        </td>
 
-                            <td>
-                                {{ $item->tgl }}
-                            </td>
+                        <td>
+                            @if($item->user && $item->user->divisi)
+                            {{ $item->user->divisi->nama_divisi }}
+                            @else
+                            Divisi Tidak Ditemukan
+                            @endif
+                        </td> -->
 
-                            <td>
-                                {{ $item->jammasuk }}
-                            </td>
+                        <td>
+                            {{ $item->tgl }}
+                        </td>
 
-                            <td>
-                                {{ $item->jamkeluar }}
-                            </td>
+                        <td>
+                            {{ $item->jammasuk }}
+                        </td>
 
-                            <td>
-                                {{ $item->jamkerja }}
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+                        <td>
+                            {{ $item->jamkeluar }}
+                        </td>
+
+                        <td>
+                            {{ $item->jamkerja }}
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
+    </div>
 
-        <!-- TTD -->
-        <div class="footer">
-            <div class="left-signature">
-                <!-- Format TTD kiri -->
-            </div>
-            <div class="right-signature">
-                <!-- Format TTD kanan -->
-            </div>
+    <!-- TTD -->
+    <footer class="footer" style="display: flex; justify-content: space-between;">
+        <div class="left-signature" style="display: flex; flex-direction: column; align-items: flex-start;">
+            <div style="margin-bottom: 20px;"></div>
+            <p>Mengetahui,</p>
+            <p>Pembimbing Lapangan</p>
+            <p style="margin-bottom: 100px;"></p>
+            <p>Nama TTD</p>
+            <p>NIP: ...</p>
         </div>
-    </body>
+        <div class="right-signature" style="display: flex; flex-direction: column; align-items: flex-end;">
+            <div style="margin-bottom: 20px;"></div>
+            <p>Kota Malang, {{ date('j F, Y') }}</p>
+            <p>Pembimbing Lapangan</p>
+            <p style="margin-bottom: 100px;"></p>
+            <p>Nama TTD</p>
+            <p>NIP: ...</p>
+        </div>
+    </footer>
+</body>
 
 </html>
-
-@if ($message = Session::get('error'))
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<script>
-    Swal.fire(
-        'Oops!',
-        '{{ $message }}',
-        'error'
-    )
-</script>
-@endif
-</section>
-@endsection

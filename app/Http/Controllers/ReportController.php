@@ -133,7 +133,14 @@ class ReportController extends Controller
                 $pdf->setOptions($options);
 
                 // Render PDF dengan nama file yang khusus
-                return $pdf->stream($fileName);
+                $pdf->render();
+
+                // Simpan ke file dengan nama yang sudah ditentukan
+                $output = $pdf->output();
+                file_put_contents($fileName, $output); // Simpan file dengan nama yang sudah ditentukan
+
+                // Kembalikan file PDF yang dihasilkan untuk diunduh
+                return response()->download($fileName)->deleteFileAfterSend(true);
             }
         }
 
