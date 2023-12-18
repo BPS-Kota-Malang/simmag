@@ -84,7 +84,7 @@ Route::middleware(['auth', 'checkStatus:2', 'checkRole:3', 'verified'])->group(f
     Route::get('rekap-admin/{tglawal}/{tglakhir}', [PresensiController::class, 'tampildataadmin'])->name('rekap-admin');
     Route::get('/getUsersByStatus/{status}', [AnggotaDivisiController::class, 'getUsersByStatus']);
     Route::get('report-admin', [ReportController::class, 'reportAdmin'])->name('reportAdmin');
-    Route::get('report-presensi-admin', [ReportAdminController::class, 'reportpresensiadmin'])->name('report-presensi-admin');
+    Route::get('/report-presensi-admin', [ReportController::class, 'reportpresensiadmin'])->name('report-presensi-admin');
 });
 
 // ROUTE GROUP USER 

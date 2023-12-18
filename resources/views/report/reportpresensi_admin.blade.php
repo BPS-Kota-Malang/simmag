@@ -119,9 +119,6 @@
         <div class="logo"></div>
         <div class="user-info">
             <p>Nama: {{ auth()->user()->name }}</p>
-            <p>Universitas: {{ auth()->user()->mahasiswa->universitas }}</p>
-            <p>Jurusan: {{ auth()->user()->mahasiswa->fakultas }}</p>
-            <p>Prodi: {{ auth()->user()->mahasiswa->program_studi }}</p>
         </div>
 
     </div>
