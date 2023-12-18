@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Divisi;
 use App\Models\Presensi;
+use App\Models\Role;
+use App\Models\StatusKerja;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Dompdf\Dompdf;
 use Dompdf\Options;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 
 class ReportController extends Controller
@@ -27,8 +32,25 @@ class ReportController extends Controller
 
     public function reportAdmin()
     {
-        //
+        $userDivisionsId = Auth::user()->divisions_id;
+
+        $anggota = User::with(['role', 'mahasiswa'])
+            ->where('divisions_id', $userDivisionsId)
+            ->whereHas('mahasiswa', function ($query) {
+                $query->whereNotNull('universitas');
+            })
+            ->whereHas('role', function ($query) {
+                $query->where('roles_id', 1); // Menambahkan kondisi ini untuk roles_id = 1
+            })
+            ->get();
+        return view('report.reportAdmin', [
+            'anggota' => $anggota,
+            'menu' => 'Report'
+        ]);
     }
+
+
+
 
     /**
      * Show the form for creating a new resource.
