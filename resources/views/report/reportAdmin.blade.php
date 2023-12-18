@@ -47,7 +47,7 @@
                                 <h5 class="modal-title" id="terima">Rekap Presensi Semua User Di Divisi Ini</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <form action="{{ url('/reportpresensiadmin') }}" method="GET"> <!-- Ubah aksi form ke URL yang benar -->
+                            <form action="{{ route('report-presensi-admin') }}" method="GET"> <!-- Ubah aksi form ke URL yang benar -->
                                 <div class="modal-body">
                                     Silahkan pilih bulan
                                     <select class="form-select mt-2" name="month" id="bulanSelect" aria-label="Default select example" required>
@@ -89,7 +89,7 @@
                                 </div>
                                 <div class="col-4 text-end">
                                     <div class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle">
-                                        <a href="{{ url('/report-logbook-admin') }}"><i class="ni ni-collection text-lg opacity-10" aria-hidden="true"></i></a>
+                                        <a href="{{ url('/reportlogbookadmin') }}"><i class="ni ni-collection text-lg opacity-10" aria-hidden="true"></i></a>
                                     </div>
                                 </div>
                             </div>

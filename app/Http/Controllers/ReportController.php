@@ -331,4 +331,59 @@ class ReportController extends Controller
         // Jika ada masalah atau presensi kosong, mungkin perlu ditangani di sini
         return redirect()->back()->with('error', 'Tidak ada data presensi yang ditemukan.');
     }
+    public function reportlogbookadmin(Request $request)
+    {
+        // Ambil informasi bulan yang dipilih dari permintaan
+        $selectedMonth = $request->input('month');
+
+        // Ambil informasi pengguna yang sedang login
+        $user = auth()->user();
+
+        // Periksa apakah pengguna ada
+        if ($user) {
+            // Ambil ID divisi pengguna yang sedang login
+            $selectedDivisionId = $user->divisions_id;
+
+            // Ambil data logbook berdasarkan divisions_id pengguna dan bulan yang dipilih
+            $logbook = logbook::with('user.mahasiswa')->whereHas('user', function ($query) use ($selectedDivisionId) {
+                $query->where('divisions_id', $selectedDivisionId)->where('roles_id', 1);
+            })
+                ->whereMonth('tanggal', $selectedMonth)
+                ->get();
+
+            // Jika logbook ditemukan, lanjutkan proses membuat PDF
+            if ($logbook->isNotEmpty()) {
+                $divisionName = $user->divisi->nama_divisi; // Nama divisi
+                $monthName = date("F", mktime(0, 0, 0, $selectedMonth, 10)); // Nama bulan
+                $fileName = 'Laporan_Logbook_' . str_replace(' ', '_', $divisionName) . '_' . $monthName . '.pdf'; // Nama file PDF
+
+                $data = [
+                    'user' => $user, // Mengirim informasi pengguna ke tampilan PDF
+                    'logbook' => $logbook,
+                ];
+
+                $pdf = new Dompdf();
+                $pdf->loadHtml(View::make('report.reportlogbook_admin', $data)->render());
+
+                // Atur opsi Dompdf jika diperlukan
+                $options = new Options();
+                $options->set('isRemoteEnabled', true);
+                $pdf->setOptions($options);
+
+                // Render PDF dengan nama file yang khusus
+                $pdf->render();
+
+                // Simpan ke file dengan nama yang sudah ditentukan
+                $output = $pdf->output();
+                file_put_contents($fileName, $output); // Simpan file dengan nama yang sudah ditentukan
+
+                // Kembalikan file PDF yang dihasilkan untuk diunduh
+                return response()->download($fileName)->deleteFileAfterSend(true);
+            }
+        }
+
+        // Jika ada masalah atau logbook kosong, mungkin perlu ditangani di sini
+        return redirect()->back()->with('error', 'Tidak ada data logbook yang ditemukan.');
+    }
+
 }
