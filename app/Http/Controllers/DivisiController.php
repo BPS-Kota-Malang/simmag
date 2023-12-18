@@ -51,6 +51,7 @@ class DivisiController extends Controller
     {
         $request->validate([
             'nama_divisi' => 'required',
+            'nama_ketua' => 'required',
             'kuota_magang' => ['required', 'numeric', 'regex:/^(?:[1-9]|1[0-9]|20)$/'],
         ], [
             'kuota_magang.regex' => 'Kuota magang harus berupa angka antara 1 sampai 20.',
@@ -58,6 +59,7 @@ class DivisiController extends Controller
 
         Divisi::create([
             'nama_divisi' => $request->nama_divisi,
+            'nama_ketua' => $request->nama_ketua,
             'kuota_magang' => $request->kuota_magang,
         ]);
 
@@ -99,11 +101,13 @@ class DivisiController extends Controller
     {
         $request->validate([
             'nama_divisi' => 'required',
+            'nama_ketua' => 'required',
             'kuota_magang' => ['required', 'numeric', 'regex:/^(?:[1-9]|1[0-9]|20)$/'], // Validasi dengan regex untuk angka 1-20
         ]);
 
         $divisi = Divisi::find($id);
         $divisi->nama_divisi = $request->nama_divisi;
+        $divisi->nama_ketua = $request->nama_ketua;
 
         // Cek apakah nilai yang dimasukkan lebih besar dari kuota_magang sebelumnya
         if ($request->kuota_magang > $divisi->kuota_magang) {

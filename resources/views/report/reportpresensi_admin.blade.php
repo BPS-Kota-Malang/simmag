@@ -129,9 +129,9 @@
                 <thead>
                     <tr>
                         <th class="text-uppercase font-weight-bolder">No.</th>
-                        <!-- <th class="text-uppercase font-weight-bolder">Nama</th>
+                        <th class="text-uppercase font-weight-bolder">Nama</th>
                         <th class="text-uppercase font-weight-bolder">Universitas</th>
-                        <th class="text-uppercase font-weight-bolder">Divisi</th> -->
+                        <!-- <th class="text-uppercase font-weight-bolder">Divisi</th> -->
                         <th class="text-uppercase font-weight-bolder">Tanggal</th>
                         <th class="text-uppercase font-weight-bolder">Jam Masuk</th>
                         <th class="text-uppercase font-weight-bolder">Jam Keluar</th>
@@ -147,7 +147,7 @@
                         <!-- NO -->
                         <td>{{ $count++ }}</td>
 
-                        <!-- <td>
+                        <td>
                             @if($item->user)
                             {{ $item->user->name }}
                             @else
@@ -163,7 +163,7 @@
                             @endif
                         </td>
 
-                        <td>
+                        <!-- <td>
                             @if($item->user && $item->user->divisi)
                             {{ $item->user->divisi->nama_divisi }}
                             @else
