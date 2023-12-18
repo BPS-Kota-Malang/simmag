@@ -22,13 +22,7 @@
         }
 
         .logo {
-            /* Atur ukuran dan properti lain sesuai kebutuhan */
-            width: 100px;
-            /* tambahkan path atau URL gambar logo Anda */
-            background-image: url('/assets/img/logo-icon.png');
-            /* Ganti path logo */
-            background-size: contain;
-            background-repeat: no-repeat;
+            /* background-image: url('/assets/img/logo-bps (1).png'); */
         }
 
         .user-info {
@@ -36,6 +30,11 @@
             /* Ubah justifikasi teks ke kiri */
             padding-left: 20px;
             /* Atur padding kiri */
+        }
+
+        .user-info p {
+            margin: 5px 0;
+            /* Berikan margin antar paragraf */
         }
 
         table {
@@ -91,16 +90,39 @@
         }
 
         .right-signature div {
-            margin-top: 50px;
+            margin-top: 1cqb;
             /* Atur margin atas untuk elemen div */
         }
 
         .left-signature div {
-            margin-top: 50px;
+            margin-top: 10px;
             /* Atur margin atas untuk elemen div */
         }
 
         .right-signature p:last-child {
+            margin-bottom: 30px;
+            /* Atur margin bawah untuk teks terakhir */
+        }
+
+        .right-date {
+            /* Format TTD kanan */
+            float: right;
+            /* Atur posisi kanan */
+            text-align: right;
+            /* Atur teks menjadi rata kanan */
+        }
+
+        .right-date p {
+            margin: 5px 0;
+            /* Berikan margin antar paragraf */
+        }
+
+        .right-date div {
+            margin-top: 50px;
+            /* Atur margin atas untuk elemen div */
+        }
+
+        .right-date p:last-child {
             margin-bottom: 30px;
             /* Atur margin bawah untuk teks terakhir */
         }
@@ -115,15 +137,17 @@
 </head>
 
 <body>
+    <div class="logo">
+        <img src="{{ storage_path('app/logo-bps.png') }}">
+    </div>
     <div class="header">
-        <div class="logo"></div>
         <div class="user-info">
-            <p>Nama: {{ auth()->user()->name }}</p>
-            <p>Universitas: {{ auth()->user()->mahasiswa->universitas }}</p>
-            <p>Jurusan: {{ auth()->user()->mahasiswa->fakultas }}</p>
-            <p>Prodi: {{ auth()->user()->mahasiswa->program_studi }}</p>
+            <p>Nama : {{ auth()->user()->name }}</p>
+            <p>Universitas : {{ auth()->user()->mahasiswa->universitas }}</p>
+            <p>Jurusan : {{ auth()->user()->mahasiswa->fakultas }}</p>
+            <p>Prodi : {{ auth()->user()->mahasiswa->program_studi }}</p>
+            <p>Divisi : {{ auth()->user()->divisi->nama_divisi }}</p>
         </div>
-
     </div>
 
     <div class="card-body px-0 pt-0 pb-2">
@@ -198,21 +222,44 @@
 
     <!-- TTD -->
     <footer class="footer" style="display: flex; justify-content: space-between;">
-        <div class="left-signature" style="display: flex; flex-direction: column; align-items: flex-start;">
-            <div style="margin-bottom: 20px;"></div>
-            <p>Mengetahui,</p>
-            <p>Pembimbing Lapangan</p>
-            <p style="margin-bottom: 100px;"></p>
-            <p>Nama TTD</p>
-            <p>NIP: ...</p>
-        </div>
-        <div class="right-signature" style="display: flex; flex-direction: column; align-items: flex-end;">
-            <div style="margin-bottom: 20px;"></div>
-            <p>Kota Malang, {{ date('j F, Y') }}</p>
-            <p>Pembimbing Lapangan</p>
-            <p style="margin-bottom: 100px;"></p>
-            <p>Nama TTD</p>
-            <p>NIP: ...</p>
+        <div class="container">
+            <div class="row g-2">
+                <!-- <div class="col-6">
+                    <div class="p-3 border bg-light">Custom column padding</div>
+                </div> -->
+                <div class="col-6" style="margin-top: 40px;">
+                    <div class="p-3 border bg-light" style="text-align: right;">
+                        <p>Kota Malang, {{ date('j F, Y') }}</p>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="p-3 border bg-light">
+                        <div class="left-signature">
+                            <div style="margin-bottom: 20px;"></div>
+                            <p>Mengetahui,</p>
+                            <p>Ketua Divisi</p>
+                            <p style="margin-bottom: 100px;"></p>
+                            @php
+                            $division = \App\Models\Divisi::find(auth()->user()->divisions_id);
+                            $namaKetua = $division ? $division->nama_ketua : 'Nama Ketua Tidak Ditemukan';
+                            @endphp
+                            <p style="text-align: center;">{{ $namaKetua }}</p>
+                            <!-- <p>NIP: ...</p> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="p-3 border bg-light">
+                        <div class="right-signature">
+                            <div style="margin-bottom: 60px;"></div>
+                            <p>Pembimbing Lapangan</p>
+                            <p style="margin-bottom: 100px;"></p>
+                            <p style="text-align: center;">{{ \App\Models\User::find(1)->name }}</p>
+                            <p style="text-align: center;">NIP: ...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
 </body>
