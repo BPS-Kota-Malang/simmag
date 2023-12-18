@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Divisi;
 use App\Models\Presensi;
+use App\Models\Logbook;
 use App\Models\Role;
 use App\Models\StatusKerja;
 use App\Models\User;
@@ -117,6 +118,59 @@ class ReportController extends Controller
     {
         //
     }
+
+    public function generatePDFlogbook(Request $request)
+    {
+        // Ambil informasi bulan yang dipilih dari permintaan
+        $selectedMonth = $request->input('month');
+
+        // Ambil informasi pengguna yang sedang login
+        $user = auth()->user();
+
+        // Periksa apakah pengguna ada
+        if ($user) {
+            // Ambil ID pengguna
+            $userId = $user->id;
+
+            // Ambil data logbook berdasarkan ID pengguna dan bulan yang dipilih
+            $logbook = logbook::where('user_id', $userId)
+                ->whereMonth('tanggal', $selectedMonth)
+                ->get();
+
+            // Jika logbook ditemukan, lanjutkan proses membuat PDF
+            if ($logbook->isNotEmpty()) {
+                $monthName = date("F", mktime(0, 0, 0, $selectedMonth, 10)); // Nama bulan
+                $fileName = 'Laporan_logbook_' . str_replace(' ', '_', $user->name) . '_' . $monthName . '.pdf'; // Nama file PDF
+
+                $data = [
+                    'user' => $user, // Mengirim informasi pengguna ke tampilan PDF
+                    'logbook' => $logbook,
+                ];
+
+                $pdf = new Dompdf();
+                $pdf->loadHtml(View::make('report.reportlogbook', $data)->render());
+
+                // Atur opsi Dompdf jika diperlukan
+                $options = new Options();
+                $options->set('isRemoteEnabled', true);
+                $pdf->setOptions($options);
+
+                // Render PDF dengan nama file yang khusus
+                $pdf->render();
+
+                // Simpan ke file dengan nama yang sudah ditentukan
+                $output = $pdf->output();
+                file_put_contents($fileName, $output); // Simpan file dengan nama yang sudah ditentukan
+
+                // Kembalikan file PDF yang dihasilkan untuk diunduh
+                return response()->download($fileName)->deleteFileAfterSend(true);
+            }
+        }
+
+        // Jika ada masalah atau logbook kosong, mungkin perlu ditangani di sini
+        return redirect()->back()->with('error', 'Tidak ada data logbook yang ditemukan.');
+    }
+
 
     public function generatePDF(Request $request)
     {

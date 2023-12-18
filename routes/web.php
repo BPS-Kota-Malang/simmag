@@ -36,6 +36,7 @@ Route::get('/', [LandingpageController::class, 'index'])->name('landingpage.inde
 // });
 
 Route::get('/generate-pdf', [ReportController::class, 'generatePDF']);
+Route::get('/generate-pdflogbook', [ReportController::class, 'generatePDFlogbook']);
 Route::get('/logout', [HomeController::class, 'logout'])->name('logout');
 
 Route::get('/logbook', [LogbookController::class, 'index'])->name('logbook.index');
