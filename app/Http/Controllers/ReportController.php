@@ -8,11 +8,13 @@ use App\Models\Logbook;
 use App\Models\Role;
 use App\Models\StatusKerja;
 use App\Models\User;
+use Dompdf\Adapter\PDFLib;
 use Illuminate\Http\Request;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
+use PDF;
 
 class ReportController extends Controller
 {
@@ -200,8 +202,20 @@ class ReportController extends Controller
                     'presensi' => $presensi,
                 ];
 
-                $pdf = new Dompdf();
-                $pdf->loadHtml(View::make('report.reportpresensi', $data)->render());
+                // Left-logo
+                $imagePathLeft = public_path('assets/img/logo-bps.png');
+                $typeLeft = pathinfo($imagePathLeft, PATHINFO_EXTENSION);
+                $dataImageLeft = file_get_contents($imagePathLeft);
+                $picLeft = 'data:image/' . $typeLeft . ';base64,' . base64_encode($dataImageLeft);
+
+                // right-logo
+                $imagePathRight = public_path('assets/img/Logo_BerAKHLAK.png');
+                $typeRight = pathinfo($imagePathRight, PATHINFO_EXTENSION);
+                $dataImageRight = file_get_contents($imagePathRight);
+                $picRight = 'data:image/' . $typeRight . ';base64,' . base64_encode($dataImageRight);
+
+                $pdf = new Dompdf(); // Menggunakan Dompdf
+                $pdf->loadHtml(View::make('report.reportpresensi', $data, compact('picLeft', 'picRight', 'data'))->render());
 
                 // Atur opsi Dompdf jika diperlukan
                 $options = new Options();
@@ -217,11 +231,14 @@ class ReportController extends Controller
 
                 // Kembalikan file PDF yang dihasilkan untuk diunduh
                 return response()->download($fileName)->deleteFileAfterSend(true);
+            } else {
+                // Jika presensi kosong, kirim respons JavaScript untuk menampilkan SweetAlert
+                return redirect()->back()->with('error', 'Tidak ada data presensi yang ditemukan.');
             }
+        } else {
+            // Jika ada masalah atau presensi kosong, mungkin perlu ditangani di sini
+            return redirect()->back()->with('error', 'Tidak ada data presensi yang ditemukan.');
         }
-
-        // Jika ada masalah atau presensi kosong, mungkin perlu ditangani di sini
-        return redirect()->back()->with('error', 'Tidak ada data presensi yang ditemukan.');
     }
 
     public function reportpresensiadmin(Request $request)
