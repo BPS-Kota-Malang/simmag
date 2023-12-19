@@ -18,6 +18,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UserManagementController;
 use Facade\FlareClient\Report;
 use Illuminate\Routing\RouteGroup;
+use App\Http\Controllers\EmployeeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,6 +75,7 @@ Route::middleware(['auth', 'checkStatus:2', 'checkRole:2', 'verified'])->group(f
     Route::get('/download/proposal/{id_mahasiswa}', [MahasiswaController::class, 'download_proposal'])->name('download.proposal');
     Route::get('/download/surat/{id_mahasiswa}', [MahasiswaController::class, 'download_surat'])->name('download.surat');
     Route::get('/admin/reset-password/{id}', [UserManagementController::class, 'resetPassword'])->name('user-management.reset-password');
+    Route::get('/data-pegawai', [EmployeeController::class, 'index'])->name('employee.index');
 });
 
 // ROUTE GROUP ADMIN ONLY
@@ -87,7 +89,6 @@ Route::middleware(['auth', 'checkStatus:2', 'checkRole:3', 'verified'])->group(f
     Route::get('report-admin', [ReportController::class, 'reportAdmin'])->name('reportAdmin');
     Route::get('/report-presensi-admin', [ReportController::class, 'reportpresensiadmin'])->name('report-presensi-admin');
     Route::get('/reportlogbookadmin', [ReportController::class, 'reportlogbookadmin'])->name('report-logbook-admin');
-
     Route::get('/admin-report-user/{id}', [ReportController::class, 'adminreportuser'])->name('admin-report-user');
 });
 

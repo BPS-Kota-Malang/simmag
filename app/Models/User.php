@@ -23,16 +23,16 @@ class User extends Authenticatable implements MustVerifyEmail
 
     use Notifiable;
 
-    
+
     /**
      * The attributes that are mass assignable.
      *
      * @var string[]
      */
-    
+
     protected $table = 'users';
     protected $primaryKey = 'id';
-    
+
     protected $fillable = [
         'name',
         'email',
@@ -40,10 +40,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'roles_id',
         'status',
         'status_kerjas_id',
-        'divisions_id'
+        'divisions_id',
+        'employee_id'
         // 'email_verified_at'
     ];
-    
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -64,7 +65,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    
+
     /**
      * The accessors to append to the model's array form.
      *
@@ -73,7 +74,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $appends = [
         'profile_photo_url',
     ];
-    
+
     public function mahasiswa()
     {
         return $this->hasOne(Mahasiswa::class, 'user_id');
@@ -94,7 +95,7 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Presensi::class, 'user_id', 'id');
     }
-    
+
     public function isSuperAdmin()
     {
         return $this->roles_id === '2'; // Ubah ini sesuai dengan logika peran Anda
@@ -119,5 +120,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function logbook()
     {
         return $this->hasMany(Logbook::class);
+    }
+
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class, 'employee_id');
     }
 }
