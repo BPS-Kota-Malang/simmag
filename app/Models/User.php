@@ -122,8 +122,8 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Logbook::class);
     }
 
-    public function employee()
+    public function pegawai()
     {
-        return $this->belongsTo(Employee::class, 'employee_id');
+        return $this->belongsTo(Employee::class, 'employee_id', 'id');
     }
 }

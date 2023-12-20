@@ -263,10 +263,22 @@
                             <p>Ketua Divisi</p>
                             <p style="margin-bottom: 100px;"></p>
                             @php
-                            $division = \App\Models\Divisi::find(auth()->user()->divisions_id);
-                            $namaKetua = $division ? $division->nama_ketua : 'Nama Ketua Tidak Ditemukan';
+                            // Ambil user yang sedang login
+                            $user = \App\Models\User::find(auth()->user()->id);
+
+                            if ($user && $user->pegawai) {
+                            // Tampilkan nama pegawai
+                            $namaPegawai = $user->pegawai->nama_pegawai;
+                            $nipPegawai = $user->pegawai->NIP; // Ambil NIP pegawai
+                            } else {
+                            // Jika tidak ditemukan, tampilkan pesan alternatif
+                            $namaPegawai = 'Nama Pegawai Tidak Ditemukan';
+                            $nipPegawai = 'NIP Pegawai Tidak Ditemukan';
+                            }
                             @endphp
-                            <p style="text-align: center;">{{ $namaKetua }}</p>
+
+                            <p style="text-align: center;">{{ $namaPegawai }}</p>
+                            <p style="text-align: center;">NIP: {{ $nipPegawai }}</p> <!-- Tampilkan NIP -->
                             <!-- <p>NIP: ...</p> -->
                         </div>
                     </div>
@@ -277,8 +289,23 @@
                             <div style="margin-bottom: 53px;"></div>
                             <p>Pembimbing Lapangan</p>
                             <p style="margin-bottom: 100px;"></p>
-                            <p style="text-align: center;">{{ \App\Models\User::find(1)->name }}</p>
-                            <p style="text-align: center;">NIP: ...</p>
+                            @php
+                            // Cari user dengan role_id = 2 (Pembimbing Lapangan)
+                            $pembimbing = \App\Models\User::where('roles_id', 2)->first();
+
+                            if ($pembimbing && $pembimbing->pegawai) {
+                            // Tampilkan nama pembimbing lapangan
+                            $namaPembimbing = $pembimbing->pegawai->nama_pegawai;
+                            $nipPembimbing = $pembimbing->pegawai->NIP; // Ambil NIP pembimbing
+                            } else {
+                            // Jika tidak ditemukan, tampilkan pesan alternatif
+                            $namaPembimbing = 'Nama Pembimbing Tidak Ditemukan';
+                            $nipPembimbing = 'NIP Pembimbing Tidak Ditemukan';
+                            }
+                            @endphp
+
+                            <p style="text-align: center;">{{ $namaPembimbing }}</p>
+                            <p style="text-align: center;">NIP: {{ $nipPembimbing }}</p> <!-- Tampilkan NIP -->
                         </div>
                     </div>
                 </div>

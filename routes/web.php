@@ -76,6 +76,9 @@ Route::middleware(['auth', 'checkStatus:2', 'checkRole:2', 'verified'])->group(f
     Route::get('/download/surat/{id_mahasiswa}', [MahasiswaController::class, 'download_surat'])->name('download.surat');
     Route::get('/admin/reset-password/{id}', [UserManagementController::class, 'resetPassword'])->name('user-management.reset-password');
     Route::get('/data-pegawai', [EmployeeController::class, 'index'])->name('employee.index');
+    Route::post('/data-pegawai', [EmployeeController::class, 'store'])->name('employee.store');
+    Route::put('/data-pegawai/{id}', [EmployeeController::class, 'update'])->name('employee.update');
+    Route::delete('/data-pegawai/{id}', [EmployeeController::class, 'destroy'])->name('employee.destroy');
 });
 
 // ROUTE GROUP ADMIN ONLY

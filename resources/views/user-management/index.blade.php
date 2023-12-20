@@ -32,6 +32,7 @@
                                     <th class="text-center text-uppercase text-xs font-weight-bolder">Nama</th>
                                     <th class="text-center text-uppercase text-xs font-weight-bolder">E-mail</th>
                                     <th class="text-center text-uppercase text-xs font-weight-bolder">Role</th>
+                                    <th class="text-center text-uppercase text-xs font-weight-bolder">Penanggung Jawab</th>
                                     {{-- <th class="text-center text-uppercase text-xs font-weight-bolder">Status</th> --}}
                                     <th class="text-center text-uppercase text-xs font-weight-bolder">Opsi</th>
                                 </tr>
@@ -47,7 +48,12 @@
                                 <td class="text-center align-items-center">{{ $data->name }}</td>
                                 <td class="text-center align-items-center">{{ $data->email }}</td>
                                 <td class="text-center align-items-center">{{ $data->role->nama_role }}</td>
-                                {{-- <td class="text-center align-items-center">
+                                <td class="text-center align-items-center">
+                                    @if($data->employee)
+                                    {{ $data->employee->nama_pegawai }}
+                                    @else
+                                    @endif
+                                </td> {{-- <td class="text-center align-items-center">
                                         @if ($data->status == 0)
                                         Belum Mendaftar
                                         @elseif ($data->status == 1)
@@ -140,6 +146,19 @@
                                                         @endforeach
                                                     </select>
                                                 </div>
+
+                                                <div class="form-group">
+                                                    <label for="employee_id">Penanggung Jawab</label>
+                                                    <select class="form-control" name="employee_id" id="employee_id">
+                                                        <option value="">Pilih Penanggung Jawab</option>
+                                                        @foreach ($employeedata as $item)
+                                                        <option value="{{ $item->id }}" {{ $item->id == $data->employee_id ? 'selected' : '' }}>
+                                                            {{ $item->nama_pegawai }}
+                                                        </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="submit" class="btn btn-primary">Simpan</button>
@@ -202,6 +221,14 @@
 
                                 @foreach ($divisidata as $item)
                                 <option value="{{ $item->id }}" selected>{{ $item->nama_divisi }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="employee_id">Penanggung Jawab</label>
+                            <select class="form-control" name="employee_id" id="employee_id" required>
+                                @foreach ($employeedata as $item)
+                                <option value="{{ $item->id }}">{{ $item->nama_pegawai }}</option>
                                 @endforeach
                             </select>
                         </div>

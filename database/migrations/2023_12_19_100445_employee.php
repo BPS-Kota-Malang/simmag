@@ -17,7 +17,6 @@ class Employee extends Migration
             $table->id();
             $table->string('nama_pegawai');
             $table->integer('NIP');
-            $table->Integer('user_id');
             $table->timestamps();
         });
     }

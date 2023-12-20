@@ -90,78 +90,78 @@
                                         <label>Jumlah Anggota Kelompok</label>
                                         <div class="input-group mb-3">
                                             <input class="form-control @error('jumlah_anggota') is-invalid @enderror" placeholder="ex: 1 or 12" aria-label="Jumlah Anggota Kelompok" type="text" name="jumlah_anggota" id="anggota" required value="{{old('jumlah_anggota')}}">
-                                            @error('jumlah_anggota')
-                                            <div class="invalid-feedback">
-                                                {{$message}}
-                                            </div>
-                                            @enderror
-                                        </div>
-                                        <p class="text-danger small" id="anggota-error"></p>
-                                    </div> --}}
+                                    @error('jumlah_anggota')
+                                    <div class="invalid-feedback">
+                                        {{$message}}
+                                    </div>
+                                    @enderror
                                 </div>
+                                <p class="text-danger small" id="anggota-error"></p>
+                            </div> --}}
+                    </div>
 
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Upload Proposal</label>
-                                        <div class="input-group mb-3">
-                                            <input type="file" class="form-control @error('file_proposal') is-invalid @enderror" id="file_proposal" name="file_proposal" accept=".pdf" required">
-                                            @error('file_proposal')
-                                            <div class="invalid-feedback">
-                                                {{$message}}
-                                            </div>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label>Upload Surat Pengantar</label>
-                                        <div class="input-group mb-3">
-                                            <input type="file" class="form-control @error('file_suratpengantar') is-invalid @enderror" id="file_suratpengantar" name="file_suratpengantar" accept=".pdf" required">
-                                            @error('file_suratpengantar')
-                                            <div class="invalid-feedback">
-                                                {{$message}}
-                                            </div>
-                                            @enderror
-                                        </div>
-                                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Upload Proposal</label>
+                            <div class="input-group mb-3">
+                                <input type="file" class="form-control @error('file_proposal') is-invalid @enderror" id="file_proposal" name="file_proposal" accept=".pdf" required">
+                                @error('file_proposal')
+                                <div class="invalid-feedback">
+                                    {{$message}}
                                 </div>
-
-                                <div class="row">
-                                    <div class="col-md-5">
-                                        <label>Waktu Pelasanaan Magang</label>
-                                    </div>
-                                </div>
-
-                                <!--  Datepicker -->
-                                <div class="row">
-                                    <div class="col-md-5 mx-auto">
-                                        <div class="input-group">
-                                            <span class="input-group-text"><i class="fas fa-calendar"></i></span>
-                                            <input class="form-control datepicker" placeholder="Tanggal Mulai" type="text" name="tanggal_mulai" required value="{{old('tanggal_mulai')}}">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-sm-auto">
-                                        <label>-</label>
-                                    </div>
-
-                                    <div class="col-md-5 mx-auto mb-5">
-                                        <!-- <label>Waktu Pelasanaan Magang</label> -->
-                                        <div class="input-group">
-                                            <span class="input-group-text"><i class="fas fa-calendar"></i></span>
-                                            <input class="form-control datepicker" placeholder="Tanggal Selesai" type="text" name="tanggal_selesai" required value="{{old('tanggal_selesai')}}">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-12">
-                                    <button type="submit" class="btn bg-gradient-dark w-100" id="daftar">Daftar Sekarang!</button>
-                                </div>
+                                @enderror
                             </div>
-                        </form>
+                        </div>
+                        <div class="col-md-6">
+                            <label>Upload Surat Pengantar</label>
+                            <div class="input-group mb-3">
+                                <input type="file" class="form-control @error('file_suratpengantar') is-invalid @enderror" id="file_suratpengantar" name="file_suratpengantar" accept=".pdf" required">
+                                @error('file_suratpengantar')
+                                <div class="invalid-feedback">
+                                    {{$message}}
+                                </div>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <label>Waktu Pelasanaan Magang</label>
+                        </div>
+                    </div>
+
+                    <!--  Datepicker -->
+                    <div class="row">
+                        <div class="col-md-5 mx-auto">
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                <input class="form-control datepicker" placeholder="Tanggal Mulai" type="text" name="tanggal_mulai" required value="{{old('tanggal_mulai')}}">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-auto">
+                            <label>-</label>
+                        </div>
+
+                        <div class="col-md-5 mx-auto mb-5">
+                            <!-- <label>Waktu Pelasanaan Magang</label> -->
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-calendar"></i></span>
+                                <input class="form-control datepicker" placeholder="Tanggal Selesai" type="text" name="tanggal_selesai" required value="{{old('tanggal_selesai')}}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <button type="submit" class="btn bg-gradient-dark w-100" id="daftar">Daftar Sekarang!</button>
                     </div>
                 </div>
+                </form>
             </div>
         </div>
+    </div>
+    </div>
     </div>
 </section>
 

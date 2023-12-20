@@ -198,6 +198,7 @@ class ReportController extends Controller
         if ($user) {
             // Ambil ID pengguna
             $userId = $user->id;
+            $penanggungJawab = \App\Models\User::find(1);
 
             // Ambil data presensi berdasarkan ID pengguna dan bulan yang dipilih
             $presensi = Presensi::where('user_id', $userId)
@@ -212,6 +213,7 @@ class ReportController extends Controller
                 $data = [
                     'user' => $user, // Mengirim informasi pengguna ke tampilan PDF
                     'presensi' => $presensi,
+                    'penanggungJawab' => $penanggungJawab,
                 ];
 
                 // Left-logo

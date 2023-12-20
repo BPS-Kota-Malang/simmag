@@ -14,8 +14,7 @@ class AddEmployeeIdToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->unsignedBigInteger('employee_id')->nullable();
-            $table->foreign('employee_id')->references('id')->on('employees')->onDelete('set null');
+            $table->bigInteger('employee_id')->unsigned()->nullable()->after('status_kerjas_id');
         });
     }
 
@@ -27,7 +26,6 @@ class AddEmployeeIdToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropForeign(['employee_id']);
             $table->dropColumn('employee_id');
         });
     }
