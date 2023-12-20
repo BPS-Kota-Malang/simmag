@@ -174,28 +174,30 @@
         </div>
     </div>
 
-    <div class="card-body px-0 pt-0 pb-2">
-        <div class="table-responsive p-0">
-            <table id="rekap" class="table align-items-center mb-0">
-                <thead>
-                    <tr>
-                        <th class="text-uppercase font-weight-bolder">No.</th>
-                        <th class="text-uppercase font-weight-bolder">Tanggal</th>
-                        <th class="text-uppercase font-weight-bolder">Jam Mulai</th>
-                        <th class="text-uppercase font-weight-bolder">Jam Selesai</th>
-                        <th class="text-uppercase font-weight-bolder">Pekerjaan</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @php
-                    $count = 1;
-                    @endphp
-                    @foreach($logbook as $item)
-                    <tr>
-                        <!-- NO -->
-                        <td>{{ $count++ }}</td>
+        <div class="card-body px-0 pt-0 pb-2">
+            <div class="table-responsive p-0">
+                <table id="rekap" class="table align-items-center mb-0">
+                    <thead>
+                        <tr>
+                            <th class="text-uppercase font-weight-bolder">No.</th>
+                            <th class="text-uppercase font-weight-bolder">Nama</th>
+                            <th class="text-uppercase font-weight-bolder">Universitas</th>
+                            <th class="text-uppercase font-weight-bolder">Tanggal</th>
+                            <th class="text-uppercase font-weight-bolder">Jam Mulai</th>
+                            <th class="text-uppercase font-weight-bolder">Jam Selesai</th>
+                            <th class="text-uppercase font-weight-bolder">Pekerjaan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php
+                        $count = 1;
+                        @endphp
+                        @foreach($logbook as $item)
+                        <tr>
+                            <!-- NO -->
+                            <td>{{ $count++ }}</td>
 
-                        <!-- <td>
+                            <td>
                                 @if($item->user)
                                 {{ $item->user->name }}
                                 @else
@@ -210,18 +212,18 @@
                                 Universitas Tidak Ditemukan
                                 @endif
                             </td>
-
+<!-- 
                             <td>
                                 @if($item->user && $item->user->divisi)
                                 {{ $item->user->divisi->nama_divisi }}
                                 @else
                                 Divisi Tidak Ditemukan
                                 @endif
+                            </td> -->
+ 
+                            <td>
+                                {{ $item->tanggal }}
                             </td>
- -->
-                        <td>
-                            {{ $item->tanggal }}
-                        </td>
 
                         <td>
                             {{ $item->jam_mulai }}
@@ -308,8 +310,15 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </footer>
-</body>
+            <div class="right-signature" style="display: flex; flex-direction: column; align-items: flex-end;">
+                <div style="margin-bottom: 20px;"></div>
+                <p>Kota Malang, {{ date('j F, Y') }}</p>
+                <p>Ketua Divisi</p>
+                <p style="margin-bottom: 100px;"></p>
+                <p>Nama TTD</p>
+                <p>NIP: ...</p>
+            </div>
+        </footer>
+    </body>
 
 </html>
