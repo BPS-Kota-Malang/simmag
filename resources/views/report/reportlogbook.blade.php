@@ -137,6 +137,7 @@
                             <th class="text-uppercase font-weight-bolder">Jam Mulai</th>
                             <th class="text-uppercase font-weight-bolder">Jam Selesai</th>
                             <th class="text-uppercase font-weight-bolder">Pekerjaan</th>
+                            <th class="text-uppercase font-weight-bolder">Divisi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -187,6 +188,8 @@
                             <td>
                                 {{ $item->pekerjaan }}
                             </td>
+                            <td>
+                                {{$item->divisi->nama_divisi}}
                         </tr>
                         @endforeach
                     </tbody>
@@ -194,25 +197,25 @@
             </div>
         </div>
 
-    <!-- TTD -->
-    <footer class="footer" style="display: flex; justify-content: space-between;">
-        <div class="left-signature" style="display: flex; flex-direction: column; align-items: flex-start;">
-            <div style="margin-bottom: 20px;"></div>
-            <p>Mengetahui,</p>
-            <p>Pembimbing Lapangan</p>
-            <p style="margin-bottom: 100px;"></p>
-            <p>Nama TTD</p>
-            <p>NIP: ...</p>
-        </div>
-        <div class="right-signature" style="display: flex; flex-direction: column; align-items: flex-end;">
-            <div style="margin-bottom: 20px;"></div>
-            <p>Kota Malang, {{ date('j F, Y') }}</p>
-            <p>Pembimbing Lapangan</p>
-            <p style="margin-bottom: 100px;"></p>
-            <p>Nama TTD</p>
-            <p>NIP: ...</p>
-        </div>
-    </footer>
-</body>
+        <!-- TTD -->
+        <footer class="footer" style="display: flex; justify-content: space-between;">
+            <div class="left-signature" style="display: flex; flex-direction: column; align-items: flex-start;">
+                <div style="margin-bottom: 20px;"></div>
+                <p>Mengetahui,</p>
+                <p>Pembimbing Lapangan</p>
+                <p style="margin-bottom: 100px;"></p>
+                <p>Nama TTD</p>
+                <p>NIP: ...</p>
+            </div>
+            <div class="right-signature" style="display: flex; flex-direction: column; align-items: flex-end;">
+                <div style="margin-bottom: 20px;"></div>
+                <p>Kota Malang, {{ date('j F, Y') }}</p>
+                <p>Ketua Divisi</p>
+                <p style="margin-bottom: 100px;"></p>
+                <p>Nama TTD</p>
+                <p>NIP: ...</p>
+            </div>
+        </footer>
+    </body>
 
 </html>
