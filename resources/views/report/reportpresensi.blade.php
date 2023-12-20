@@ -4,6 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Presensi Report</title>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <style>
         /* Tambahkan gaya CSS sesuai kebutuhan Anda */
         /* Misalnya, atur font, ukuran teks, dll. */
@@ -13,23 +19,43 @@
             padding: 0;
         }
 
+        .logos {
+            display: flex;
+            justify-content: space-between;
+            /* Membuat jarak di antara logo */
+            position: absolute;
+            /* Mengatur posisi absolut */
+            top: 0;
+            /* Mendorong ke atas */
+            width: 100%;
+            /* Mengisi lebar penuh */
+        }
+
+        /* CSS untuk gaya logo kiri */
+        .left-logo {
+            float: left;
+            clear: both;
+            text-align: left;
+        }
+
+        /* CSS untuk gaya logo kanan */
+        .right-logo {
+            float: right;
+            text-align: right;
+        }
+
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
+            margin-top: 100px;
             padding: 20px;
-        }
-
-        .logo {
-            /* background-image: url('/assets/img/logo-bps (1).png'); */
         }
 
         .user-info {
             text-align: left;
             /* Ubah justifikasi teks ke kiri */
-            padding-left: 20px;
-            /* Atur padding kiri */
         }
 
         .user-info p {
@@ -137,16 +163,24 @@
 </head>
 
 <body>
-    <div class="logo">
-        <img src="{{ storage_path('app/logo-bps.png') }}">
+    <div class="logos">
+        <div class="left-logo">
+            <img src="{{ $picLeft }}" width="15%"">
+        </div>
+        <div class=" right-logo">
+            <img src="{{ $picRight }}" width="20%"">
+        </div>
     </div>
-    <div class="header">
-        <div class="user-info">
-            <p>Nama : {{ auth()->user()->name }}</p>
-            <p>Universitas : {{ auth()->user()->mahasiswa->universitas }}</p>
-            <p>Jurusan : {{ auth()->user()->mahasiswa->fakultas }}</p>
-            <p>Prodi : {{ auth()->user()->mahasiswa->program_studi }}</p>
-            <p>Divisi : {{ auth()->user()->divisi->nama_divisi }}</p>
+
+    <div class=" header">
+            <div class="user-info">
+                <p style=" margin-bottom: 30px;"></p>
+                <p>Nama : {{ auth()->user()->name }}</p>
+                <p>Universitas : {{ auth()->user()->mahasiswa->universitas }}</p>
+                <p>Jurusan : {{ auth()->user()->mahasiswa->fakultas }}</p>
+                <p>Prodi : {{ auth()->user()->mahasiswa->program_studi }}</p>
+                <p>Divisi : {{ auth()->user()->divisi->nama_divisi }}</p>
+            </div>
         </div>
     </div>
 
@@ -251,7 +285,7 @@
                 <div class="col-6">
                     <div class="p-3 border bg-light">
                         <div class="right-signature">
-                            <div style="margin-bottom: 60px;"></div>
+                            <div style="margin-bottom: 53px;"></div>
                             <p>Pembimbing Lapangan</p>
                             <p style="margin-bottom: 100px;"></p>
                             <p style="text-align: center;">{{ \App\Models\User::find(1)->name }}</p>
@@ -262,6 +296,43 @@
             </div>
         </div>
     </footer>
+
+    @if ($message = Session::get('error'))
+    <script>
+        Swal.fire(
+            'Deleted!',
+            '{{ $message }}',
+            'success'
+        )
+    </script>
+    @endif
+    @if ($message = Session::get('save_message'))
+    <script>
+        Swal.fire(
+            'Tersimpan!',
+            '{{ $message }}',
+            'success'
+        )
+    </script>
+    @endif
+    @if ($message = Session::get('success_message'))
+    <script>
+        Swal.fire(
+            'Tersimpan!',
+            '{{ $message }}',
+            'success'
+        )
+    </script>
+    @endif
+    @if ($message = Session::get('error_message'))
+    <script>
+        Swal.fire(
+            'Error!',
+            '{{ $message }}',
+            'question'
+        )
+    </script>
+    @endif
 </body>
 
 </html>

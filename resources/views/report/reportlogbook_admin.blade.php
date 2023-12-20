@@ -13,29 +13,48 @@
             padding: 0;
         }
 
+        .logos {
+            display: flex;
+            justify-content: space-between;
+            /* Membuat jarak di antara logo */
+            position: absolute;
+            /* Mengatur posisi absolut */
+            top: 0;
+            /* Mendorong ke atas */
+            width: 100%;
+            /* Mengisi lebar penuh */
+        }
+
+        /* CSS untuk gaya logo kiri */
+        .left-logo {
+            float: left;
+            clear: both;
+            text-align: left;
+        }
+
+        /* CSS untuk gaya logo kanan */
+        .right-logo {
+            float: right;
+            text-align: right;
+        }
+
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
+            margin-top: 100px;
             padding: 20px;
-        }
-
-        .logo {
-            /* Atur ukuran dan properti lain sesuai kebutuhan */
-            width: 100px;
-            /* tambahkan path atau URL gambar logo Anda */
-            background-image: url('/assets/img/logo-icon.png');
-            /* Ganti path logo */
-            background-size: contain;
-            background-repeat: no-repeat;
         }
 
         .user-info {
             text-align: left;
             /* Ubah justifikasi teks ke kiri */
-            padding-left: 20px;
-            /* Atur padding kiri */
+        }
+
+        .user-info p {
+            margin: 5px 0;
+            /* Berikan margin antar paragraf */
         }
 
         table {
@@ -91,16 +110,39 @@
         }
 
         .right-signature div {
-            margin-top: 50px;
+            margin-top: 1cqb;
             /* Atur margin atas untuk elemen div */
         }
 
         .left-signature div {
-            margin-top: 50px;
+            margin-top: 10px;
             /* Atur margin atas untuk elemen div */
         }
 
         .right-signature p:last-child {
+            margin-bottom: 30px;
+            /* Atur margin bawah untuk teks terakhir */
+        }
+
+        .right-date {
+            /* Format TTD kanan */
+            float: right;
+            /* Atur posisi kanan */
+            text-align: right;
+            /* Atur teks menjadi rata kanan */
+        }
+
+        .right-date p {
+            margin: 5px 0;
+            /* Berikan margin antar paragraf */
+        }
+
+        .right-date div {
+            margin-top: 50px;
+            /* Atur margin atas untuk elemen div */
+        }
+
+        .right-date p:last-child {
             margin-bottom: 30px;
             /* Atur margin bawah untuk teks terakhir */
         }
@@ -113,16 +155,24 @@
         } */
     </style>
 </head>
-<section>
 
-    <body>
-        <div class="header">
-            <div class="logo"></div>
+<body>
+    <div class="logos">
+        <div class="left-logo">
+            <img src="{{ $picLeft }}" width="15%"">
+        </div>
+        <div class=" right-logo">
+            <img src="{{ $picRight }}" width="20%"">
+        </div>
+    </div>
+
+    <div class=" header">
             <div class="user-info">
+                <p style=" margin-bottom: 30px;"></p>
                 <p>Nama: {{ auth()->user()->name }}</p>
             </div>
-
         </div>
+    </div>
 
         <div class="card-body px-0 pt-0 pb-2">
             <div class="table-responsive p-0">
@@ -175,23 +225,23 @@
                                 {{ $item->tanggal }}
                             </td>
 
-                            <td>
-                                {{ $item->jam_mulai }}
-                            </td>
+                        <td>
+                            {{ $item->jam_mulai }}
+                        </td>
 
-                            <td>
-                                {{ $item->jam_selesai }}
-                            </td>
+                        <td>
+                            {{ $item->jam_selesai }}
+                        </td>
 
-                            <td>
-                                {{ $item->pekerjaan }}
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+                        <td>
+                            {{ $item->pekerjaan }}
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
+    </div>
 
         <!-- TTD -->
         <footer class="footer" style="display: flex; justify-content: space-between;">

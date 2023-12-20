@@ -12,6 +12,7 @@ $admin = '';
 $divisi = '';
 $user = '';
 $report = '';
+$employee = '';
 @endphp
 
 @switch($menu)
@@ -30,7 +31,7 @@ $admin = '';
 $divisi = '';
 $user = '';
 $report = '';
-
+$employee = '';
 @endphp
 @break
 
@@ -49,6 +50,7 @@ $admin = '';
 $divisi = '';
 $user = '';
 $report = '';
+$employee = '';
 @endphp
 @break
 
@@ -67,6 +69,7 @@ $admin = '';
 $divisi = '';
 $user = '';
 $report = '';
+$employee = '';
 @endphp
 @break
 
@@ -85,7 +88,7 @@ $admin = '';
 $divisi = '';
 $user = '';
 $report = '';
-
+$employee = '';
 @endphp
 @break
 
@@ -104,6 +107,7 @@ $admin = '';
 $divisi = '';
 $user = '';
 $report = '';
+$employee = '';
 @endphp
 @break
 
@@ -122,6 +126,7 @@ $admin = '';
 $divisi = '';
 $user = '';
 $report = '';
+$employee = '';
 @endphp
 @break
 
@@ -140,6 +145,7 @@ $admin = '';
 $divisi = '';
 $user = '';
 $report = '';
+$employee = '';
 @endphp
 @break
 
@@ -158,6 +164,7 @@ $admin = '';
 $divisi = '';
 $user = '';
 $report = '';
+$employee = '';
 @endphp
 @break
 
@@ -176,6 +183,7 @@ $admin = '';
 $divisi = '';
 $user = '';
 $report = '';
+$employee = '';
 @endphp
 @break
 
@@ -194,6 +202,7 @@ $admin = '';
 $divisi = '';
 $user = '';
 $report = '';
+$employee = '';
 @endphp
 @break
 
@@ -212,6 +221,7 @@ $admin = '';
 $divisi = '';
 $user = '';
 $report = '';
+$employee = '';
 @endphp
 @break
 
@@ -230,6 +240,7 @@ $admin = '';
 $divisi = '';
 $user = '';
 $report = '';
+$employee = '';
 @endphp
 @break
 
@@ -248,6 +259,7 @@ $admin = '';
 $divisi = 'active';
 $user = '';
 $report = '';
+$employee = '';
 @endphp
 @break
 
@@ -266,6 +278,7 @@ $admin = '';
 $divisi = '';
 $user = 'active';
 $report = '';
+$employee = '';
 @endphp
 @break
 
@@ -284,6 +297,26 @@ $admin = '';
 $divisi = '';
 $user = '';
 $report = 'active';
+$employee = '';
+@endphp
+@break
+
+@case('Employee')
+@php
+$dashboard = '';
+$magang = '';
+$profile = '';
+$rekap = '';
+$rekapuser = '';
+$rekapadmin = '';
+$masuk = '';
+$keluar = '';
+$logbook = '';
+$admin = '';
+$divisi = '';
+$user = '';
+$report = '';
+$employee = 'active';
 @endphp
 @break
 
@@ -413,6 +446,14 @@ $report = 'active';
                         <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
                     </div>
                     <span class="nav-link-text ms-1">User Management</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ $employee }}" href="{{ url('data-pegawai') }}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Data Pegawai</span>
                 </a>
             </li>
             @endif
