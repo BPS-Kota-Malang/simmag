@@ -30,7 +30,6 @@
                                 <tr>
                                     <th class="text-center text-uppercase text-xs font-weight-bolder w-15">No.</th>
                                     <th class="text-center text-uppercase text-xs font-weight-bolder">Divisi</th>
-                                    <th class="text-center text-uppercase text-xs font-weight-bolder">Nama Ketua</th>
                                     <th class="text-center text-uppercase text-xs font-weight-bolder">Kuota Magang</th>
                                     <th class="text-center text-uppercase text-xs font-weight-bolder w-30">Action</th>
                                 </tr>
@@ -45,10 +44,6 @@
 
                                     <td class="align-items-center text-center">
                                         {{ $data->nama_divisi }}
-                                    </td>
-
-                                    <td class="align-items-center text-center">
-                                        {{ $data->nama_ketua }}
                                     </td>
 
                                     <td class="align-items-center text-center">
@@ -100,11 +95,6 @@
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <label for="nama_ketua">Nama Ketua</label>
-                                                        <input type="text" class="form-control" id="nama_ketua" name="nama_ketua" value="{{ $data->nama_ketua }}">
-                                                    </div>
-
-                                                    <div class="form-group">
                                                         <label for="kuota_magang_{{ $index }}">Kuota Magang</label>
                                                         <input type="number" class="form-control" id="kuota_magang_{{ $index }}" name="kuota_magang" placeholder="Kuota Magang" value="{{ $data->kuota_magang }}">
                                                         <div class="invalid-feedback" id="kuota_magang_error_{{ $index }}"></div>
@@ -142,14 +132,6 @@
                             <label for="nama_divisi">Nama Divisi</label>
                             <input type="text" class="form-control @error('nama_divisi') is-invalid @enderror" id="nama_divisi" name="nama_divisi" placeholder="Nama Divisi" value="{{ old('nama_divisi') }}" required>
                             @error('nama_divisi')
-                            <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
-                            <label for="nama_divisi">Nama Ketua</label>
-                            <input type="text" class="form-control @error('nama_ketua') is-invalid @enderror" id="nama_ketua" name="nama_ketua" placeholder="Nama Ketua" value="{{ old('nama_ketua') }}" required>
-                            @error('nama_ketua')
                             <span class="text-danger">{{ $message }}</span>
                             @enderror
                         </div>
