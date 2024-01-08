@@ -98,11 +98,11 @@
                                     </td> --}}
 
                                     <td class="align-middle text-center text-sm">
-                                        <a href="{{ asset('storage/proposal/' . $data->file_proposal) }}" target="_blank">Lihat Proposal</a>
+                                        <a href="{{ route('download.proposal', $data->id_mahasiswa) }}">Download Proposal</a>
                                     </td>
 
                                     <td class="align-middle text-center text-sm">
-                                        <a href="{{ asset('storage/pengantar/' . $data->file_suratpengantar) }}" target="_blank">Lihat Surat Pengantar</a>
+                                        <a href="{{ route('download.surat', $data->id_mahasiswa) }}">Download Surat Pengantar</a>
                                     </td>
 
                                     <td class="align-middle text-center text-sm">
@@ -157,23 +157,29 @@
                                                     @csrf
                                                     <div class="modal-body">
                                                         Apakah Anda yakin ingin menerima permohonan magang tersebut?
+                                                        @if($allDivisionsFull)
+                                                        <p class="text-danger">Kuota Magang Penuh Saat Ini.</p>
+                                                        @else
                                                         <select class="form-select" name="divisi" aria-label="Default select example" required>
-                                                            <option value="" selected disabled>Pilih Divisi</option>
-                                                            <option value="1">Divisi Produksi</option>
-                                                            <option value="2">Divisi Sosial</option>
-                                                            <option value="3">Divisi Neraca</option>
-                                                            <option value="4">Divisi IPDS</option>
-                                                            <option value="5">Divisi Distribusi</option>
+                                                            @foreach($divisions as $division)
+                                                            @if($division->status_kuota !== 1)
+                                                            <option value="{{ $division->id }}">{{ $division->nama_divisi }}</option>
+                                                            @endif
+                                                            @endforeach
                                                         </select>
+                                                        @endif
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                                        @unless($allDivisionsFull)
                                                         <button type="submit" class="btn btn-success">Terima</button>
+                                                        @endunless
                                                     </div>
                                                 </form>
                                             </div>
                                         </div>
                                     </div>
+
 
                                     <!-- Modal Ditolak -->
                                     <div class="modal fade" id="tolak{{ $data->id_mahasiswa }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="tolak" aria-hidden="true">

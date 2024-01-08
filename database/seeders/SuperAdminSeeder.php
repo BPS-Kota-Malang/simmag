@@ -19,7 +19,7 @@ class SuperAdminSeeder extends Seeder
     {
         DB::table('users')->insert([
             'name' => 'Superadmin',
-            'email' => 'Superadmin@gmail.com',
+            'email' => 'superadmin@magang.bpskotamalang.id',
             'roles_id'  => 2,
             'status' => 2,
             'divisions_id' => 4,

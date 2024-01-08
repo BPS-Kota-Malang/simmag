@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Mahasiswa;
+use App\Models\Divisi;
 use Illuminate\Http\Request;
 
 class MagangController extends Controller
@@ -16,8 +17,23 @@ class MagangController extends Controller
     public function index()
     {
         $magang = Mahasiswa::all(); // Ambil semua data mahasiswa
-        return view('admin.magang', compact('magang'), ['menu' => 'Penerimaan Magang']);
+        $divisions = Divisi::all(); // Ambil semua data divisi
+
+        $allDivisionsFull = true;
+        foreach ($divisions as $division) {
+            // Jika ada divisi yang belum penuh (status kuota magang != 1), set variabel $allDivisionsFull menjadi false
+            if ($division->status_kuota !== 1) {
+                $allDivisionsFull = false;
+                break; // Jika ada divisi yang tidak penuh, hentikan pengecekan
+            }
+        }
+
+        return view('admin.magang', compact('magang', 'divisions'))->with([
+            'menu' => 'Penerimaan Magang',
+            'allDivisionsFull' => $allDivisionsFull
+        ]);
     }
+
 
     /**
      * Show the form for creating a new resource.

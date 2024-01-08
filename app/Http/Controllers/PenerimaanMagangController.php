@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\SendEmail;
 use Illuminate\Http\Request;
 use App\Models\Mahasiswa;
+use App\Models\Divisi;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 
@@ -19,6 +20,7 @@ class PenerimaanMagangController extends Controller
     {
         //
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -89,9 +91,26 @@ class PenerimaanMagangController extends Controller
 
         // Edit data pengguna yang sesuai
         $user->divisions_id = $request->divisi;
-        $user->status = 2; // Ubah status user menjadi 2
+        $user->status = 2; // Ubah status user menjadi 2 (DITERIMA)
         $user->save();
 
+        // Check kuota magang di divisi terkait
+        $divisi = Divisi::findOrFail($request->divisi);
+
+        // Menghitung jumlah mahasiswa dengan roles_id 1 yang telah diterima dalam divisi tersebut
+        $jumlahMahasiswa = User::where('divisions_id', $request->divisi)
+            ->where('roles_id', 1) // Hanya mahasiswa dengan roles_id 1
+            ->count();
+
+        // $jumlahMahasiswa += 1; // Menambah satu pendaftar baru
+
+        if ($jumlahMahasiswa >= $divisi->kuota_magang) {
+            // Ubah status kuota jika kuota terpenuhi
+            $divisi->status_kuota = 1; // Magang sudah penuh pada divisi tersebut
+            $divisi->save();
+        }
+
+        // EMAIL
         // Mengambil nama pendaftar
         $namaPendaftar = $mahasiswa->nama;
 
@@ -109,9 +128,10 @@ class PenerimaanMagangController extends Controller
 
         Mail::to($user->email)->send(new SendEmail($emailData));
 
-        return redirect()->back()
-            ->with('success_message', 'Permohonan magang berhasil diterima.');
+        return redirect()->back()->with('success_message', 'Permohonan magang berhasil diterima.');
     }
+
+
 
 
     /**
@@ -166,7 +186,10 @@ class PenerimaanMagangController extends Controller
         if (!$mahasiswa) {
             return redirect()->back()->with('error', 'Mahasiswa tidak ditemukan.');
         }
-
+        $user = $mahasiswa->user;
+        $user->status = 0;
+        $user->divisions_id = null;
+        $user->save();
         $mahasiswa->delete();
 
         return redirect()->back()->with('hapus', 'Permohonan magang berhasil dihapus.');

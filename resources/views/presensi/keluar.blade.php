@@ -1,7 +1,7 @@
 @extends('admin.admin-main')
 
 @section('container')
-@include('components.topnav', ['title' => 'Presensi Keluar'])
+@include('components.topnav', ['title' => 'Presensi Pulang'])
 
 <section class="pt-3 pb-4" id="count-stats">
     <div class="container-fluid py-4">
@@ -20,7 +20,7 @@
                 <div class="card mb-4 p-3">
                     <div class="content">
                         <div class="row justify-content-center">
-                            <form action="{{ route('ubah-presensi') }}" method="post">
+                            <form id="presensiForm" action="{{ route('ubah-presensi') }}" method="post">
                                 {{ csrf_field() }}
                                 <div class="form-group">
                                     <center>
@@ -28,53 +28,75 @@
                                             <div id="digit_clock_time"></div>
                                             <div id="digit_clock_date"></div>
                                         </div>
+                                        <div class="row" style="margin-top: 10px">
+                                            <div class="col">
+                                                <input type="hidden" id="lokasi" name="lokasi">
+                                            </div>
+                                        </div>
                                         <div class="row px-3">
                                             <div class="col text-center py-3">
                                                 <div class="col-6 mx-auto">
-                                                    <!-- <div class="col" style="font-size: 18px;">Jam Masuk</div>
-                                                        <div class="jam" style="font-size: 36px; font-weight: bold;">07.30</div> -->
                                                     <button type="submit" class="btn bg-gradient-dark w-auto me-1 mb-0">Absen Pulang</button>
-                                                    <!-- <hr class="vertical dark"> -->
                                                 </div>
                                             </div>
                                         </div>
                                     </center>
                                 </div>
                             </form>
+                        </div>
+                    </div>
+                </div>
 
+                <!-- <button id='takeabsen' class="btn btn-primary">tes</button> -->
+                <div class="card mb-4 p-3">
+                    <div class="content">
+                        <div class="row justify-content-center">
+                            <div class="col"></div>
+                            <div id="map"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+
+        @if ($message = Session::get('Delete'))
+        <script>
+            Swal.fire(
+                'Deleted!',
+                '{{ $message }}',
+                'error'
+            )
+        </script>
+        @endif
+        @if ($message = Session::get('save_message'))
+        <script>
+            Swal.fire(
+                'Peringatan!',
+                '{{ $message }}',
+                'warning'
+            )
+        </script>
+        @endif
+        @if ($message = Session::get('success_message'))
+        <script>
+            Swal.fire(
+                'Tersimpan!',
+                '{{ $message }}',
+                'success'
+            )
+        </script>
+        @endif
+        @if ($message = Session::get('error_message'))
+        <script>
+            Swal.fire(
+                'Oops!',
+                '{{ $message }}',
+                'error'
+            )
+        </script>
+        @endif
     </div>
-    @if ($message = Session::get('Delete'))
-    <script>
-        Swal.fire(
-            'Deleted!',
-            '{{ $message }}',
-            'success'
-        )
-    </script>
-    @endif
-    @if ($message = Session::get('save_message'))
-    <script>
-        Swal.fire(
-            'Berhasil!',
-            '{{ $message }}',
-            'success'
-        )
-    </script>
-    @endif
-    @if ($message = Session::get('success_message'))
-    <script>
-        Swal.fire(
-            'Berhasil!',
-            '{{ $message }}',
-            'success'
-        )
-    </script>
-    @endif
 </section>
 
 <script type="text/javascript">
@@ -116,6 +138,62 @@
     currentTime();
 </script>
 
+<script>
+    var lokasi = document.getElementById('lokasi');
+    var form = document.getElementById('presensiForm');
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(successcallback, errorcallback);
+    }
+
+    function successcallback(position) {
+        // Sukses mendapatkan lokasi
+        var lokasi = document.getElementById('lokasi');
+        lokasi.value = position.coords.latitude + "," + position.coords.longitude;
+        var map = L.map('map').setView([position.coords.latitude, position.coords.longitude], 16);
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+        var marker = L.marker([position.coords.latitude, position.coords.longitude]).addTo(map);
+        var circle = L.circle([-8.00122092617956, 112.62118425338326], {
+            color: 'red',
+            fillColor: '#f03',
+            fillOpacity: 0.5,
+            radius: 100
+        }).addTo(map);
+
+        
+
+    }
+
+    function errorcallback(error) {
+
+    };
+
+    // $("#takeabsen").click(function(e) {
+
+    //     var lokasi = $("#lokasi").val();
+    //     $.ajax({
+    //         type: 'POST',
+    //         url: '/simpan-masuk',
+    //         data: {
+    //             _token: "{{ csrf_token() }}",
+    //             lokasi: lokasi
+    //         },
+    //         cache: false,
+    //         error: function(xhr) {
+    //             var error = "{{ Session::get('error_message') }}"; // Mendapatkan pesan dari session
+    //             Swal.fire({
+    //                 title: 'Error!',
+    //                 text: error,
+    //                 icon: 'error',
+    //                 confirmButtonText: 'OK'
+    //             });
+    //         }
+    //     });
+    // });
+</script>
+
 <style type="text/css">
     /* Google font */
     @import url('https://fonts.googleapis.com/css?family=Orbitron');
@@ -150,4 +228,12 @@
     }
 </style>
 
+<style>
+    #map {
+        height: 300px;
+    }
+</style>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<!-- Make sure you put this AFTER Leaflet's CSS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 @endsection

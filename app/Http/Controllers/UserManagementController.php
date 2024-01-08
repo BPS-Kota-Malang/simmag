@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Divisi;
+use App\Models\Employee;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -21,11 +22,13 @@ class UserManagementController extends Controller
         $admins = User::with('role')->get();
         $roledata = Role::all();
         $divisidata = Divisi::all();
+        $employeedata = Employee::all();
 
         return view('user-management.index', [
             'admins' => $admins,
             'roledata' => $roledata,
             'divisidata' => $divisidata,
+            'employeedata' => $employeedata,
             'menu' => 'Data User'
         ]);
     }
@@ -53,6 +56,7 @@ class UserManagementController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'roles_id' => ['required', 'string', 'max:3'],
             'divisions_id' => ['required', 'string', 'max:3'],
+            'employee_id' => ['required', 'string', 'max:3'],
             'status' => ['required', 'string', 'max:1'],
             // 'password' => ['required', 'string', 'min:8'],
         ]);
@@ -62,6 +66,7 @@ class UserManagementController extends Controller
             'email' => $request->email,
             'roles_id' => $request->roles_id,
             'divisions_id' => $request->divisions_id,
+            'employee_id' => $request->employee_id,
             'status' => $request->status,
             'password' => Hash::make('password'),
             // 'password' => Hash::make($request->password),
@@ -106,6 +111,7 @@ class UserManagementController extends Controller
             'name' => ['required', 'string', 'max:110'],
             'email' => ['required', 'string', 'email', 'max:110'],
             'roles_id' => ['required', 'integer', 'max:3'],
+            'employee_id' => ['nullable', 'integer', 'max:3'],
             // 'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
@@ -113,6 +119,7 @@ class UserManagementController extends Controller
         $admins->name = $request->name;
         $admins->email = $request->email;
         $admins->roles_id = $request->roles_id;
+        $admins->employee_id = $request->employee_id;
         // $admins->password = Hash::make($request->password);
         $admins->save();
 
@@ -134,5 +141,21 @@ class UserManagementController extends Controller
         if ($admins) $admins->delete();
         return redirect()->route('user-management.index')
             ->with('Delete', 'Berhasil menghapus data.');
+    }
+
+    public function resetPassword($id)
+    {
+        $user = User::find($id);
+        $currentPassword = $user->password;
+
+        // Memeriksa apakah kata sandi saat ini bukan "magang3573"
+        if (!Hash::check('magang3573', $currentPassword)) {
+            $user->password = Hash::make('magang3573');
+            $user->save();
+
+            return redirect()->route('user-management.index')->with('success_message', 'Password telah diganti ke default');
+        } else {
+            return redirect()->route('user-management.index')->with('pesan_error', 'User ini telah menggunakan password default');
+        }
     }
 }

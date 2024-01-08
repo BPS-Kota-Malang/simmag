@@ -23,19 +23,6 @@ class User extends Authenticatable implements MustVerifyEmail
 
     use Notifiable;
 
-    public function mahasiswa()
-    {
-        return $this->hasOne(Mahasiswa::class, 'user_id');
-    }
-
-    public function divisi()
-    {
-        return $this->belongsTo(Divisi::class, 'divisions_id', 'id');
-    }
-    public function role()
-    {
-        return $this->belongsTo(Role::class, 'roles_id', 'id');
-    }
 
     /**
      * The attributes that are mass assignable.
@@ -52,7 +39,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'roles_id',
         'status',
-        'divisions_id'
+        'status_kerjas_id',
+        'divisions_id',
+        'employee_id'
         // 'email_verified_at'
     ];
 
@@ -86,6 +75,22 @@ class User extends Authenticatable implements MustVerifyEmail
         'profile_photo_url',
     ];
 
+    public function mahasiswa()
+    {
+        return $this->hasOne(Mahasiswa::class, 'user_id');
+    }
+    public function divisi()
+    {
+        return $this->belongsTo(Divisi::class, 'divisions_id', 'id');
+    }
+    public function statusKerja()
+    {
+        return $this->belongsTo(StatusKerja::class, 'status_kerjas_id', 'id');
+    }
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'roles_id', 'id');
+    }
     public function presensi()
     {
         return $this->hasMany(Presensi::class, 'user_id', 'id');
@@ -115,5 +120,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function logbook()
     {
         return $this->hasMany(Logbook::class);
+    }
+
+    public function pegawai()
+    {
+        return $this->belongsTo(Employee::class, 'employee_id', 'id');
     }
 }

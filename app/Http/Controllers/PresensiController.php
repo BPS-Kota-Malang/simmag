@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Presensi;
 use App\Models\User;
+use Carbon\Carbon;
 use DateTime;
 use DateTimeZone;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Date;
 
 class PresensiController extends Controller
 {
@@ -23,7 +25,7 @@ class PresensiController extends Controller
 
     public function keluar()
     {
-        return view('presensi.Keluar', ['menu' => 'Presensi Keluar']);
+        return view('presensi.keluar', ['menu' => 'Presensi Keluar']);
     }
 
     /**
@@ -42,6 +44,23 @@ class PresensiController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    //Menghitung Jarak
+    function distance($lat1, $lon1, $lat2, $lon2)
+    {
+        $theta = $lon1 - $lon2;
+        $miles = (sin(deg2rad($lat1)) * sin(deg2rad($lat2))) + (cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * cos(deg2rad($theta)));
+        $miles = acos($miles);
+        $miles = rad2deg($miles);
+        $miles = $miles * 60 * 1.1515;
+        $feet = $miles * 5280;
+        $yards = $feet / 3;
+        $kilometers = $miles * 1.609344;
+        $meters = $kilometers * 1000;
+        return compact('meters');
+    }
+
+
     public function store(Request $request)
     {
         $timezone = 'Asia/Jakarta';
@@ -53,19 +72,55 @@ class PresensiController extends Controller
             ['user_id', '=', auth()->user()->id],
             ['tgl', '=', $tanggal],
         ])->first();
-        if ($presensi) {
-            return redirect('presensi-masuk')
-                ->with('save_message', 'Anda Telah Absen Hari Ini');
-        } else {
-            Presensi::create([
-                'user_id' => auth()->user()->id,
-                'tgl' => $tanggal,
-                'jammasuk' => $localtime,
-            ]);
-        }
+        $latitudekantor = -8.00122092617956;
+        $longitudekantor = 112.62118425338326;
+        $lokasi = $request->lokasi;
 
+        // Pemrosesan koordinat user
+        $lokasiuser = explode(",", $lokasi);
+        $latitudeuser = $lokasiuser[0];
+        $longitudeuser = $lokasiuser[1];
+        // dd($lokasi);
+
+        // Menghitung jarak antara koordinat user dan kantor dalam meter
+        $jarak = $this->distance($latitudekantor, $longitudekantor, $latitudeuser, $longitudeuser);
+        $radius = round($jarak["meters"]);
+        // dd($radius);
+
+        // Pengecekan apakah user berada dalam radius 100m
+        // Pengecekan apakah user berada dalam radius 100m
+        if (Auth::user()->status_kerjas_id == 1) {
+            if ($radius > 100) {
+                return redirect('presensi-masuk')->with('error_message', 'Maaf, Anda diluar radius absensi');
+            } else {
+                if ($presensi) {
+                    return redirect('presensi-masuk')
+                        ->with('save_message', 'Anda Telah Mengisi Absen Hari Ini');
+                } else {
+                    Presensi::create([
+                        'user_id' => auth()->user()->id,
+                        'tgl' => $tanggal,
+                        'jammasuk' => $localtime,
+                    ]);
+                }
+
+                return redirect('presensi-masuk')
+                    ->with('success_message', 'Anda Telah Absen Hari Ini');
+            }
+        } else {
+            if ($presensi) {
+                return redirect('presensi-masuk')
+                    ->with('save_message', 'Anda Telah Mengisi Absen Hari Ini');
+            } else {
+                Presensi::create([
+                    'user_id' => auth()->user()->id,
+                    'tgl' => $tanggal,
+                    'jammasuk' => $localtime,
+                ]);
+            }
+        }
         return redirect('presensi-masuk')
-            ->with('save_message', 'Anda Telah Absen Hari Ini');
+            ->with('success_message', 'Anda Telah Absen Hari Ini');
     }
 
     /**
@@ -76,7 +131,18 @@ class PresensiController extends Controller
      */
     public function halamanrekap()
     {
-        return view('presensi.halaman-rekap-absen', ['menu' => 'Rekap Absen']);
+        $today = Carbon::now()->toDateString();
+
+        $presensi = Presensi::with('user')
+            ->whereDate('tgl', $today)
+            ->orderBy('tgl', 'asc')
+            ->get();
+
+        // $presensi = Presensi::join('users', 'presensis.user_id', '=', 'users.id')
+        //     ->where('users.divisions_id', $userDivisionsId)
+        //     ->orderBy('presensis.tgl', 'asc')
+        //     ->get();
+        return view('presensi.halaman-rekap-absen', ['presensi' => $presensi, 'menu' => 'Rekap Absen']);
     }
 
 
@@ -94,7 +160,13 @@ class PresensiController extends Controller
 
     public function halamanrekapuser()
     {
-        return view('presensi.halaman-rekap-user', ['menu' => 'Rekap User']);
+        $today = Carbon::now()->toDateString();
+        $presensi = Presensi::with('user')
+            ->where('user_id', auth()->user()->id)
+            ->whereDate('tgl', $today)
+            ->orderBy('tgl', 'asc')
+            ->get();
+        return view('presensi.halaman-rekap-user', ['presensi' => $presensi, 'menu' => 'Rekap User']);
     }
 
     public function tampildatauser($tglawal, $tglakhir)
@@ -110,7 +182,16 @@ class PresensiController extends Controller
 
     public function halamanrekapadmin()
     {
-        return view('presensi.halaman-rekap-admin', ['menu' => 'Rekap Admin']);
+        $userDivisionsId = Auth::user()->divisions_id;
+        $today = Carbon::now()->toDateString();
+
+        $presensi = Presensi::join('users', 'presensis.user_id', '=', 'users.id')
+            ->where('users.divisions_id', $userDivisionsId)
+            ->whereDate('presensis.tgl', $today)
+            ->orderBy('presensis.tgl', 'asc')
+            ->get();
+
+        return view('presensi.halaman-rekap-admin', ['presensi' => $presensi, 'menu' => 'Rekap Admin']);
     }
 
 
@@ -124,12 +205,15 @@ class PresensiController extends Controller
             ->orderBy('presensis.tgl', 'asc')
             ->get();
 
-        return view('presensi.rekap-admin', compact('presensi'), ['menu' => 'Rekap Absen Admin']);
+        return view('presensi.rekap-admin', compact('presensi'), [
+            'presensi' => $presensi,
+            'menu' => 'Rekap Absen Admin',
+        ]);
     }
 
 
 
-    public function presensipulang()
+    public function presensipulang(Request $request)
     {
         $timezone = 'Asia/Jakarta';
         $date = new DateTime('now', new DateTimeZone($timezone));
@@ -146,13 +230,43 @@ class PresensiController extends Controller
             'jamkerja' => date('H:i:s', strtotime($localtime) - strtotime($presensi->jammasuk))
         ];
 
-        if ($presensi->jamkeluar == "") {
-            $presensi->update($dt);
-            return redirect('presensi-keluar')
-                ->with('success_message', 'Anda Telah Absen Pulang Hari Ini');
+        $latitudekantor = -8.00122092617956;
+        $longitudekantor = 112.62118425338326;
+        $lokasi = $request->lokasi;
+
+        // Pemrosesan koordinat user
+        $lokasiuser = explode(",", $lokasi);
+        $latitudeuser = $lokasiuser[0];
+        $longitudeuser = $lokasiuser[1];
+        // dd($lokasi);
+
+        // Menghitung jarak antara koordinat user dan kantor dalam meter
+        $jarak = $this->distance($latitudekantor, $longitudekantor, $latitudeuser, $longitudeuser);
+        $radius = round($jarak["meters"]);
+
+        if (Auth::user()->status_kerjas_id == 1) {
+            if ($radius <= 100) {
+                if ($presensi->jamkeluar == "") {
+                    $presensi->update($dt);
+                    return redirect('presensi-keluar')
+                        ->with('success_message', 'Anda Telah Absen Pulang Hari Ini');
+                } else {
+                    return redirect('presensi-keluar')
+                        ->with('save_message', 'Anda Telah Melakukan Absen Pulang Hari Ini');
+                }
+            } else {
+                // Jika diluar radius, user tidak dapat melakukan absen pulang
+                return redirect('presensi-keluar')->with('error_message', 'Maaf, Anda diluar radius absensi');
+            }
         } else {
-            return redirect('presensi-keluar')
-                ->with('success_message', 'Anda Telah Absen Pulang Hari Ini');
+            if ($presensi->jamkeluar == "") {
+                $presensi->update($dt);
+                return redirect('presensi-keluar')
+                    ->with('success_message', 'Anda Telah Absen Pulang Hari Ini');
+            } else {
+                return redirect('presensi-keluar')
+                    ->with('save_message', 'Anda Telah Melakukan Absen Pulang Hari Ini');
+            }
         }
     }
 

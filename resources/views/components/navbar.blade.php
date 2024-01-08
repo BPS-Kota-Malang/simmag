@@ -6,7 +6,7 @@
             <nav x-data="{ open: false }" class="navbar navbar-expand-lg  blur blur-rounded top-0 z-index-fixed shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
                 <div class="container-fluid px-0">
                     <img src="{{ asset('assets/img/logo-bps.png') }}" width="4%">
-                    <a class="navbar-brand font-weight-bolder ms-sm-2" href="{{ url('/') }}" rel=" tooltip" data-placement="bottom">
+                    <a class="navbar-brand font-weight-bolder ms-sm-2" href="{{ url('/dashboard') }}" rel=" tooltip" data-placement="bottom">
                         Sistem Informasi Magang BPS Kota Malang
                     </a>
 

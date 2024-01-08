@@ -11,6 +11,8 @@ $logbook = '';
 $admin = '';
 $divisi = '';
 $user = '';
+$report = '';
+$employee = '';
 @endphp
 
 @switch($menu)
@@ -28,7 +30,8 @@ $logbook = '';
 $admin = '';
 $divisi = '';
 $user = '';
-
+$report = '';
+$employee = '';
 @endphp
 @break
 
@@ -46,6 +49,8 @@ $logbook = '';
 $admin = '';
 $divisi = '';
 $user = '';
+$report = '';
+$employee = '';
 @endphp
 @break
 
@@ -63,6 +68,8 @@ $logbook = '';
 $admin = '';
 $divisi = '';
 $user = '';
+$report = '';
+$employee = '';
 @endphp
 @break
 
@@ -80,7 +87,8 @@ $logbook = '';
 $admin = '';
 $divisi = '';
 $user = '';
-
+$report = '';
+$employee = '';
 @endphp
 @break
 
@@ -98,6 +106,8 @@ $logbook = '';
 $admin = '';
 $divisi = '';
 $user = '';
+$report = '';
+$employee = '';
 @endphp
 @break
 
@@ -115,6 +125,8 @@ $logbook = '';
 $admin = '';
 $divisi = '';
 $user = '';
+$report = '';
+$employee = '';
 @endphp
 @break
 
@@ -132,6 +144,8 @@ $logbook = '';
 $admin = '';
 $divisi = '';
 $user = '';
+$report = '';
+$employee = '';
 @endphp
 @break
 
@@ -149,6 +163,8 @@ $logbook = '';
 $admin = '';
 $divisi = '';
 $user = '';
+$report = '';
+$employee = '';
 @endphp
 @break
 
@@ -166,6 +182,8 @@ $logbook = '';
 $admin = '';
 $divisi = '';
 $user = '';
+$report = '';
+$employee = '';
 @endphp
 @break
 
@@ -183,6 +201,8 @@ $logbook = '';
 $admin = '';
 $divisi = '';
 $user = '';
+$report = '';
+$employee = '';
 @endphp
 @break
 
@@ -200,6 +220,8 @@ $logbook = '';
 $admin = '';
 $divisi = '';
 $user = '';
+$report = '';
+$employee = '';
 @endphp
 @break
 
@@ -217,6 +239,8 @@ $logbook = 'active';
 $admin = '';
 $divisi = '';
 $user = '';
+$report = '';
+$employee = '';
 @endphp
 @break
 
@@ -234,8 +258,11 @@ $logbook = '';
 $admin = '';
 $divisi = 'active';
 $user = '';
+$report = '';
+$employee = '';
 @endphp
 @break
+
 @case('Data User')
 @php
 $dashboard = '';
@@ -250,6 +277,46 @@ $logbook = '';
 $admin = '';
 $divisi = '';
 $user = 'active';
+$report = '';
+$employee = '';
+@endphp
+@break
+
+@case('Report')
+@php
+$dashboard = '';
+$magang = '';
+$profile = '';
+$rekap = '';
+$rekapuser = '';
+$rekapadmin = '';
+$masuk = '';
+$keluar = '';
+$logbook = '';
+$admin = '';
+$divisi = '';
+$user = '';
+$report = 'active';
+$employee = '';
+@endphp
+@break
+
+@case('Employee')
+@php
+$dashboard = '';
+$magang = '';
+$profile = '';
+$rekap = '';
+$rekapuser = '';
+$rekapadmin = '';
+$masuk = '';
+$keluar = '';
+$logbook = '';
+$admin = '';
+$divisi = '';
+$user = '';
+$report = '';
+$employee = 'active';
 @endphp
 @break
 
@@ -268,7 +335,7 @@ $user = 'active';
     <div class="collapse navbar-collapse  w-auto" id="sidenav-collapse-main">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link {{ $dashboard }}" href="{{ url('/') }}">
+                <a class="nav-link {{ $dashboard }}" href="{{ url('/dashboard') }}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
                     </div>
@@ -296,14 +363,25 @@ $user = 'active';
                     <span class="nav-link-text ms-1">Presensi Pulang</span>
                 </a>
             </li>
+            <!-- rekap presensi user -->
             <li class="nav-item">
                 <a class="nav-link {{ $rekapuser }}" href="{{ url('rekap-user') }}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-collection text-dark text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Rekap Presensi User</span>
+                    <span class="nav-link-text ms-1">Rekap Presensi</span>
                 </a>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link {{ $report }}" href="{{ url('reportUser') }}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fas fa-book text-dark text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Report</span>
+                </a>
+            </li>
+
             @endif
 
             <li class="nav-item">
@@ -334,6 +412,7 @@ $user = 'active';
                 </a>
             </li>
 
+
             @if (Auth::user()->isSuperAdmin())
             {{-- Gantilah ini dengan metode autentikasi dan kondisi Anda --}}
             <li class="nav-item">
@@ -344,12 +423,13 @@ $user = 'active';
                     <span class="nav-link-text ms-1">Penerimaan Magang</span>
                 </a>
             </li>
+            <!-- rekap presensi Superadmin -->
             <li class="nav-item">
                 <a class="nav-link {{ $rekap }}" href="{{ url('rekap-absen') }}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-collection text-dark text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Rekap Presensi Admin</span>
+                    <span class="nav-link-text ms-1">Rekap Presensi</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -368,6 +448,14 @@ $user = 'active';
                     <span class="nav-link-text ms-1">User Management</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link {{ $employee }}" href="{{ url('data-pegawai') }}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="ni ni-bullet-list-67 text-dark text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Data Pegawai</span>
+                </a>
+            </li>
             @endif
 
             @if (Auth::user()->isAdmin())
@@ -379,12 +467,21 @@ $user = 'active';
                     <span class="nav-link-text ms-1">Anggota Divisi</span>
                 </a>
             </li>
+            <!-- rekap presensi admin -->
             <li class="nav-item">
                 <a class="nav-link {{ $rekapadmin }}" href="{{ url('rekap-admin') }}">
                     <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="ni ni-collection text-dark text-sm opacity-10"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Rekap Presensi Admin</span>
+                    <span class="nav-link-text ms-1">Rekap Presensi</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ $report }}" href="{{ url('report-admin') }}">
+                    <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fas fa-book text-dark text-sm opacity-10"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Report</span>
                 </a>
             </li>
             @endif

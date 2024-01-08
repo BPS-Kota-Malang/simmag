@@ -4,6 +4,7 @@ use App\Http\Controllers\AnggotaDivisiController;
 use App\Http\Controllers\DivisiController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LandingpageController;
 use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\PresensiController;
 use App\Http\Controllers\LogbookController;
@@ -12,8 +13,12 @@ use App\Http\Controllers\StatusMagangUser;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\StatusMagangUserController;
 use App\Http\Controllers\PenerimaanMagangController;
+use App\Http\Controllers\ReportAdminController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UserManagementController;
+use Facade\FlareClient\Report;
 use Illuminate\Routing\RouteGroup;
+use App\Http\Controllers\EmployeeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,17 +31,20 @@ use Illuminate\Routing\RouteGroup;
 |
 */
 
+Route::get('/', [LandingpageController::class, 'index'])->name('landingpage.index');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get('/', function () {
-    return redirect('/redirects');
-});
-
+Route::get('/generate-pdf', [ReportController::class, 'generatePDF']);
+Route::get('/generate-pdflogbook', [ReportController::class, 'generatePDFlogbook']);
 Route::get('/logout', [HomeController::class, 'logout'])->name('logout');
 
 Route::get('/logbook', [LogbookController::class, 'index'])->name('logbook.index');
 Route::get('/logbook/create', [LogbookController::class, 'create'])->name('logbook.create');
 Route::post('/logbook/store', [LogbookController::class, 'store'])->name('logbook.store');
 Route::put('/logbook/update/{id}', [LogbookController::class, 'update'])->name('logbook.update');
+Route::put('/logbook/entry/{id}', [LogbookController::class, 'entry'])->name('logbook.entry');
 Route::get('/logbook/{tglawal}/{tglakhir}', [LogbookController::class, 'rekaplogbook'])->name('logbook.rekap');
 
 
@@ -46,7 +54,7 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified'
 ])->group(function () {
-    Route::get('/redirects', [HomeController::class, 'index'])->name('redirects');
+    Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
 });
 
 
@@ -64,16 +72,30 @@ Route::middleware(['auth', 'checkStatus:2', 'checkRole:2', 'verified'])->group(f
     Route::post('/magang/terima/{id_mahasiswa}', [PenerimaanMagangController::class, 'update'])->name('magang.terima');
     Route::post('/magang/tolak/{id_mahasiswa}', [PenerimaanMagangController::class, 'destroy'])->name('magang.tolak');
     Route::post('/magang/hapus/{id_mahasiswa}', [PenerimaanMagangController::class, 'hapus'])->name('magang.hapus');
+    Route::get('/download/proposal/{id_mahasiswa}', [MahasiswaController::class, 'download_proposal'])->name('download.proposal');
+    Route::get('/download/surat/{id_mahasiswa}', [MahasiswaController::class, 'download_surat'])->name('download.surat');
+    Route::get('/admin/reset-password/{id}', [UserManagementController::class, 'resetPassword'])->name('user-management.reset-password');
+    Route::get('/data-pegawai', [EmployeeController::class, 'index'])->name('employee.index');
+    Route::post('/data-pegawai', [EmployeeController::class, 'store'])->name('employee.store');
+    Route::put('/data-pegawai/{id}', [EmployeeController::class, 'update'])->name('employee.update');
+    Route::delete('/data-pegawai/{id}', [EmployeeController::class, 'destroy'])->name('employee.destroy');
 });
 
 // ROUTE GROUP ADMIN ONLY
 Route::middleware(['auth', 'checkStatus:2', 'checkRole:3', 'verified'])->group(function () {
     Route::resource('/anggota-divisi', AnggotaDivisiController::class);
     Route::get('/anggota-divisi/edit/{id}', [AnggotaDivisiController::class, 'edit'])->name('anggota-divisi.edit');
-    Route::put('/anggota-divisi/update/{id}', [AnggotaDivisiController::class, 'update'])->name('anggota-divisi.update');
+    Route::put('/anggota-divisi/update', [AnggotaDivisiController::class, 'update'])->name('anggota-divisi.update');
     Route::get('rekap-admin', [PresensiController::class, 'halamanrekapadmin'])->name('rekap-absen-admin');
     Route::get('rekap-admin/{tglawal}/{tglakhir}', [PresensiController::class, 'tampildataadmin'])->name('rekap-admin');
+    Route::get('/getUsersByStatus/{status}', [AnggotaDivisiController::class, 'getUsersByStatus']);
+    Route::get('report-admin', [ReportController::class, 'reportAdmin'])->name('reportAdmin');
+    Route::get('/report-presensi-admin', [ReportController::class, 'reportpresensiadmin'])->name('report-presensi-admin');
+    Route::get('/reportlogbookadmin', [ReportController::class, 'reportlogbookadmin'])->name('reportlogbookadmin');
+    Route::get('/admin-report-user-logbook/{id}', [ReportController::class, 'adminreportuserlogbook'])->name('admin-report-user-logbook');
+    Route::get('/admin-report-user/{id}', [ReportController::class, 'adminreportuser'])->name('admin-report-user');
 });
+
 
 // ROUTE GROUP USER 
 Route::middleware(['auth', 'checkRole:1', 'verified'])->group(function () {
@@ -92,6 +114,7 @@ Route::get('/presensi-keluar', [PresensiController::class, 'keluar'])->name('pre
 Route::post('/ubah-presensi', [PresensiController::class, 'presensipulang'])->name('ubah-presensi');
 Route::get('rekap-user', [PresensiController::class, 'halamanrekapuser'])->name('rekap-absen-user');
 Route::get('rekap-user/{tglawal}/{tglakhir}', [PresensiController::class, 'tampildatauser'])->name('rekap-user');
+Route::get('reportUser', [ReportController::class, 'reportUser'])->name('reportUser');
 
 // ROUTE GROUP PROFILE DITERIMA
 Route::middleware(['auth', 'checkStatus:2', 'verified'])->group(function () {
